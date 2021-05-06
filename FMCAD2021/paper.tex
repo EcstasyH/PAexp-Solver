@@ -1,3 +1,4 @@
+% !TEX program = xelatex
 \documentclass[runningheads]{llncs}
 
 \usepackage{graphicx}
@@ -17,13 +18,10 @@ initial text=$ $, % sets the text that appears on the start arrow
 }
 
 \RequirePackage{todonotes}
-%\newcommand{\znj}[1]{\todo[inline,color=orange!10]{\textbf{ZHAN:} #1}}
 \newcommand{\znjSide}[1]{\todo[color=orange!10]{\textbf{ZHAN:} #1}}
 \newcommand\znj[1]{\textcolor{red}{#1}}
-
 \newcommand{\parseInt}{\textsf{parseInt}}
 \newcommand{\paexp}{$\textsf{PA}_{\exp}$}
-%\newcommand{\paexp}{$(\mathbb{N},+,2^x)$}
 \newcommand{\Def}{\hat{=}}
 
 \title{A Decision Procedure for String Constraints with {\parseInt} Function and Flat Regular Constraints}
@@ -33,22 +31,14 @@ initial text=$ $, % sets the text that appears on the start arrow
 \maketitle{}
 
 \begin{abstract}
-    The problem of solving string constraints is currently one of the focuses of theoretical computer science, particular related to SMT-based program verification, as it is inevitably that most of 
-    programs manipulate string data structures. 
-    The general problem of string constraint solving 
-    is undecidable, therefore people try to identify 
-    some sub-problems with decidability, e.g., string constraints restricted to generic flat languages. 
-    Certainly, it is challenging and 
-    makes theoretical and practical significance to 
-    identify such subset with as much expressive power as possible. 
-    In this paper, we identify 
-    the subset of flat string constraints with 
-     the string-number conversion function $\mathbf{parseInt}$, and 
-     provide a decision procedure to the subset by reduction to
-   the decidability problem of Presburger Arithmetic with exponential functions, 
-    which is decidable. To the best of our knowledge, such a subset is 
-    the largest subset of string constraints with decidability so far. 
-
+    String constraint solving is the core of various testing and verification approaches for scripting languages. 
+    Among algorithms for solving string constraints, flattening is a well-known approach that is particularly useful in handling satisfiable instances.
+    In the PLDI 2020 paper of Abdulla et al., the authors extended the flattening approach to support the string-integer conversion function, which appears in almost all scripting languages.
+    However, their approach supports only a specific flattening pattern and leaves the support of the general class as an open problem.
+    In this paper, we bridge the gap and propose a complete flattening approach for the string-integer conversion, based upon a decision procedure for solving the linear-exponential arithmetic constraints (namely, the extension of Presburger arithmetic with exponential functions).
+    Besides the theoretical results, we also develop various optimizations and implement the decision procedure.
+    Moreover, we evaluate the performance of the implementation on the benchmarks that are generated from the string hash functions as well as generated randomly.
+    The experimental results show that our implementation outperforms the state-of-the-art solvers for string-integer constraints as well as linear-exponential constraints, in both precision and efficiency.
 \keywords{ String Constraints \and Decidability \and Exponential Functions \and Quantifier Elimination.}
 
 \end{abstract}

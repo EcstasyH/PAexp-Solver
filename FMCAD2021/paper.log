@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.13)  6 MAY 2021 22:28
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.1.13)  6 MAY 2021 22:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/wuhao/Documents/CODE/FMCAD2021/FMCAD2021/paper.tex
+**/Users/wuhao/Documents/CODE/FMCAD2021/FMCAD2021/paper
 (/Users/wuhao/Documents/CODE/FMCAD2021/FMCAD2021/paper.tex
 LaTeX2e <2020-02-02> patch level 5
-L3 programming layer <2020-03-06> (/Users/wuhao/Documents/CODE/FMCAD2021/FMCAD2021/llncs.cls
+L3 programming layer <2020-03-06> (./llncs.cls
 Document Class: llncs 2018/03/10 v2.20 
  LaTeX document class for Lecture Notes in Computer Science
 (/usr/local/texlive/2020/texmf-dist/tex/latex/base/article.cls
@@ -14,27 +14,27 @@ Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
 (/usr/local/texlive/2020/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
-\c@part=\count167
-\c@section=\count168
-\c@subsection=\count169
-\c@subsubsection=\count170
-\c@paragraph=\count171
-\c@subparagraph=\count172
-\c@figure=\count173
-\c@table=\count174
+\c@part=\count163
+\c@section=\count164
+\c@subsection=\count165
+\c@subsubsection=\count166
+\c@paragraph=\count167
+\c@subparagraph=\count168
+\c@figure=\count169
+\c@table=\count170
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen134
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
-\c@tracingmulticols=\count175
+\c@tracingmulticols=\count171
 \mult@box=\box45
 \multicol@leftmargin=\dimen135
-\c@unbalance=\count176
-\c@collectmore=\count177
-\doublecol@number=\count178
-\multicoltolerance=\count179
-\multicolpretolerance=\count180
+\c@unbalance=\count172
+\c@collectmore=\count173
+\doublecol@number=\count174
+\multicoltolerance=\count175
+\multicolpretolerance=\count176
 \full@width=\dimen136
 \page@free=\dimen137
 \premulticols=\dimen138
@@ -85,19 +85,19 @@ Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
 \@tempa=\box86
 \@tempa=\box87
 \@tempa=\box88
-\c@minrows=\count181
-\c@columnbadness=\count182
-\c@finalcolumnbadness=\count183
+\c@minrows=\count177
+\c@columnbadness=\count178
+\c@finalcolumnbadness=\count179
 \last@try=\dimen141
 \multicolovershoot=\dimen142
 \multicolundershoot=\dimen143
 \mult@nat@firstbox=\box89
 \colbreak@box=\box90
-\mc@col@check@num=\count184
+\mc@col@check@num=\count180
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/oberdiek/aliascnt.sty
 Package: aliascnt 2018/09/07 v1.5 Alias counters (HO)
 )
-\c@chapter=\count185
+\c@chapter=\count181
 LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 362.
 LaTeX Font Info:    Redeclaring math symbol \Delta on input line 363.
 LaTeX Font Info:    Redeclaring math symbol \Theta on input line 364.
@@ -119,11 +119,11 @@ LaTeX Font Info:    Redeclaring math symbol \Omega on input line 372.
 \tocparanum=\dimen151
 \tocparatotal=\dimen152
 \tocsubparanum=\dimen153
-\@tempcntc=\count186
+\@tempcntc=\count182
 \fnindent=\dimen154
-\c@@inst=\count187
-\c@@auth=\count188
-\c@auco=\count189
+\c@@inst=\count183
+\c@@auth=\count184
+\c@auco=\count185
 \instindent=\dimen155
 \authrun=\box91
 \authorrunning=\toks15
@@ -131,21 +131,21 @@ LaTeX Font Info:    Redeclaring math symbol \Omega on input line 372.
 \titrun=\box92
 \titlerunning=\toks17
 \toctitle=\toks18
-\c@theorem=\count190
-\c@case=\count191
-\c@conjecture=\count192
-\c@corollary=\count193
-\c@definition=\count194
-\c@example=\count195
-\c@exercise=\count196
-\c@lemma=\count197
-\c@note=\count198
-\c@problem=\count199
-\c@property=\count266
-\c@proposition=\count267
-\c@question=\count268
-\c@solution=\count269
-\c@remark=\count270
+\c@theorem=\count186
+\c@case=\count187
+\c@conjecture=\count188
+\c@corollary=\count189
+\c@definition=\count190
+\c@example=\count191
+\c@exercise=\count192
+\c@lemma=\count193
+\c@note=\count194
+\c@problem=\count195
+\c@property=\count196
+\c@proposition=\count197
+\c@question=\count198
+\c@solution=\count199
+\c@remark=\count266
 \headlineindent=\dimen156
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
@@ -159,22 +159,25 @@ Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 105.
- (/usr/local/texlive/2020/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+Package graphics Info: Driver file: xetex.def on input line 105.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/graphics-def/xetex.def
+File: xetex.def 2017/06/24 v5.0h Graphics/color driver for xetex
 ))
 \Gin@req@height=\dimen157
 \Gin@req@width=\dimen158
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+Invalid UTF-8 byte or sequence at line 284 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 299 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 550 replaced by U+FFFD.
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count271
+\c@AlgoLine=\count267
  (/usr/local/texlive/2020/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
 \algocf@hangindent=\skip51
  (/usr/local/texlive/2020/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count272
+\c@checkoddpage=\count268
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/relsize/relsize.sty
@@ -210,9 +213,9 @@ Package: relsize 2013/03/29 ver 4.1
 \algoheightrule=\skip67
 \algotitleheightruledefault=\skip68
 \algotitleheightrule=\skip69
-\c@algocfline=\count273
-\c@algocfproc=\count274
-\c@algocf=\count275
+\c@algocfline=\count269
+\c@algocfproc=\count270
+\c@algocf=\count271
 \algocf@algoframe=\box99
 \algocf@algobox=\box100
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/amsfonts.sty
@@ -245,13 +248,13 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count276
+\inf@bad=\count272
 LaTeX Info: Redefining \frac on input line 227.
-\uproot@=\count277
-\leftroot@=\count278
+\uproot@=\count273
+\leftroot@=\count274
 LaTeX Info: Redefining \overline on input line 389.
-\classnum@=\count279
-\DOTSCASE@=\count280
+\classnum@=\count275
+\DOTSCASE@=\count276
 LaTeX Info: Redefining \ldots on input line 486.
 LaTeX Info: Redefining \dots on input line 489.
 LaTeX Info: Redefining \cdots on input line 610.
@@ -260,15 +263,15 @@ LaTeX Info: Redefining \cdots on input line 610.
 \big@size=\dimen167
 LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
-\macc@depth=\count281
-\c@MaxMatrixCols=\count282
+\macc@depth=\count277
+\c@MaxMatrixCols=\count278
 \dotsspace@=\muskip16
-\c@parentequation=\count283
-\dspbrk@lvl=\count284
+\c@parentequation=\count279
+\dspbrk@lvl=\count280
 \tag@help=\toks24
-\row@=\count285
-\column@=\count286
-\maxfields@=\count287
+\row@=\count281
+\column@=\count282
+\maxfields@=\count283
 \andhelp@=\toks25
 \eqnshift@=\dimen168
 \alignsep@=\dimen169
@@ -316,26 +319,30 @@ Package: pgfsys 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@yd=\dimen185
 \w@pgf@writea=\write3
 \r@pgf@reada=\read3
-\c@pgf@counta=\count288
-\c@pgf@countb=\count289
-\c@pgf@countc=\count290
-\c@pgf@countd=\count291
+\c@pgf@counta=\count284
+\c@pgf@countb=\count285
+\c@pgf@countc=\count286
+\c@pgf@countd=\count287
 \t@pgf@toka=\toks32
 \t@pgf@tokb=\toks33
 \t@pgf@tokc=\toks34
-\pgf@sys@id@count=\count292
+\pgf@sys@id@count=\count288
  (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2020/01/08 v3.1.5b (3.1.5b)
 )
-Driver file for pgf: pgfsys-pdftex.def
- (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
-File: pgfsys-pdftex.def 2020/01/08 v3.1.5b (3.1.5b)
+Driver file for pgf: pgfsys-xetex.def
+ (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-xetex.def
+File: pgfsys-xetex.def 2020/01/08 v3.1.5b (3.1.5b)
+ (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-dvipdfmx.def
+File: pgfsys-dvipdfmx.def 2020/01/08 v3.1.5b (3.1.5b)
  (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
 File: pgfsys-common-pdf.def 2020/01/08 v3.1.5b (3.1.5b)
+)
+\pgfsys@objnum=\count289
 ))) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfsyssoftpath@smallbuffer@items=\count293
-\pgfsyssoftpath@bigbuffer@items=\count294
+\pgfsyssoftpath@smallbuffer@items=\count290
+\pgfsyssoftpath@bigbuffer@items=\count291
 ) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )) (/usr/local/texlive/2020/texmf-dist/tex/latex/xcolor/xcolor.sty
@@ -343,9 +350,8 @@ Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
  (/usr/local/texlive/2020/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Driver file: xetex.def on input line 225.
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
 Package xcolor Info: Model `RGB' extended on input line 1364.
 Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
 Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
@@ -357,13 +363,13 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 Package: pgfcore 2020/01/08 v3.1.5b (3.1.5b)
  (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
 \pgfmath@dimen=\dimen186
-\pgfmath@count=\count295
+\pgfmath@count=\count292
 \pgfmath@box=\box104
 \pgfmath@toks=\toks35
 \pgfmath@stack@operand=\toks36
 \pgfmath@stack@operation=\toks37
 ) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex))) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count296
+\c@pgfmathroundto@lastzeros=\count293
 )) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@picminx=\dimen187
@@ -393,7 +399,7 @@ File: pgfcorescopes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgfpic=\box105
 \pgf@hbox=\box106
 \pgf@layerbox@main=\box107
-\pgf@picture@serial@count=\count297
+\pgf@picture@serial@count=\count294
 ) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgflinewidth=\dimen261
@@ -414,8 +420,8 @@ File: pgfcorearrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@max=\dimen266
-\pgf@sys@shading@range@num=\count298
-\pgf@shadingcount=\count299
+\pgf@sys@shading@range@num=\count295
+\pgf@shadingcount=\count296
 ) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
  (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
@@ -451,7 +457,7 @@ Package: pgffor 2020/01/08 v3.1.5b (3.1.5b)
 Package: tikz 2020/01/08 v3.1.5b (3.1.5b)
  (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgf@plot@mark@count=\count300
+\pgf@plot@mark@count=\count297
 \pgfplotmarksize=\dimen271
 )
 \tikz@lastx=\dimen272
@@ -466,17 +472,17 @@ File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \tikz@figbox@bg=\box111
 \tikz@tempbox=\box112
 \tikz@tempbox@bg=\box113
-\tikztreelevel=\count301
-\tikznumberofchildren=\count302
-\tikznumberofcurrentchild=\count303
-\tikz@fig@count=\count304
+\tikztreelevel=\count298
+\tikznumberofchildren=\count299
+\tikznumberofcurrentchild=\count300
+\tikz@fig@count=\count301
  (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-\pgfmatrixcurrentrow=\count305
-\pgfmatrixcurrentcolumn=\count306
-\pgf@matrix@numberofcolumns=\count307
+\pgfmatrixcurrentrow=\count302
+\pgfmatrixcurrentcolumn=\count303
+\pgf@matrix@numberofcolumns=\count304
 )
-\tikz@expandcount=\count308
+\tikz@expandcount=\count305
  (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ))) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryautomata.code.tex
@@ -521,7 +527,7 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 \XKV@toks=\toks40
 \XKV@tempa@toks=\toks41
 )
-\XKV@depth=\count309
+\XKV@depth=\count306
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (/usr/local/texlive/2020/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshadows.code.tex
 File: tikzlibraryshadows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
@@ -531,266 +537,233 @@ File: tikzlibraryfadings.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 File: pgflibraryfadings.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ))) (/usr/local/texlive/2020/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count310
-\calc@Bcount=\count311
+\calc@Acount=\count307
+\calc@Bcount=\count308
 \calc@Adimen=\dimen281
 \calc@Bdimen=\dimen282
 \calc@Askip=\skip73
 \calc@Bskip=\skip74
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count312
+\calc@Ccount=\count309
 \calc@Cskip=\skip75
 )
-\c@@todonotes@numberoftodonotes=\count313
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count314
+\c@@todonotes@numberoftodonotes=\count310
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-xdvipdfmx.def
+File: l3backend-xdvipdfmx.def 2020-03-12 L3 backend support: xdvipdfmx
+\g__graphics_track_int=\count311
 \l__pdf_internal_box=\box134
-) (/Users/wuhao/Documents/CODE/FMCAD2021/FMCAD2021/paper.aux)
+\g__pdf_backend_object_int=\count312
+\g__pdf_backend_annotation_int=\count313
+) (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 32.
- (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ot1ptm.fd
-File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
-) (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count315
-\scratchdimen=\dimen283
-\scratchbox=\box135
-\nofMPsegments=\count316
-\nofMParguments=\count317
-\everyMPshowfont=\toks42
-\MPscratchCnt=\count318
-\MPscratchDim=\dimen284
-\MPnumerator=\count319
-\makeMPintoPDFobject=\count320
-\everyMPtoPDFconversion=\toks43
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
-Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
- (/usr/local/texlive/2020/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
-)) ABD: EveryShipout initializing macros
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 33.
- (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ot1phv.fd
-File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
-
-
-LaTeX Warning: Font shape declaration has incorrect series value `mc'.
-               It should not contain an `m'! Please correct it.
-               Found on input line 21.
-
-
-LaTeX Warning: Font shape declaration has incorrect series value `mc'.
-               It should not contain an `m'! Please correct it.
-               Found on input line 24.
-
-
-LaTeX Warning: Font shape declaration has incorrect series value `mc'.
-               It should not contain an `m'! Please correct it.
-               Found on input line 27.
-
-
-LaTeX Warning: Font shape declaration has incorrect series value `mc'.
-               It should not contain an `m'! Please correct it.
-               Found on input line 47.
-
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 30.
+ (/usr/local/texlive/2020/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 33.
- (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Trying to load font information for TU+ptm on input line 30.
+LaTeX Font Info:    No file TUptm.fd. on input line 30.
+
+
+LaTeX Font Warning: Font shape `TU/ptm/m/n' undefined
+(Font)              using `TU/lmr/m/n' instead on input line 30.
+
+ABD: EveryShipout initializing macros
+
+LaTeX Font Warning: Font shape `TU/ptm/b/n' undefined
+(Font)              using `TU/ptm/m/n' instead on input line 31.
+
+LaTeX Font Info:    Trying to load font information for TU+phv on input line 31.
+LaTeX Font Info:    No file TUphv.fd. on input line 31.
+
+LaTeX Font Warning: Font shape `TU/phv/b/n' undefined
+(Font)              using `TU/lmr/m/n' instead on input line 31.
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 31.
+(/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 33.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+
+LaTeX Font Warning: Font shape `TU/phv/m/n' undefined
+(Font)              using `TU/lmr/m/n' instead on input line 31.
+
 Title too long for running head. Please supply
 a shorter form with \titlerunning prior to \maketitle
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 52.
-(/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ts1ptm.fd
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [1
 
-{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Warning: Font shape `TU/ptm/m/it' undefined
+(Font)              using `TU/ptm/m/n' instead on input line 91.
 
-LaTeX Warning: Citation `PA' on page 2 undefined on input line 136.
+[1
 
+]
 
-LaTeX Warning: Citation `Oppen69' on page 2 undefined on input line 158.
+LaTeX Warning: Citation `PA' on page 2 undefined on input line 126.
 
 
-LaTeX Warning: Citation `Parikh66' on page 2 undefined on input line 179.
-
-[2]
-
-LaTeX Warning: Reference `sec:string-solving' on page 3 undefined on input line 219.
+LaTeX Warning: Citation `Oppen69' on page 2 undefined on input line 148.
 
 
-LaTeX Warning: Reference `fig: FA' on page 3 undefined on input line 274.
+LaTeX Warning: Citation `Parikh66' on page 2 undefined on input line 169.
 
-[3]
+[2] [3] [4]
 
-LaTeX Warning: Reference `fig: GFA' on page 4 undefined on input line 331.
-
-[4]
-
-LaTeX Warning: Citation `Abdulla 2017' on page 5 undefined on input line 415.
+LaTeX Warning: Citation `Abdulla 2017' on page 5 undefined on input line 405.
 
 
-LaTeX Warning: Citation `Abdulla 2017' on page 5 undefined on input line 426.
-
-
-LaTeX Warning: Reference `eq:purity' on page 5 undefined on input line 446.
-
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 463.
-(/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-
-LaTeX Warning: Citation `POPL20' on page 5 undefined on input line 478.
+LaTeX Warning: Citation `Abdulla 2017' on page 5 undefined on input line 416.
 
 [5]
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 505.
+LaTeX Font Info:    Trying to load font information for TU+pcr on input line 453.
+LaTeX Font Info:    No file TUpcr.fd. on input line 453.
 
-Overfull \hbox (20.27942pt too wide) in paragraph at lines 510--513
-[]\OT1/ptm/m/it/10 for $\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 w\OMS/cmsy/m/n/10 j ^^U \OT1/cmr/m/n/10 2$ \OT1/ptm/m/it/10 and $\OML/cmm/m/it/10 w \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 w[] \OMS/cmsy/m/n/10 ^^A \OML/cmm/m/it/10 w[]$\OT1/ptm/m/it/10 , where $\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 w[]\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 w[]\OMS/cmsy/m/n/10 j ^^U \OT1/cmr/m/n/10 1$\OT1/ptm/m/it/10 , $[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 w\OT1/cmr/m/n/10 ) = [](\OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 )2[] +
+
+LaTeX Font Warning: Font shape `TU/pcr/m/n' undefined
+(Font)              using `TU/lmr/m/n' instead on input line 453.
+
+
+LaTeX Warning: Citation `POPL20' on page 6 undefined on input line 468.
+
+
+LaTeX Font Warning: Font shape `TU/phv/m/it' undefined
+(Font)              using `TU/phv/m/n' instead on input line 495.
+
+
+Overfull \hbox (24.72083pt too wide) in paragraph at lines 500--503
+[]\TU/phv/m/it/10 for $\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 w\OMS/cmsy/m/n/10 j ^^U \OT1/cmr/m/n/10 2$ \TU/phv/m/it/10 and $\OML/cmm/m/it/10 w \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 w[] \OMS/cmsy/m/n/10 ^^A \OML/cmm/m/it/10 w[]$\TU/phv/m/it/10 , where $\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 w[]\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 w[]\OMS/cmsy/m/n/10 j ^^U \OT1/cmr/m/n/10 1$\TU/phv/m/it/10 , $[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 w\OT1/cmr/m/n/10 ) = [](\OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 )2[] +
  []
 
 
-LaTeX Warning: Reference `parse' on page 6 undefined on input line 539.
-
-
-Overfull \hbox (16.36293pt too wide) in paragraph at lines 538--542
-\OT1/ptm/m/n/10 ([]) is a re-cur-sive ex-pres-sion. So we only need to deal with the ba-sic case $[]\OT1/cmr/m/n/10 ((\OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 )[])$\OT1/ptm/m/n/10 ,
+Overfull \hbox (9.14648pt too wide) in paragraph at lines 506--511
+[]\TU/phv/m/it/10 Now, we introduce a new form of atomic string constraints: a parseInt constraint
  []
 
 [6]
-
-LaTeX Warning: Reference `parseInt-basic' on page 7 undefined on input line 547.
-
-
-LaTeX Warning: Reference `parse' on page 7 undefined on input line 551.
+Overfull \hbox (14.42966pt too wide) in paragraph at lines 518--523
+\TU/phv/m/it/10 where $\OML/cmm/m/it/10 p; q$ \TU/phv/m/it/10 and $\OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 (1 \OMS/cmsy/m/n/10 ^^T \OML/cmm/m/it/10 i \OMS/cmsy/m/n/10 ^^T \OML/cmm/m/it/10 q\OT1/cmr/m/n/10 )$ \TU/phv/m/it/10 are known. We further assume that $\OML/cmm/m/it/10 x \OT1/cmr/m/n/10 = (\OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 )[]\OML/cmm/m/it/10 :::\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 )[]$\TU/phv/m/it/10 ,
+ []
 
 
-LaTeX Warning: Reference `parseInt-basic' on page 7 undefined on input line 551.
+Overfull \hbox (31.42596pt too wide) in paragraph at lines 528--532
+\TU/phv/m/it/10 (2[]) is a recursive expression. So we only need to deal with the basic case $[]\OT1/cmr/m/n/10 ((\OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 )[])$\TU/phv/m/it/10 ,
+ []
 
 
-LaTeX Warning: Reference `parse' on page 7 undefined on input line 577.
-
-
-LaTeX Warning: Reference `parseInt-basic' on page 7 undefined on input line 577.
-
-
-LaTeX Warning: Reference `PA' on page 7 undefined on input line 599.
+Overfull \hbox (20.30016pt too wide) in paragraph at lines 576--578
+[]\TU/phv/m/it/10 If $[][]$ is decidable, then the satisfiability (validity) of string constraints
+ []
 
 [7]
 
-LaTeX Warning: Citation `Semenov' on page 8 undefined on input line 649.
+LaTeX Warning: Citation `Semenov' on page 8 undefined on input line 639.
 
 
-LaTeX Warning: Citation `semenov' on page 8 undefined on input line 651.
+LaTeX Warning: Citation `semenov' on page 8 undefined on input line 641.
 
 
-LaTeX Warning: Citation `Francoise' on page 8 undefined on input line 652.
+LaTeX Warning: Citation `Francoise' on page 8 undefined on input line 642.
+
+[8]
+
+LaTeX Warning: Citation `Francoise' on page 9 undefined on input line 660.
 
 
-LaTeX Warning: Reference `thm:string-parInt' on page 8 undefined on input line 665.
-
-
-LaTeX Warning: Citation `Francoise' on page 8 undefined on input line 670.
-
-[8] [9] [10] [11]
-
-LaTeX Warning: Reference `thm:exp-ineq' on page 12 undefined on input line 946.
-
-[12]
-
-LaTeX Warning: Reference `lem:1' on page 13 undefined on input line 958.
-
-
-LaTeX Warning: Reference `eq:thm-ineq-1' on page 13 undefined on input line 973.
-
-
-LaTeX Warning: Reference `eq:thm-ineq-2' on page 13 undefined on input line 973.
-
-
-LaTeX Warning: Reference `eq:thm-ineq-1' on page 13 undefined on input line 973.
-
-
-LaTeX Warning: Reference `eq:thm-ineq-2' on page 13 undefined on input line 973.
-
-
-LaTeX Warning: Reference `eq:thm-ineq-1' on page 13 undefined on input line 985.
-
-
-LaTeX Warning: Reference `eq:thm-ineq-2' on page 13 undefined on input line 985.
-
-
-LaTeX Warning: Reference `eq:thm-ineq-1' on page 13 undefined on input line 985.
-
-
-LaTeX Warning: Reference `eq:thm-ineq-2' on page 13 undefined on input line 985.
-
-
-Overfull \hbox (14.28276pt too wide) in paragraph at lines 996--1004
-[]\OT1/ptm/m/n/10 Let $\OML/cmm/m/it/10 d \OT1/cmr/m/n/10 = 2[]\OML/cmm/m/it/10 d[]$\OT1/ptm/m/n/10 , $\OML/cmm/m/it/10 d[]$ \OT1/ptm/m/n/10 is an odd nat-u-ral num-ber. Ac-cord-ing to Eu-ler's The-o-rem, $\OML/cmm/m/it/10 gcd\OT1/cmr/m/n/10 (2\OML/cmm/m/it/10 ; d[]\OT1/cmr/m/n/10 ) =
+Overfull \hbox (6.19678pt too wide) in paragraph at lines 685--691
+\TU/phv/b/n/10 In order to show $\OT1/cmr/m/n/10 (\U/msb/m/n/10 N\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 +\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2[])$ \TU/phv/b/n/10 admits QE , it is sufficient to show that any 1-existential
  []
+
+
+Overfull \hbox (3.26775pt too wide) in paragraph at lines 685--691
+\TU/phv/b/n/10 formula $\OMS/cmsy/m/n/10 9\OML/cmm/m/it/10 x:^^R\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x; []\OT1/cmr/m/n/10 )$ \TU/phv/b/n/10 indeed does, where $\OML/cmm/m/it/10 ^^R\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x; []\OT1/cmr/m/n/10 )$ \TU/phv/b/n/10 is a quantifier-free formula. However,
+ []
+
+[9]
+Overfull \hbox (20.24649pt too wide) in paragraph at lines 699--700
+[]\TU/phv/b/n/10 Make substitutions by introducing new variables according to the while statements
+ []
+
+[10]
+Overfull \hbox (0.75478pt too wide) in paragraph at lines 825--832
+\TU/phv/b/n/10 mentioned, QE-exp takes $\OML/cmm/m/it/10 ^^R[]\OT1/cmr/m/n/10 ([]\OML/cmm/m/it/10 ; []\OT1/cmr/m/n/10 )$ \TU/phv/b/n/10 and variable $\OML/cmm/m/it/10 x[]$ \TU/phv/b/n/10 (the maximal variable among
+ []
+
+
+Overfull \hbox (28.7078pt too wide) in paragraph at lines 833--837
+[]\TU/phv/b/n/10 After normalization, the formula $\OML/cmm/m/it/10 ^^R\OT1/cmr/m/n/10 ([]\OML/cmm/m/it/10 ; []\OT1/cmr/m/n/10 )$ \TU/phv/b/n/10 contains atoms of three forms corresponding
+ []
+
+
+LaTeX Font Warning: Font shape `TU/pcr/b/n' undefined
+(Font)              using `TU/pcr/m/n' instead on input line 888.
+
+[11] [12]
+
+LaTeX Font Warning: Font shape `TU/ptm/b/it' undefined
+(Font)              using `TU/ptm/b/n' instead on input line 914.
 
 [13] [14]
 
-LaTeX Warning: Citation `Francoise' on page 15 undefined on input line 1117.
-
-
-LaTeX Warning: Reference `sec:3.2' on page 15 undefined on input line 1137.
+LaTeX Warning: Citation `Francoise' on page 15 undefined on input line 1107.
 
 [15]
-
-LaTeX Warning: Citation `Oppen' on page 16 undefined on input line 1183.
-
-
-Overfull \hbox (2.51682pt too wide) in paragraph at lines 1186--1200
-[]\OT1/ptm/m/n/10 Apply Cooper's al-go-rithm on the quan-ti-fied PA for-mula $\OML/cmm/m/it/10 Q[]x[]Q[]$ $x[]:::Q[]x[]:$
+Overfull \hbox (0.55649pt too wide) in paragraph at lines 1131--1137
+\TU/ptm/b/it/10 because divisible predicates is not introduced in his setting. In this step, Francoise
  []
 
-[16] [17]
-No file paper.bbl.
-[18] (/Users/wuhao/Documents/CODE/FMCAD2021/FMCAD2021/paper.aux)
+[16]
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: Citation `Oppen' on page 17 undefined on input line 1173.
+
+
+Overfull \hbox (21.66798pt too wide) in paragraph at lines 1176--1190
+[]\TU/ptm/b/it/10 Apply Cooper’s algorithm on the quantified PA formula $\OML/cmm/m/it/10 Q[]x[]Q[]$ $x[]:::Q[]x[]:$
+ []
+
+
+Overfull \hbox (1.7365pt too wide) in paragraph at lines 1211--1215
+[]\TU/ptm/b/it/10 In our algorithm, we use the same denotations and have the following theorem.
+ []
+
+[17] [18]
+Overfull \hbox (5.58649pt too wide) in paragraph at lines 1294--1298
+[]\TU/ptm/b/it/10 Other sub-cases are similar. However, when the abstraction parameter becomes
+ []
+
+(./paper.bbl) [19] (./paper.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 15707 strings out of 480608
- 322191 string characters out of 5903630
- 574210 words of memory out of 5000000
- 31249 multiletter control sequences out of 15000+600000
- 583703 words of font info for 126 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 60i,18n,83p,480b,884s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /Users/wuhao/Documents/CODE/FMCAD2021/FMCAD2021/paper.pdf (18 pages, 381837 bytes).
-PDF statistics:
- 223 PDF objects out of 1000 (max. 8388607)
- 152 compressed objects within 2 object streams
- 0 named destinations out of 1000 (max. 500000)
- 109 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 15261 strings out of 479418
+ 317073 string characters out of 5884585
+ 592965 words of memory out of 5000000
+ 32461 multiletter control sequences out of 15000+600000
+ 543984 words of font info for 75 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 60i,18n,83p,485b,865s stack positions out of 5000i,500n,10000p,200000b,80000s
 
+Output written on paper.pdf (19 pages).
