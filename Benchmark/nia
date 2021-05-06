@@ -1,0 +1,12 @@
+(set-logic ALL)
+;(set-option :produce-models true)
+;(set-option :fmf-fun true)
+(declare-fun x () Int)
+
+(define-fun-rec power ((x Int)) Int (ite (<= x 0) 1 (* 2 (power (- x 1)))))
+
+(assert  
+(> (power (- x 1)) 20  )
+)
+(check-sat)
+(get-model)
