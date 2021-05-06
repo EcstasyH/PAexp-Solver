@@ -1,0 +1,11 @@
+\begin{thebibliography}{1}
+
+\bibitem{PA}
+Haris Aziz and Simon Mackenzie.
+\newblock A discrete and bounded envy-free cake cutting protocol for four
+  agents.
+\newblock In {\em Proceedings of the 48th Annual {ACM} {SIGACT} Symposium on
+  Theory of Computing, {STOC} 2016, Cambridge, MA, USA, June 18-21, 2016},
+  pages 454--464, 2016.
+
+\end{thebibliography}
