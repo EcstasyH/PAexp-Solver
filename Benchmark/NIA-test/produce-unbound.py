@@ -23,7 +23,24 @@ for testno in range(1,totaltests+1):
     for i in range (1,expnum+linearnum+1):
         s.add(x[i] >= 0)
 
-    for i in range (1,expfml+1):
+    g.write("{")
+    expr = 0
+    for j in range (1,expnum+1):
+        coef = random.randint(-10,10)
+        while coef == 0:
+            coef = random.randint(-10,10)
+        expr = expr + coef * pow(x[j])
+        g.write("%d," %coef)
+    for j in range (1,expnum+linearnum+1):
+        coef = random.randint(-10**5,10**5)
+        expr = expr + coef * x[j]
+        g.write("%d," %coef)
+    num = random.randint(-10**5,10**5)
+    s.add(expr == num)
+    g.write("%d}\n" % num)
+
+
+    for i in range (2,expfml+1):
         g.write("{")
         expr = 0
         for j in range (1,expnum+1):
@@ -58,7 +75,7 @@ for testno in range(1,totaltests+1):
         s.add(expr <= num)
         g.write("%d}\n" % num)
             
-    f = open('NIA-unbound/2-3-3-4/test'+str(testno),mode='w+')
+    f = open('NIA-unbound/3-4-4-5-eq/test'+str(testno),mode='w+')
     f.write("(set-logic ALL)\n")
     f.write("(define-fun-rec pow ((x Int)) Int (ite (= x 0) 1 (* 10 (pow (- x 1)) ) ) )\n")
     f.write(s.sexpr())
