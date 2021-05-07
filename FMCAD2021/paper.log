@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.1.13)  6 MAY 2021 22:37
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.1.13)  6 MAY 2021 22:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -618,9 +618,6 @@ LaTeX Font Warning: Font shape `TU/ptm/m/it' undefined
 
 ]
 
-LaTeX Warning: Citation `PA' on page 2 undefined on input line 126.
-
-
 LaTeX Warning: Citation `Oppen69' on page 2 undefined on input line 148.
 
 
@@ -753,14 +750,11 @@ Overfull \hbox (5.58649pt too wide) in paragraph at lines 1294--1298
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
  15261 strings out of 479418
  317073 string characters out of 5884585
- 592965 words of memory out of 5000000
+ 592968 words of memory out of 5000000
  32461 multiletter control sequences out of 15000+600000
  543984 words of font info for 75 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191

@@ -1,0 +1,29 @@
+begin test using Z3 ...
+1
+sat
+(
+  (define-fun x6 () Int
+    6)
+  (define-fun x9 () Int
+    2)
+  (define-fun x7 () Int
+    11)
+  (define-fun x8 () Int
+    12)
+  (define-fun x3 () Int
+    1)
+  (define-fun x5 () Int
+    0)
+  (define-fun x4 () Int
+    0)
+  (define-fun x1 () Int
+    1)
+  (define-fun x2 () Int
+    1)
+)
+It took 0 seconds
+2
+unknown
+(error "line 138 column 10: model is not available")
+It took 10 seconds
+3

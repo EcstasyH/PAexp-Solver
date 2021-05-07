@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "begin test using Z3 ..."
+echo "begin test using CVC4 ..."
 
 count=1
 while(( $count<= 100 ))
