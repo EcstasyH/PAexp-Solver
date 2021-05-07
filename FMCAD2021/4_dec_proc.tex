@@ -1,42 +1,7 @@
+%!TEX root = paper.tex
 
-\subsection{Decidability of \paexp} \label{sec:3.2}
+%\subsection{Decidability of $\paexp$} \label{sec:3.2}
 
-For a first order theory $T$,
-we say theory $T$ admits quantifier elimination (QE) if for any formula in $T$, 
-there is a quantifier-free formula equivalent to it.
-It is well-known that if a theory admits QE, 
-then it is a decidable theory.
-
-The formal definition of PA is given in section \ref{PA}.
-Here we add the ordering predicate $\le$ into the signature,
-which can be defined by $x \le y\, \Def \, \exists z. x+z=y$.
-However, the theory PA so far does not admit QE, 
-for example, consider the formula $\exists x.x = y + y$. 
-We augment the theory with countable unary divisible predicates
-$n|x$, where $n\in \mathbb{N}$, 
-$n|x$ is true if and only if $x\ \text{mod}\ n=0$ holds.
-This structure of PA that admits QE is denoted by $(\mathbb{N},+)$.
-
-We then introduce a theory {\paexp}, denoted by $(\mathbb{N},+,2^x)$, that we work on.
-\begin{definition}
-    Let $\mathcal{L}=\{0,1,+,\le,n \, |x(n\in \mathbb{N}),2^x,l_2(x)\}$, 
-     $(\mathbb{N},+,2^x)$ be a $\mathcal{L}$-theory that has domain $\mathbb{N}$, where 
-    \begin{itemize}
-        \item  $2^x$ is interpreted to the exponential function of $2$ over $\mathbb{N}$; 
-        \item interpretations of $0,1,+,\le,=$ are consistent with PA;
-        \item for $n\ge 1$,$n|x$ holds iff $\exists y.x=ny$;
-        \item $2^0=1$, for $n \ge 1, 2^n = 2^{n-1}+2^{n-1}$;
-        We further assume that if $m,n\in \mathbb{N}, m\le n$, 
-        then $2^{m-n} = 1$
-        \item $l_2(0)=0$; for $n \ge 1,l_2(n) = y$ iff $2^y \le n < 2^{y+1}$;  $l_2(m-n) = 0$
-        if $m,n\in \mathbb{N}$ and $m\le n$. 
-    \end{itemize}
-\end{definition}
-
-$\lambda_2(x) = 2^{l_2(x)}$ can be defined by $l_2(x)$,
-intuitively, $\lambda_2(x)$ means the maximal power of 2 that is not larger than $x$.
-Then we have $\lambda_2(x) \le x \le 2\lambda_2(x)-1$,
-which will be useful in our proof. 
 
 \begin{definition}
     For a strictly increasing function $f:\mathbb{N}\mapsto \mathbb{N}$, 
@@ -58,7 +23,7 @@ which will be useful in our proof.
 
 Semenov proved that for any function $f$ that is compatible with addition, 
 theory $(\mathbb{N},+,f)$ admits QE  and thus the theory is complete and decidable \cite{Semenov84}. 
-Exponential functions are compatible with addition functions, and therefore {\paexp} is decidable 
+Exponential functions are compatible with addition functions, and therefore {$\paexp$} is decidable 
 by \cite{Semenov84}.
 Particularly, in \cite{Point86} Point gave a detailed QE algorithm for $(\mathbb{N},+,2^x)$, where $f(x)=2^x$.
 Unfortunately, Point's algorithm is flawed, one problem 
@@ -70,7 +35,7 @@ but Francoise's algorithm will return a formula equivalent to $y \le 2^6=64$.
 % 这里好像还有另一个与Francoise一起的作者
 
 In the next section, within Point's framework, we give a revised algorithm
- to the decision problem of {\paexp} with 
+ to the decision problem of {$\paexp$} with 
 both subtle improvements and crucial corrections, that 
 provides a crucial step to the decision procedure of string constraints with {\parseInt} function according to 
 Theorem~\ref{thm:string-parInt}. 

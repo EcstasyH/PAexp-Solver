@@ -437,8 +437,9 @@ initial text=$ $, % sets the text that appears on the start arrow
 \newcommand{\znjSide}[1]{\todo[color=orange!10]{\textbf{ZHAN:} #1}}
 \newcommand\znj[1]{\textcolor{red}{#1}}
 \newcommand{\parseInt}{\textsf{parseInt}}
-\newcommand{\paexp}{$\textsf{PA}_{\exp}$}
+\newcommand{\paexp}{{\sf PA}_{\sf exp}}
 \newcommand{\Def}{\hat{=}}
+\newcommand{\strint}{{\sf STR}_\parseInt}
 
 
 \usepackage{amsthm}
@@ -539,7 +540,7 @@ Beijing, China}
 
 \input{3_flatten.tex}
 
-\section{Decision procedure for $(\mathbb{N},+,2^x)$}
+\section{Decision procedure for $\paexp$}
 
 \input{4_dec_proc.tex}
 

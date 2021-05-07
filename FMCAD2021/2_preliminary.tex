@@ -1,3 +1,5 @@
+%!TEX root = paper.tex
+
 In this section, we introduce some basic concepts and theories that will be used later. 
 \subsection{Basic Concepts}
 
@@ -82,52 +84,7 @@ It is well known that
 any context-free language (therefore regular language) 
 is Parikh definable \cite{Parikh66}.
 
-\paragraph{String Terms}
-Given a finite alphabet $\Sigma$ and 
-a finite set $X$ of string variables over $\Sigma^*$,
-we define the set of terms $\textit{Terms}(\Sigma,X)$ 
-to be the smallest set satisfying
-\begin{itemize}
-    \item[1] $\Sigma\cup \{\epsilon\} \cup X \subseteq \textit{Terms}(\Sigma,X)$;
-    \item[2] if $t_1,t_2\in \textit{Terms}(\Sigma,X)$, then $t_1 \cdot t_2 \in \textit{Terms}(\Sigma,X)$.
-\end{itemize} 
 
-We extend $I_X$ to $\textit{Terms}(\Sigma,X)$ by letting $I_X(\epsilon)=\epsilon$, 
-for $a\in \Sigma, I_X(a)=a$,
-and $I_X(t_1\cdot t_2)= I_X(t_1)\cdot I_X(t_2)$.
-
-\paragraph{String Constraints} \label{par: string constraints}
-Given a constraint $\phi$ and an interpretation $I$,
-$I\models \phi$ denotes that $I$ satisfies $\phi$,
-and $I$ is called a \emph{model} of $\phi$.
-We use $\lVert \phi\rVert$ to denote the set of all models of $\phi$.
-
-We define the following three forms of atomic string constraints:
-\begin{itemize}
-\item An equality constraint $\phi_e$ is of the form 
-$t_1 = t_2$, where $t_1,t_2\in \textit{Terms}(\Sigma,X)$.
-We define $\lVert \phi_e \rVert = \{I\mid I(t_1)=I(t_2)\}$.
-Inequality constraints can be defined analogously.
-
-\item A regular constraint $\phi_r$ is of the form 
-$x\in L(\mathcal{A})$,
-where $x\in \mathbb{X}$ and $\mathcal{A}$ is a finite state automaton.
-We define $\lVert \phi_r \rVert = \{I\mid I(x)\in L(\mathcal{A})\}$.
-
-\item A length constraint $\phi_l$ is a linear constraint over 
-$Z \cup \{|x| \mid x\in X\}$, %the values of $|x|$ for all $x\in X$,
-where $|\cdot |$ is the length function.
-We define $\lVert \phi_l \rVert = \{I \mid I\models \phi_l \}$.
-\end{itemize}
-
-In Section~\ref{sec:string-solving},  
-we will introduce a new form of atomic string constraints, i.e., \emph{string-number conversion constraints}.
-A string constraint is a Boolean combination of atomic string constraints possibly with quantifications over $X\cup Z$. Other notions are same as in the first-order logic. 
-
-Giving a string constraint $\Psi$,
-the problem of string constraints solving is to decide 
-whether $\lVert \Psi \rVert$ is empty,
-if not, to compute an interpretation $I$ that satisfies $\Psi$.
 
 
 \subsection{Flat Automata and Flat Languages}
@@ -313,48 +270,3 @@ The important feature of generic flat autamata
 is that every word $w\in \mathbb{G}(\alpha)$ is uniquely determined by its Parikh image $\mathbb{P}(w)$.
 
 
-\subsection{Flattening}
-
-The flattening technique was first introduced 
-in \cite{Abdulla 2017}.
-Fix an alphabet $\Sigma$ and an abstraction parameter $\alpha$, 
-for a given atomic string constraint $\phi$, 
-flattening $\phi$ with parameter $\alpha$ 
-results in a new string constraint $\phi_\alpha$,
-such that 
-$R(\lVert \phi_\alpha \rVert) = \lVert \phi \rVert \cap \{I \mid \forall x\in X, I(x)\in \mathbb{G}'(\alpha)\}$,
-where $R$ is the renaming function with its domain extended to interpretations in the normal manner.
-Intuitively, it restricts $\phi$ to interpret 
-string variables over $\mathbb{G}'(\alpha)$.
-
-\cite{Abdulla 2017} discussed the flattening of basic 
-string constraints including equality, integer, (regular) grammar and transducer constraints. 
-For an atomic string constraint $\phi$,
-the flattening $\phi_\alpha$ is still an atomic string constraint 
-and is Parikh definable,
-so its Parikh image can be expressed by a quantifier free PA formula.
-Together with the purity condition,
-we obtain an existential quantified PA formula $\rho$.
-$\rho$ will be sent to a SMT solver,
-if the solver returns an solution $\theta$,
-then we can construct an interpretation for $\phi_\alpha$ from $\theta$,
-otherwise it means $\phi$ is unsatistiable when 
-string variables are interpreted  to $\alpha$-flat languages.
-
-Take a regular constraint $\phi = x\in L(A)$ for example,
-the flattening of $\phi$ resutls in a new finite state automaton $A'$ over $\Sigma(\alpha)$,
-which encodes running $A$ ``in parallel" 
-with the generic $\alpha$-flat automaton.
-Let $\rho_1$ be the formula describing the Parikh image of $A'$,
-which is a formula over variable sets $\Sigma(\alpha)^\#$.
-Let $\rho_2$ be the purity condition \eqref{eq:purity}.
-Then we obtain the PA formula $\exists (\Sigma(\alpha))^\#. \rho_1 \wedge \rho_2$.
-In order to distinguish between different string variables,
-we may replace $a(i)^\# \in \Sigma(\alpha)^\#$ by $(x,a(i))^\#$.
-
-Since the structure of a flat automaton is decided 
-by its abstraction parameter $\alpha$, 
-a Counter-Example Guided Abstraction 
-Refinement (CEGAR) framework is designed, which contains both an under- and an 
-over-approximation module, to search the possible values of $\alpha$.
-The termination for the overall algorithm is not guaranteed.
