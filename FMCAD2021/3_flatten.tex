@@ -1,0 +1,271 @@
+%!TEX root = paper.tex
+
+In this section, we first define the class of string constraints with string-integer conversion, denoted by $\strint$. Then we define the extension of Presburger arithmetic with exponential functions, denoted by $\paexp$. Finally, we show how to flatten the string constraints in $\strint$ into the arithmetic constraints in $\paexp$.
+
+\subsection{String constraints with string-integer conversion ($\strint$)}
+
+Commonly, 
+{\parseInt} function takes a string representation of a decimal
+number and returns an integer.
+Since we focus on the decidability,
+we define a binary version of {\parseInt},
+which takes a binary string and returns a decimal integer number.
+For example,
+${\parseInt}('111')=7$. 
+Clearly,  our decision procedure given in this paper 
+can be adapted to string constraints with other string to number conversion function without substantial change. 
+Single quotation marks are used to distinguish a symbol like $'1'\in \Sigma$
+from a number $1_\mathbb{N}\in \mathbb{N}$ when needed.
+
+
+\begin{definition} Let $\Sigma_{\textit{num}}=\{'0','1'\}$,
+ ${\parseInt}:\Sigma_{\textit{num}}^*\mapsto \mathbb{N}$ is recursively defined by:
+    for $w\in \Sigma_{\textit{num}}^*$
+    \begin{itemize}
+        \item if $|w|=0$, i.e., $w=\epsilon$,  ${\parseInt}(w)=0$;
+        \item if $|w|=1, {\parseInt}('w')=w_\mathbb{N}$;
+        \item for $|w|\ge 2$ and $w=w_1 \cdot w_2$, 
+        where $|w_1|, |w_2| \ge 1$, 
+        ${\parseInt}(w) = {\parseInt}(w_1)2^{|w_2|}+{\parseInt}(w_2)$.
+    \end{itemize} 
+\end{definition}
+
+
+\paragraph{String Terms}
+Given a finite alphabet $\Sigma$ and 
+a finite set $X$ of string variables over $\Sigma^*$,
+we define the set of terms $\textit{Terms}(\Sigma,X)$ 
+to be the smallest set satisfying
+\begin{itemize}
+    \item[1] $\Sigma\cup \{\epsilon\} \cup X \subseteq \textit{Terms}(\Sigma,X)$;
+    \item[2] if $t_1,t_2\in \textit{Terms}(\Sigma,X)$, then $t_1 \cdot t_2 \in \textit{Terms}(\Sigma,X)$.
+\end{itemize} 
+
+We extend $I_X$ to $\textit{Terms}(\Sigma,X)$ by letting $I_X(\epsilon)=\epsilon$, 
+for $a\in \Sigma, I_X(a)=a$,
+and $I_X(t_1\cdot t_2)= I_X(t_1)\cdot I_X(t_2)$.
+
+\paragraph{String Constraints} \label{par: string constraints}
+Given a constraint $\phi$ and an interpretation $I$,
+$I\models \phi$ denotes that $I$ satisfies $\phi$,
+and $I$ is called a \emph{model} of $\phi$.
+We use $\lVert \phi\rVert$ to denote the set of all models of $\phi$.
+
+We define the following three forms of atomic string constraints:
+\begin{itemize}
+\item An equality constraint $\phi_e$ is of the form 
+$t_1 = t_2$, where $t_1,t_2\in \textit{Terms}(\Sigma,X)$.
+We define $\lVert \phi_e \rVert = \{I\mid I(t_1)=I(t_2)\}$.
+Inequality constraints can be defined analogously.
+
+\item A regular constraint $\phi_r$ is of the form 
+$x\in L(\mathcal{A})$,
+where $x\in \mathbb{X}$ and $\mathcal{A}$ is a finite state automaton.
+We define $\lVert \phi_r \rVert = \{I\mid I(x)\in L(\mathcal{A})\}$.
+
+\item A length constraint $\phi_l$ is a linear constraint over 
+$Z \cup \{|x| \mid x\in X\}$, %the values of $|x|$ for all $x\in X$,
+where $|\cdot |$ is the length function.
+We define $\lVert \phi_l \rVert = \{I \mid I\models \phi_l \}$.
+\end{itemize}
+
+In Section~\ref{sec:string-solving},  
+we will introduce a new form of atomic string constraints, i.e., \emph{string-number conversion constraints}.
+A string constraint is a Boolean combination of atomic string constraints possibly with quantifications over $X\cup Z$. Other notions are same as in the first-order logic. 
+
+Giving a string constraint $\Psi$,
+the problem of string constraints solving is to decide 
+whether $\lVert \Psi \rVert$ is empty,
+if not, to compute an interpretation $I$ that satisfies $\Psi$.
+
+\subsection{An Extension of Presburger Arithmetic with Exponential Functions ($\paexp$)}
+
+For a first order theory $T$,
+we say theory $T$ admits quantifier elimination (QE) if for any formula in $T$, 
+there is a quantifier-free formula equivalent to it.
+It is well-known that if a theory admits QE, 
+then it is a decidable theory.
+
+The formal definition of PA is given in section \ref{PA}.
+Here we add the ordering predicate $\le$ into the signature,
+which can be defined by $x \le y\, \Def \, \exists z. x+z=y$.
+However, the theory PA so far does not admit QE, 
+for example, consider the formula $\exists x.x = y + y$. 
+We augment the theory with countable unary divisible predicates
+$n|x$, where $n\in \mathbb{N}$, 
+$n|x$ is true if and only if $x\ \text{mod}\ n=0$ holds.
+This structure of PA that admits QE is denoted by $(\mathbb{N},+)$.
+
+We then introduce a theory {$\paexp$}, denoted by $(\mathbb{N},+,2^x)$, that we work on.
+\begin{definition}
+    Let $\mathcal{L}=\{0,1,+,\le,n \, |x(n\in \mathbb{N}),2^x,l_2(x)\}$, 
+     $(\mathbb{N},+,2^x)$ be a $\mathcal{L}$-theory that has domain $\mathbb{N}$, where 
+    \begin{itemize}
+        \item  $2^x$ is interpreted to the exponential function of $2$ over $\mathbb{N}$; 
+        \item interpretations of $0,1,+,\le,=$ are consistent with PA;
+        \item for $n\ge 1$,$n|x$ holds iff $\exists y.x=ny$;
+        \item $2^0=1$, for $n \ge 1, 2^n = 2^{n-1}+2^{n-1}$;
+        We further assume that if $m,n\in \mathbb{N}, m\le n$, 
+        then $2^{m-n} = 1$
+        \item $l_2(0)=0$; for $n \ge 1,l_2(n) = y$ iff $2^y \le n < 2^{y+1}$;  $l_2(m-n) = 0$
+        if $m,n\in \mathbb{N}$ and $m\le n$. 
+    \end{itemize}
+\end{definition}
+
+$\lambda_2(x) = 2^{l_2(x)}$ can be defined by $l_2(x)$,
+intuitively, $\lambda_2(x)$ means the maximal power of 2 that is not larger than $x$.
+Then we have $\lambda_2(x) \le x \le 2\lambda_2(x)-1$,
+which will be useful in our proof. 
+
+
+\subsection{Flattening $\strint$ into $\paexp$}
+
+The flattening technique was first introduced 
+in \cite{Abdulla 2017}.
+Fix an alphabet $\Sigma$ and an abstraction parameter $\alpha$, 
+for a given atomic string constraint $\phi$, 
+flattening $\phi$ with parameter $\alpha$ 
+results in a new string constraint $\phi_\alpha$,
+such that 
+$R(\lVert \phi_\alpha \rVert) = \lVert \phi \rVert \cap \{I \mid \forall x\in X, I(x)\in \mathbb{G}'(\alpha)\}$,
+where $R$ is the renaming function with its domain extended to interpretations in the normal manner.
+Intuitively, it restricts $\phi$ to interpret 
+string variables over $\mathbb{G}'(\alpha)$.
+
+\cite{Abdulla 2017} discussed the flattening of basic 
+string constraints including equality, integer, (regular) grammar and transducer constraints. 
+For an atomic string constraint $\phi$,
+the flattening $\phi_\alpha$ is still an atomic string constraint 
+and is Parikh definable,
+so its Parikh image can be expressed by a quantifier free PA formula.
+Together with the purity condition,
+we obtain an existential quantified PA formula $\rho$.
+$\rho$ will be sent to a SMT solver,
+if the solver returns an solution $\theta$,
+then we can construct an interpretation for $\phi_\alpha$ from $\theta$,
+otherwise it means $\phi$ is unsatistiable when 
+string variables are interpreted  to $\alpha$-flat languages.
+
+Take a regular constraint $\phi = x\in L(A)$ for example,
+the flattening of $\phi$ resutls in a new finite state automaton $A'$ over $\Sigma(\alpha)$,
+which encodes running $A$ ``in parallel" 
+with the generic $\alpha$-flat automaton.
+Let $\rho_1$ be the formula describing the Parikh image of $A'$,
+which is a formula over variable sets $\Sigma(\alpha)^\#$.
+Let $\rho_2$ be the purity condition \eqref{eq:purity}.
+Then we obtain the PA formula $\exists (\Sigma(\alpha))^\#. \rho_1 \wedge \rho_2$.
+In order to distinguish between different string variables,
+we may replace $a(i)^\# \in \Sigma(\alpha)^\#$ by $(x,a(i))^\#$.
+
+Since the structure of a flat automaton is decided 
+by its abstraction parameter $\alpha$, 
+a Counter-Example Guided Abstraction 
+Refinement (CEGAR) framework is designed, which contains both an under- and an 
+over-approximation module, to search the possible values of $\alpha$.
+The termination for the overall algorithm is not guaranteed.
+
+
+The string-number conversion functions are commonly used functions
+in most of programming languages,
+for example,
+\verb+parseInt()+ in Java and \verb+Int()+ in Python.
+The functions usually take two parameters, 
+a string over the agreed alphabet $\Sigma$
+and an optional parameter denotes the radix.
+They parse the string according to the rules indicated by the radix,
+and return an integer denoted by the string.
+
+From the view of string constraints,
+string-number conversion functions give rise to a new form of string constraints
+and are more expressive than length constraints.
+So we consider extending string constraints with 
+{\parseInt} function. 
+As the general problem of string constraints is undecidable,
+we still adopt the idea of flattening, 
+i.e., variables are restricted to (generic) flat languages.
+This problem has been investigated in \cite{POPL20},
+which defined a special form of flat restriction (straight-line PFA) and 
+proposed a heuristic search method.
+
+In this section, 
+we describe the problem of interest first, and then 
+present an reduction from the problem of solving flat string constraints with {\parseInt} function
+to the decidability problem of Presburger Arithmetic with exponential functions.
+Hence, we identify a decidable subset of string constraints, which is the largest one with decidability so far to the best of our knowledge.
+
+
+Now, we introduce a new form of atomic string constraints: 
+a {\parseInt} constraint $\phi$ is of the form 
+$n \sim {\parseInt}(t)$,
+where $n$ is an integer term, $\sim \in \{\le,<,=,>,\ge\}$ and $t\in \textit{Terms}(\Sigma_{\textit{num}},X)$ is a string term.
+$\lVert \phi\rVert \Def  \{I \mid I(n)\sim {\parseInt}(I(t))\}$.
+
+In what follows, we only  consider the problem in the case when $t=x$ and $x$ is restricted to (generic) flat languages. 
+%If $t$ is not a single variable, 
+For the general case $t\in \textit{Terms}(\Sigma_{\textit{num}},X)$, 
+it can be reduced to this special case by induction on the structure of $t$. 
+%we can reduce the problem by separating $t$ (corresponding to the $|w|>2$ case in definition).
+
+Given an $\alpha$-flat language $L$,
+we assume $\alpha=\langle p,q \rangle$ and $L=(w_1)^*...(w_q)^*$,
+where $p,q$ and $w_i(1\le i \le q) $ are known.
+We further assume that $x = (w_1)^{\beta_1} ... (w_q)^{\beta_q}$,
+then we have
+\begin{align}
+    &{\parseInt}(x) \notag \\
+    =&{\parseInt}((w_1)^{\beta_1} ... (w_q)^{\beta_q}) \notag \\
+    =&{\parseInt}((w_1)^{\beta_1} ... (w_{q-1})^{\beta_{q-1}})\cdot 2^{\beta_q |w_q|}
+    + {\parseInt}((w_q)^{\beta_q}) \label{parse}
+\end{align}
+(\ref{parse}) is a recursive expression.
+So we only need to deal with the basic case ${\parseInt}((w_q)^{\beta_q})$, 
+where $w_q \neq \epsilon$
+\begin{align}
+    {\parseInt}((w_q)^{\beta_q}) &= \sum_{i=0}^{\beta_q-1} {\parseInt}(w_q)\cdot 2^{|w_q|\cdot i}  \notag \\
+    &={\parseInt}(w_q)\frac{2^{|w_q|\cdot \beta_q}-1}{2^{|w_q|}-1}
+    \label{parseInt-basic}
+\end{align}
+In (\ref{parseInt-basic}), since $w_q$ and $|w_q|$ are known, 
+they can be regarded as constants.
+The only unknown variable is $\beta_q$.
+
+Combine (\ref{parse}) and (\ref{parseInt-basic}),
+the constraint $n={\parseInt}(x)$ can be expressed by an arithmetic expression with 
+$n$ and $(\beta_1,...,\beta_q)$,
+inevitably with exponential components.
+
+Take $n={\parseInt}((11)^a(10)^b)$ for example.
+\begin{align}
+    n=& {\parseInt}((11)^a)\cdot 2^{2b} + {\parseInt}((10)^b) \notag \\
+    =& {\parseInt}(11)\cdot \frac{2^{2a}-1}{2^2-1}\cdot 2^{2b} + 
+    {\parseInt}(10) \cdot \frac{2^{2b}-1}{2^2-1} \notag 
+\end{align}
+
+So we have 
+\begin{equation}
+    3\cdot n = 3\cdot 2^{2a+2b}-3\cdot 2^{2b}+2\cdot 2^{2b}-2. \notag
+\end{equation}
+
+Observe the form of the above equation,
+$a,b,n$ are integer variables and either occur in 
+an exponential term or a linear term.
+This is always the case,
+so the problem can be reduced to 
+the decidability of PA with exponential function.
+
+When $x$ of {\parseInt} constraints is restricted to the
+generic $\alpha$-flat language ($\alpha$ is fixed),
+the (\ref{parse}) and (\ref{parseInt-basic}) still hold 
+but $w_i(1\le i\le q)$ is known.
+However,
+by definition,
+the generic $\alpha$-flat language is the finite union of all $\alpha$-flat languages,
+so we can enumerate all possible values for $w_i$.
+In this way,
+the problem can still be reduced to the decidability of PA with exponential function ($\paexp$), i.e.,
+\begin{theorem} \label{thm:string-parInt}
+If {$\paexp$} is decidable, then the satisfiability (validity) of string constraints with {\parseInt} in which all string variables 
+are ranged over flat strings is decidable. 
+\end{theorem}
+
+
