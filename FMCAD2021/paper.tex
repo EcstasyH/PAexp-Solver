@@ -35,8 +35,8 @@ initial text=$ $, % sets the text that appears on the start arrow
     Among algorithms for solving string constraints, flattening is a well-known approach that is particularly useful in handling satisfiable instances.
     In the PLDI 2020 paper of Abdulla et al., the authors extended the flattening approach to support the string-integer conversion, which is an important function appearing in almost all scripting languages.
     However, their approach supports only a special flattening pattern and leaves the support of the general flat regular constraints as an open problem.
-    In this paper, we fill the gap and propose a complete flattening approach for the string-integer conversion. The approach is built upon a decision procedure for the linear-exponential arithmetic constraints (namely, the extension of Presburger arithmetic with exponential functions).
-    Besides the theoretical results, we also develop various optimizations and provide an implementation.
+    In this paper, we fill the gap and propose a complete flattening approach for the string-integer conversion. The approach is built upon a decision procedure for the linear-exponential arithmetic constraints (namely, the extension of Presburger arithmetic with exponential functions) proposed by Point in 1986. While the decision procedure by Point relies on expensive quantifier elimination, we introduce various optimizations and provide an efficient implementation.
+%    Besides the theoretical results, we also develop various optimizations and provide an implementation.
     We evaluate the performance of the implementation on the benchmarks that are generated from the string hash functions as well as randomly.
     The experimental results show that our implementation outperforms the state-of-the-art solvers for string-integer conversion constraints as well as linear-exponential constraints, in both precision and efficiency.
 \keywords{ String Constraints \and Decidability \and Exponential Functions \and Quantifier Elimination.}
