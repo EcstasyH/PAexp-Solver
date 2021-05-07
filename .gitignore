@@ -1,0 +1,8 @@
+./FMCAD2021/*.log
+./FMCAD2021/*.pdf
+./FMCAD2021/*.aux
+./FMCAD2021/*.fbd_latexmk
+./FMCAD2021/*.synctex.gz
+./FMCAD2021/2
+
+./Benchmark/HashFunction/produce-head.py
