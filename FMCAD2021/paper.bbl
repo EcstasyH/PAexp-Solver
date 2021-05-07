@@ -1,11 +1,15 @@
 \begin{thebibliography}{1}
 
-\bibitem{PA}
-Haris Aziz and Simon Mackenzie.
-\newblock A discrete and bounded envy-free cake cutting protocol for four
-  agents.
-\newblock In {\em Proceedings of the 48th Annual {ACM} {SIGACT} Symposium on
-  Theory of Computing, {STOC} 2016, Cambridge, MA, USA, June 18-21, 2016},
-  pages 454--464, 2016.
+\bibitem{Point86}
+Francoise Point.
+\newblock On the expansion (n, +, $2^x$) of presburger arithmetic.
+\newblock In {\em Proceedings of the fourth Easter Conference on model theory,
+  Gross Koris}, pages 17--34, 1986.
+
+\bibitem{Semenov84}
+A~L Semënov.
+\newblock Logical theories of one-place functions on the set of natural
+  numbers.
+\newblock {\em Mathematics of the {USSR}-Izvestiya}, 22(3):587--618, jun 1984.
 
 \end{thebibliography}
