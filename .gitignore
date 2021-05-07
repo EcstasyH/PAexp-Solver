@@ -4,4 +4,4 @@
 ./FMCAD2021/*.fbd_latexmk
 ./FMCAD2021/*.synctex.gz
 
-./Benchmark/HashFunction/produce-head.py
+./FMCAD2021/*.md
