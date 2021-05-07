@@ -23,7 +23,13 @@ sat
 )
 It took 0 seconds
 2
-unknown
-(error "line 138 column 10: model is not available")
-It took 10 seconds
+timeout
+It took 60 seconds
 3
+timeout
+It took 60 seconds
+4
+unsat
+(error "line 138 column 10: model is not available")
+It took 0 seconds
+5
