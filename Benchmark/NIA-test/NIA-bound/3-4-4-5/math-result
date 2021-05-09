@@ -1,448 +1,472 @@
 1
 UNSAT
 0
-Time:0.023645
+Time:0.022537
 2
 UNSAT
 0
-Time:0.028846
+Time:0.026984
 3
 TIMEOUT
 0
-Time:60.0008
+Time:60.0169
 4
-TIMEOUT
-0
-Time:60.0124
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 773, Subscript[x, 3] -> 774, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 2483, Subscript[x, 6] -> 0, 
+  Subscript[x, 7] -> 762}}
+Time:3.2256
 5
 SAT
 {{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
   Subscript[x, 4] -> 652, Subscript[x, 5] -> 144, Subscript[x, 6] -> 0, 
   Subscript[x, 7] -> 491}}
-Time:0.192539
+Time:0.198871
 6
 SAT
-{{Subscript[x, 1] -> 8, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
-  Subscript[x, 4] -> 0, Subscript[x, 5] -> 1061, Subscript[x, 6] -> 0, 
-  Subscript[x, 7] -> 2100}}
-Time:0.46358
+{{Subscript[x, 1] -> 26, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 1853, Subscript[x, 6] -> 563, 
+  Subscript[x, 7] -> 1473}}
+Time:0.199274
 7
-TIMEOUT
+BOUNDED UNSAT
 0
-Time:60.0206
+Time:57.0047
 8
 TIMEOUT
 0
-Time:60.032
+Time:60.008
 9
 TIMEOUT
 0
-Time:60.0289
+Time:60.0179
 10
 SAT
 {{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
   Subscript[x, 4] -> 1503, Subscript[x, 5] -> 0, Subscript[x, 6] -> 2066, 
   Subscript[x, 7] -> 0}}
-Time:0.135637
+Time:0.150978
 11
 UNSAT
 0
-Time:0.010459
+Time:0.011089
 12
 TIMEOUT
 0
-Time:60.0287
+Time:60.0257
 13
 SAT
 {{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
   Subscript[x, 4] -> 1174, Subscript[x, 5] -> 0, Subscript[x, 6] -> 835, 
   Subscript[x, 7] -> 0}}
-Time:0.174287
+Time:0.171062
 14
 UNSAT
 0
-Time:0.00983
+Time:0.01051
 15
 TIMEOUT
 0
-Time:60.0106
+Time:60.0214
 16
-TIMEOUT
-0
-Time:60.0121
+SAT
+{{Subscript[x, 1] -> 27, Subscript[x, 2] -> 0, Subscript[x, 3] -> 27, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 0, Subscript[x, 6] -> 1277, 
+  Subscript[x, 7] -> 0}}
+Time:2.75816
 17
 TIMEOUT
 0
-Time:60.0114
+Time:60.0251
 18
 TIMEOUT
 0
-Time:60.0125
+Time:60.0253
 19
 SAT
 {{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
   Subscript[x, 4] -> 407, Subscript[x, 5] -> 3077, Subscript[x, 6] -> 0, 
   Subscript[x, 7] -> 2701}}
-Time:0.166722
+Time:0.165034
 20
-TIMEOUT
-0
-Time:60.0208
+SAT
+{{Subscript[x, 1] -> 15054, Subscript[x, 2] -> 15054, 
+  Subscript[x, 3] -> 15054, Subscript[x, 4] -> 0, Subscript[x, 5] -> 23946, 
+  Subscript[x, 6] -> 18312, Subscript[x, 7] -> 14531}}
+Time:3.16357
 21
 SAT
 {{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
   Subscript[x, 4] -> 0, Subscript[x, 5] -> 10, Subscript[x, 6] -> 16, 
   Subscript[x, 7] -> 0}}
-Time:0.210082
+Time:0.188812
 22
 UNSAT
 0
-Time:0.028562
+Time:0.022808
 23
 TIMEOUT
 0
-Time:60.0315
+Time:60.0358
 24
 SAT
 {{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
   Subscript[x, 4] -> 0, Subscript[x, 5] -> 0, Subscript[x, 6] -> 1244, 
   Subscript[x, 7] -> 875}}
-Time:0.193545
+Time:0.202212
 25
 UNSAT
 0
-Time:0.014963
+Time:0.015507
 26
 SAT
-{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 8, Subscript[x, 3] -> 0, 
-  Subscript[x, 4] -> 0, Subscript[x, 5] -> 0, Subscript[x, 6] -> 1531, 
-  Subscript[x, 7] -> 2433}}
-Time:7.2451
+{{Subscript[x, 1] -> 90, Subscript[x, 2] -> 91, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 0, Subscript[x, 6] -> 1162, 
+  Subscript[x, 7] -> 592}}
+Time:0.288065
 27
-TIMEOUT
+BOUNDED UNSAT
 0
-Time:60.0054
+Time:48.9248
 28
 SAT
 {{Subscript[x, 1] -> 410, Subscript[x, 2] -> 0, Subscript[x, 3] -> 409, 
   Subscript[x, 4] -> 485, Subscript[x, 5] -> 0, Subscript[x, 6] -> 0, 
   Subscript[x, 7] -> 0}}
-Time:39.9047
+Time:0.403635
 29
 TIMEOUT
 0
-Time:60.0182
+Time:60.0225
 30
 UNSAT
 0
-Time:0.010548
+Time:0.010705
 31
 UNSAT
 0
-Time:0.120464
+Time:0.11725
 32
 UNSAT
 0
-Time:0.023788
+Time:0.023674
 33
 SAT
 {{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
   Subscript[x, 4] -> 864, Subscript[x, 5] -> 899, Subscript[x, 6] -> 0, 
   Subscript[x, 7] -> 160}}
-Time:0.162095
+Time:0.163745
 34
 UNSAT
 0
-Time:0.014629
+Time:0.015317
 35
-TIMEOUT
+BOUNDED UNSAT
 0
-Time:60.009
+Time:58.2247
 36
 TIMEOUT
 0
-Time:60.0302
+Time:60.0269
 37
 UNSAT
 0
-Time:0.014935
+Time:0.01521
 38
 UNSAT
 0
-Time:0.018037
+Time:0.017724
 39
 SAT
 {{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
   Subscript[x, 4] -> 0, Subscript[x, 5] -> 258, Subscript[x, 6] -> 744, 
   Subscript[x, 7] -> 744}}
-Time:0.188039
+Time:0.188774
 40
 TIMEOUT
 0
-Time:60.0241
+Time:60.0248
 41
 UNSAT
 0
-Time:0.010243
+Time:0.010458
 42
 UNSAT
 0
-Time:0.136849
+Time:0.137312
 43
 SAT
-{{Subscript[x, 1] -> 8, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
-  Subscript[x, 4] -> 10296, Subscript[x, 5] -> 0, Subscript[x, 6] -> 9857, 
-  Subscript[x, 7] -> 1032}}
-Time:0.519787
+{{Subscript[x, 1] -> 41, Subscript[x, 2] -> 41, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 0, Subscript[x, 6] -> 0, 
+  Subscript[x, 7] -> 644}}
+Time:0.248766
 44
-TIMEOUT
-0
-Time:60.0064
+SAT
+{{Subscript[x, 1] -> 26, Subscript[x, 2] -> 27, Subscript[x, 3] -> 27, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 0, Subscript[x, 6] -> 0, 
+  Subscript[x, 7] -> 4061}}
+Time:3.11673
 45
 UNSAT
 0
-Time:0.015049
+Time:0.015585
 46
 TIMEOUT
 0
-Time:60.0189
+Time:60.0304
 47
 UNSAT
 0
-Time:0.010421
+Time:0.010821
 48
 UNSAT
 0
-Time:0.010474
+Time:0.010698
 49
-TIMEOUT
-0
-Time:60.0151
+SAT
+{{Subscript[x, 1] -> 27, Subscript[x, 2] -> 26, Subscript[x, 3] -> 26, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 178, Subscript[x, 6] -> 196, 
+  Subscript[x, 7] -> 1447}}
+Time:3.17812
 50
 TIMEOUT
 0
-Time:60.0319
+Time:60.0227
 51
 UNSAT
 0
-Time:0.017627
+Time:0.017411
 52
 UNSAT
 0
-Time:0.018719
+Time:0.017404
 53
 SAT
-{{Subscript[x, 1] -> 7, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
-  Subscript[x, 4] -> 574, Subscript[x, 5] -> 0, Subscript[x, 6] -> 0, 
+{{Subscript[x, 1] -> 26, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 619, Subscript[x, 5] -> 0, Subscript[x, 6] -> 0, 
   Subscript[x, 7] -> 0}}
-Time:0.382373
+Time:0.165641
 54
-TIMEOUT
-0
-Time:60.0054
+SAT
+{{Subscript[x, 1] -> 8, Subscript[x, 2] -> 0, Subscript[x, 3] -> 8, 
+  Subscript[x, 4] -> 1482, Subscript[x, 5] -> 0, Subscript[x, 6] -> 0, 
+  Subscript[x, 7] -> 0}}
+Time:15.7795
 55
 UNSAT
 0
-Time:0.017357
+Time:0.017222
 56
 UNSAT
 0
-Time:0.020723
+Time:0.021935
 57
-TIMEOUT
-0
-Time:60.0288
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 9, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 36407, Subscript[x, 6] -> 4738, 
+  Subscript[x, 7] -> 292096}}
+Time:23.7254
 58
-TIMEOUT
-0
-Time:60.0113
+SAT
+{{Subscript[x, 1] -> 9, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 82818, Subscript[x, 5] -> 24086, 
+  Subscript[x, 6] -> 9285, Subscript[x, 7] -> 4789}}
+Time:13.2706
 59
 UNSAT
 0
-Time:0.010823
+Time:0.010707
 60
 UNSAT
 0
-Time:0.021194
+Time:0.022042
 61
 SAT
-{{Subscript[x, 1] -> 9, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
-  Subscript[x, 4] -> 842, Subscript[x, 5] -> 0, Subscript[x, 6] -> 1281, 
+{{Subscript[x, 1] -> 26, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 881, Subscript[x, 5] -> 0, Subscript[x, 6] -> 1302, 
   Subscript[x, 7] -> 0}}
-Time:0.434755
+Time:0.209594
 62
 TIMEOUT
 0
-Time:60.0211
+Time:60.0269
 63
 UNSAT
 0
-Time:0.014984
+Time:0.015584
 64
 UNSAT
 0
-Time:0.010622
+Time:0.010453
 65
 SAT
 {{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
   Subscript[x, 4] -> 998, Subscript[x, 5] -> 373, Subscript[x, 6] -> 91, 
   Subscript[x, 7] -> 0}}
-Time:0.159418
+Time:0.154186
 66
 UNSAT
 0
-Time:0.013977
+Time:0.014915
 67
-TIMEOUT
-0
-Time:60.0012
+SAT
+{{Subscript[x, 1] -> 864, Subscript[x, 2] -> 865, Subscript[x, 3] -> 864, 
+  Subscript[x, 4] -> 3107, Subscript[x, 5] -> 0, Subscript[x, 6] -> 0, 
+  Subscript[x, 7] -> 197}}
+Time:3.22192
 68
 TIMEOUT
 0
-Time:60.0127
+Time:60.0145
 69
 SAT
 {{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
   Subscript[x, 4] -> 397, Subscript[x, 5] -> 419, Subscript[x, 6] -> 76, 
   Subscript[x, 7] -> 0}}
-Time:0.163937
+Time:0.165389
 70
 UNSAT
 0
-Time:0.017174
+Time:0.01799
 71
 SAT
 {{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
   Subscript[x, 4] -> 16, Subscript[x, 5] -> 10, Subscript[x, 6] -> 0, 
   Subscript[x, 7] -> 0}}
-Time:12.5994
+Time:0.300369
 72
 SAT
 {{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
   Subscript[x, 4] -> 0, Subscript[x, 5] -> 0, Subscript[x, 6] -> 996, 
   Subscript[x, 7] -> 728}}
-Time:0.1439
+Time:0.146523
 73
 UNSAT
 0
-Time:0.015717
+Time:0.016252
 74
 TIMEOUT
 0
-Time:60.0115
+Time:60.0287
 75
 SAT
-{{Subscript[x, 1] -> 2334, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
-  Subscript[x, 4] -> 1570, Subscript[x, 5] -> 0, Subscript[x, 6] -> 0, 
-  Subscript[x, 7] -> 6367}}
-Time:22.7654
+{{Subscript[x, 1] -> 2333, Subscript[x, 2] -> 0, Subscript[x, 3] -> 4, 
+  Subscript[x, 4] -> 1566, Subscript[x, 5] -> 0, Subscript[x, 6] -> 0, 
+  Subscript[x, 7] -> 6361}}
+Time:1.44994
 76
 UNSAT
 0
-Time:0.010267
+Time:0.011986
 77
 UNSAT
 0
-Time:0.020925
+Time:0.026488
 78
 UNSAT
 0
-Time:0.094341
+Time:0.107215
 79
 SAT
-{{Subscript[x, 1] -> 4, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
-  Subscript[x, 4] -> 4, Subscript[x, 5] -> 0, Subscript[x, 6] -> 0, 
-  Subscript[x, 7] -> 2}}
-Time:2.20669
+{{Subscript[x, 1] -> 1, Subscript[x, 2] -> 1, Subscript[x, 3] -> 1, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 0, Subscript[x, 6] -> 0, 
+  Subscript[x, 7] -> 0}}
+Time:0.447105
 80
 UNSAT
 0
-Time:0.009787
+Time:0.011633
 81
-TIMEOUT
-0
-Time:60.0191
+SAT
+{{Subscript[x, 1] -> 293, Subscript[x, 2] -> 292, Subscript[x, 3] -> 292, 
+  Subscript[x, 4] -> 704, Subscript[x, 5] -> 0, Subscript[x, 6] -> 55, 
+  Subscript[x, 7] -> 0}}
+Time:2.93547
 82
 UNSAT
 0
-Time:0.013181
+Time:0.013516
 83
 SAT
-{{Subscript[x, 1] -> 6, Subscript[x, 2] -> 7, Subscript[x, 3] -> 0, 
-  Subscript[x, 4] -> 1050, Subscript[x, 5] -> 132, Subscript[x, 6] -> 598, 
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 7, 
+  Subscript[x, 4] -> 942, Subscript[x, 5] -> 113, Subscript[x, 6] -> 483, 
   Subscript[x, 7] -> 0}}
-Time:6.32655
+Time:24.205
 84
-TIMEOUT
-0
-Time:60.0224
+SAT
+{{Subscript[x, 1] -> 31, Subscript[x, 2] -> 32, Subscript[x, 3] -> 31, 
+  Subscript[x, 4] -> 1526, Subscript[x, 5] -> 1649, Subscript[x, 6] -> 0, 
+  Subscript[x, 7] -> 292}}
+Time:3.25074
 85
 SAT
-{{Subscript[x, 1] -> 6, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
-  Subscript[x, 4] -> 2, Subscript[x, 5] -> 659, Subscript[x, 6] -> 0, 
-  Subscript[x, 7] -> 228}}
-Time:0.422585
+{{Subscript[x, 1] -> 26, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 67, Subscript[x, 5] -> 349, Subscript[x, 6] -> 0, 
+  Subscript[x, 7] -> 308}}
+Time:0.208698
 86
 UNSAT
 0
-Time:0.017479
+Time:0.016361
 87
 TIMEOUT
 0
-Time:60.0282
+Time:60.0087
 88
 SAT
-{{Subscript[x, 1] -> 841, Subscript[x, 2] -> 7, Subscript[x, 3] -> 0, 
-  Subscript[x, 4] -> 0, Subscript[x, 5] -> 0, Subscript[x, 6] -> 862, 
+{{Subscript[x, 1] -> 1288, Subscript[x, 2] -> 0, Subscript[x, 3] -> 6, 
+  Subscript[x, 4] -> 79, Subscript[x, 5] -> 0, Subscript[x, 6] -> 736, 
   Subscript[x, 7] -> 0}}
-Time:7.90146
+Time:3.0818
 89
 UNSAT
 0
-Time:0.010926
+Time:0.016547
 90
 UNSAT
 0
-Time:0.132577
+Time:0.135181
 91
 TIMEOUT
 0
-Time:60.0204
+Time:60.0061
 92
 UNSAT
 0
-Time:0.013376
+Time:0.013086
 93
 SAT
-{{Subscript[x, 1] -> 7, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
-  Subscript[x, 4] -> 782, Subscript[x, 5] -> 635, Subscript[x, 6] -> 1777, 
-  Subscript[x, 7] -> 0}}
-Time:0.456219
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 6, Subscript[x, 3] -> 6, 
+  Subscript[x, 4] -> 846, Subscript[x, 5] -> 728, Subscript[x, 6] -> 1788, 
+  Subscript[x, 7] -> 28}}
+Time:3.60962
 94
 TIMEOUT
 0
-Time:60.018
+Time:60.0276
 95
 UNSAT
 0
-Time:0.011819
+Time:0.011399
 96
 UNSAT
 0
-Time:0.016332
+Time:0.014734
 97
-TIMEOUT
-0
-Time:60.0178
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 6, 
+  Subscript[x, 4] -> 890, Subscript[x, 5] -> 0, Subscript[x, 6] -> 38, 
+  Subscript[x, 7] -> 1292}}
+Time:2.60304
 98
 UNSAT
 0
-Time:0.016967
+Time:0.018464
 99
 UNSAT
 0
-Time:0.010056
+Time:0.010261
 100
 UNSAT
 0
-Time:0.009693
+Time:0.01052
