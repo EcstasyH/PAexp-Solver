@@ -1,0 +1,2388 @@
+begin test using CVC4 ...
+1
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+2
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_1443 Int)) Int (ite (= BOUND_VARIABLE_1443 (- 1)) (- 41513) 1))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 145)
+(define-fun x3 () Int 2887)
+; cardinality of I_pow is 1
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+)
+It took 0 seconds
+3
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+4
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+5
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+6
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_7990 Int)) Int (ite (= BOUND_VARIABLE_7990 6) 1000000 (ite (= BOUND_VARIABLE_7990 8) 100000000 (ite (= BOUND_VARIABLE_7990 4) 10000 (ite (= BOUND_VARIABLE_7990 3) 1000 (ite (= BOUND_VARIABLE_7990 5) 100000 (ite (= BOUND_VARIABLE_7990 7) 10000000 (ite (= BOUND_VARIABLE_7990 2) 100 (ite (= BOUND_VARIABLE_7990 1) 10 1)))))))))
+(define-fun x1 () Int 8)
+(define-fun x2 () Int 1389)
+(define-fun x3 () Int 5)
+; cardinality of I_pow is 9
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+)
+It took 1 seconds
+7
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+8
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_114698 Int)) Int (ite (= BOUND_VARIABLE_114698 1028) 1 (ite (= BOUND_VARIABLE_114698 1029) 10 (ite (= BOUND_VARIABLE_114698 1030) 100 (ite (= BOUND_VARIABLE_114698 1031) 1000 (ite (= BOUND_VARIABLE_114698 1032) 10000 (ite (= BOUND_VARIABLE_114698 1033) 100000 (ite (= BOUND_VARIABLE_114698 1034) 1000000 (ite (= BOUND_VARIABLE_114698 1035) 10000000 (ite (= BOUND_VARIABLE_114698 1036) 100000000 (ite (= BOUND_VARIABLE_114698 1037) 1000000000 (ite (= BOUND_VARIABLE_114698 1038) 10000000000 (ite (= BOUND_VARIABLE_114698 1039) 100000000000 (ite (= BOUND_VARIABLE_114698 1040) 1000000000000 (ite (= BOUND_VARIABLE_114698 1041) 10000000000000 (ite (= BOUND_VARIABLE_114698 1042) 100000000000000 (ite (= BOUND_VARIABLE_114698 1043) 1000000000000000 (ite (= BOUND_VARIABLE_114698 1044) 10000000000000000 (ite (= BOUND_VARIABLE_114698 1045) 100000000000000000 (ite (= BOUND_VARIABLE_114698 1046) 1000000000000000000 (ite (= BOUND_VARIABLE_114698 1047) 10000000000000000000 (ite (= BOUND_VARIABLE_114698 1048) 100000000000000000000 (ite (= BOUND_VARIABLE_114698 1049) 1000000000000000000000 (ite (= BOUND_VARIABLE_114698 1050) 10000000000000000000000 (ite (= BOUND_VARIABLE_114698 1051) 100000000000000000000000 (ite (= BOUND_VARIABLE_114698 1052) 1000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1053) 10000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1054) 100000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1055) 1000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1056) 10000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1057) 100000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1058) 1000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1059) 10000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1060) 100000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1061) 1000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1062) 10000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1063) 100000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1064) 1000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1065) 10000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1066) 100000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1067) 1000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1068) 10000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1069) 100000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1070) 1000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1071) 10000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1072) 100000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1073) 1000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1074) 10000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1075) 100000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1076) 1000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1077) 10000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1078) 100000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1079) 1000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1080) 10000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1081) 100000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1082) 1000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1083) 10000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1084) 100000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1085) 1000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1086) 10000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1087) 100000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1088) 1000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1089) 10000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1090) 100000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1091) 1000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1092) 10000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1093) 100000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1094) 1000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1095) 10000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1096) 100000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1097) 1000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1098) 10000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1099) 100000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1100) 1000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1101) 10000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1102) 100000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1103) 1000000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1104) 10000000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1105) 100000000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1106) 1000000000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1107) 10000000000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1109) 1000000000000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114698 1108) 100000000000000000000000000000000000000000000000000000000000000000000000000000000 0)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 1109)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 1)
+; cardinality of I_pow is 82
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+; rep: @uc_I_pow_64
+; rep: @uc_I_pow_65
+; rep: @uc_I_pow_66
+; rep: @uc_I_pow_67
+; rep: @uc_I_pow_68
+; rep: @uc_I_pow_69
+; rep: @uc_I_pow_70
+; rep: @uc_I_pow_71
+; rep: @uc_I_pow_72
+; rep: @uc_I_pow_73
+; rep: @uc_I_pow_74
+; rep: @uc_I_pow_75
+; rep: @uc_I_pow_76
+; rep: @uc_I_pow_77
+; rep: @uc_I_pow_78
+; rep: @uc_I_pow_79
+; rep: @uc_I_pow_80
+; rep: @uc_I_pow_81
+)
+It took 60 seconds
+9
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_76102 Int)) Int 0)
+(define-fun x1 () Int 2958)
+(define-fun x2 () Int 2594)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 91
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+; rep: @uc_I_pow_64
+; rep: @uc_I_pow_65
+; rep: @uc_I_pow_66
+; rep: @uc_I_pow_67
+; rep: @uc_I_pow_68
+; rep: @uc_I_pow_69
+; rep: @uc_I_pow_70
+; rep: @uc_I_pow_71
+; rep: @uc_I_pow_72
+; rep: @uc_I_pow_73
+; rep: @uc_I_pow_74
+; rep: @uc_I_pow_75
+; rep: @uc_I_pow_76
+; rep: @uc_I_pow_77
+; rep: @uc_I_pow_78
+; rep: @uc_I_pow_79
+; rep: @uc_I_pow_80
+; rep: @uc_I_pow_81
+; rep: @uc_I_pow_82
+; rep: @uc_I_pow_83
+; rep: @uc_I_pow_84
+; rep: @uc_I_pow_85
+; rep: @uc_I_pow_86
+; rep: @uc_I_pow_87
+; rep: @uc_I_pow_88
+; rep: @uc_I_pow_89
+; rep: @uc_I_pow_90
+)
+It took 60 seconds
+10
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+11
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_110952 Int)) Int (ite (= BOUND_VARIABLE_110952 2106109) (- 100) (ite (= BOUND_VARIABLE_110952 2106112) (- 100000) (ite (= BOUND_VARIABLE_110952 2106113) (- 1000000) (ite (= BOUND_VARIABLE_110952 2106114) (- 10000000) (ite (= BOUND_VARIABLE_110952 2106115) (- 100000000) (ite (= BOUND_VARIABLE_110952 2106116) (- 1000000000) (ite (= BOUND_VARIABLE_110952 2106117) (- 10000000000) (ite (= BOUND_VARIABLE_110952 2106107) (- 1) (ite (= BOUND_VARIABLE_110952 2106108) (- 10) (ite (= BOUND_VARIABLE_110952 2106110) (- 1000) (ite (= BOUND_VARIABLE_110952 2106111) (- 10000) 0))))))))))))
+(define-fun x1 () Int 2106117)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 1443077)
+; cardinality of I_pow is 11
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+)
+It took 60 seconds
+12
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+13
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+14
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_11687 Int)) Int (ite (= BOUND_VARIABLE_11687 4) 10000 (ite (= BOUND_VARIABLE_11687 6) 1000000 (ite (= BOUND_VARIABLE_11687 5) 100000 (ite (= BOUND_VARIABLE_11687 7) 10000000 (ite (= BOUND_VARIABLE_11687 3) 1000 (ite (= BOUND_VARIABLE_11687 (- 1)) 0 (ite (= BOUND_VARIABLE_11687 2) 100 (ite (= BOUND_VARIABLE_11687 1) 10 1)))))))))
+(define-fun x1 () Int 7)
+(define-fun x2 () Int 1991)
+(define-fun x3 () Int 869)
+; cardinality of I_pow is 8
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+)
+It took 1 seconds
+15
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+16
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+17
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+18
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_1067 Int)) Int (ite (= BOUND_VARIABLE_1067 (- 1)) (- 82) 1))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 1
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+)
+It took 0 seconds
+19
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_230582 Int)) Int (ite (= BOUND_VARIABLE_230582 1165454) 1 (ite (= BOUND_VARIABLE_230582 1165455) 10 (ite (= BOUND_VARIABLE_230582 1165456) 100 (ite (= BOUND_VARIABLE_230582 1165460) 1000000 (ite (= BOUND_VARIABLE_230582 1165461) 10000000 (ite (= BOUND_VARIABLE_230582 1165462) 100000000 (ite (= BOUND_VARIABLE_230582 1165463) 1000000000 (ite (= BOUND_VARIABLE_230582 1165465) 100000000000 (ite (= BOUND_VARIABLE_230582 1165464) 10000000000 (ite (= BOUND_VARIABLE_230582 1165459) 100000 (ite (= BOUND_VARIABLE_230582 1165458) 10000 (ite (= BOUND_VARIABLE_230582 1165457) 1000 0)))))))))))))
+(define-fun x1 () Int 1165465)
+(define-fun x2 () Int 3553774)
+(define-fun x3 () Int 5802981)
+; cardinality of I_pow is 12
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+)
+It took 60 seconds
+20
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_114600 Int)) Int (ite (= BOUND_VARIABLE_114600 822) 1 (ite (= BOUND_VARIABLE_114600 823) 10 (ite (= BOUND_VARIABLE_114600 824) 100 (ite (= BOUND_VARIABLE_114600 825) 1000 (ite (= BOUND_VARIABLE_114600 826) 10000 (ite (= BOUND_VARIABLE_114600 827) 100000 (ite (= BOUND_VARIABLE_114600 828) 1000000 (ite (= BOUND_VARIABLE_114600 829) 10000000 (ite (= BOUND_VARIABLE_114600 830) 100000000 (ite (= BOUND_VARIABLE_114600 831) 1000000000 (ite (= BOUND_VARIABLE_114600 832) 10000000000 (ite (= BOUND_VARIABLE_114600 833) 100000000000 (ite (= BOUND_VARIABLE_114600 834) 1000000000000 (ite (= BOUND_VARIABLE_114600 835) 10000000000000 (ite (= BOUND_VARIABLE_114600 836) 100000000000000 (ite (= BOUND_VARIABLE_114600 837) 1000000000000000 (ite (= BOUND_VARIABLE_114600 838) 10000000000000000 (ite (= BOUND_VARIABLE_114600 839) 100000000000000000 (ite (= BOUND_VARIABLE_114600 840) 1000000000000000000 (ite (= BOUND_VARIABLE_114600 841) 10000000000000000000 (ite (= BOUND_VARIABLE_114600 842) 100000000000000000000 (ite (= BOUND_VARIABLE_114600 843) 1000000000000000000000 (ite (= BOUND_VARIABLE_114600 844) 10000000000000000000000 (ite (= BOUND_VARIABLE_114600 845) 100000000000000000000000 (ite (= BOUND_VARIABLE_114600 846) 1000000000000000000000000 (ite (= BOUND_VARIABLE_114600 847) 10000000000000000000000000 (ite (= BOUND_VARIABLE_114600 848) 100000000000000000000000000 (ite (= BOUND_VARIABLE_114600 849) 1000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 850) 10000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 851) 100000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 852) 1000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 853) 10000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 854) 100000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 855) 1000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 856) 10000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 857) 100000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 858) 1000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 859) 10000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 860) 100000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 861) 1000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 862) 10000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 863) 100000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 864) 1000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 865) 10000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 866) 100000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 867) 1000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 868) 10000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 869) 100000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 870) 1000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 871) 10000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 872) 100000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 873) 1000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 874) 10000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 875) 100000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 876) 1000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 877) 10000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 878) 100000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 879) 1000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 880) 10000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 881) 100000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 882) 1000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 883) 10000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 884) 100000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 885) 1000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 886) 10000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 887) 100000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 888) 1000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 889) 10000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 890) 100000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 891) 1000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 892) 10000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 893) 100000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 894) 1000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 895) 10000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 896) 100000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 897) 1000000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 898) 10000000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 899) 100000000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 901) 10000000000000000000000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_114600 900) 1000000000000000000000000000000000000000000000000000000000000000000000000000000 0)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 901)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 658)
+; cardinality of I_pow is 80
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+; rep: @uc_I_pow_64
+; rep: @uc_I_pow_65
+; rep: @uc_I_pow_66
+; rep: @uc_I_pow_67
+; rep: @uc_I_pow_68
+; rep: @uc_I_pow_69
+; rep: @uc_I_pow_70
+; rep: @uc_I_pow_71
+; rep: @uc_I_pow_72
+; rep: @uc_I_pow_73
+; rep: @uc_I_pow_74
+; rep: @uc_I_pow_75
+; rep: @uc_I_pow_76
+; rep: @uc_I_pow_77
+; rep: @uc_I_pow_78
+; rep: @uc_I_pow_79
+)
+It took 60 seconds
+21
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+22
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_6628 Int)) Int (ite (= BOUND_VARIABLE_6628 8) 100000000 (ite (= BOUND_VARIABLE_6628 3) 1000 (ite (= BOUND_VARIABLE_6628 5) 100000 (ite (= BOUND_VARIABLE_6628 6) 1000000 (ite (= BOUND_VARIABLE_6628 4) 10000 (ite (= BOUND_VARIABLE_6628 7) 10000000 (ite (= BOUND_VARIABLE_6628 (- 1)) 0 (ite (= BOUND_VARIABLE_6628 2) 100 (ite (= BOUND_VARIABLE_6628 1) 10 1))))))))))
+(define-fun x1 () Int 8)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 6396)
+; cardinality of I_pow is 9
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+)
+It took 1 seconds
+23
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_30012 Int)) Int 0)
+(define-fun x1 () Int 50)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 49
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+)
+It took 60 seconds
+24
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+25
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_1134 Int)) Int (ite (= BOUND_VARIABLE_1134 1) 10 1))
+(define-fun x1 () Int 1)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 2
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+)
+It took 0 seconds
+26
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+27
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_11316 Int)) Int (ite (= BOUND_VARIABLE_11316 9) 1000000000 (ite (= BOUND_VARIABLE_11316 8) 100000000 (ite (= BOUND_VARIABLE_11316 7) 10000000 (ite (= BOUND_VARIABLE_11316 6) 1000000 (ite (= BOUND_VARIABLE_11316 4) 10000 (ite (= BOUND_VARIABLE_11316 5) 100000 (ite (= BOUND_VARIABLE_11316 3) 1000 (ite (= BOUND_VARIABLE_11316 2) 100 (ite (= BOUND_VARIABLE_11316 1) 10 1))))))))))
+(define-fun x1 () Int 9)
+(define-fun x2 () Int 14)
+(define-fun x3 () Int 12879)
+; cardinality of I_pow is 10
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+)
+It took 1 seconds
+28
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+29
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+30
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_5072 Int)) Int (ite (= BOUND_VARIABLE_5072 5) 100000 (ite (= BOUND_VARIABLE_5072 4) 10000 (ite (= BOUND_VARIABLE_5072 6) 1000000 (ite (= BOUND_VARIABLE_5072 3) 1000 (ite (= BOUND_VARIABLE_5072 2) 100 (ite (= BOUND_VARIABLE_5072 1) 10 1)))))))
+(define-fun x1 () Int 6)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 233)
+; cardinality of I_pow is 7
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+)
+It took 0 seconds
+31
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_5997 Int)) Int (ite (= BOUND_VARIABLE_5997 7) 10000000 (ite (= BOUND_VARIABLE_5997 5) 100000 (ite (= BOUND_VARIABLE_5997 4) 10000 (ite (= BOUND_VARIABLE_5997 3) 1000 (ite (= BOUND_VARIABLE_5997 6) 1000000 (ite (= BOUND_VARIABLE_5997 (- 1)) 0 (ite (= BOUND_VARIABLE_5997 2) 100 (ite (= BOUND_VARIABLE_5997 1) 10 1)))))))))
+(define-fun x1 () Int 7)
+(define-fun x2 () Int 939)
+(define-fun x3 () Int 914)
+; cardinality of I_pow is 8
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+)
+It took 0 seconds
+32
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_835 Int)) Int 1)
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 1
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+)
+It took 1 seconds
+33
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_64548 Int)) Int 0)
+(define-fun x1 () Int 1720)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 1176)
+; cardinality of I_pow is 80
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+; rep: @uc_I_pow_64
+; rep: @uc_I_pow_65
+; rep: @uc_I_pow_66
+; rep: @uc_I_pow_67
+; rep: @uc_I_pow_68
+; rep: @uc_I_pow_69
+; rep: @uc_I_pow_70
+; rep: @uc_I_pow_71
+; rep: @uc_I_pow_72
+; rep: @uc_I_pow_73
+; rep: @uc_I_pow_74
+; rep: @uc_I_pow_75
+; rep: @uc_I_pow_76
+; rep: @uc_I_pow_77
+; rep: @uc_I_pow_78
+; rep: @uc_I_pow_79
+)
+It took 60 seconds
+34
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_142243 Int)) Int (ite (= BOUND_VARIABLE_142243 1584) (- 2) (ite (= BOUND_VARIABLE_142243 1585) (- 20) (ite (= BOUND_VARIABLE_142243 1586) (- 200) (ite (= BOUND_VARIABLE_142243 1587) (- 2000) (ite (= BOUND_VARIABLE_142243 1588) (- 20000) (ite (= BOUND_VARIABLE_142243 1589) (- 200000) (ite (= BOUND_VARIABLE_142243 1590) (- 2000000) (ite (= BOUND_VARIABLE_142243 1591) (- 20000000) (ite (= BOUND_VARIABLE_142243 1592) (- 200000000) (ite (= BOUND_VARIABLE_142243 1593) (- 2000000000) (ite (= BOUND_VARIABLE_142243 1594) (- 20000000000) (ite (= BOUND_VARIABLE_142243 1595) (- 200000000000) (ite (= BOUND_VARIABLE_142243 1596) (- 2000000000000) (ite (= BOUND_VARIABLE_142243 1597) (- 20000000000000) (ite (= BOUND_VARIABLE_142243 1598) (- 200000000000000) (ite (= BOUND_VARIABLE_142243 1599) (- 2000000000000000) (ite (= BOUND_VARIABLE_142243 1600) (- 20000000000000000) (ite (= BOUND_VARIABLE_142243 1601) (- 200000000000000000) (ite (= BOUND_VARIABLE_142243 1602) (- 2000000000000000000) (ite (= BOUND_VARIABLE_142243 1603) (- 20000000000000000000) (ite (= BOUND_VARIABLE_142243 1604) (- 200000000000000000000) (ite (= BOUND_VARIABLE_142243 1605) (- 2000000000000000000000) (ite (= BOUND_VARIABLE_142243 1606) (- 20000000000000000000000) (ite (= BOUND_VARIABLE_142243 1607) (- 200000000000000000000000) (ite (= BOUND_VARIABLE_142243 1608) (- 2000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1609) (- 20000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1610) (- 200000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1611) (- 2000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1612) (- 20000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1613) (- 200000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1614) (- 2000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1615) (- 20000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1616) (- 200000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1617) (- 2000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1618) (- 20000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1619) (- 200000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1620) (- 2000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1621) (- 20000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1622) (- 200000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1623) (- 2000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1624) (- 20000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1625) (- 200000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1626) (- 2000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1627) (- 20000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1628) (- 200000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1629) (- 2000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1630) (- 20000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1631) (- 200000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1632) (- 2000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1633) (- 20000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1634) (- 200000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1635) (- 2000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1636) (- 20000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1637) (- 200000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1638) (- 2000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1639) (- 20000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1640) (- 200000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1641) (- 2000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1642) (- 20000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1643) (- 200000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1644) (- 2000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1645) (- 20000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1647) (- 2000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_142243 1646) (- 200000000000000000000000000000000000000000000000000000000000000) 0)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 1647)
+(define-fun x2 () Int 122530249655383672844233420125593505896768264665339255629516)
+(define-fun x3 () Int 1)
+; cardinality of I_pow is 64
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+)
+It took 60 seconds
+35
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+36
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+37
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_1386 Int)) Int (ite (= BOUND_VARIABLE_1386 (- 1)) 443449 1))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 376)
+; cardinality of I_pow is 1
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+)
+It took 0 seconds
+38
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_1314 Int)) Int (ite (= BOUND_VARIABLE_1314 (- 1)) (- 3215883) 1))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 2062)
+; cardinality of I_pow is 1
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+)
+It took 0 seconds
+39
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+40
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_785 Int)) Int 1)
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 1
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+)
+It took 0 seconds
+41
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+42
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+43
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+44
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_7400 Int)) Int (ite (= BOUND_VARIABLE_7400 8) 100000000 (ite (= BOUND_VARIABLE_7400 7) 10000000 (ite (= BOUND_VARIABLE_7400 5) 100000 (ite (= BOUND_VARIABLE_7400 3) 1000 (ite (= BOUND_VARIABLE_7400 6) 1000000 (ite (= BOUND_VARIABLE_7400 4) 10000 (ite (= BOUND_VARIABLE_7400 (- 1)) 0 (ite (= BOUND_VARIABLE_7400 2) 100 (ite (= BOUND_VARIABLE_7400 1) 10 1))))))))))
+(define-fun x1 () Int 8)
+(define-fun x2 () Int 9743)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 9
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+)
+It took 0 seconds
+45
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_871 Int)) Int 1)
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 509)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 1
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+)
+It took 0 seconds
+46
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_121751 Int)) Int (ite (= BOUND_VARIABLE_121751 755) (- 1) (ite (= BOUND_VARIABLE_121751 756) (- 10) (ite (= BOUND_VARIABLE_121751 757) (- 100) (ite (= BOUND_VARIABLE_121751 758) (- 1000) (ite (= BOUND_VARIABLE_121751 759) (- 10000) (ite (= BOUND_VARIABLE_121751 760) (- 100000) (ite (= BOUND_VARIABLE_121751 761) (- 1000000) (ite (= BOUND_VARIABLE_121751 762) (- 10000000) (ite (= BOUND_VARIABLE_121751 763) (- 100000000) (ite (= BOUND_VARIABLE_121751 764) (- 1000000000) (ite (= BOUND_VARIABLE_121751 765) (- 10000000000) (ite (= BOUND_VARIABLE_121751 766) (- 100000000000) (ite (= BOUND_VARIABLE_121751 767) (- 1000000000000) (ite (= BOUND_VARIABLE_121751 768) (- 10000000000000) (ite (= BOUND_VARIABLE_121751 769) (- 100000000000000) (ite (= BOUND_VARIABLE_121751 770) (- 1000000000000000) (ite (= BOUND_VARIABLE_121751 771) (- 10000000000000000) (ite (= BOUND_VARIABLE_121751 772) (- 100000000000000000) (ite (= BOUND_VARIABLE_121751 773) (- 1000000000000000000) (ite (= BOUND_VARIABLE_121751 774) (- 10000000000000000000) (ite (= BOUND_VARIABLE_121751 775) (- 100000000000000000000) (ite (= BOUND_VARIABLE_121751 776) (- 1000000000000000000000) (ite (= BOUND_VARIABLE_121751 777) (- 10000000000000000000000) (ite (= BOUND_VARIABLE_121751 778) (- 100000000000000000000000) (ite (= BOUND_VARIABLE_121751 779) (- 1000000000000000000000000) (ite (= BOUND_VARIABLE_121751 780) (- 10000000000000000000000000) (ite (= BOUND_VARIABLE_121751 781) (- 100000000000000000000000000) (ite (= BOUND_VARIABLE_121751 782) (- 1000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 783) (- 10000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 784) (- 100000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 785) (- 1000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 786) (- 10000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 787) (- 100000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 788) (- 1000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 789) (- 10000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 790) (- 100000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 791) (- 1000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 792) (- 10000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 793) (- 100000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 794) (- 1000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 795) (- 10000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 796) (- 100000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 797) (- 1000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 798) (- 10000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 799) (- 100000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 800) (- 1000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 801) (- 10000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 802) (- 100000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 803) (- 1000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 804) (- 10000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 805) (- 100000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 806) (- 1000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 807) (- 10000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 809) (- 1000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_121751 808) (- 100000000000000000000000000000000000000000000000000000) 0))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 809)
+(define-fun x2 () Int 235)
+(define-fun x3 () Int 37195462153617258694439278408034219825181327877373)
+; cardinality of I_pow is 55
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+)
+It took 60 seconds
+47
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+48
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_4533 Int)) Int (ite (= BOUND_VARIABLE_4533 7) 10000000 (ite (= BOUND_VARIABLE_4533 6) 1000000 (ite (= BOUND_VARIABLE_4533 4) 10000 (ite (= BOUND_VARIABLE_4533 3) 1000 (ite (= BOUND_VARIABLE_4533 5) 100000 (ite (= BOUND_VARIABLE_4533 2) 100 (ite (= BOUND_VARIABLE_4533 1) 10 1))))))))
+(define-fun x1 () Int 7)
+(define-fun x2 () Int 1054)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 8
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+)
+It took 1 seconds
+49
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 1 seconds
+50
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_71154 Int)) Int 0)
+(define-fun x1 () Int 1014)
+(define-fun x2 () Int 3353)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 89
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+; rep: @uc_I_pow_64
+; rep: @uc_I_pow_65
+; rep: @uc_I_pow_66
+; rep: @uc_I_pow_67
+; rep: @uc_I_pow_68
+; rep: @uc_I_pow_69
+; rep: @uc_I_pow_70
+; rep: @uc_I_pow_71
+; rep: @uc_I_pow_72
+; rep: @uc_I_pow_73
+; rep: @uc_I_pow_74
+; rep: @uc_I_pow_75
+; rep: @uc_I_pow_76
+; rep: @uc_I_pow_77
+; rep: @uc_I_pow_78
+; rep: @uc_I_pow_79
+; rep: @uc_I_pow_80
+; rep: @uc_I_pow_81
+; rep: @uc_I_pow_82
+; rep: @uc_I_pow_83
+; rep: @uc_I_pow_84
+; rep: @uc_I_pow_85
+; rep: @uc_I_pow_86
+; rep: @uc_I_pow_87
+; rep: @uc_I_pow_88
+)
+It took 60 seconds
+51
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+52
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+53
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_168370 Int)) Int (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263895) (- 1) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263896) (- 10) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263897) (- 100) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263898) (- 1000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263899) (- 10000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263900) (- 100000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263901) (- 1000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263902) (- 10000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263903) (- 100000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263904) (- 1000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263905) (- 10000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263906) (- 100000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263907) (- 1000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263908) (- 10000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263909) (- 100000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263910) (- 1000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263911) (- 10000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263912) (- 100000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263913) (- 1000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263914) (- 10000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263915) (- 100000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263916) (- 1000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263917) (- 10000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263918) (- 100000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263919) (- 1000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263920) (- 10000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263921) (- 100000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263922) (- 1000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263923) (- 10000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263924) (- 100000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263925) (- 1000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263926) (- 10000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263927) (- 100000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263928) (- 1000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263929) (- 10000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263930) (- 100000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263931) (- 1000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263932) (- 10000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263933) (- 100000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263934) (- 1000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263935) (- 10000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263936) (- 100000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263937) (- 1000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263938) (- 10000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263939) (- 100000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263940) (- 1000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263941) (- 10000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263942) (- 100000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263943) (- 1000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263944) (- 10000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263945) (- 100000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263946) (- 1000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263947) (- 10000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263948) (- 100000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263949) (- 1000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263950) (- 10000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263951) (- 100000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263952) (- 1000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263953) (- 10000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263958) (- 1000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263957) (- 100000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263956) (- 10000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263955) (- 1000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_168370 5915875743449363376248186847019481104692875422733376263954) (- 100000000000000000000000000000000000000000000000000000000000) 0)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 5915875743449363376248186847019481104692875422733376263958)
+(define-fun x2 () Int 12461099970244403707416393571381460199246695039374558512219)
+(define-fun x3 () Int 1)
+; cardinality of I_pow is 64
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+)
+It took 60 seconds
+54
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+55
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_1617 Int)) Int (ite (= BOUND_VARIABLE_1617 (- 1)) 0 1))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 45081)
+(define-fun x3 () Int 2)
+; cardinality of I_pow is 1
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+)
+It took 0 seconds
+56
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+57
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+58
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_232371 Int)) Int (ite (= BOUND_VARIABLE_232371 39) (- 1000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 38) (- 100000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 37) (- 10000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 36) (- 1000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 35) (- 100000000000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 34) (- 10000000000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 33) (- 1000000000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 32) (- 100000000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 31) (- 10000000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 29) (- 100000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 28) (- 10000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 25) (- 10000000000000000000000000) (ite (= BOUND_VARIABLE_232371 24) (- 1000000000000000000000000) (ite (= BOUND_VARIABLE_232371 23) (- 100000000000000000000000) (ite (= BOUND_VARIABLE_232371 22) (- 10000000000000000000000) (ite (= BOUND_VARIABLE_232371 21) (- 1000000000000000000000) (ite (= BOUND_VARIABLE_232371 18) (- 1000000000000000000) (ite (= BOUND_VARIABLE_232371 17) (- 100000000000000000) (ite (= BOUND_VARIABLE_232371 16) (- 10000000000000000) (ite (= BOUND_VARIABLE_232371 11) (- 100000000000) (ite (= BOUND_VARIABLE_232371 19) (- 10000000000000000000) (ite (= BOUND_VARIABLE_232371 9) (- 1000000000) (ite (= BOUND_VARIABLE_232371 27) (- 1000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 26) (- 100000000000000000000000000) (ite (= BOUND_VARIABLE_232371 20) (- 100000000000000000000) (ite (= BOUND_VARIABLE_232371 7) (- 10000000) (ite (= BOUND_VARIABLE_232371 12) (- 1000000000000) (ite (= BOUND_VARIABLE_232371 13) (- 10000000000000) (ite (= BOUND_VARIABLE_232371 14) (- 100000000000000) (ite (= BOUND_VARIABLE_232371 5) (- 100000) (ite (= BOUND_VARIABLE_232371 3) (- 1000) (ite (= BOUND_VARIABLE_232371 15) (- 1000000000000000) (ite (= BOUND_VARIABLE_232371 30) (- 1000000000000000000000000000000) (ite (= BOUND_VARIABLE_232371 6) (- 1000000) (ite (= BOUND_VARIABLE_232371 8) (- 100000000) (ite (= BOUND_VARIABLE_232371 4) (- 10000) (ite (= BOUND_VARIABLE_232371 2) (- 100) (ite (= BOUND_VARIABLE_232371 10) (- 10000000000) (ite (= BOUND_VARIABLE_232371 1) (- 10) (- 1)))))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 39)
+(define-fun x2 () Int 26)
+(define-fun x3 () Int 110748103438728611772523395536851585)
+; cardinality of I_pow is 39
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+)
+It took 61 seconds
+59
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_40071 Int)) Int (ite (= BOUND_VARIABLE_40071 7) 10000000 (ite (= BOUND_VARIABLE_40071 6) 1000000 (ite (= BOUND_VARIABLE_40071 5) 100000 (ite (= BOUND_VARIABLE_40071 4) 10000 (ite (= BOUND_VARIABLE_40071 3) 1000 (ite (= BOUND_VARIABLE_40071 (- 1)) 0 (ite (= BOUND_VARIABLE_40071 2) 100 (ite (= BOUND_VARIABLE_40071 1) 10 1)))))))))
+(define-fun x1 () Int 7)
+(define-fun x2 () Int 9)
+(define-fun x3 () Int 600)
+; cardinality of I_pow is 8
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+)
+It took 9 seconds
+60
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_8037 Int)) Int (ite (= BOUND_VARIABLE_8037 8) 100000000 (ite (= BOUND_VARIABLE_8037 7) 10000000 (ite (= BOUND_VARIABLE_8037 6) 1000000 (ite (= BOUND_VARIABLE_8037 5) 100000 (ite (= BOUND_VARIABLE_8037 3) 1000 (ite (= BOUND_VARIABLE_8037 4) 10000 (ite (= BOUND_VARIABLE_8037 (- 1)) 0 (ite (= BOUND_VARIABLE_8037 2) 100 (ite (= BOUND_VARIABLE_8037 1) 10 1))))))))))
+(define-fun x1 () Int 8)
+(define-fun x2 () Int 1932)
+(define-fun x3 () Int 1176)
+; cardinality of I_pow is 9
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+)
+It took 1 seconds
+61
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+62
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+63
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_9167 Int)) Int (ite (= BOUND_VARIABLE_9167 7) 10000000 (ite (= BOUND_VARIABLE_9167 5) 100000 (ite (= BOUND_VARIABLE_9167 4) 10000 (ite (= BOUND_VARIABLE_9167 3) 1000 (ite (= BOUND_VARIABLE_9167 6) 1000000 (ite (= BOUND_VARIABLE_9167 (- 1)) 0 (ite (= BOUND_VARIABLE_9167 2) 100 (ite (= BOUND_VARIABLE_9167 1) 10 1)))))))))
+(define-fun x1 () Int 7)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 581)
+; cardinality of I_pow is 8
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+)
+It took 1 seconds
+64
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+65
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+66
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_37989 Int)) Int (ite (= BOUND_VARIABLE_37989 46) (- 1) (ite (= BOUND_VARIABLE_37989 47) (- 10) (ite (= BOUND_VARIABLE_37989 48) (- 100) (ite (= BOUND_VARIABLE_37989 49) (- 1000) (ite (= BOUND_VARIABLE_37989 50) (- 10000) (ite (= BOUND_VARIABLE_37989 51) (- 100000) (ite (= BOUND_VARIABLE_37989 52) (- 1000000) (ite (= BOUND_VARIABLE_37989 53) (- 10000000) (ite (= BOUND_VARIABLE_37989 54) (- 100000000) (ite (= BOUND_VARIABLE_37989 55) (- 1000000000) (ite (= BOUND_VARIABLE_37989 56) (- 10000000000) (ite (= BOUND_VARIABLE_37989 57) (- 100000000000) (ite (= BOUND_VARIABLE_37989 58) (- 1000000000000) (ite (= BOUND_VARIABLE_37989 59) (- 10000000000000) (ite (= BOUND_VARIABLE_37989 60) (- 100000000000000) (ite (= BOUND_VARIABLE_37989 61) (- 1000000000000000) (ite (= BOUND_VARIABLE_37989 62) (- 10000000000000000) (ite (= BOUND_VARIABLE_37989 63) (- 100000000000000000) (ite (= BOUND_VARIABLE_37989 64) (- 1000000000000000000) (ite (= BOUND_VARIABLE_37989 65) (- 10000000000000000000) (ite (= BOUND_VARIABLE_37989 66) (- 100000000000000000000) (ite (= BOUND_VARIABLE_37989 67) (- 1000000000000000000000) (ite (= BOUND_VARIABLE_37989 68) (- 10000000000000000000000) (ite (= BOUND_VARIABLE_37989 69) (- 100000000000000000000000) (ite (= BOUND_VARIABLE_37989 70) (- 1000000000000000000000000) (ite (= BOUND_VARIABLE_37989 71) (- 10000000000000000000000000) (ite (= BOUND_VARIABLE_37989 73) (- 1000000000000000000000000000) (ite (= BOUND_VARIABLE_37989 74) (- 10000000000000000000000000000) (ite (= BOUND_VARIABLE_37989 75) (- 100000000000000000000000000000) (ite (= BOUND_VARIABLE_37989 76) (- 1000000000000000000000000000000) (ite (= BOUND_VARIABLE_37989 77) (- 10000000000000000000000000000000) (ite (= BOUND_VARIABLE_37989 78) (- 100000000000000000000000000000000) (ite (= BOUND_VARIABLE_37989 79) (- 1000000000000000000000000000000000) (ite (= BOUND_VARIABLE_37989 80) (- 10000000000000000000000000000000000) (ite (= BOUND_VARIABLE_37989 81) (- 100000000000000000000000000000000000) (ite (= BOUND_VARIABLE_37989 83) (- 10000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_37989 82) (- 1000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_37989 72) (- 100000000000000000000000000) 0)))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 83)
+(define-fun x2 () Int 5)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 38
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+)
+It took 60 seconds
+67
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+68
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+69
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+70
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+71
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_22758 Int)) Int 0)
+(define-fun x1 () Int 652)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 45
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+)
+It took 60 seconds
+72
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+73
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+74
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+75
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_130281 Int)) Int (ite (= BOUND_VARIABLE_130281 1358) (- 1) (ite (= BOUND_VARIABLE_130281 1359) (- 10) (ite (= BOUND_VARIABLE_130281 1360) (- 100) (ite (= BOUND_VARIABLE_130281 1361) (- 1000) (ite (= BOUND_VARIABLE_130281 1362) (- 10000) (ite (= BOUND_VARIABLE_130281 1363) (- 100000) (ite (= BOUND_VARIABLE_130281 1364) (- 1000000) (ite (= BOUND_VARIABLE_130281 1365) (- 10000000) (ite (= BOUND_VARIABLE_130281 1366) (- 100000000) (ite (= BOUND_VARIABLE_130281 1367) (- 1000000000) (ite (= BOUND_VARIABLE_130281 1368) (- 10000000000) (ite (= BOUND_VARIABLE_130281 1369) (- 100000000000) (ite (= BOUND_VARIABLE_130281 1370) (- 1000000000000) (ite (= BOUND_VARIABLE_130281 1371) (- 10000000000000) (ite (= BOUND_VARIABLE_130281 1372) (- 100000000000000) (ite (= BOUND_VARIABLE_130281 1373) (- 1000000000000000) (ite (= BOUND_VARIABLE_130281 1374) (- 10000000000000000) (ite (= BOUND_VARIABLE_130281 1375) (- 100000000000000000) (ite (= BOUND_VARIABLE_130281 1376) (- 1000000000000000000) (ite (= BOUND_VARIABLE_130281 1377) (- 10000000000000000000) (ite (= BOUND_VARIABLE_130281 1378) (- 100000000000000000000) (ite (= BOUND_VARIABLE_130281 1379) (- 1000000000000000000000) (ite (= BOUND_VARIABLE_130281 1380) (- 10000000000000000000000) (ite (= BOUND_VARIABLE_130281 1381) (- 100000000000000000000000) (ite (= BOUND_VARIABLE_130281 1382) (- 1000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1383) (- 10000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1384) (- 100000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1385) (- 1000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1386) (- 10000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1387) (- 100000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1388) (- 1000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1389) (- 10000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1390) (- 100000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1391) (- 1000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1392) (- 10000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1393) (- 100000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1394) (- 1000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1395) (- 10000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1396) (- 100000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1397) (- 1000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1398) (- 10000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1399) (- 100000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1400) (- 1000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1401) (- 10000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1402) (- 100000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1403) (- 1000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1404) (- 10000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1405) (- 100000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1406) (- 1000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1407) (- 10000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1408) (- 100000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1409) (- 1000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1410) (- 10000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1411) (- 100000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1412) (- 1000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1413) (- 10000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1414) (- 100000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1415) (- 1000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1416) (- 10000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1417) (- 100000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1418) (- 1000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1419) (- 10000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1421) (- 1000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_130281 1420) (- 100000000000000000000000000000000000000000000000000000000000000) 0)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 1421)
+(define-fun x2 () Int 764)
+(define-fun x3 () Int 68080007624960853995615647508952521002682352300423457647174)
+; cardinality of I_pow is 64
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+)
+It took 60 seconds
+76
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_335886 Int)) Int 0)
+(define-fun x1 () Int 850)
+(define-fun x2 () Int 986)
+(define-fun x3 () Int 2)
+; cardinality of I_pow is 193
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+; rep: @uc_I_pow_64
+; rep: @uc_I_pow_65
+; rep: @uc_I_pow_66
+; rep: @uc_I_pow_67
+; rep: @uc_I_pow_68
+; rep: @uc_I_pow_69
+; rep: @uc_I_pow_70
+; rep: @uc_I_pow_71
+; rep: @uc_I_pow_72
+; rep: @uc_I_pow_73
+; rep: @uc_I_pow_74
+; rep: @uc_I_pow_75
+; rep: @uc_I_pow_76
+; rep: @uc_I_pow_77
+; rep: @uc_I_pow_78
+; rep: @uc_I_pow_79
+; rep: @uc_I_pow_80
+; rep: @uc_I_pow_81
+; rep: @uc_I_pow_82
+; rep: @uc_I_pow_83
+; rep: @uc_I_pow_84
+; rep: @uc_I_pow_85
+; rep: @uc_I_pow_86
+; rep: @uc_I_pow_87
+; rep: @uc_I_pow_88
+; rep: @uc_I_pow_89
+; rep: @uc_I_pow_90
+; rep: @uc_I_pow_91
+; rep: @uc_I_pow_92
+; rep: @uc_I_pow_93
+; rep: @uc_I_pow_94
+; rep: @uc_I_pow_95
+; rep: @uc_I_pow_96
+; rep: @uc_I_pow_97
+; rep: @uc_I_pow_98
+; rep: @uc_I_pow_99
+; rep: @uc_I_pow_100
+; rep: @uc_I_pow_101
+; rep: @uc_I_pow_102
+; rep: @uc_I_pow_103
+; rep: @uc_I_pow_104
+; rep: @uc_I_pow_105
+; rep: @uc_I_pow_106
+; rep: @uc_I_pow_107
+; rep: @uc_I_pow_108
+; rep: @uc_I_pow_109
+; rep: @uc_I_pow_110
+; rep: @uc_I_pow_111
+; rep: @uc_I_pow_112
+; rep: @uc_I_pow_113
+; rep: @uc_I_pow_114
+; rep: @uc_I_pow_115
+; rep: @uc_I_pow_116
+; rep: @uc_I_pow_117
+; rep: @uc_I_pow_118
+; rep: @uc_I_pow_119
+; rep: @uc_I_pow_120
+; rep: @uc_I_pow_121
+; rep: @uc_I_pow_122
+; rep: @uc_I_pow_123
+; rep: @uc_I_pow_124
+; rep: @uc_I_pow_125
+; rep: @uc_I_pow_126
+; rep: @uc_I_pow_127
+; rep: @uc_I_pow_128
+; rep: @uc_I_pow_129
+; rep: @uc_I_pow_130
+; rep: @uc_I_pow_131
+; rep: @uc_I_pow_132
+; rep: @uc_I_pow_133
+; rep: @uc_I_pow_134
+; rep: @uc_I_pow_135
+; rep: @uc_I_pow_136
+; rep: @uc_I_pow_137
+; rep: @uc_I_pow_138
+; rep: @uc_I_pow_139
+; rep: @uc_I_pow_140
+; rep: @uc_I_pow_141
+; rep: @uc_I_pow_142
+; rep: @uc_I_pow_143
+; rep: @uc_I_pow_144
+; rep: @uc_I_pow_145
+; rep: @uc_I_pow_146
+; rep: @uc_I_pow_147
+; rep: @uc_I_pow_148
+; rep: @uc_I_pow_149
+; rep: @uc_I_pow_150
+; rep: @uc_I_pow_151
+; rep: @uc_I_pow_152
+; rep: @uc_I_pow_153
+; rep: @uc_I_pow_154
+; rep: @uc_I_pow_155
+; rep: @uc_I_pow_156
+; rep: @uc_I_pow_157
+; rep: @uc_I_pow_158
+; rep: @uc_I_pow_159
+; rep: @uc_I_pow_160
+; rep: @uc_I_pow_161
+; rep: @uc_I_pow_162
+; rep: @uc_I_pow_163
+; rep: @uc_I_pow_164
+; rep: @uc_I_pow_165
+; rep: @uc_I_pow_166
+; rep: @uc_I_pow_167
+; rep: @uc_I_pow_168
+; rep: @uc_I_pow_169
+; rep: @uc_I_pow_170
+; rep: @uc_I_pow_171
+; rep: @uc_I_pow_172
+; rep: @uc_I_pow_173
+; rep: @uc_I_pow_174
+; rep: @uc_I_pow_175
+; rep: @uc_I_pow_176
+; rep: @uc_I_pow_177
+; rep: @uc_I_pow_178
+; rep: @uc_I_pow_179
+; rep: @uc_I_pow_180
+; rep: @uc_I_pow_181
+; rep: @uc_I_pow_182
+; rep: @uc_I_pow_183
+; rep: @uc_I_pow_184
+; rep: @uc_I_pow_185
+; rep: @uc_I_pow_186
+; rep: @uc_I_pow_187
+; rep: @uc_I_pow_188
+; rep: @uc_I_pow_189
+; rep: @uc_I_pow_190
+; rep: @uc_I_pow_191
+; rep: @uc_I_pow_192
+)
+It took 60 seconds
+77
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_115025 Int)) Int (ite (= BOUND_VARIABLE_115025 52) (- 10000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 51) (- 1000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 50) (- 100000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 49) (- 10000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 48) (- 1000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 47) (- 100000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 46) (- 10000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 45) (- 1000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 44) (- 100000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 43) (- 10000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 42) (- 1000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 41) (- 100000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 40) (- 10000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 39) (- 1000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 38) (- 100000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 37) (- 10000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 36) (- 1000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 35) (- 100000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 34) (- 10000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 33) (- 1000000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 31) (- 10000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 30) (- 1000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 29) (- 100000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 28) (- 10000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 27) (- 1000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 26) (- 100000000000000000000000000) (ite (= BOUND_VARIABLE_115025 25) (- 10000000000000000000000000) (ite (= BOUND_VARIABLE_115025 23) (- 100000000000000000000000) (ite (= BOUND_VARIABLE_115025 22) (- 10000000000000000000000) (ite (= BOUND_VARIABLE_115025 21) (- 1000000000000000000000) (ite (= BOUND_VARIABLE_115025 20) (- 100000000000000000000) (ite (= BOUND_VARIABLE_115025 19) (- 10000000000000000000) (ite (= BOUND_VARIABLE_115025 18) (- 1000000000000000000) (ite (= BOUND_VARIABLE_115025 17) (- 100000000000000000) (ite (= BOUND_VARIABLE_115025 16) (- 10000000000000000) (ite (= BOUND_VARIABLE_115025 14) (- 100000000000000) (ite (= BOUND_VARIABLE_115025 13) (- 10000000000000) (ite (= BOUND_VARIABLE_115025 12) (- 1000000000000) (ite (= BOUND_VARIABLE_115025 11) (- 100000000000) (ite (= BOUND_VARIABLE_115025 7) (- 10000000) (ite (= BOUND_VARIABLE_115025 6) (- 1000000) (ite (= BOUND_VARIABLE_115025 9) (- 1000000000) (ite (= BOUND_VARIABLE_115025 8) (- 100000000) (ite (= BOUND_VARIABLE_115025 3) (- 1000) (ite (= BOUND_VARIABLE_115025 5) (- 100000) (ite (= BOUND_VARIABLE_115025 24) (- 1000000000000000000000000) (ite (= BOUND_VARIABLE_115025 32) (- 100000000000000000000000000000000) (ite (= BOUND_VARIABLE_115025 15) (- 1000000000000000) (ite (= BOUND_VARIABLE_115025 4) (- 10000) (ite (= BOUND_VARIABLE_115025 2) (- 100) (ite (= BOUND_VARIABLE_115025 10) (- 10000000000) (ite (= BOUND_VARIABLE_115025 1) (- 10) (- 1))))))))))))))))))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 52)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 52
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+)
+It took 60 seconds
+78
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 1 seconds
+79
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_1002 Int)) Int 1)
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 4315)
+(define-fun x3 () Int 1347)
+; cardinality of I_pow is 1
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+)
+It took 0 seconds
+80
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_1172 Int)) Int (ite (= BOUND_VARIABLE_1172 (- 1)) (- 16608548) 1))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 2383)
+(define-fun x3 () Int 976)
+; cardinality of I_pow is 1
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+)
+It took 0 seconds
+81
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_102493 Int)) Int (ite (= BOUND_VARIABLE_102493 387) (- 1) (ite (= BOUND_VARIABLE_102493 388) (- 10) (ite (= BOUND_VARIABLE_102493 389) (- 100) (ite (= BOUND_VARIABLE_102493 390) (- 1000) (ite (= BOUND_VARIABLE_102493 391) (- 10000) (ite (= BOUND_VARIABLE_102493 392) (- 100000) (ite (= BOUND_VARIABLE_102493 393) (- 1000000) (ite (= BOUND_VARIABLE_102493 394) (- 10000000) (ite (= BOUND_VARIABLE_102493 395) (- 100000000) (ite (= BOUND_VARIABLE_102493 396) (- 1000000000) (ite (= BOUND_VARIABLE_102493 397) (- 10000000000) (ite (= BOUND_VARIABLE_102493 398) (- 100000000000) (ite (= BOUND_VARIABLE_102493 399) (- 1000000000000) (ite (= BOUND_VARIABLE_102493 400) (- 10000000000000) (ite (= BOUND_VARIABLE_102493 401) (- 100000000000000) (ite (= BOUND_VARIABLE_102493 402) (- 1000000000000000) (ite (= BOUND_VARIABLE_102493 403) (- 10000000000000000) (ite (= BOUND_VARIABLE_102493 404) (- 100000000000000000) (ite (= BOUND_VARIABLE_102493 405) (- 1000000000000000000) (ite (= BOUND_VARIABLE_102493 406) (- 10000000000000000000) (ite (= BOUND_VARIABLE_102493 407) (- 100000000000000000000) (ite (= BOUND_VARIABLE_102493 408) (- 1000000000000000000000) (ite (= BOUND_VARIABLE_102493 409) (- 10000000000000000000000) (ite (= BOUND_VARIABLE_102493 410) (- 100000000000000000000000) (ite (= BOUND_VARIABLE_102493 411) (- 1000000000000000000000000) (ite (= BOUND_VARIABLE_102493 412) (- 10000000000000000000000000) (ite (= BOUND_VARIABLE_102493 413) (- 100000000000000000000000000) (ite (= BOUND_VARIABLE_102493 414) (- 1000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 415) (- 10000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 416) (- 100000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 417) (- 1000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 418) (- 10000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 419) (- 100000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 420) (- 1000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 421) (- 10000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 422) (- 100000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 423) (- 1000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 424) (- 10000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 425) (- 100000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 426) (- 1000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 427) (- 10000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 428) (- 100000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 429) (- 1000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 430) (- 10000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 431) (- 100000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 432) (- 1000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 433) (- 10000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 434) (- 100000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 435) (- 1000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 436) (- 10000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 437) (- 100000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 438) (- 1000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 439) (- 10000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 440) (- 100000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 441) (- 1000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 442) (- 10000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 443) (- 100000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 444) (- 1000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 445) (- 10000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 446) (- 100000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 447) (- 1000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 448) (- 10000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 449) (- 100000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 450) (- 1000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 451) (- 10000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 452) (- 100000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 453) (- 1000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 454) (- 10000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 455) (- 100000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 456) (- 1000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 457) (- 10000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 458) (- 100000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 459) (- 1000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 460) (- 10000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 461) (- 100000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 462) (- 1000000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 465) (- 1000000000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 464) (- 100000000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_102493 463) (- 10000000000000000000000000000000000000000000000000000000000000000000000000000) 0))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 465)
+(define-fun x2 () Int 19)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 79
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+; rep: @uc_I_pow_64
+; rep: @uc_I_pow_65
+; rep: @uc_I_pow_66
+; rep: @uc_I_pow_67
+; rep: @uc_I_pow_68
+; rep: @uc_I_pow_69
+; rep: @uc_I_pow_70
+; rep: @uc_I_pow_71
+; rep: @uc_I_pow_72
+; rep: @uc_I_pow_73
+; rep: @uc_I_pow_74
+; rep: @uc_I_pow_75
+; rep: @uc_I_pow_76
+; rep: @uc_I_pow_77
+; rep: @uc_I_pow_78
+)
+It took 60 seconds
+82
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+83
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+84
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+85
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+86
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+87
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_32100 Int)) Int (ite (= BOUND_VARIABLE_32100 1139) 1 (ite (= BOUND_VARIABLE_32100 1140) 10 (ite (= BOUND_VARIABLE_32100 1141) 100 (ite (= BOUND_VARIABLE_32100 1142) 1000 (ite (= BOUND_VARIABLE_32100 1143) 10000 (ite (= BOUND_VARIABLE_32100 1144) 100000 (ite (= BOUND_VARIABLE_32100 1145) 1000000 (ite (= BOUND_VARIABLE_32100 1146) 10000000 (ite (= BOUND_VARIABLE_32100 1147) 100000000 (ite (= BOUND_VARIABLE_32100 1148) 1000000000 (ite (= BOUND_VARIABLE_32100 1149) 10000000000 (ite (= BOUND_VARIABLE_32100 1150) 100000000000 (ite (= BOUND_VARIABLE_32100 1151) 1000000000000 (ite (= BOUND_VARIABLE_32100 1152) 10000000000000 (ite (= BOUND_VARIABLE_32100 1153) 100000000000000 (ite (= BOUND_VARIABLE_32100 1154) 1000000000000000 (ite (= BOUND_VARIABLE_32100 1155) 10000000000000000 (ite (= BOUND_VARIABLE_32100 1156) 100000000000000000 (ite (= BOUND_VARIABLE_32100 1157) 1000000000000000000 (ite (= BOUND_VARIABLE_32100 1158) 10000000000000000000 (ite (= BOUND_VARIABLE_32100 1159) 100000000000000000000 (ite (= BOUND_VARIABLE_32100 1160) 1000000000000000000000 (ite (= BOUND_VARIABLE_32100 1161) 10000000000000000000000 (ite (= BOUND_VARIABLE_32100 1162) 100000000000000000000000 (ite (= BOUND_VARIABLE_32100 1163) 1000000000000000000000000 (ite (= BOUND_VARIABLE_32100 1164) 10000000000000000000000000 (ite (= BOUND_VARIABLE_32100 1165) 100000000000000000000000000 (ite (= BOUND_VARIABLE_32100 1166) 1000000000000000000000000000 (ite (= BOUND_VARIABLE_32100 1167) 10000000000000000000000000000 (ite (= BOUND_VARIABLE_32100 1168) 100000000000000000000000000000 (ite (= BOUND_VARIABLE_32100 1169) 1000000000000000000000000000000 (ite (= BOUND_VARIABLE_32100 1170) 10000000000000000000000000000000 (ite (= BOUND_VARIABLE_32100 1171) 100000000000000000000000000000000 (ite (= BOUND_VARIABLE_32100 1173) 10000000000000000000000000000000000 (ite (= BOUND_VARIABLE_32100 1172) 1000000000000000000000000000000000 0))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 1173)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 35
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+)
+It took 61 seconds
+88
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+89
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_110997 Int)) Int (ite (= BOUND_VARIABLE_110997 1329) (- 1) (ite (= BOUND_VARIABLE_110997 1330) (- 10) (ite (= BOUND_VARIABLE_110997 1331) (- 100) (ite (= BOUND_VARIABLE_110997 1332) (- 1000) (ite (= BOUND_VARIABLE_110997 1333) (- 10000) (ite (= BOUND_VARIABLE_110997 1334) (- 100000) (ite (= BOUND_VARIABLE_110997 1335) (- 1000000) (ite (= BOUND_VARIABLE_110997 1336) (- 10000000) (ite (= BOUND_VARIABLE_110997 1337) (- 100000000) (ite (= BOUND_VARIABLE_110997 1338) (- 1000000000) (ite (= BOUND_VARIABLE_110997 1339) (- 10000000000) (ite (= BOUND_VARIABLE_110997 1340) (- 100000000000) (ite (= BOUND_VARIABLE_110997 1341) (- 1000000000000) (ite (= BOUND_VARIABLE_110997 1342) (- 10000000000000) (ite (= BOUND_VARIABLE_110997 1343) (- 100000000000000) (ite (= BOUND_VARIABLE_110997 1344) (- 1000000000000000) (ite (= BOUND_VARIABLE_110997 1345) (- 10000000000000000) (ite (= BOUND_VARIABLE_110997 1346) (- 100000000000000000) (ite (= BOUND_VARIABLE_110997 1347) (- 1000000000000000000) (ite (= BOUND_VARIABLE_110997 1348) (- 10000000000000000000) (ite (= BOUND_VARIABLE_110997 1349) (- 100000000000000000000) (ite (= BOUND_VARIABLE_110997 1350) (- 1000000000000000000000) (ite (= BOUND_VARIABLE_110997 1351) (- 10000000000000000000000) (ite (= BOUND_VARIABLE_110997 1352) (- 100000000000000000000000) (ite (= BOUND_VARIABLE_110997 1353) (- 1000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1354) (- 10000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1355) (- 100000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1356) (- 1000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1357) (- 10000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1358) (- 100000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1359) (- 1000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1360) (- 10000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1361) (- 100000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1362) (- 1000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1363) (- 10000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1364) (- 100000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1365) (- 1000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1366) (- 10000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1367) (- 100000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1368) (- 1000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1369) (- 10000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1370) (- 100000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1371) (- 1000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1372) (- 10000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1373) (- 100000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1374) (- 1000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1375) (- 10000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1376) (- 100000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1377) (- 1000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1378) (- 10000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1379) (- 100000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1380) (- 1000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1381) (- 10000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1382) (- 100000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1383) (- 1000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1384) (- 10000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1385) (- 100000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1386) (- 1000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1387) (- 10000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1388) (- 100000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1389) (- 1000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1390) (- 10000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1391) (- 100000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1392) (- 1000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1393) (- 10000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1394) (- 100000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1395) (- 1000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1396) (- 10000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1397) (- 100000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1398) (- 1000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1399) (- 10000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1400) (- 100000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1401) (- 1000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1402) (- 10000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1403) (- 100000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1404) (- 1000000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1405) (- 10000000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1406) (- 100000000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1407) (- 1000000000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1409) (- 100000000000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_110997 1408) (- 10000000000000000000000000000000000000000000000000000000000000000000000000000000) 0))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 1409)
+(define-fun x2 () Int 153)
+(define-fun x3 () Int 3795)
+; cardinality of I_pow is 81
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+; rep: @uc_I_pow_64
+; rep: @uc_I_pow_65
+; rep: @uc_I_pow_66
+; rep: @uc_I_pow_67
+; rep: @uc_I_pow_68
+; rep: @uc_I_pow_69
+; rep: @uc_I_pow_70
+; rep: @uc_I_pow_71
+; rep: @uc_I_pow_72
+; rep: @uc_I_pow_73
+; rep: @uc_I_pow_74
+; rep: @uc_I_pow_75
+; rep: @uc_I_pow_76
+; rep: @uc_I_pow_77
+; rep: @uc_I_pow_78
+; rep: @uc_I_pow_79
+; rep: @uc_I_pow_80
+)
+It took 60 seconds
+90
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+91
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_73785 Int)) Int 0)
+(define-fun x1 () Int 607)
+(define-fun x2 () Int 656)
+(define-fun x3 () Int 8)
+; cardinality of I_pow is 85
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+; rep: @uc_I_pow_64
+; rep: @uc_I_pow_65
+; rep: @uc_I_pow_66
+; rep: @uc_I_pow_67
+; rep: @uc_I_pow_68
+; rep: @uc_I_pow_69
+; rep: @uc_I_pow_70
+; rep: @uc_I_pow_71
+; rep: @uc_I_pow_72
+; rep: @uc_I_pow_73
+; rep: @uc_I_pow_74
+; rep: @uc_I_pow_75
+; rep: @uc_I_pow_76
+; rep: @uc_I_pow_77
+; rep: @uc_I_pow_78
+; rep: @uc_I_pow_79
+; rep: @uc_I_pow_80
+; rep: @uc_I_pow_81
+; rep: @uc_I_pow_82
+; rep: @uc_I_pow_83
+; rep: @uc_I_pow_84
+)
+It took 60 seconds
+92
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_7389 Int)) Int (ite (= BOUND_VARIABLE_7389 7) 10000000 (ite (= BOUND_VARIABLE_7389 5) 100000 (ite (= BOUND_VARIABLE_7389 4) 10000 (ite (= BOUND_VARIABLE_7389 3) 1000 (ite (= BOUND_VARIABLE_7389 6) 1000000 (ite (= BOUND_VARIABLE_7389 (- 1)) 0 (ite (= BOUND_VARIABLE_7389 2) 100 (ite (= BOUND_VARIABLE_7389 1) 10 1)))))))))
+(define-fun x1 () Int 7)
+(define-fun x2 () Int 211)
+(define-fun x3 () Int 1226)
+; cardinality of I_pow is 8
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+)
+It took 1 seconds
+93
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+94
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_7106 Int)) Int (ite (= BOUND_VARIABLE_7106 8) 100000000 (ite (= BOUND_VARIABLE_7106 4) 10000 (ite (= BOUND_VARIABLE_7106 6) 1000000 (ite (= BOUND_VARIABLE_7106 5) 100000 (ite (= BOUND_VARIABLE_7106 3) 1000 (ite (= BOUND_VARIABLE_7106 7) 10000000 (ite (= BOUND_VARIABLE_7106 (- 1)) 0 (ite (= BOUND_VARIABLE_7106 2) 100 (ite (= BOUND_VARIABLE_7106 1) 10 1))))))))))
+(define-fun x1 () Int 8)
+(define-fun x2 () Int 2131)
+(define-fun x3 () Int 1)
+; cardinality of I_pow is 9
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+)
+It took 0 seconds
+95
+sat
+(model
+(define-fun pow ((BOUND_VARIABLE_1485 Int)) Int (ite (= BOUND_VARIABLE_1485 (- 1)) 0 (ite (= BOUND_VARIABLE_1485 1) 10 1)))
+(define-fun x1 () Int 1)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 0)
+; cardinality of I_pow is 2
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+)
+It took 0 seconds
+96
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_153526 Int)) Int (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032659) 1 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032661) 100 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032662) 1000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032663) 10000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032664) 100000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032665) 1000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032666) 10000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032667) 100000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032668) 1000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032669) 10000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032670) 100000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032671) 1000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032672) 10000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032673) 100000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032674) 1000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032675) 10000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032676) 100000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032677) 1000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032678) 10000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032679) 100000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032680) 1000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032681) 10000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032682) 100000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032683) 1000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032684) 10000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032685) 100000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032686) 1000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032687) 10000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032688) 100000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032689) 1000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032690) 10000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032691) 100000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032692) 1000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032693) 10000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032694) 100000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032695) 1000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032696) 10000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032697) 100000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032698) 1000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032699) 10000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032700) 100000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032701) 1000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032702) 10000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032703) 100000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032704) 1000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032705) 10000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032706) 100000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032707) 1000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032708) 10000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032709) 100000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032710) 1000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032711) 10000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032712) 100000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032713) 1000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032714) 10000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032715) 100000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032716) 1000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032717) 10000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032660) 10 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032719) 1000000000000000000000000000000000000000000000000000000000000 (ite (= BOUND_VARIABLE_153526 49428279566349227271229447680426141396167842121150032718) 100000000000000000000000000000000000000000000000000000000000 0))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 49428279566349227271229447680426141396167842121150032719)
+(define-fun x2 () Int 147)
+(define-fun x3 () Int 28535913976449038424627310001070762043148444935921668007)
+; cardinality of I_pow is 60
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+)
+It took 61 seconds
+97
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+98
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+99
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_108272 Int)) Int (ite (= BOUND_VARIABLE_108272 375) (- 1) (ite (= BOUND_VARIABLE_108272 376) (- 10) (ite (= BOUND_VARIABLE_108272 377) (- 100) (ite (= BOUND_VARIABLE_108272 378) (- 1000) (ite (= BOUND_VARIABLE_108272 379) (- 10000) (ite (= BOUND_VARIABLE_108272 380) (- 100000) (ite (= BOUND_VARIABLE_108272 381) (- 1000000) (ite (= BOUND_VARIABLE_108272 382) (- 10000000) (ite (= BOUND_VARIABLE_108272 383) (- 100000000) (ite (= BOUND_VARIABLE_108272 384) (- 1000000000) (ite (= BOUND_VARIABLE_108272 385) (- 10000000000) (ite (= BOUND_VARIABLE_108272 386) (- 100000000000) (ite (= BOUND_VARIABLE_108272 387) (- 1000000000000) (ite (= BOUND_VARIABLE_108272 388) (- 10000000000000) (ite (= BOUND_VARIABLE_108272 389) (- 100000000000000) (ite (= BOUND_VARIABLE_108272 390) (- 1000000000000000) (ite (= BOUND_VARIABLE_108272 391) (- 10000000000000000) (ite (= BOUND_VARIABLE_108272 392) (- 100000000000000000) (ite (= BOUND_VARIABLE_108272 393) (- 1000000000000000000) (ite (= BOUND_VARIABLE_108272 394) (- 10000000000000000000) (ite (= BOUND_VARIABLE_108272 395) (- 100000000000000000000) (ite (= BOUND_VARIABLE_108272 396) (- 1000000000000000000000) (ite (= BOUND_VARIABLE_108272 397) (- 10000000000000000000000) (ite (= BOUND_VARIABLE_108272 398) (- 100000000000000000000000) (ite (= BOUND_VARIABLE_108272 399) (- 1000000000000000000000000) (ite (= BOUND_VARIABLE_108272 400) (- 10000000000000000000000000) (ite (= BOUND_VARIABLE_108272 401) (- 100000000000000000000000000) (ite (= BOUND_VARIABLE_108272 402) (- 1000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 403) (- 10000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 404) (- 100000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 405) (- 1000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 406) (- 10000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 407) (- 100000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 408) (- 1000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 409) (- 10000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 410) (- 100000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 411) (- 1000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 412) (- 10000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 413) (- 100000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 414) (- 1000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 415) (- 10000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 416) (- 100000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 417) (- 1000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 418) (- 10000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 419) (- 100000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 420) (- 1000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 421) (- 10000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 422) (- 100000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 423) (- 1000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 424) (- 10000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 425) (- 100000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 426) (- 1000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 427) (- 10000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 428) (- 100000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 429) (- 1000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 430) (- 10000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 431) (- 100000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 432) (- 1000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 433) (- 10000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 434) (- 100000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 435) (- 1000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 436) (- 10000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 437) (- 100000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 438) (- 1000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 439) (- 10000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 440) (- 100000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 441) (- 1000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 442) (- 10000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 443) (- 100000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 444) (- 1000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 445) (- 10000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 446) (- 100000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 447) (- 1000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 448) (- 10000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 449) (- 100000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 450) (- 1000000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 451) (- 10000000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 453) (- 1000000000000000000000000000000000000000000000000000000000000000000000000000000) (ite (= BOUND_VARIABLE_108272 452) (- 100000000000000000000000000000000000000000000000000000000000000000000000000000) 0))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+(define-fun x1 () Int 453)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 518)
+; cardinality of I_pow is 79
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+; rep: @uc_I_pow_7
+; rep: @uc_I_pow_8
+; rep: @uc_I_pow_9
+; rep: @uc_I_pow_10
+; rep: @uc_I_pow_11
+; rep: @uc_I_pow_12
+; rep: @uc_I_pow_13
+; rep: @uc_I_pow_14
+; rep: @uc_I_pow_15
+; rep: @uc_I_pow_16
+; rep: @uc_I_pow_17
+; rep: @uc_I_pow_18
+; rep: @uc_I_pow_19
+; rep: @uc_I_pow_20
+; rep: @uc_I_pow_21
+; rep: @uc_I_pow_22
+; rep: @uc_I_pow_23
+; rep: @uc_I_pow_24
+; rep: @uc_I_pow_25
+; rep: @uc_I_pow_26
+; rep: @uc_I_pow_27
+; rep: @uc_I_pow_28
+; rep: @uc_I_pow_29
+; rep: @uc_I_pow_30
+; rep: @uc_I_pow_31
+; rep: @uc_I_pow_32
+; rep: @uc_I_pow_33
+; rep: @uc_I_pow_34
+; rep: @uc_I_pow_35
+; rep: @uc_I_pow_36
+; rep: @uc_I_pow_37
+; rep: @uc_I_pow_38
+; rep: @uc_I_pow_39
+; rep: @uc_I_pow_40
+; rep: @uc_I_pow_41
+; rep: @uc_I_pow_42
+; rep: @uc_I_pow_43
+; rep: @uc_I_pow_44
+; rep: @uc_I_pow_45
+; rep: @uc_I_pow_46
+; rep: @uc_I_pow_47
+; rep: @uc_I_pow_48
+; rep: @uc_I_pow_49
+; rep: @uc_I_pow_50
+; rep: @uc_I_pow_51
+; rep: @uc_I_pow_52
+; rep: @uc_I_pow_53
+; rep: @uc_I_pow_54
+; rep: @uc_I_pow_55
+; rep: @uc_I_pow_56
+; rep: @uc_I_pow_57
+; rep: @uc_I_pow_58
+; rep: @uc_I_pow_59
+; rep: @uc_I_pow_60
+; rep: @uc_I_pow_61
+; rep: @uc_I_pow_62
+; rep: @uc_I_pow_63
+; rep: @uc_I_pow_64
+; rep: @uc_I_pow_65
+; rep: @uc_I_pow_66
+; rep: @uc_I_pow_67
+; rep: @uc_I_pow_68
+; rep: @uc_I_pow_69
+; rep: @uc_I_pow_70
+; rep: @uc_I_pow_71
+; rep: @uc_I_pow_72
+; rep: @uc_I_pow_73
+; rep: @uc_I_pow_74
+; rep: @uc_I_pow_75
+; rep: @uc_I_pow_76
+; rep: @uc_I_pow_77
+; rep: @uc_I_pow_78
+)
+It took 61 seconds
+100
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
