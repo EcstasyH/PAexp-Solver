@@ -19,8 +19,6 @@
     \end{itemize}
 \end{definition}
 
-%\znjSide{\textbf{Solved}. I think you need to explain the meanings of compatibility.}
-
 Semenov proved that for any function $f$ that is compatible with addition, 
 theory $(\mathbb{N},+,f)$ admits QE  and thus the theory is complete and decidable \cite{Semenov84}. 
 Exponential functions are compatible with addition functions, and therefore {$\paexp$} is decidable 
@@ -31,7 +29,7 @@ Unfortunately, Point's algorithm is flawed, one problem
 % making the algorithm fail to handle "$a_0<0$" case.
 For example, after  eliminating variable $x$ in formula $\exists x. y\le 2^x \wedge x\le 10$,
 the expected result should be $y\le 2^{10} =1024$,
-but Francoise's algorithm will return a formula equivalent to $y \le 2^6=64$.
+but Point's algorithm will return a formula equivalent to $y \le 2^6=64$.
 % 这里好像还有另一个与Francoise一起的作者
 
 In the next section, within Point's framework, we give a revised algorithm
@@ -483,12 +481,10 @@ distinguished from term substitution $\theta[t'/t]$.
     \caption{QE-linear (Cooper's QE algorithm for PA)}
 \end{algorithm}
 
-%\znj{\textbf{Solved, missing $\bigvee$ for $\theta_{+\infty}$}.Pls check whether the output is correct or not, my intuition is not correct.} 
-% 之前的算法
 
-\subsection{Compared with Francoise's Origin Algorithm}
+\subsection{Compared with Point's Origin Algorithm}
 
-Francoise's algorithm \cite{Francoise} has four steps,
+Point's algorithm \cite{Point86} has four steps,
 corresponding to the four steps of our algorithm respectively.
 So we will use the names of our steps to refer to them. 
 The divisible predicate $n|x$ is not included in his theory,
@@ -501,10 +497,10 @@ In \textbf{QE-exp},
 we adopt the same idea to find sufficient conditions
 and necessary conditions for the formula to holds.
 But our strategy for choosing parameters are easier to understand and use.
-A flaw lies in the $a_i<0$ case in Francoise's algorithm 
+A flaw lies in the $a_i<0$ case in Point's algorithm 
 \footnote{
 In the $a_i<0$ case of \textbf{QE-exp-ineq},
-Francoise's algorithm assumes falsely $t(y)\ge 0$.
+Point's algorithm assumes falsely $t(y)\ge 0$.
 The reason for this mistake might be the confusion of 
 two subtraction operators.
 The example mentioned in \ref{sec:3.2} shows this case.
@@ -512,14 +508,14 @@ The example mentioned in \ref{sec:3.2} shows this case.
 our \textbf{QE-exp-ineq} corrects this flaw by 
 treating $a_i<0$ case similarly to the $a_i>0$ case.
 
-\textbf{QE-linear} in Francoise's algorithm in some sense includes our
+\textbf{QE-linear} in Point's algorithm in some sense includes our
 \textbf{QE-exp-div}, because divisible predicates is not introduced in his setting.
 In this step,
-Francoise uses the permutation groups (just like $S_{(n+1)}$ in \textbf{QE-with-order}) and needs recursively renaming of variables $x_i$.
+Point uses the permutation groups (just like $S_{(n+1)}$ in \textbf{QE-with-order}) and needs recursively renaming of variables $x_i$.
 We instead invoke the QE algorithm of PA without referring to permutation groups, 
 other improved QE algorithm can also be used to simplify this step.
 
-Francoise's algorithm has more restrictions on the form
+Point's algorithm has more restrictions on the form
 of the formula.
 Before \textbf{QE-linear} and \textbf{QE-exp} step,
 it needs to transform the formula into disjunction normal form (DNF)
@@ -535,6 +531,8 @@ the formula other than NNF.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\iffalse
 \subsection{Complexity Analysis and Case Study}
 In this section, we give a complexity analysis of our decision procedure, and provide an example to demonstrate the procedure.
 %\subsection{Complexity Analysis}
@@ -684,3 +682,4 @@ Other sub-cases are similar. However, when the abstraction parameter becomes lar
 say, $\alpha =\langle 2,2 \rangle$,
 the complexity will grow rapidly,
 because \textbf{QE-with-order} can not always be omitted and formulae in \textbf{QE-exp} can not be simplified easily.
+\fi

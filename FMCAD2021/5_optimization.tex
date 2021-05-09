@@ -1,6 +1,24 @@
 %!TEX root = paper.tex
 
-Although
+In the last section, 
+we introduced quantifier elimination as a decision procedure for {$\paexp$}. According to theorem \ref{thm:string-parInt}, the satisfiability of {$\strint$} fragment is decidable.
+However, the quantifier elimination procedure can not be directly applied on solving string constraints over {$\strint$} due to the following two reasons.
+First, quantifier elimination does not return a model that satisfies the constraints. In constrast, it only leaves a formula with constants and free variables. And to obtain satisfiability, all free variables need to be treated as existential quantified variables and be eliminated one by one, 
+Second, the quantifier elimination procedure is highly complicated. Note that we alternatively invoke QE-exp and Cooper's algorithm to eliminate exponential terms and linear terms of a quantified variable, the length of the formula grows super-exponentially in the procedure. 
+
+In this section, we introduced some optimizations on the QE procedure when focus on the quantifier-free fragment in {$paexp$}. Given a quantifier-free formula, we wish to decide its satisfiability and find an assignment for variables in the formula if it exists. Since the Cooper's algorithm is the main contribution to the complexity, we try to only eliminate exponential terms using an variation of QE-exp and send the obtained linear formula to SMT-solver. The cost is that the algorithm is no longer complete in some situations, in which case some practical restrictions are needed.
+
+A quantifier-free formula is a boolean combination of constraints. Here we allow only equalities and inequalities, divisible predicates are replaced by equalities, for example, $2|x$ is replace to $x=2y$, where $y$ is a fresh variable. Since we only eliminate exponential terms, the newly introduced $y$ will not bother. For convenience, we call variables that occurs exponentially in the formula \emph{exponential variables}, variables that have only linear occurrences \emph{linear variables}. Similarly,
+constraints that have exponential terms are called exponential constraints, others are called linear constraints.
+
+\paragraph{QE-exp for all atoms} 
+
+\paragraph{over-approximation}
+
+\paragraph{DFS and pruning}
+
+
+
 
 Describe the optimizations for improving the scalability
 
