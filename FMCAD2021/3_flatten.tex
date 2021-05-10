@@ -4,6 +4,15 @@ In this section, we first define the class of string constraints with string-int
 
 \subsection{String constraints with string-integer conversion ($\strint$)}
 
+There are two types of variables in string constraints,
+i.e., $X$, a set of string variables ranged over $\Sigma^*$,  
+and $Z$,  a set of integer variables ranged over $\mathbb{Z}$.
+As usual, an interpretation $I$ is a mapping from the set of variables $X\cup Z$ to the respective domain, 
+essentially a pair of two mappings 
+$I_X$ and $I_Z$, i.e., $I= (I_X, I_Z)$,  
+where $I_X$ is a mapping in $X \mapsto \Sigma^*$ and $I_Z$ is a mapping in $Z \mapsto \mathbb{N}$.
+
+
 Commonly, 
 {\parseInt} function takes a string representation of a decimal
 number and returns an integer.
