@@ -1,0 +1,38 @@
+\begin{thebibliography}{1}
+
+\bibitem{Parosh:20:PLDI}
+Parosh~Aziz Abdulla, Mohamed~Faouzi Atig, Yu{-}Fang Chen, Bui~Phi Diep, Julian
+  Dolby, Petr Janku, Hsin{-}Hung Lin, Luk{\'{a}}s Hol{\'{\i}}k, and Wei{-}Cheng
+  Wu.
+\newblock Efficient handling of string-number conversion.
+\newblock In Alastair~F. Donaldson and Emina Torlak, editors, {\em Proceedings
+  of the 41st {ACM} {SIGPLAN} International Conference on Programming Language
+  Design and Implementation, {PLDI} 2020, London, UK, June 15-20, 2020}, pages
+  943--957. {ACM}, 2020.
+
+\bibitem{Cooper72}
+David~C Cooper.
+\newblock Theorem proving in arithmetic without multiplication.
+\newblock {\em Machine intelligence}, 7(91-99):300, 1972.
+
+\bibitem{Point86}
+Francoise Point.
+\newblock On the expansion ($\mathbb{N}$, $+$, $2^x$) of {P}resburger
+  arithmetic.
+\newblock In {\em Proceedings of the fourth Easter Conference on model theory,
+  Gross Koris}, pages 17--34, 1986.
+
+\bibitem{SSMH04}
+Helmut Seidl, Thomas Schwentick, Anca Muscholl, and Peter Habermehl.
+\newblock Counting in trees for free.
+\newblock In {\em Automata, Languages and Programming: 31st International
+  Colloquium, {ICALP} 2004, Turku, Finland, July 12-16, 2004. Proceedings},
+  pages 1136--1149, 2004.
+
+\bibitem{Semenov84}
+A~L Semënov.
+\newblock Logical theories of one-place functions on the set of natural
+  numbers.
+\newblock {\em Mathematics of the {USSR}-Izvestiya}, 22(3):587--618, 1984.
+
+\end{thebibliography}

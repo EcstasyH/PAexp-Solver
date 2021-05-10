@@ -1,11 +1,8 @@
 %!TEX root = paper.tex
 
-%\subsection{Decidability of $\paexp$} \label{sec:3.2}
-
-
 \begin{definition}
     For a strictly increasing function $f:\mathbb{N}\mapsto \mathbb{N}$, 
-    $f$ is said to be compatible with addition 
+    $f$ is said to be \emph{compatible with addition}
     if for every $m\in \mathbb{N}^+$,  $f$ modulo $m$ is periodic, 
     and for any term $A(x)=\sum_{1\le i\le n} a_i f(x+b_i)$, 
     where $n \in \mathbb{N}^+, a_i ,b_i \in \mathbb{Z}$,
@@ -19,46 +16,24 @@
     \end{itemize}
 \end{definition}
 
-Semenov proved that for any function $f$ that is compatible with addition, 
-theory $(\mathbb{N},+,f)$ admits QE  and thus the theory is complete and decidable \cite{Semenov84}. 
-Exponential functions are compatible with addition functions, and therefore {$\paexp$} is decidable 
-by \cite{Semenov84}.
-Particularly, in \cite{Point86} Point gave a detailed QE algorithm for $(\mathbb{N},+,2^x)$, where $f(x)=2^x$.
-Unfortunately, Point's algorithm is flawed, one problem 
- lies in the discussion to eliminate exponential terms. 
-% making the algorithm fail to handle "$a_0<0$" case.
-For example, after  eliminating variable $x$ in formula $\exists x. y\le 2^x \wedge x\le 10$,
-the expected result should be $y\le 2^{10} =1024$,
-but Point's algorithm will return a formula equivalent to $y \le 2^6=64$.
-% 这里好像还有另一个与Francoise一起的作者
+Semenov proved that for any function $f$ that is compatible with addition, the first order theory $(\mathbb{N},+,f)$ admits QE  and thus is complete and decidable \cite{Semenov84}. Exponential functions are a typical class of compatible with addition functions, and therefore {$\paexp$} is decidable. Particularly, in \cite{Point86} 
+Point gave a detailed QE algorithm for $(\mathbb{N},+,2^x)$.
+%下面这些感觉可以不用说，或者放在后面
+%Unfortunately, Point's algorithm is flawed, one problem lies in the discussion to eliminate exponential terms. For example, after  eliminating variable $x$ in formula $\exists x. y\le 2^x \wedge x\le 10$, the expected result should be $y\le 2^{10} =1024$, but Point's algorithm will return a formula equivalent to $y \le 2^6=64$.
 
-In the next section, within Point's framework, we give a revised algorithm
- to the decision problem of {$\paexp$} with 
-both subtle improvements and crucial corrections, that 
-provides a crucial step to the decision procedure of string constraints with {\parseInt} function according to 
-Theorem~\ref{thm:string-parInt}. 
+In this section, within Point's framework, we give a revised algorithm to the decision problem of {$\paexp$} with both improvements and corrections, that provides a crucial step to the decision procedure of string constraints with {\parseInt} function according to Theorem~\ref{thm:string-parInt}. 
 
 %\section{Quantifier Elimination Algorithm for $(\mathbb{N},+,2^x)$}
-Based on Point's work \cite{Point86}, we present a  revised QE algorithm for the formula of the form $Qx.\theta(x,\bar{y})$, 
-where $Q$ is a quantifier and $\theta(x,\bar{y})$ is a quantifier-free formula. 
-Since $\forall x. F = \neg \exists x. \neg F$, we further assume the quantifier $Q$ to be the existential quantifier, 
-that is, $\exists x.\theta(x,\bar{y})$. 
-For eliminating quantifiers in arbitrary formula, 
-we apply the algorithm to the innermost quantified formula and repeat this procedure until all quantifiers are eliminated.
+% Based on Point's work \cite{Point86}, 
+We will present a revised QE algorithm for {$\paexp$} formulas of the form $Qx.\theta(x,\bar{y})$, where $Q$ is a quantifier and $\theta(x,\bar{y})$ is a quantifier-free formula. Since $\forall x. F = \neg \exists x. \neg F$, we further assume the quantifier is an existential quantifier, that is, $\exists x.\theta(x,\bar{y})$. For eliminating quantifiers in arbitrary {$\paexp$} formula, we need to apply the algorithm to the innermost quantified formula and repeat this procedure until all quantifiers are eliminated.
 
-We divide the whole QE algorithm into 4 steps.
-The first step $\textbf{Normalization}$ can be viewed as a pre-processing step, which substitutes ``complex" terms like $2^{2^x}$, $l_2(3x+y)$ with ``simple" terms by introducing new variables $x_i$. Now we move forward to handle a ``simpler" formula, however, at the cost of more quantified variables.
+The whole QE algorithm can be divided into 4 steps. The first step \textbf{Normalization} can be viewed as a pre-processing step, which substitutes ``complex" terms like $2^{2^x}$, $l_2(3x+y)$ with ``simple" terms by introducing new variables. After \textbf{Normalization}, we move forward to handle a ``simpler" formula, however, at the cost of more quantified variables.
 
-The other three steps undertake the task to eliminate the introduced variables $x_i$ and the original variable $x$ (will be denoted by $x_0$) one by one. 
-The main body of \textbf{QE-with-Order} step is a loop to enumerate all possible orders among quantified variables. 
-In each iteration, according the given (decreasing) order (corresponding to a for loop), we invoke \textbf{QE-exp} or 
-\textbf{QE-linear} to eliminate these variables one by one. 
-%depending on  eliminates the maximal variable in the remaining $\bar{x}$. So it is necessary to specify an ordering for $\bar{x}$ at the beginning, as we will see, this is the main reason for the complexity of this algorithm.
-During each iteration of the inner loop (the for loop), 
-if the maximal $x_i$ in $\bar{x}$ occurs in an exponential term in an atomic formula, 
-we will invoke \textbf{QE-exp} to produce a formula equivalent to the atom where $x_i$ occurs linearly;  
-otherwise, if $x_i$ occurs linearly in the formula, \textbf{QE-linear} will be invoked to eliminate all occurrences of $x_i$, 
-and this procedure is similar to the classic QE algorithm for PA. 
+The other three steps undertake the task to eliminate the newly introduced variables in \textbf{Normalization} step, denoted by $\{x_i:1\le i\le n\}$, and the original variable $x$ (will be denoted by $x_0$) one by one. 
+The main body of \textbf{Enumerate-Orders} step is a loop to enumerate all possible orders among quantified variables $\{x_i : 0\le i \le n\}$. 
+In each iteration, according the given (decreasing) order of quantified variables (corresponding to an outer \emph{for} loop), we invoke \textbf{Elim-exp} and \textbf{Elim-linear} to eliminate these variables one by one. 
+
+During each iteration of the inner \emph{for} loop, if the maximal $x_i$ in $\bar{x}$ occurs in an exponential term in an atom, we will invoke \textbf{Elim-exp} to produce an equivalent formula where $x_i$ occurs linearly. Then \textbf{Elim-linear} will eliminate all linear occurrences of $x_i$, which is similar to the classic Cooper's QE algorithm for PA \cite{Cooper72}. 
 
 A more detailed description is given below.
 
@@ -78,19 +53,13 @@ $$\exists x\exists x_1. x_1 > 3 \wedge 2^{x_1}\le x \wedge x\le 2^{x_1+1}-1\,.$$
 The \textbf{Normalization} step goes like this, first transform the given formula $\theta(x,\bar{y})$ into the Negation Normal Form (NNF).
 Then $\theta(x,\bar{y})$ becomes a Boolean combination (with only $\wedge$ and $\vee$) of literals.
 
-Make substitutions by introducing new variables according to the \textit{while} statements in the pseudo-code.For consistency, we rename the original $x$ to be $x_0$ and assume $n$ new quantified variables are introduced.
+Make substitutions by introducing new variables according to the \textit{while} statements in the pseudo-code. For consistency, we rename the original $x$ to be $x_0$ and assume $n$ new quantified variables are introduced.
 
-After introducing new variables and substitution, 
-we obtain a formula where if an exponential term contains a quantified variable $x_i(0\le i\le n)$, the term should be $2^{x_i}$.
-We then collect all terms with $x_i(0\le i\le n)$ together, 
-it will be of the form $s(\bar{x})\Def \sum_{i=0}^{n} a_i 2^{x_i} + \sum_{i=0}^n b_i x_i$, where $a_i,b_i(0\le i \le n)$ are all constants.
-Other terms including constants and terms of $\bar{y}$ are collected,  
-denoted by $t(\bar{y})$. 
-Since $\bar{y}$ are free variables, 
-we will regard $t(\bar{y})$ as a constant.
-Inequalities and equalities will all be transformed into $s(\bar{x})\le t(\bar{y})$, for example, $s(\bar{x}) = t(\bar{y})$ will be replaced by $s(\bar{x})\le t(\bar{y})\wedge t(\bar{y})\le s(\bar{x})$.
-
-At the end, the resulted formula $\theta'$ only contains literals of the forms $s(\bar{x})\le t(\bar{y})$, $k|s(\bar{x})+t(\bar{y})$ and $\neg  (k|s(\bar{x})+t(\bar{y}))$.
+%After introducing new variables and substitution, 
+After substitutions, we obtain a formula where if an exponential term contains a quantified variable $x_i$, the term must be $2^{x_i}$.
+We then collect all terms with $x_i (0\le i\le n)$ together, it will be of the form $s(\bar{x}) \Def \sum_{i=0}^{n} a_i 2^{x_i} + \sum_{i=0}^n b_i x_i$, where $a_i,b_i (0\le i \le n)$ are all constants.
+Other terms including constants and terms of free variables $\bar{y}$ are collected, denoted by $t(\bar{y})$. Since $\bar{y}$ are free variables, we will regard $t(\bar{y})$ as a constant. Inequalities and equalities will all be transformed into $s(\bar{x})\le t(\bar{y})$, for example, $s(\bar{x}) = t(\bar{y})$ will be replaced by $s(\bar{x})\le t(\bar{y})\wedge t(\bar{y})\le s(\bar{x})$.
+ end, the resulted formula $\theta'$ only contains literals of the forms $s(\bar{x})\le t(\bar{y})$, $k|s(\bar{x})+t(\bar{y})$ and $\neg  (k|s(\bar{x})+t(\bar{y}))$.
 
 
 \begin{algorithm}[t]
@@ -101,7 +70,7 @@ At the end, the resulted formula $\theta'$ only contains literals of the forms $
     $\theta' :=  \theta(x,\bar{y})$ \;
     Transform $\theta'$ into NNF\;
     \tcp{ i is used for counting the introduced variables }
-    i = 1\; 
+    $i := 1$\; 
     \tcp{ $\bar{y}$ are regarded as constants} 
     \While{there is a term $l_2(t)$, $t$ is not a constant}
     {
@@ -114,55 +83,38 @@ At the end, the resulted formula $\theta'$ only contains literals of the forms $
         $i:= i+1$\;
     }
     $n:= i-1$\;
-    \tcp{ Collect quantified variables $x_i$}
-    Transform all atoms into forms $s(\bar{x})\le t(\bar{y})$, $k|s(\bar{x})+t(\bar{y})$ or $\neg  (k|s(\bar{x})+t(\bar{y}))$\;
+    \tcp{ Collect quantified variables}
+    Transform all atoms of $\theta'$ into forms $s(\bar{x})\le t(\bar{y})$, $k|s(\bar{x})+t(\bar{y})$ or $\neg  (k|s(\bar{x})+t(\bar{y}))$\;
     Return $\exists x_0,...,\exists x_n. \theta'$
    
     \caption{Normalization}
 \end{algorithm}
 
+\subsection{Enumerate-Orders} 
+In the \textbf{Normalization} step, we simplify the origin formula at the cost of more quantified variables. Suppose we get $\exists \bar{x}.\theta(\bar{x},\bar{y})$ and it has $n$ new variables $x_i$. As a consequence, we need to eliminate all $(n+1)$ quantified variables one by one. 
 
-\subsection{QE-with-order} 
-During the \textbf{Normalization} step, 
-we simplify the origin formula at the cost of more quantified variables. 
-Suppose we get $\exists \bar{x}.\theta(\bar{x},\bar{y})$,
-and it has $n$ new variables $x_i$ ($x$ is denoted by $x_0$).
-As a consequence, we need to eliminate all quantified variables one by one. 
-
-To the end, we denote the set of all orders among the $n+1$ variables by 
- $S_{n+1}$, and then enumerate these orders one by one in the outer \textit{for} loop. 
- For the considered order $\sigma$, we first add the ordering information to 
- the quantifier free formula, and then according to the 
- order, to eliminate $x_{\sigma(i)}$ for $i=n$ to $0$ by invoking \textbf{QE-exp} first, and then invoking \textbf{QE-linear} (the inner \textit{for} loop). 
- In each iteration of the inner \textit{for} loop, 
-if $x_{\sigma{(i)}}$ occurs in an exponential term in an atomic formula, 
-\textbf{QE-exp} is invoked and a formula   equivalent to the atom is returned, in which $x_i$ occurs linearly;  
-then $x_i$ occurs linearly in the formula, thus \textbf{QE-linear} is further invoked to eliminate all occurrences of $x_i$. 
-The returned formula is the disjunction of all formulas resulted in all iterations of the outer \textit{for} loop. 
- 
- 
+%To the end, 
+We denote the set of all orders among the $(n+1)$ variables by $S_{n+1}$, and then enumerate these orders one by one in the outer \textit{for} loop. For the considered order $\sigma$, we first add the ordering information to $\theta$, and then according to the order, to eliminate $x_{\sigma(i)}$ for $i=n$ to $0$ by invoking \textbf{Elim-exp} first, and then invoking \textbf{Elim-linear} (the inner \textit{for} loop). In each iteration of the inner \textit{for} loop, if $x_{\sigma{(i)}}$ occurs in an exponential term in an atom $\tau$, \textbf{Elim-exp} is invoked to produce a formula, in which $x_i$ occurs linearly, equivalent to $\theta$;  
+then $x_i$ occurs only linearly, thus \textbf{Elim-linear} is further invoked to eliminate all (linear) occurrences of $x_i$. The returned formula is the disjunction of all formulas resulted in all iterations of the outer \textit{for} loop. 
  
 \iffalse
 put , We now specify an order of $\bar{x}$, and recursively eliminate the maximal element in the remaining $\bar{x}$. 
 That is to say,
-every execution of \textbf{QE-exp} and \textbf{QE-linear} will eliminate the largest element $x_i$ in $\bar{x}$.
+every execution of \textbf{Elim-exp} and \textbf{Elim-linear} will eliminate the largest element $x_i$ in $\bar{x}$.
 However, as you may notice, if there is no clue about the order of $\bar{x}$, 
 we will have to use the idea of permutation group and the number of sub-cases will blow up, in the worst case, $(n+1)!$ cases. 
 
-Here is how \textbf{QE-exp} and \textbf{QE-linear} are invoked in
-\textbf{Ordering and QE}. 
+Here is how \textbf{Elim-exp} and \textbf{Elim-linear} are invoked in
+\textb
+At thef{Ordering and QE}. 
 \fi
-
-%我们这里还是考虑用循环群来做，因为如果每一次只找到最大的$x_i$，那么递归的执行还是需要整个$\bar{x}$的顺序。但如果一开始就知道了，后面有些操作可以简化
 
 \begin{algorithm}[t]
     \SetAlgoLined
-    \KwIn{a normalized $(n+1)$-existential formula $\exists \bar{x}.\theta(\bar{x},\bar{y})$,
-    where $\bar{x}=(x_0,...,x_n)$} 
-    \KwOut{a equivalent quantifier free formula without $\bar{x}$}
-    
-    Let $S_{n+1}$ denote the group of permutations on $\{0,1,...,n\}$\;
-    $\phi :=  \textit{False}$\;
+    \KwIn{a normalized $(n+1)$-existential formula $\exists \bar{x}.\theta(\bar{x},\bar{y})$, where $\bar{x}=(x_0,...,x_n)$} 
+    \KwOut{an equivalent quantifier-free formula without $\bar{x}$}
+    \tcp{Let $S_{n+1}$ denote the group of permutations on $\{0,1,...,n\}$}
+    $\phi := \textit{False}$\;
     \For{each $\sigma \in S_{n+1}$ }
     {
         $\theta_{\sigma}:=  \theta(\bar{x},\bar{y})\wedge \bigwedge_{j=0}^{n-1}(x_{\sigma(j)}\le x_{\sigma(j+1)})$\;
@@ -172,53 +124,29 @@ Here is how \textbf{QE-exp} and \textbf{QE-linear} are invoked in
         \For{i from n to 0}
         {
             \tcp{if $x_{\sigma(i)}$ occurs exponentially in $\theta_\sigma$}
-            $\theta_{\sigma}:= \textbf{QE-exp}(x_{\sigma(i)},\theta_{\sigma})$\;
+            $\theta_{\sigma}:= \textbf{Elim-exp}(x_{\sigma(i)},\theta_{\sigma})$\;
             \tcp{now $x_{\sigma(i)}$ occurs only linearly in $\theta_\sigma$}
-            $\theta_{\sigma}:= \textbf{QE-linear}(x_{\sigma(i)},\theta_{\sigma})$\;
+            $\theta_{\sigma}:= \textbf{Elim-linear}(x_{\sigma(i)},\theta_{\sigma})$\;
         }
         $\phi :=  \phi \vee \theta_{\sigma}$\;
     }
-\iffalse
-    \For{i from $0$ to $n$}
-    {
-        \tcp{ specify the maximal quantified variable}
-        $\theta_i :=  \theta(\bar{x},\bar{y}) \wedge (\bigwedge_{0\le j \le n} x_i - x_j \ge 0)$\;
-        \tcp{ eliminate $x_i$}
-        \While{$x_i$ occurs in an exponential term in formula $\tau(x_i,\bar{x},\bar{y})$}{
-            \tcp{ QE-exp outputs a formula equivalent with $\tau(x_i,\bar{x},\bar{y})$ where $x_i$ occurs linearly }
-            $\theta_i :=  \theta_i[\text{QE-exp}(\tau(x_i,\bar{x},\bar{y}))/\tau(x_i,\bar{x},\bar{y})]$\;
-        }   
-        transform $\theta_i$ into disjunction normal form $\theta_i = \bigvee_s \theta_{i,s}$\;
-        \For{ every $\theta_{i,s}$ }{
-            $\theta'_{i,s} :=  \text{QE-linear}(x_i,\theta_{i,s})$
-        }
-        $\theta'_i =\bigvee_s \theta'_{i,s}$\;
-    }
-\fi
     output $\phi$
-    \caption{QE-with-order}
+    \caption{Enumerate-Orders}
 \end{algorithm}
-%\znj{I cannot understand why you need to do QE for all permutation $\sigma$? I think 
-%one is enough.}
 
+\subsection{Elim-exp}
 
-\subsection{QE-exp}
-
-\textbf{QE-exp} and \textbf{QE-linear} are the most technical parts of our QE algorithm.
-As mentioned, 
-\textbf{QE-exp} takes $\theta_{\sigma}(\bar{x},\bar{y})$ and  variable $x_{\sigma(i)}$ (the maximal variable among all quantified variables that are not eliminated yet according to $\sigma$) as 
-inputs, and  outputs an equivalent formula in which $x_{\sigma(i)}$ occurs linearly.
-The ideal case is that the formula $\theta(\bar{x},\bar{y})$ itself contains no $2^{x_{\sigma(i)}}$ terms, so we can omit this step and directly go to \textbf{QE-linear}.
-For simplicity, we will abuse   $x_i$ for $x_{\sigma(i)}$, 
-and  $\bar{x}$ for $(x_{\sigma(0)},...,x_{\sigma(i-1)})$ ( remind that $x_{\sigma(i+1)},...,x_n$ have been eliminated already).
+\textbf{Elim-exp} is the most technical part of our QE algorithm. As mentioned, \textbf{Elim-exp} takes $\theta_{\sigma}(\bar{x},\bar{y})$ and  variable $x_{\sigma(i)}$ (the maximal variable among all quantified variables that are not eliminated yet according to $\sigma$) as inputs, and outputs an equivalent formula in which $x_{\sigma(i)}$ occurs linearly.
+The ideal case is that the formula $\theta(\bar{x},\bar{y})$ itself contains no $2^{x_{\sigma(i)}}$ terms, so we can omit this step and directly go to \textbf{Elim-linear}.
+For simplicity, we will abuse notations $x_i$ for $x_{\sigma(i)}$, and $\bar{x}$ for $(x_{\sigma(0)},...,x_{\sigma(i-1)})$ ( remind that $x_{\sigma(i+1)},...,x_n$ have been eliminated already).
 
 After normalization, the formula $\theta(\bar{x},\bar{y})$ contains atoms of three forms corresponding to 
 the predicates $\le$, $|$ and negation of $|$, respectively.
-The problem will be discussed in 2 cases depending on the form of the atom $\tau$ that contains $2^{x_i}$, 
-corresponding to \textbf{QE-exp-ineq} or \textbf{QE-exp-div}. 
+The problem will be discussed in two cases depending on the form of the atom $\tau$ that contains $2^{x_i}$, 
+corresponding to \textbf{Elim-exp-ineq} or \textbf{Elim-exp-div}. 
 
-We first give the whole procedure of \textbf{QE-exp},
-and then provide the details of the two sub-routines.
+%We first give the whole procedure of \textbf{Elim-exp},and then provide the details of the two sub-routines.
+
 \begin{algorithm}[t]
     \SetAlgoLined
     \KwIn{$x_i$ and $\theta$, $x_i$ is larger than $x_0$ to $x_{i-1}$
@@ -230,7 +158,7 @@ and then provide the details of the two sub-routines.
         $\Psi:= \textit{False}$\;
         \eIf{$\tau$ is of the form $a_i 2^{x_i}+\sum_{j=0}^{i-1} a_j2^{x_j} + \sum_{k=0}^{i}b_k x_k \le t(\bar{y})$}
         { 
-            \tcp{ \textbf{QE-exp-ineq} case}
+            \tcp{ \textbf{Elim-exp-ineq} case}
             $A :=  \sum_{j=0}^{i-1}|a_j|$, $B:= b_i + \sum_{j=0}^{i-1}|b_j|$\;
             $B':= 2(l_2(B)+3)$, $\delta:=  l_2(A)+3$\;
             If $a_i>0$ then $\alpha := l_2(t(y))-l_2(a_i)$
@@ -257,7 +185,8 @@ and then provide the details of the two sub-routines.
             }
             }
         {
-            \tcp{ \textbf{QE-exp-div} case, the atom is of the form $d|t(x_i,\bar{x},\bar{y})$}
+            \tcp{the atom is of the form $d|t(x_i,\bar{x},\bar{y})$}
+            \tcp{ \textbf{Elim-exp-div} case}
             \tcp{ let $d=2^r d_0$ where $d_0$ is odd}
             $\rho_5 := \bigvee_{p=0}^{r-1} [\tau(p,\bar{x},\bar{y})\wedge x=p]$\;
             $\rho_6 := \bigvee_{q=0}^{\phi(d_0)-1} [d|(a_i 2^{r+q}+\sum_{j=0}^{i-1} a_j 2^{x_j}
@@ -267,13 +196,13 @@ and then provide the details of the two sub-routines.
         }
         replace $\tau$ by $\Psi$ in $\theta$\;
     }
-    \caption{QE-exp}
+    \caption{Elim-exp}
 \end{algorithm}
 
 
-\subsubsection{QE-exp-ineq}
+\subsubsection{Elim-exp-ineq}
 
-This algorithm deals with the case where $\tau$ is an inequality of the form 
+This part deals with the case when $\tau$ is an inequality of the form 
 $$\tau(x_i,\bar{x},\bar{y}) \Def  a_i 2^{x_i}+\sum_{j=0}^{i-1} a_j2^{d x_j} + \sum_{k=0}^{i}b_k x_k \le t(\bar{y})$$
 
 We now try to eliminate $2^{x_i}$ in $\tau$, the idea is to find a bound for $x_i$, 
@@ -281,11 +210,10 @@ either by constants or by other variables.
 We will prove the following theorem.
 
 \begin{theorem} \label{thm:exp-ineq}
-Assume that $x_i$ is the maximal variable in $\bar{x}$ according to the given order. 
-Given an inequality $\tau(x_i,\bar{x},\bar{y})$ of the form %, suppose $x_i$ occurs in an exponential term, that is 
+Assume that $x_i$ is the maximal variable in $\{x_0,...,x_{i}\}$ according to the given order, $\bar{x}$ denotes $\{x_0,...,x_{i-1}\}$.
+Given an inequality $\tau(x_i,\bar{x},\bar{y})$ of the form  
 $$\tau(x_i,\bar{x},\bar{y}) \Def  a_i 2^{x_i}+\sum_{j=0}^{i-1} a_j2^{d x_j} + \sum_{k=0}^{i}b_k x_k \le t(\bar{y})$$
-with $a_i \neq 0$, 
-let $A\Def \sum_{j=0}^{i-1}|a_j|$, 
+with $a_i \neq 0$. Define $A\Def \sum_{j=0}^{i-1}|a_j|$, 
 $B\Def |b_i| + \sum_{j=0}^{i-1}|b_j|$, 
 $B'\Def 2(l_2(B)+3)$,
 $\delta\Def  l_2(A)+3$, then 
@@ -358,11 +286,11 @@ When $x_i \le \alpha-1$, similarly we have
 which indicates that when  $x_i \le \alpha-1$, $\tau(x_i,\bar{x},\bar{y})$ keeps \textit{true}. \qed 
 \end{proof}
 
-\subsubsection{QE-exp-div}
+\subsubsection{Elim-exp-div}
 
 If $x_i$ occurs exponentially in an atom $\tau(x_i,\bar{x},\bar{y})$ of the form
 $$\tau(x_i,\bar{x},\bar{y}) \Def  d| a_i 2^{x_i}+\sum_{j=0}^{i-1} a_j 2^{x_j} + \sum_{k=0}^{i} b_k x_k+t(\bar{y}) \quad (a_i \neq 0)\,,$$
-the algorithm \textbf{QE-exp-div} outputs an equivalent formula without $2^{x_i}$ terms.
+the algorithm \textbf{Elim-exp-div} outputs an equivalent formula without $2^{x_i}$ terms.
 The idea is that $a_i 2^x$ modulo $d$ is a periodic function when $x$ is large enough and the period can be computed.
 
 Let $d = 2^rd_0$, $d_0$ is an odd natural number. 
@@ -395,9 +323,9 @@ $$
 
 %\znj{\textbf{Solved}.More explanation or a formal proof is needed. }
 
-\subsection{QE-linear}
+\subsection{Elim-linear}
 
-After \textbf{QE-exp}, 
+After \textbf{Elim-exp}, 
 we obtain a formula (still denoted by $\theta(x_i,\bar{x},\bar{y})$) without $2^{x_i}$ terms,
 i.e., $x_i$ occurs only linearly.
 Now we wish to construct a formula without $x_i$ equivalent to $\exists x_i.\theta(x_i,\bar{x},\bar{y})$.
@@ -406,7 +334,7 @@ following Cooper's QE algorithm for PA,
 treating all $x_j (j<i)$ as free variables (like $\bar{y}$).
 The procedure contains 3 steps.
 
-Step 1: Put $\theta(x_i,\bar{x},\bar{y})$ in NNF form, replace atomic formulae containing symbols other than $\le,|$ by equivalent formulae only with $\le$, that is, $x=a$ by $x\le a \wedge a\le x$, $x< a$ by $x\le a+1$, $x\neq a$ by $x>a \vee x<a$,  $x\geq a$ by $-x \le -a$, and $x>a$ by $-x \le -a-1$.
+Step 1: Put $\theta(x_i,\bar{x},\bar{y})$ in NNF form, replace atomic formulas containing symbols other than $\le,|$ by equivalent formulas only with $\le$, that is, $x=a$ by $x\le a \wedge a\le x$, $x< a$ by $x\le a+1$, $x\neq a$ by $x>a \vee x<a$,  $x\geq a$ by $-x \le -a$, and $x>a$ by $-x \le -a-1$.
 In inequality atoms, collect terms of $x_i$
 to one side and guarantee the coefficients of $x_i$ are positive.
 
@@ -478,7 +406,7 @@ distinguished from term substitution $\theta[t'/t]$.
         $\theta'_{+\infty}:=  \theta'_{+\infty}\{\textit{false}/\tau_u\}$
     }
     output $\bigvee_{j=0}^{\delta-1} \theta'_{+\infty}[j/x_i'] \vee \bigvee_{j=0}^{\delta-1} \bigvee_{u\in U}\theta'[t_u(\bar{x},\bar{y})-j/x_i']$
-    \caption{QE-linear (Cooper's QE algorithm for PA)}
+    \caption{Elim-linear (Cooper's QE algorithm for PA)}
 \end{algorithm}
 
 
@@ -489,35 +417,35 @@ corresponding to the four steps of our algorithm respectively.
 So we will use the names of our steps to refer to them. 
 The divisible predicate $n|x$ is not included in his theory,
 instead, the division operation $\frac{x}{n}$ where $n\in \mathbb{N}$ is allowed.
-The \textbf{Normalization} and \textbf{QE-with-order} steps in two algorithms are similar,
+The \textbf{Normalization} and \textbf{Enumerate-Orders} steps in two algorithms are similar,
 with some minor differences due to the setting of the theory.
 The main differences between the two algorithms lies in the following aspects.
 
-In \textbf{QE-exp},
+In \textbf{Elim-exp},
 we adopt the same idea to find sufficient conditions
 and necessary conditions for the formula to holds.
 But our strategy for choosing parameters are easier to understand and use.
 A flaw lies in the $a_i<0$ case in Point's algorithm 
 \footnote{
-In the $a_i<0$ case of \textbf{QE-exp-ineq},
+In the $a_i<0$ case of \textbf{Elim-exp-ineq},
 Point's algorithm assumes falsely $t(y)\ge 0$.
 The reason for this mistake might be the confusion of 
 two subtraction operators.
 The example mentioned in \ref{sec:3.2} shows this case.
 },
-our \textbf{QE-exp-ineq} corrects this flaw by 
+our \textbf{Elim-exp-ineq} corrects this flaw by 
 treating $a_i<0$ case similarly to the $a_i>0$ case.
 
-\textbf{QE-linear} in Point's algorithm in some sense includes our
-\textbf{QE-exp-div}, because divisible predicates is not introduced in his setting.
+\textbf{Elim-linear} in Point's algorithm in some sense includes our
+\textbf{Elim-exp-div}, because divisible predicates is not introduced in his setting.
 In this step,
-Point uses the permutation groups (just like $S_{(n+1)}$ in \textbf{QE-with-order}) and needs recursively renaming of variables $x_i$.
+Point uses the permutation groups (just like $S_{(n+1)}$ in \textbf{Enumerate-Orders}) and needs recursively renaming of variables $x_i$.
 We instead invoke the QE algorithm of PA without referring to permutation groups, 
 other improved QE algorithm can also be used to simplify this step.
 
 Point's algorithm has more restrictions on the form
 of the formula.
-Before \textbf{QE-linear} and \textbf{QE-exp} step,
+Before \textbf{Elim-linear} and \textbf{Elim-exp} step,
 it needs to transform the formula into disjunction normal form (DNF)
 and deals with the basic case when input formula $\theta$ is 
 a conjunction of atoms. 
@@ -548,13 +476,13 @@ The generic $\alpha$-flat language contains $O(|\Sigma|^{pq})$ $\alpha$-flat lan
 
 
 \paragraph{Complexity for QE}
-In \textbf{QE-with-order},
+In \textbf{Enumerate-Orders},
 it reduces the origin problem to $(n+1)!$ sub-cases,
 and for each case,
-we recursively invoke \textbf{QE-exp} and \textbf{QE-linear}.
+we recursively invoke \textbf{Elim-exp} and \textbf{Elim-linear}.
 So the key is to analysis the inner \textit{for}
-loop in \textbf{QE-with-order}.
-Note that if we omit the \textbf{QE-exp} step,
+loop in \textbf{Enumerate-Orders}.
+Note that if we omit the \textbf{Elim-exp} step,
 the sub-cases are equivalent to Cooper's algorithm,
 so we adopt the idea of Oppen's analysis to analyze the complexity
 \cite{Oppen}.
@@ -597,7 +525,7 @@ where $(m+1)$ is the maximum number of constants per atom and $q>1$ is some cons
 
 In our algorithm,
 we use the same denotations and have the following theorem. 
-Note that each iteration corresponds to \textbf{QE-exp} and \textbf{QE-linear}.
+Note that each iteration corresponds to \textbf{Elim-exp} and \textbf{Elim-linear}.
 \begin{theorem}
 for all $k: 1\le k\le m$, the following relations holds
 \begin{itemize}
@@ -625,8 +553,8 @@ $$
 \le 2^{2^{2^{p n \textit{log}n}}}
 $$
 
-Then the upper bound for Cooper's algorithm still holds for the inner \textit{for} loop of \textbf{QE-with-order}.
-When considering \textbf{Normalization} and permutations groups in \textbf{QE-with-order},
+Then the upper bound for Cooper's algorithm still holds for the inner \textit{for} loop of \textbf{Enumerate-Orders}.
+When considering \textbf{Normalization} and permutations groups in \textbf{Enumerate-Orders},
 since the super exponential term dominates the number of permutations $n^{O(n)}$,
 this upper bound still holds.
 
@@ -670,16 +598,16 @@ $\phi$ is transformed into the form
 $$\exists x_0. 2|(x+1)\wedge  2^{x}\le 16 \wedge -2^{x}\le -5\,.$$
 
 Since there is only one variable, 
-\textbf{QE-with-order} can be omitted.
-We send $2^x\le 16$ and $-2^x \le -5$ to \textbf{QE-exp} and obtain
+\textbf{Enumerate-Orders} can be omitted.
+We send $2^x\le 16$ and $-2^x \le -5$ to \textbf{Elim-exp} and obtain
 $$2^x\le 16 \equiv x \le 4$$
 $$-2^x\le -5 \equiv 3\le x\,.$$ 
-Then we apply \textbf{QE-linear} on formula $\exists x_0. 2|(x+1) \wedge x\le 4 \wedge 3\le x$ and get
+Then we apply \textbf{Elim-linear} on formula $\exists x_0. 2|(x+1) \wedge x\le 4 \wedge 3\le x$ and get
 $$\bigvee_{j=0}^1(2| j+1 \wedge \textit{false} \wedge \textit{true})\vee \bigvee_{j=0}^1 (2|4-j+i\wedge 4-j\le 4 \wedge 3\le 4-j) \,.$$
 which evaluates \textit{true} and we can deduce $j=1\implies x=3$, so $y$ is string $111$.
 
 Other sub-cases are similar. However, when the abstraction parameter becomes larger,
 say, $\alpha =\langle 2,2 \rangle$,
 the complexity will grow rapidly,
-because \textbf{QE-with-order} can not always be omitted and formulae in \textbf{QE-exp} can not be simplified easily.
+because \textbf{Enumerate-Orders} can not always be omitted and formulas in \textbf{Elim-exp} can not be simplified easily.
 \fi
