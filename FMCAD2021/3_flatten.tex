@@ -4,42 +4,51 @@ In this section, we first define the class of string constraints with string-int
 
 \subsection{String constraints with string-integer conversion ($\strint$)}
 
-There are two types of variables in string constraints,
-i.e., $X$, a set of string variables ranged over $\Sigma^*$,  
-and $Z$,  a set of integer variables ranged over $\mathbb{Z}$.
-As usual, an interpretation $I$ is a mapping from the set of variables $X\cup Z$ to the respective domain, 
-essentially a pair of two mappings 
-$I_X$ and $I_Z$, i.e., $I= (I_X, I_Z)$,  
-where $I_X$ is a mapping in $X \mapsto \Sigma^*$ and $I_Z$ is a mapping in $Z \mapsto \mathbb{N}$.
+In the sequel, we shall define $\strint$, the class of string constraints with the string-integer conversion function {\parseInt}.
 
-
-Commonly, 
-{\parseInt} function takes a string representation of a decimal
-number and returns an integer.
-Since we focus on the decidability,
-we define a binary version of {\parseInt},
-which takes a binary string and returns a decimal integer number.
+The function  {\parseInt} takes a decimal string as the input and returns the integer represented by the string\footnote{The {\parseInt} function in scripting languages e.g. Javascript is more general in the sense that the base can be a number between 2 and 36. Although our approach works for arbitrary positive bases, we choose to focus on the base 10 in this paper, for readibility.}.
+%Since we focus on the decidability,
+%we define a binary version of {\parseInt},
+%which takes a binary string and returns a decimal integer number.
 For example,
-${\parseInt}('111')=7$. 
-Clearly,  our decision procedure given in this paper 
-can be adapted to string constraints with other string to number conversion function without substantial change. 
-Single quotation marks are used to distinguish a symbol like $'1'\in \Sigma$
-from a number $1_\mathbb{N}\in \mathbb{N}$ when needed.
+${\parseInt}('0123') = {\parseInt}('123')=10^2+10*2+3 = 123$. 
+Note here we use the quotation marks to delimit the strings, 
+%Clearly,  our decision procedure given in this paper 
+%can be adapted to string constraints with other string to number conversion function without substantial change. 
+%Single quotation marks are used to distinguish a symbol like $'1'\in \Sigma$
+%from a number $1_\mathbb{N}\in \mathbb{N}$ when needed.
 
-
-\begin{definition} Let $\Sigma_{\textit{num}}=\{'0','1'\}$,
- ${\parseInt}:\Sigma_{\textit{num}}^*\mapsto \mathbb{N}$ is recursively defined by:
-    for $w\in \Sigma_{\textit{num}}^*$
+Formally, the semantics of the $\parseInt$ function is defined as follows. 
+%\begin{definition} 
+Let $\Sigma_{\textit{num}}=\{0,1, \ldots, 9\}$. Then ${\parseInt}: \Sigma_{\textit{num}}^+ \mapsto \Nat$ is recursively defined by
+    for every $w\in \Sigma_{\textit{num}}^+$,
     \begin{itemize}
-        \item if $|w|=0$, i.e., $w=\epsilon$,  ${\parseInt}(w)=0$;
-        \item if $|w|=1, {\parseInt}('w')=w_\mathbb{N}$;
-        \item for $|w|\ge 2$ and $w=w_1 \cdot w_2$, 
-        where $|w_1|, |w_2| \ge 1$, 
-        ${\parseInt}(w) = {\parseInt}(w_1)2^{|w_2|}+{\parseInt}(w_2)$.
+%        \item if $|w|=0$, i.e., $w=\epsilon$,  ${\parseInt}(w)=0$;
+        \item if $w={'i'}$ for $i \in \Sigma_{\textit{num}}$, then ${\parseInt}('i')=i$;
+        \item for $w = w_1 {'i'}$ for $i \in \Sigma_{\textit{num}}$ with $|w_1| \ge 1$, 
+        ${\parseInt}(w) = 10*{\parseInt}(w_1)+{\parseInt}({'i'})$.
     \end{itemize} 
-\end{definition}
+%\end{definition}
+Note that $\parseInt$ is undefined with $\varepsilon$ as the input.
 
 
+In $\strint$, there are two types of variables, namely, the string variables $\svarx,\svary,\ldots \in \svars$ and the integer variables $\ivarx,\ivary,\ldots \in \ivars$.
+%
+A $\strint$ formula $\varphi$ is defined by the following rules, where $\len(\sterm)$ denotes the length of a string $\sterm$.
+\[
+\begin{array}{l c l}
+\sterm & ::= & a \mid \svarx \mid \sterm \concat \sterm, \\
+\iterm & ::= & n \mid \ivarx \mid \len(\sterm) \mid \parseInt(\sterm) \mid \iterm + \iterm \mid \iterm - \iterm,\\
+\varphi & ::= & \sterm = \sterm \mid x \in \Aut \mid \iterm\ \op\ \iterm \mid \varphi \wedge \varphi \mid \varphi \vee \varphi \mid \neg \varphi,
+\end{array}
+\]
+where $a \in \Sigma_\varepsilon$, $n \in \Nat$, $\Aut$ is an FA, and $\op \in \{=, < , >, \le, \ge\}$. Let us call $\sterm$ as string terms, $\iterm$ as integer terms, $\sterm = \sterm$ as string equality constraints, $x \in \Aut$ as regular constraints, $\iterm \op\ \iterm$ as arithmetic constraints. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 \paragraph{String Terms}
 Given a finite alphabet $\Sigma$ and 
 a finite set $X$ of string variables over $\Sigma^*$,
@@ -77,17 +86,25 @@ $Z \cup \{|x| \mid x\in X\}$, %the values of $|x|$ for all $x\in X$,
 where $|\cdot |$ is the length function.
 We define $\lVert \phi_l \rVert = \{I \mid I\models \phi_l \}$.
 \end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In Section~\ref{sec:string-solving},  
-we will introduce a new form of atomic string constraints, i.e., \emph{string-number conversion constraints}.
-A string constraint is a Boolean combination of atomic string constraints possibly with quantifications over $X\cup Z$. Other notions are same as in the first-order logic. 
+The $\strint$ formulas are interpreted on $I=(I_s, I_i)$ where $I_s$ is a partial function from $\svars$ (the set of string variables) to $\Sigma^*$ and $I_i$ is a partial function from $\ivars$ (the set of integer variables) to $\Nat$. Moreover, it is required that the domains of $I_s, I_i$ are finite. Given $I = (I_s, I_i)$, the interpretations of string terms, integer terms, as well as the formulas $\varphi$ under $I$ are easy to comprehend, thus omitted to avoid tediousness. For $\varphi \in \strint$ and $I = (I_s, I_i)$, $I$ satisfies $\varphi$ if the interpretation of $\varphi$ under $I$ is $\ltrue$.
+Let us use $\lVert \varphi \rVert$ to denote the set of $I = (I_s, I_i)$ satisfying $\varphi$.
 
-Giving a string constraint $\Psi$,
-the problem of string constraints solving is to decide 
-whether $\lVert \Psi \rVert$ is empty,
-if not, to compute an interpretation $I$ that satisfies $\Psi$.
+%As usual, an interpretation $I$ is a mapping from the set of variables $X\cup Z$ to the respective domain, 
+%essentially a pair of two mappings 
+%$I_X$ and $I_Z$, i.e., $I= (I_X, I_Z)$,  
+%where $I_X$ is a mapping in $X \mapsto \Sigma^*$ and $I_Z$ is a mapping in $Z \mapsto \mathbb{N}$.
+
+The satisfiability problem of $\strint$ is to decide for a given constraint $\varphi \in \strint$,
+whether $\lVert  \varphi \rVert \neq \emptyset$.
+%if not, to compute an interpretation $I$ that satisfies $\Psi$.
 
 \subsection{An Extension of Presburger Arithmetic with Exponential Functions ($\paexp$)}
+
+\zhilin{stopped here}
 
 For a first order theory $T$,
 we say theory $T$ admits quantifier elimination (QE) if for any formula in $T$, 

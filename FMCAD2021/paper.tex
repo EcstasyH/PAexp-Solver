@@ -434,7 +434,7 @@ initial text=$ $, % sets the text that appears on the start arrow
 \newcommand{\znjSide}[1]{\todo[color=orange!10]{\textbf{ZHAN:} #1}}
 \newcommand\znj[1]{\textcolor{red}{#1}}
 \newcommand{\parseInt}{\textsf{parseInt}}
-\newcommand{\paexp}{{\sf PA}_{\sf exp}}
+\newcommand{\paexp}{{\sf ExpPA}}
 \newcommand{\Def}{\hat{=}}
 \newcommand{\strint}{{\sf STR}_\parseInt}
 
@@ -448,9 +448,9 @@ initial text=$ $, % sets the text that appears on the start arrow
 \newcommand{\hide}[1]{}
 \newcommand\encode{\mathit{encode}}
 \newcommand\decode{\mathit{decode}}
-\newcommand\len{\mathit{len}}
-\newcommand\svar{\mathcal{S}}
-\newcommand\ivar{\mathcal{I}}
+\newcommand\len{\textsf{len}}
+\newcommand\svars{\mathcal{X}}
+\newcommand\ivars{\mathbbm{X}}
 \newcommand\pos{\mathit{pos}}
 \newcommand\ltrue{\mathtt{true}}
 \newcommand\lfalse{\mathtt{false}}
@@ -462,8 +462,8 @@ initial text=$ $, % sets the text that appears on the start arrow
 \newcommand\ivary{\mathbbm{y}}
 %\newcommand\notsubstr{\tt{NotSubstr}}
 \newcommand\concat{\cdot}
-\newcommand{\pfl}[2]{\textsc{PFL}(#1,#2)}
-
+\newcommand\sterm{t}
+\newcommand\iterm{\mathbbm{t}}
 
 \usepackage{bbm}
 \usepackage{amsthm}
@@ -483,6 +483,10 @@ initial text=$ $, % sets the text that appears on the start arrow
 % \newcommand{\sextract}{\mathcal{S}}
 % \newcommand{\ainput}{Input}
 
+\newcommand{\naijun}[1]{\color{red} {NJ: #1 :JN} \color{black}}
+\newcommand{\zhilin}[1]{\color{brown} {ZL: #1 :LZ} \color{black}}
+\newcommand{\wuhao}[1]{\color{cyan} {WH: #1 :HW} \color{black}}
+\newcommand{\yufang}[1]{\color{violet} {YF: #1 :FY} \color{black}}
 
 
 \begin{document}
