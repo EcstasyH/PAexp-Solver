@@ -1,0 +1,21 @@
+\begin{thebibliography}{1}
+
+\bibitem{Cooper72}
+David~C Cooper.
+\newblock Theorem proving in arithmetic without multiplication.
+\newblock {\em Machine intelligence}, 7(91-99):300, 1972.
+
+\bibitem{Point86}
+Francoise Point.
+\newblock On the expansion ($\mathbb{N}$, $+$, $2^x$) of {P}resburger
+  arithmetic.
+\newblock In {\em Proceedings of the fourth Easter Conference on model theory,
+  Gross Koris}, pages 17--34, 1986.
+
+\bibitem{Semenov84}
+A~L Semënov.
+\newblock Logical theories of one-place functions on the set of natural
+  numbers.
+\newblock {\em Mathematics of the {USSR}-Izvestiya}, 22(3):587--618, 1984.
+
+\end{thebibliography}
