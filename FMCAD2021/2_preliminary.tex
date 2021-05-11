@@ -21,17 +21,18 @@ For convenience, we also use $\Sigma_{\epsilon}$ to denote $\Sigma \cup \{\epsil
 A language $L$ over $\Sigma$ is a subset of $\Sigma^*$.
 
 \paragraph{Presburger Arithmetic} \label{PA}
-A Presburger Arithmetic (PA) formula 
+A Presburger Arithmetic ({\pa}) formula 
 % is a first order theory over the signature 
 %$\Sigma_\mathbb{N}\Def  \{0,1,+, <, |\}$. 
  is defined by the rules 
  $$
  \begin{array}{ l c l}
- \phi &::= & t \ \op\ 0 \mid c | t \mid \phi \wedge \phi \mid \phi \vee \phi \mid \neg \phi \mid \exists \ivarx.\ \phi \mid \forall \ivarx.\ \phi,\\
- t &::=& c \mid \ivarx \mid t+t \mid t - t,
+ \iterm &::= & c \mid \ivarx \mid \iterm+\iterm \mid \iterm - \iterm, \\
+ \phi & ::= & \iterm \ \op\ 0 \mid c | \iterm \mid \phi \wedge \phi \mid \phi \vee \phi \mid \neg \phi \mid \exists \ivarx.\ \phi \mid \forall \ivarx.\ \phi,
+
  \end{array}
  $$
-where $\op \in \{=, < , >, \le, \ge\}$ and $\ivarx, c$ are integer variables and constants, respectively. A \emph{quantifier-free} PA (QFPA) formula is a PA formula containing no quantifiers. A PA formula is in \emph{negation normal form} (NNF) if all occurrences of the negation symbol $\neg$ are before the atomic formulas. A PA formula is called \emph{existential} if it is in NNF and contains no occurrences of universal quantifiers.
+where $\op \in \{=, < , >, \le, \ge\}$ and $\ivarx, c$ are integer variables and constants, respectively. A \emph{quantifier-free} PA (\qfpa) formula is a {\pa} formula containing no quantifiers. A {\pa} formula is in \emph{negation normal form} (NNF) if all occurrences of the negation symbol $\neg$ are before the atomic formulas. A {\pa} formula is called \emph{existential} if it is in NNF and contains no occurrences of universal quantifiers.
 %An \emph{existential} LIA (ELIA) formula is an LIA formula where there are no universal quantifiers and all existential quantifiers are in the scope of an even number of the negation symbols $\neg$. 
 %
 The set of free variables of $\phi$, denoted by $\free(\phi)$, is defined in a standard manner. 

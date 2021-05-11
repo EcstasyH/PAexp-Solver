@@ -42,7 +42,7 @@ A $\strint$ formula $\varphi$ is defined by the following rules, where $\len(\st
 \varphi & ::= & \sterm = \sterm \mid x \in \Aut \mid \iterm\ \op\ \iterm \mid \varphi \wedge \varphi \mid \varphi \vee \varphi \mid \neg \varphi,
 \end{array}
 \]
-where $a \in \Sigma_\varepsilon$, $n \in \Nat$, $\Aut$ is an FA, and $\op \in \{=, < , >, \le, \ge\}$. Let us call $\sterm$ as string terms, $\iterm$ as integer terms, $\sterm = \sterm$ as string equality constraints, $x \in \Aut$ as regular constraints, $\iterm \op\ \iterm$ as arithmetic constraints. 
+where $a \in (\Sigma_{\textit{num}})_\varepsilon$, $n \in \Nat$, $\Aut$ is an FA, and $\op \in \{=, < , >, \le, \ge\}$. Let us call $\sterm$ as string terms, $\iterm$ as integer terms, $\sterm = \sterm$ as string equality constraints, $x \in \Aut$ as regular constraints, $\iterm \op\ \iterm$ as arithmetic constraints. 
 
 
 
@@ -108,8 +108,10 @@ whether $\lVert  \varphi \rVert \neq \emptyset$.
 
 \subsection{An Extension of Presburger Arithmetic with Exponential Functions ($\paexp$)}
 
-\zhilin{stopped here}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 For a first order theory $T$,
 we say theory $T$ admits quantifier elimination (QE) if for any formula in $T$, 
 there is a quantifier-free formula equivalent to it.
@@ -125,8 +127,38 @@ We augment the theory with countable unary divisible predicates
 $n|x$, where $n\in \mathbb{N}$, 
 $n|x$ is true if and only if $x\ \text{mod}\ n=0$ holds.
 This structure of PA that admits QE is denoted by $(\mathbb{N},+)$.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We then introduce a theory {$\paexp$}, denoted by $(\mathbb{N},+,2^x)$, that we work on.
+{\paexp} extends Presburger arithmetic with the exponential function $10^x$ as well as the (partial) functions $\ell_{10}(\ivarx)$ and $\lambda_{10}(\ivarx)$ (cf. \cite{Point86}). The functions $\ell_{10}(\ivarx)$ and $\lambda_{10}(\ivarx)$ are inductively defined as follows.
+\begin{itemize}
+\item The (partial) function $\ell_{10}(\ivarx)$ is inductively defined as follows: For $n \ge 1$, $\ell_{10}(n) = m$ iff $10^m \le n < 10^{m+1}$. (Note that $\ell_{10}(0)$ is undefined.) 
+%
+\item The (partial) function $\lambda_{10}(\ivarx)$ can be defined by $\ell_{10}(\ivarx)$: For $n \ge 1$, $\lambda_{10}(n) = 10^{\ell_{10}(n)}$. (Intuitively, $\lambda_{10}(\ivarx)$ is the maximum power of 10 that is no greater than $\ivarx$.)
+\end{itemize}
+
+The syntax of {\paexp} is obtained from that of {\pa} by adding $10^\iterm$, $\ell_{10}(\iterm)$ and $\lambda_{10}(\iterm)$ to the definition of integer terms. Specifically, {\paexp} formulas are defined by the rules,
+%
+ $$
+ \begin{array}{ l c l}
+ \iterm &::=& c \mid \ivarx \mid \iterm + \iterm \mid \iterm - \iterm \mid 10^\iterm \mid \ell_{10}(\iterm) \mid \lambda_{10}(\iterm), \\
+ \phi &::= & \iterm \ \op\ 0 \mid c | \iterm \mid \phi \wedge \phi \mid \phi \vee \phi \mid \neg \phi \mid \exists \ivarx.\ \phi \mid \forall \ivarx.\ \phi.
+ \end{array}
+ $$
+ The semantics of {\paexp} are defined similarly as {\pa}.
+
+\begin{example}
+Some example of  {\paexp} here.
+\end{example} 
+ 
+%Moreover, we introduce an abbreviation $\lambda_{10}(\ivarx) \equiv 2^{\ell_{10}(\ivarx)}$.
+From the definition of $\lambda_{10}(\ivarx)$, we know that for all $n \ge 1$, $\lambda_{10}(n) \le n \le 10\lambda_{10}(n)-1$ holds.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 \begin{definition}
     Let $\mathcal{L}=\{0,1,+,\le,n \, |x(n\in \mathbb{N}),2^x,l_2(x)\}$, 
      $(\mathbb{N},+,2^x)$ be a $\mathcal{L}$-theory that has domain $\mathbb{N}$, where 
@@ -146,7 +178,9 @@ $\lambda_2(x) = 2^{l_2(x)}$ can be defined by $l_2(x)$,
 intuitively, $\lambda_2(x)$ means the maximal power of 2 that is not larger than $x$.
 Then we have $\lambda_2(x) \le x \le 2\lambda_2(x)-1$,
 which will be useful in our proof. 
-
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Flattening $\strint$ into $\paexp$}
 

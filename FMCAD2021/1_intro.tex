@@ -1,5 +1,29 @@
+The emerging of scripting languages boosted the needs of better approaches and tools to ensure program quality.
+Comparing with traditional programming languages, string data type plays a more critical role in its analysis.
+String constraint solvers are the engine of modern scripting program analysis techniques. 
+Due to the high demand, in recent years, there is a boosting amount of publications on this subject.
 
-solve string constraint is hard
+However, research progress of string constraint solving has been hampered by many major obstacles in both theory and tool implementation aspects (including long-standing open problems). 
+Logical theories over strings have to allow string concatenation, which is arguably the most fundamental operation of strings. 
+The most celebrated result concerning theories of strings is Makanin’s result on deciding the satisfiability problem for word equations~\cite{}.
+A simple example of a word equation is $xaby = ybax$, where $x, y$ are variables, and $a, b \in \Sigma$ are constant letters. 
+A word equation is satisfiable if it has a solution, i.e., an assignment that maps variables to strings over the alphabet $\Sigma$ which equate the left-hand side with the right-hand side of the equation.
+The correctness proof of Makanin’s algorithm is arguably one of the most complex termination proofs in computer science. 
+Makanin’s result can be extended to include regular constraints (a.k.a. regular expression matching, e.g., $x \in (ba)^*)$, and arbitrary Boolean connectives.
+This extension is called word equations with regular constraints. 
+The complexity of the satisfiability of word equations with regular constraints was proven to be PSPACE-complete by Plandowski~\cite{}, after decades of improvement of the original algorithm by Makanin.
+
+Satisfiability of word equations is a special instance of Hilbert’s 10th problem. 
+In the past, the original motivation of studying word equations was for finding an undecidability proof of Hilbert’s 10th problem. 
+However, the motivation is no longer valid since Makanin finds a decision procedure. Interestingly, in the last decade, driven by the need for program analysis, people start to revisit the problem and its extensions to describe the complete string library APIs in conventional programming languages.
+
+The satisfiability of string/number conversion constraints has been proven undecidable in~\cite{}. 
+It is undecidable even without combining with other types of string constraints.
+However, this kind of constraint is pervasive in scripting language programs. 
+For example, it is common that programs read string input from text files and conversion a part of the string input to numbers.
+Even more crucially, in many programming languages, the string-number conversion is a part of the definition of their core semantics. 
+JavaScript, which powers most interactive content on the Web and increasingly server- side code with Node.js, is one of such languages. 
+
 
 strategy: do unsat and sat separately
 
