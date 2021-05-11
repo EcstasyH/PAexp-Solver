@@ -43,7 +43,7 @@ A $\strint$ formula $\varphi$ is defined by the following rules, where $\len(\st
 \end{array}
 \]
 where $a \in (\Sigma_{\textit{num}})_\varepsilon$, $n \in \Nat$, $\Aut$ is an FA, and $\op \in \{=, < , >, \le, \ge\}$. Let us call $\sterm$ as string terms, $\iterm$ as integer terms, $\sterm = \sterm$ as string equality constraints, $x \in \Aut$ as regular constraints, $\iterm \op\ \iterm$ as arithmetic constraints. 
-
+Let  $\svar(\varphi)$ and $\ivar(\varphi)$ denote the set of string variables and integer variables respectively occurring in $\varphi$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -184,6 +184,33 @@ which will be useful in our proof.
 
 \subsection{Flattening $\strint$ into $\paexp$}
 
+We first recall the flattening approach for string constraints in \cite{Parosh:20:PLDI}, then show how to extend it to deal with the {\parseInt} function.
+
+A \emph{flat domain restriction} for a string constraint $\varphi$ is a function $\flatfun_\varphi$ that maps each string variable $\svarx \in \svar(\varphi)$ to a flat language $(w_{\svarx,1})^* \cdots (w_{\svarx, k_\svarx})^*$, where $w_{\svarx, i} \in \Sigma_{\textit{num}}^+$ for every $i \in [k_\svarx]$. 
+%
+The flattened semantics of $\phi \in \strint$ is defined as $\llbracket \varphi \rrbracket_{\flatfun_\varphi} = \{(I_s, I_i) \in \llbracket \varphi  \rrbracket \mid \forall \svarx \in \svar(\varphi).\ I_s(x) \in  \flatfun_\varphi(\svarx)\}$.  
+
+The flattening of $\varphi \in \strint$ under a flat domain restriction $\flatfun_\varphi$ is a {\paexp} formula, denoted by $\flatten_{\flatfun_\varphi}(\varphi)$, that encodes its flattened semantics.
+%
+More concretely, $\flatten_{\flatfun_\varphi}(\varphi)$ is a formula over the integer variables $\ivar(\varphi)$,  and Parikh variables $\pvar_{\flatfun_\varphi}(\varphi) = \bigcup_{\svarx \in \svar(\varphi)} \pvar_{\flatfun_\varphi}(\svarx)$, where $\pvar_{\flatfun_\varphi}(\svarx) = \{\#_{\svarx,i} \mid i \in [k_\svarx]\}$, called \emph{flattening variables}, plus some other auxiliary variables, such that 
+%
+$$\llbracket \phi \rrbracket_\kell =\decode_{\flatfun_\varphi}(\llbracket \flatten_{\flatfun_\varphi}(\varphi) \rrbracket |_{\ivar(\phi) \cup \pvar_{\flatfun_\varphi}(\varphi)})$$
+%
+The decoding function above decodes an interpretation of integer and flattening variables $I_e: \ivar(\varphi) \cup \pvar_{\flatfun_\varphi}(\varphi) \rightarrow \Nat$ as a set $\decode_{\flatfun_\varphi}(I_e)$ of interpretations of the $\varphi$'s integer and string variables $(I_s, I_i)$ with $I_s: \svar(\varphi) \rightarrow \Sigma^*$ and $I_i: \ivar(\phi) \rightarrow \Nat$ such that 
+\begin{itemize}
+\item  
+for every $ \svarx \in \svar(\varphi)$, $I_s(\svarx) = w_{\svarx,1}^{I_e(\#_{\svarx,1})} \ldots  w_{\svarx,k_\svarx}^{I_e(\#_{\svarx,k_\svarx})}$, 
+%
+\item for every $ \ivarx \in \ivar(\varphi)$, $I_i(\ivarx) = I_e(\ivarx)$.
+\end{itemize}
+
+The formula $\flatten_{\flatfun_\varphi}(\varphi)$ is constructed inductively by following the structure of $\varphi$: $\flatten_{\flatfun_\varphi}(\varphi_1\ \mathfrak{o}\ \varphi_2) = \flatten_{\flatfun_\varphi}(\varphi_1) \ \mathfrak{o}\  \flatten_{\flatfun_\varphi}(\varphi_2)$, where $\mathfrak{o} \in \{\wedge, \vee\}$, and $\flatten_{\flatfun_\varphi}(\neg \varphi_1) = \neg \flatten_{\flatfun_\varphi}(\varphi_1)$. Therefore, it is sufficient to show how to construct $\flatten_{\flatfun_\varphi}(\varphi)$ for atomic constraints $\varphi$. 
+In the sequel, we will show how to construct $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$ where $\parseInt(\sterm)$ may occur in $\iterm_1$ or $\iterm_2$. The construction of $\flatten_{\flatfun_\varphi}(\varphi)$ for the other atomic constraints is essentially the same as that in \cite{Parosh:20:PLDI} and thus omitted. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 The flattening technique was first introduced 
 in \cite{Abdulla 2017}.
 Fix an alphabet $\Sigma$ and an abstraction parameter $\alpha$, 
@@ -256,8 +283,57 @@ we describe the problem of interest first, and then
 present an reduction from the problem of solving flat string constraints with {\parseInt} function
 to the decidability problem of Presburger Arithmetic with exponential functions.
 Hence, we identify a decidable subset of string constraints, which is the largest one with decidability so far to the best of our knowledge.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Before presenting the construction of $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$, for every $\svarx \in \svar(\varphi)$, we define $\flatten_{\flatfun_\varphi}(\parseInt(\svarx)) = \iterm_{\svarx,1}$  such that $(\iterm_{\svarx, i})_{i \in [k_\svarx]}$ and $(\ell_{\svarx, i})_{i \in [k_\svarx]}$ are inductively defined as follows: 
+\begin{itemize}
+\item for $i = k_\svarx$, 
+$$\iterm_{\svarx, i} = \frac{\parseInt(w_{\svarx, k_\svarx}) (10^{|w_{\svarx,k_\svarx}| \#_{\svarx, k_\svarx} } -1 )}{(10^{|w_{\svarx, k_\svarx}|} -1 )}$$ 
+and $\ell_{\svarx, i} = |w_{\svarx,k_\svarx}| \#_{\svarx, k_\svarx}$,
+%
+\item for $i \in [k_\svarx-1]$, 
+%
+$$\iterm_{\svarx, i} =  \frac{\parseInt(w_{\svarx, i}) (10^{|w_{\svarx, i} | \#_{\svarx, i} } -1 ) 10^{\ell_{\svarx, i+1}}} {(10^{|w_{\svarx, i}|} -1 )} + \iterm_{\svarx, i+1}$$
+%
+\and $\ell_{\svarx, i} = |w_{\svarx, i} | \#_{\svarx, i} + \ell_{\svarx, i+1}$.
+\end{itemize}
+
+Then $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$ is obtained from $\iterm_1 \op \iterm_2$ by the following procedure, 
+\begin{itemize}
+\item Replace each integer term $\len(t)$ such that $t = \alpha_1 \ldots \alpha_m$ with $\alpha_i \in \Sigma_{\textit{num}} \cup \svar(\varphi)$ for every $i \in [m]$ by 
+ $\sum \limits_{i \in [m]} \theta_i$, where for every $i \in [m]$, $\theta_i = 1$ if $\alpha_i \in \Sigma_{\textit{num}}$ and $ \theta_i = \sum \limits_{j \in [k_{\alpha_i}]} |w_{\alpha_i, j} | \#_{\alpha_i, j}$ otherwise.
+%
+\item  Replace each integer term $\parseInt(\sterm)$ such that $t = \alpha_1 \ldots \alpha_m$ with $\alpha_i \in \Sigma_{\textit{num}} \cup \svar(\varphi)$ for every $i \in [m]$ by $\iterm_{\parseInt(\sterm)}$, where $\iterm_{\parseInt(\sterm)} = \iterm_{t,1}$ such that $(\iterm_{t,i})_{i \in [m]}$ and $(\ell_{t, i})_{i \in [m]}$ are inductively defined as follows: 
+\begin{itemize}
+\item if $\alpha_m \in \Sigma_{\textit{num}}$, then $\iterm_{t, m} = \alpha_m$ and $\ell_{t, m} = 1$, otherwise, $\iterm_{t, m} = \flatten_{\flatfun_\varphi}(\parseInt(\alpha_m))$ and $\ell_{t, m} = \sum \limits_{j \in [k_{\alpha_m}]} |w_{\alpha_m, j}| \#_{\alpha_m, j}$,
+%
+\item for $i \in [m-1]$, if $\alpha_i \in \Sigma_{\textit{num}}$, then $\iterm_{t, i} = \alpha_i 10^{\ell_{t, i+1}} + \iterm_{t, i+1}$ and $\ell_{t, i} = \ell_{t, i+1}+1$, otherwise, $\iterm_{t, i} = 
+\flatten_{\flatfun_\varphi}(\parseInt(\alpha_i))10^{\ell_{t, i+1}}  + \iterm_{t, i+1}$ and $\ell_{t, i} = \ell_{t, i+1} + \sum \limits_{j \in [k_{\alpha_i}]} |w_{\alpha_i, j}| \#_{\alpha_i, j}$.
+\end{itemize}
+\end{itemize}
+
+\begin{example}
+\zhilin{this example to be cleaned}
+Take $n={\parseInt}((11)^a(10)^b)$ for example.
+\begin{align}
+    n=& {\parseInt}((11)^a)\cdot 2^{2b} + {\parseInt}((10)^b) \notag \\
+    =& {\parseInt}(11)\cdot \frac{2^{2a}-1}{2^2-1}\cdot 2^{2b} + 
+    {\parseInt}(10) \cdot \frac{2^{2b}-1}{2^2-1} \notag 
+\end{align}
+
+So we have 
+\begin{equation}
+    3\cdot n = 3\cdot 2^{2a+2b}-3\cdot 2^{2b}+2\cdot 2^{2b}-2. \notag
+\end{equation}
+\end{example}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 Now, we introduce a new form of atomic string constraints: 
 a {\parseInt} constraint $\phi$ is of the form 
 $n \sim {\parseInt}(t)$,
@@ -298,18 +374,6 @@ the constraint $n={\parseInt}(x)$ can be expressed by an arithmetic expression w
 $n$ and $(\beta_1,...,\beta_q)$,
 inevitably with exponential components.
 
-Take $n={\parseInt}((11)^a(10)^b)$ for example.
-\begin{align}
-    n=& {\parseInt}((11)^a)\cdot 2^{2b} + {\parseInt}((10)^b) \notag \\
-    =& {\parseInt}(11)\cdot \frac{2^{2a}-1}{2^2-1}\cdot 2^{2b} + 
-    {\parseInt}(10) \cdot \frac{2^{2b}-1}{2^2-1} \notag 
-\end{align}
-
-So we have 
-\begin{equation}
-    3\cdot n = 3\cdot 2^{2a+2b}-3\cdot 2^{2b}+2\cdot 2^{2b}-2. \notag
-\end{equation}
-
 Observe the form of the above equation,
 $a,b,n$ are integer variables and either occur in 
 an exponential term or a linear term.
@@ -331,5 +395,9 @@ the problem can still be reduced to the decidability of PA with exponential func
 If {$\paexp$} is decidable, then the satisfiability (validity) of string constraints with {\parseInt} in which all string variables 
 are ranged over flat strings is decidable. 
 \end{theorem}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
