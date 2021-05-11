@@ -2,18 +2,44 @@
 
 In the last section, 
 we introduced quantifier elimination as a decision procedure for {$\paexp$}. According to theorem \ref{thm:string-parInt}, the satisfiability of {$\strint$} fragment is decidable.
-However, the quantifier elimination procedure can not be directly applied on solving string constraints over {$\strint$} due to the following two reasons.
-First, quantifier elimination does not return a model that satisfies the constraints. In constrast, it only leaves a formula with constants and free variables. And to obtain satisfiability, all free variables need to be treated as existential quantified variables and be eliminated one by one, 
-Second, the quantifier elimination procedure is highly complicated. Note that we alternatively invoke QE-exp and Cooper's algorithm to eliminate exponential terms and linear terms of a quantified variable, the length of the formula grows super-exponentially in the procedure. 
+However, it is not practical to directly apply quantifier elimination when solving constraints over {$\paexp$} due to two main reasons.
 
-In this section, we introduced some optimizations on the QE procedure when focus on the quantifier-free fragment in {$paexp$}. Given a quantifier-free formula, we wish to decide its satisfiability and find an assignment for variables in the formula if it exists. Since the Cooper's algorithm is the main contribution to the complexity, we try to only eliminate exponential terms using an variation of QE-exp and send the obtained linear formula to SMT-solver. The cost is that the algorithm is no longer complete in some situations, in which case some practical restrictions are needed.
+First, quantifier elimination does not return a model that satisfies the constraints. In constrast, it only leaves a formula with constants and free variables. To obtain satisfiability, all free variables need to be treated as existential quantified variables and be eliminated one by one until the formula is equal to \textit{true} or \textit{false}.
+Second, the quantifier elimination procedure has a high complexity, both time and space. Note that we alternatively invoke QE-exp and Cooper's algorithm to eliminate exponential terms and linear terms of a quantified variable, the length of the formula grows super-exponentially in the procedure. 
+
+In this section, we introduced some optimizations on the QE procedure restricted to quantifier-free fragment in {$\paexp$}. Given a quantifier-free formula, we wish to decide its satisfiability and find an assignment for variables in the formula if it exists. Since the Cooper's algorithm is the main contribution to the complexity, we try to only eliminate exponential terms using an variation of \textbf{Elim-exp} and send the obtained linear formula to SMT-solver. The cost is that the algorithm is no longer complete in some situations, in which case some practical restrictions are needed.
 
 A quantifier-free formula is a boolean combination of constraints. Here we allow only equalities and inequalities, divisible predicates are replaced by equalities, for example, $2|x$ is replace to $x=2y$, where $y$ is a fresh variable. Since we only eliminate exponential terms, the newly introduced $y$ will not bother. For convenience, we call variables that occurs exponentially in the formula \emph{exponential variables}, variables that have only linear occurrences \emph{linear variables}. Similarly,
-constraints that have exponential terms are called exponential constraints, others are called linear constraints.
-
-\paragraph{QE-exp for all atoms} 
+constraints that have exponential terms are called \textit{exponential constraints}, others are called \textit{linear constraints.}
 
 \paragraph{over-approximation}
+
+Given any formula in $\paexp$, we first invoke \textbf{Normalization} to translate it into a simpler form. Then we  try to detect if there are obvious conflicts, for example, if the linear constraints combined are unsatisfiable, the whole formula is of course unsatisfiable.
+
+Suppose the normalized formula $\theta$ contains variables $\{x_i:i\in[n]\}$, so the exponential terms could be $e^{x_i}$. For each $e^{x_i}$, we subtitute $e^{x_i}$ by a fresh variable $y_i$ in $\theta$ and add the constraints $(e-1)x_i+1\le y_i$ to get $\theta'$. Since $(e-1)x_i+1\le e^{x_i}$ holds for all $e,x\in \Nat$, $\theta'$ is an over-approximation of $\theta$ and if $\theta'$ is unsatisfiable over positive reals, then $\theta$ is unsatisfiable over $\Nat$.
+
+This technique also helps us to rule out impossible orders of exponential variables. In this case, constraints $\bigwedge_{1\le i\le n-1} x_{\sigma(i)}<x_{\sigma(i+1)}$ is added in $\theta'$.
+
+\paragraph{modified \textbf{Elim-exp}}
+
+\textbf{Elim-exp} is performed recursively on atoms according to orders of all variables. The idea is that if the upper bound of linear variables is given, it is enough to consider orders of exponential variables and this step can be performed on all atoms in the formula simultaneously.
+
+Assume we have $m$ exponential variables with an order $x_1\le ...\le x_m$ and $n-m$ linear variables $x_{m+1},...,x_n$. We further assume that there is an upper bound for all variables, say $x_{m+1},...,x_n< e^\gamma$, the bound may be inferred from constraints or specified manually. When we try to eliminate exponential terms of $x_i(1\le i\le m)$, an atom with $e^{x_i}$ is of the form 
+
+\begin{equation}\label{eq:modify-Elim-exp}
+    \sum_{j=1}^i a_j e^{x_j}+\sum_{k=1}^n b_j x_j\le t 
+\end{equation}
+where $a_m\neq 0$ and $t$ is a constant. Note that the form of (\ref{eq:modify-Elim-exp}) is different from formula in theorem \ref{thm:exp-ineq}, exponential variables $x_{i+1},...,x_{m}$ may appear linearly in formula (\ref{eq:modify-Elim-exp}) because we do not invoke \textbf{Elim-linear} to eliminate linear terms. Following the method of theorem \ref{thm:exp-ineq}, we seperate terms in the left hand side into the following form.
+\begin{equation}
+    \sum_{j=1}^i (a_j e^{x_j} + b_j x_j) \le t -\sum_{k=i+1}^n b_k x_k \notag
+\end{equation}
+
+The first part $\sum_{j=1}^i (a_j e^{x_j} + b_j x_j)$ can be estimated using the same technique in theorem \ref{thm:exp-ineq}.
+
+
+The problem now reduce to estimate terms of linear variables $\sum_{j=m+1}^{n} b_j x_j$ by $c e^{x_m}$
+
+
 
 \paragraph{DFS and pruning}
 
