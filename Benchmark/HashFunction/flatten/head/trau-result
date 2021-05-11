@@ -53,7 +53,7 @@ sat
   (define-fun x () String
     "12345")
 )
-It took 1 seconds
+It took 0 seconds
 13
 unsat
 (error "line 7 column 10: model is not available")
@@ -118,7 +118,7 @@ It took 0 seconds
 23
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 24
 sat
 (model 
@@ -137,15 +137,15 @@ It took 4 seconds
 26
 unsat
 (error "line 7 column 10: model is not available")
-It took 3 seconds
+It took 2 seconds
 27
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 28
 unsat
 (error "line 7 column 10: model is not available")
-It took 2 seconds
+It took 1 seconds
 29
 unsat
 (error "line 7 column 10: model is not available")
@@ -153,11 +153,11 @@ It took 0 seconds
 30
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 31
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 32
 unsat
 (error "line 7 column 10: model is not available")
@@ -165,7 +165,7 @@ It took 0 seconds
 33
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 34
 unsat
 (error "line 7 column 10: model is not available")
@@ -173,7 +173,7 @@ It took 0 seconds
 35
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 36
 unsat
 (error "line 7 column 10: model is not available")
@@ -181,7 +181,7 @@ It took 0 seconds
 37
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 38
 unsat
 (error "line 7 column 10: model is not available")
@@ -189,11 +189,11 @@ It took 0 seconds
 39
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 40
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 41
 unsat
 (error "line 7 column 10: model is not available")
@@ -205,7 +205,7 @@ It took 1 seconds
 43
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 44
 unsat
 (error "line 7 column 10: model is not available")
@@ -213,7 +213,7 @@ It took 0 seconds
 45
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 46
 unsat
 (error "line 7 column 10: model is not available")
@@ -245,11 +245,11 @@ It took 0 seconds
 53
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 54
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 55
 unsat
 (error "line 7 column 10: model is not available")
@@ -265,7 +265,7 @@ It took 3 seconds
 58
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 59
 unsat
 (error "line 7 column 10: model is not available")
@@ -273,7 +273,7 @@ It took 0 seconds
 60
 unsat
 (error "line 7 column 10: model is not available")
-It took 2 seconds
+It took 1 seconds
 61
 unsat
 (error "line 7 column 10: model is not available")
@@ -285,7 +285,7 @@ It took 1 seconds
 63
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 64
 unsat
 (error "line 7 column 10: model is not available")
@@ -297,19 +297,19 @@ It took 1 seconds
 66
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 67
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 68
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 69
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 70
 unsat
 (error "line 7 column 10: model is not available")
@@ -320,7 +320,7 @@ It took 60 seconds
 72
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 73
 unsat
 (error "line 7 column 10: model is not available")
@@ -328,7 +328,7 @@ It took 0 seconds
 74
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 2 seconds
 75
 unsat
 (error "line 7 column 10: model is not available")
@@ -336,7 +336,7 @@ It took 2 seconds
 76
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 77
 unsat
 (error "line 7 column 10: model is not available")
@@ -344,7 +344,7 @@ It took 2 seconds
 78
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 79
 unsat
 (error "line 7 column 10: model is not available")
@@ -356,18 +356,18 @@ It took 1 seconds
 81
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 82
 timeout
 It took 60 seconds
 83
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 84
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 85
 unsat
 (error "line 7 column 10: model is not available")
@@ -375,7 +375,7 @@ It took 0 seconds
 86
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 87
 unsat
 (error "line 7 column 10: model is not available")
@@ -386,7 +386,7 @@ It took 60 seconds
 89
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 90
 unsat
 (error "line 7 column 10: model is not available")
@@ -402,7 +402,7 @@ It took 1 seconds
 93
 unsat
 (error "line 7 column 10: model is not available")
-It took 5 seconds
+It took 6 seconds
 94
 unsat
 (error "line 7 column 10: model is not available")
@@ -410,15 +410,15 @@ It took 0 seconds
 95
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 96
 unsat
 (error "line 7 column 10: model is not available")
-It took 0 seconds
+It took 1 seconds
 97
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds
 98
 unsat
 (error "line 7 column 10: model is not available")
@@ -426,8 +426,8 @@ It took 3 seconds
 99
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 2 seconds
 100
 unsat
 (error "line 7 column 10: model is not available")
-It took 1 seconds
+It took 0 seconds

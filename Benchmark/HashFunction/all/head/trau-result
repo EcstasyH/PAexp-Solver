@@ -9,7 +9,7 @@ sat
   (define-fun x () String
     "1234580350")
 )
-It took 4 seconds
+It took 5 seconds
 2
 sat
 (model 
@@ -31,7 +31,7 @@ sat
   (define-fun x () String
     "1234580821")
 )
-It took 7 seconds
+It took 8 seconds
 4
 sat
 (model 
@@ -42,7 +42,7 @@ sat
   (define-fun x () String
     "12345922")
 )
-It took 46 seconds
+It took 45 seconds
 5
 sat
 (model 
@@ -119,7 +119,7 @@ sat
   (define-fun x () String
     "1234522")
 )
-It took 0 seconds
+It took 1 seconds
 12
 sat
 (model 
@@ -130,7 +130,7 @@ sat
   (define-fun x () String
     "12345620")
 )
-It took 6 seconds
+It took 5 seconds
 13
 sat
 (model 
@@ -141,7 +141,7 @@ sat
   (define-fun x () String
     "1234560")
 )
-It took 0 seconds
+It took 1 seconds
 14
 sat
 (model 
@@ -152,7 +152,7 @@ sat
   (define-fun x () String
     "12345108")
 )
-It took 6 seconds
+It took 5 seconds
 15
 sat
 (model 
@@ -207,7 +207,7 @@ sat
   (define-fun x () String
     "12345345")
 )
-It took 25 seconds
+It took 24 seconds
 20
 sat
 (model 
@@ -218,7 +218,7 @@ sat
   (define-fun x () String
     "1234509901")
 )
-It took 0 seconds
+It took 1 seconds
 21
 sat
 (model 
@@ -335,7 +335,7 @@ sat
   (define-fun x () String
     "12345189")
 )
-It took 26 seconds
+It took 27 seconds
 44
 timeout
 It took 60 seconds
@@ -414,7 +414,7 @@ sat
 It took 0 seconds
 64
 timeout
-It took 61 seconds
+It took 60 seconds
 65
 timeout
 It took 60 seconds
