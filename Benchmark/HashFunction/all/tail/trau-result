@@ -1,279 +1,255 @@
 begin test using Z3trau ...
 1
-sat
-(model 
-  (define-fun x () String
-    "1234580350")
-)
-(model 
-  (define-fun x () String
-    "1234580350")
-)
-It took 4 seconds
+timeout
+It took 60 seconds
 2
 sat
 (model 
   (define-fun x () String
-    "123458")
+    "0056789")
 )
 (model 
   (define-fun x () String
-    "123458")
+    "0056789")
 )
 It took 0 seconds
 3
 sat
 (model 
   (define-fun x () String
-    "1234580821")
+    "005386789")
 )
 (model 
   (define-fun x () String
-    "1234580821")
+    "005386789")
 )
-It took 8 seconds
+It took 2 seconds
 4
-sat
-(model 
-  (define-fun x () String
-    "12345922")
-)
-(model 
-  (define-fun x () String
-    "12345922")
-)
-It took 45 seconds
+timeout
+It took 60 seconds
 5
 sat
 (model 
   (define-fun x () String
-    "123455")
+    "0000945046789")
 )
 (model 
   (define-fun x () String
-    "123455")
+    "0000945046789")
 )
-It took 0 seconds
+It took 2 seconds
 6
 sat
 (model 
   (define-fun x () String
-    "1234550169")
+    "276789")
 )
 (model 
   (define-fun x () String
-    "1234550169")
+    "276789")
 )
-It took 3 seconds
+It took 17 seconds
 7
 sat
 (model 
   (define-fun x () String
-    "123456201")
+    "01435076789")
 )
 (model 
   (define-fun x () String
-    "123456201")
+    "01435076789")
 )
-It took 10 seconds
+It took 2 seconds
 8
 sat
 (model 
   (define-fun x () String
-    "1234515")
+    "7678976789")
 )
 (model 
   (define-fun x () String
-    "1234515")
+    "7678976789")
 )
-It took 1 seconds
+It took 10 seconds
 9
 sat
 (model 
   (define-fun x () String
-    "1234505")
+    "05488426789")
 )
 (model 
   (define-fun x () String
-    "1234505")
+    "05488426789")
 )
-It took 0 seconds
+It took 13 seconds
 10
-sat
-(model 
-  (define-fun x () String
-    "123456")
-)
-(model 
-  (define-fun x () String
-    "123456")
-)
-It took 0 seconds
+timeout
+It took 60 seconds
 11
 sat
 (model 
   (define-fun x () String
-    "1234522")
+    "0046789")
 )
 (model 
   (define-fun x () String
-    "1234522")
+    "0046789")
 )
 It took 0 seconds
 12
 sat
 (model 
   (define-fun x () String
-    "12345620")
+    "0046789")
 )
 (model 
   (define-fun x () String
-    "12345620")
+    "0046789")
 )
-It took 6 seconds
+It took 0 seconds
 13
 sat
 (model 
   (define-fun x () String
-    "1234560")
+    "886789")
 )
 (model 
   (define-fun x () String
-    "1234560")
+    "886789")
 )
-It took 0 seconds
+It took 4 seconds
 14
 sat
 (model 
   (define-fun x () String
-    "12345108")
+    "06789866789")
 )
 (model 
   (define-fun x () String
-    "12345108")
+    "06789866789")
 )
-It took 6 seconds
+It took 12 seconds
 15
 sat
 (model 
   (define-fun x () String
-    "123452853")
+    "71796789")
 )
 (model 
   (define-fun x () String
-    "123452853")
+    "71796789")
 )
-It took 2 seconds
+It took 18 seconds
 16
 sat
 (model 
   (define-fun x () String
-    "123458011")
+    "02906006789")
 )
 (model 
   (define-fun x () String
-    "123458011")
+    "02906006789")
 )
-It took 14 seconds
+It took 23 seconds
 17
 sat
 (model 
   (define-fun x () String
-    "123454")
+    "01989756789")
 )
 (model 
   (define-fun x () String
-    "123454")
+    "01989756789")
 )
-It took 0 seconds
+It took 28 seconds
 18
 sat
 (model 
   (define-fun x () String
-    "123457")
+    "257036789")
 )
 (model 
   (define-fun x () String
-    "123457")
+    "257036789")
 )
-It took 0 seconds
+It took 2 seconds
 19
 sat
 (model 
   (define-fun x () String
-    "12345345")
+    "6979906789")
 )
 (model 
   (define-fun x () String
-    "12345345")
+    "6979906789")
 )
-It took 24 seconds
+It took 13 seconds
 20
 sat
 (model 
   (define-fun x () String
-    "1234509901")
+    "31486789")
 )
 (model 
   (define-fun x () String
-    "1234509901")
+    "31486789")
 )
-It took 0 seconds
+It took 9 seconds
 21
 sat
 (model 
   (define-fun x () String
-    "1234502")
+    "09969826789")
 )
 (model 
   (define-fun x () String
-    "1234502")
+    "09969826789")
 )
-It took 0 seconds
+It took 4 seconds
 22
 sat
 (model 
   (define-fun x () String
-    "123450317")
+    "09168896789")
 )
 (model 
   (define-fun x () String
-    "123450317")
+    "09168896789")
 )
-It took 1 seconds
+It took 5 seconds
 23
 sat
 (model 
   (define-fun x () String
-    "1234587")
+    "09819786789")
 )
 (model 
   (define-fun x () String
-    "1234587")
+    "09819786789")
 )
-It took 3 seconds
+It took 23 seconds
 24
 sat
 (model 
   (define-fun x () String
-    "12345984")
+    "8919896789")
 )
 (model 
   (define-fun x () String
-    "12345984")
+    "8919896789")
 )
-It took 2 seconds
+It took 13 seconds
 25
 sat
 (model 
   (define-fun x () String
-    "1234528070")
+    "0046789")
 )
 (model 
   (define-fun x () String
-    "1234528070")
+    "0046789")
 )
-It took 9 seconds
+It took 0 seconds
 26
 timeout
 It took 60 seconds
@@ -284,8 +260,16 @@ It took 60 seconds
 timeout
 It took 60 seconds
 29
-timeout
-It took 60 seconds
+sat
+(model 
+  (define-fun x () String
+    "1806789")
+)
+(model 
+  (define-fun x () String
+    "1806789")
+)
+It took 12 seconds
 30
 timeout
 It took 60 seconds
@@ -305,8 +289,16 @@ It took 60 seconds
 timeout
 It took 60 seconds
 36
-timeout
-It took 60 seconds
+sat
+(model 
+  (define-fun x () String
+    "0686789")
+)
+(model 
+  (define-fun x () String
+    "0686789")
+)
+It took 3 seconds
 37
 timeout
 It took 60 seconds
@@ -326,16 +318,8 @@ It took 60 seconds
 timeout
 It took 60 seconds
 43
-sat
-(model 
-  (define-fun x () String
-    "12345189")
-)
-(model 
-  (define-fun x () String
-    "12345189")
-)
-It took 26 seconds
+timeout
+It took 60 seconds
 44
 timeout
 It took 60 seconds
@@ -349,16 +333,8 @@ It took 60 seconds
 timeout
 It took 60 seconds
 48
-sat
-(model 
-  (define-fun x () String
-    "123457")
-)
-(model 
-  (define-fun x () String
-    "123457")
-)
-It took 0 seconds
+timeout
+It took 60 seconds
 49
 timeout
 It took 60 seconds
@@ -394,7 +370,7 @@ timeout
 It took 60 seconds
 60
 timeout
-It took 61 seconds
+It took 60 seconds
 61
 timeout
 It took 60 seconds
@@ -402,16 +378,8 @@ It took 60 seconds
 timeout
 It took 60 seconds
 63
-sat
-(model 
-  (define-fun x () String
-    "123451821")
-)
-(model 
-  (define-fun x () String
-    "123451821")
-)
-It took 0 seconds
+timeout
+It took 60 seconds
 64
 timeout
 It took 60 seconds
@@ -456,7 +424,7 @@ timeout
 It took 60 seconds
 78
 timeout
-It took 60 seconds
+It took 61 seconds
 79
 timeout
 It took 60 seconds
