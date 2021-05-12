@@ -22,7 +22,7 @@ This technique also helps us to rule out impossible orders of exponential variab
 
 \paragraph{modified \textbf{Elim-exp}}
 
-\textbf{Elim-exp} is performed recursively on atoms according to orders of all variables. The idea is that if the upper bound of linear variables is given, it is enough to consider orders of exponential variables and this step can be performed on all atoms in the formula simultaneously.
+\textbf{Elim-exp} is performed recursively on atoms according to orders of all variables. The idea is that if the upper bound of variables is given, it is enough to consider orders of exponential variables and this step can be performed on all atoms in the formula simultaneously.
 
 Assume we have $m$ exponential variables with an order $x_1\le ...\le x_m$ and $n-m$ linear variables $x_{m+1},...,x_n$. We further assume that there is an upper bound for all variables, say $x_{m+1},...,x_n< e^\gamma$, the bound may be inferred from constraints or specified manually. When we try to eliminate exponential terms of $x_i(1\le i\le m)$, an atom with $e^{x_i}$ is of the form 
 
@@ -34,27 +34,32 @@ where $a_m\neq 0$ and $t$ is a constant. Note that the form of (\ref{eq:modify-E
     \sum_{j=1}^i (a_j e^{x_j} + b_j x_j) \le t -\sum_{k=i+1}^n b_k x_k \notag
 \end{equation}
 
-The first part $\sum_{j=1}^i (a_j e^{x_j} + b_j x_j)$ can be estimated using the same technique in theorem \ref{thm:exp-ineq}.
+The left hand side $\sum_{j=1}^i (a_j e^{x_j} + b_j x_j)$ can be estimated using the same technique in theorem \ref{thm:exp-ineq}. For the right hand side, define  $ t_1 \Def t-\gamma (\sum_{k=i+1}^n b_k)$, $t_2\Def t+\gamma (\sum_{k=i+1}^n b_k)$, we have
+\begin{equation}
+    t_1  \le t - \sum_{k=i+1}^n b_k x_k \le  t_2 \notag
+\end{equation} 
 
+Similar to \textbf{Elim-exp}, we will discuss 3 subcases,
+assuming w.l.o.g $a_i>0$, define $\alpha_1 \Def l(t_1)-l(a_i)$, $\alpha_2 \Def l(t_2)-l(a_i)$. 
 
-The problem now reduce to estimate terms of linear variables $\sum_{j=m+1}^{n} b_j x_j$ by $c e^{x_m}$
+\begin{itemize}
+    \item $x_i\le \alpha_1 -1$, corresponds to $\rho_1$ (in \textbf{Elim-exp}), the atom is evaluated \textit{true}
+    \item $\alpha_1 -1\le x_i \le \alpha_2 +2$, corresponds to $\rho_2$ and $\rho_3$
+    \item $\alpha_2 + 2\le x_i$, corresponds to $\rho_4$, the atom is evaluated \textit{false}
+\end{itemize}
 
+For each atom with $e^{x_i}$, we compute $\alpha_1$ and $\alpha_2$ according to coefficients in the atom. Select the minimal $\alpha_1$ and the maximal $\alpha_2$, in this way we can perform \textbf{Elim-exp} simultaneously on all atoms in the formula.
 
+Note that the manually specified bound is for variables that only appear linearly in exponential constraints, if there are no variables of this form, the modified algorithm is still complete.
 
-\paragraph{DFS and pruning}
+\paragraph{DFS pruning}
 
+Given an order for exponential variables $x_1\le x_2 \le ... \le x_m$, the process of \textbf{Elim-exp} from $x_m$ to $x_1$ can be seen as a search tree with depth $m+1$. A depth $i(1\le i\le m)$ non-leaf node is a disjunction, each of its child corresponds to a subcase in \textbf{Elim-exp} of $x_i$, a leaf is labeled by a linear formula in which all exponential terms have been eliminated.  
 
+In our implement, we adopt a DFS strategy to search the tree to avoid the explosion of length of the formula. When eliminating $x_{i-1}$, the upper bound for $x_i$ in some subcases are passed down for pruning. 
 
-
-Describe the optimizations for improving the scalability
-
-existential PAexp formula, framework, eliminate exponential terms leaving linear terms, send the (equivalent) linear formula to SMT solver
-
-over-approximation for UNSAT and find possible orders
-
-eliminate exponential terms for the formula
-
-dfs search
+\paragraph{pre-search}
+To answer \textit{unsat}, the algorithm must search for all possible orders of exponential variables. Intuitively, in most satisfiable cases exponential variables are small, so we first give a small bound (roughly the biggest constants in the formula) for exponential variables to perform a pre-search.
 
 
 
