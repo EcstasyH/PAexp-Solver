@@ -297,36 +297,41 @@ and $\ell_{\svarx, i} = |w_{\svarx,k_\svarx}| \#_{\svarx, k_\svarx}$,
 %
 $$\iterm_{\svarx, i} =  \frac{\parseInt(w_{\svarx, i}) (10^{|w_{\svarx, i} | \#_{\svarx, i} } -1 ) 10^{\ell_{\svarx, i+1}}} {(10^{|w_{\svarx, i}|} -1 )} + \iterm_{\svarx, i+1}$$
 %
-\and $\ell_{\svarx, i} = |w_{\svarx, i} | \#_{\svarx, i} + \ell_{\svarx, i+1}$.
+and $\ell_{\svarx, i} = |w_{\svarx, i} | \#_{\svarx, i} + \ell_{\svarx, i+1}$.
 \end{itemize}
 
-Then $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$ is obtained from $\iterm_1 \op \iterm_2$ by the following procedure, 
-\begin{itemize}
-\item Replace each integer term $\len(t)$ such that $t = \alpha_1 \ldots \alpha_m$ with $\alpha_i \in \Sigma_{\textit{num}} \cup \svar(\varphi)$ for every $i \in [m]$ by 
+Then $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$ is obtained from $\iterm_1 \op \iterm_2$ by the following procedure.
+\begin{enumerate}
+\item Replace each integer term $\len(t)$ such that $t = \alpha_1 \ldots \alpha_m$ with $\alpha_i \in \Sigma_{\textit{num}} \cup \svar(\varphi)$ for every $i \in [m]$, by 
  $\sum \limits_{i \in [m]} \theta_i$, where for every $i \in [m]$, $\theta_i = 1$ if $\alpha_i \in \Sigma_{\textit{num}}$ and $ \theta_i = \sum \limits_{j \in [k_{\alpha_i}]} |w_{\alpha_i, j} | \#_{\alpha_i, j}$ otherwise.
 %
-\item  Replace each integer term $\parseInt(\sterm)$ such that $t = \alpha_1 \ldots \alpha_m$ with $\alpha_i \in \Sigma_{\textit{num}} \cup \svar(\varphi)$ for every $i \in [m]$ by $\iterm_{\parseInt(\sterm)}$, where $\iterm_{\parseInt(\sterm)} = \iterm_{t,1}$ such that $(\iterm_{t,i})_{i \in [m]}$ and $(\ell_{t, i})_{i \in [m]}$ are inductively defined as follows: 
+\item  Replace each integer term $\parseInt(\sterm)$ such that $t = \alpha_1 \ldots \alpha_m$ with $\alpha_i \in \Sigma_{\textit{num}} \cup \svar(\varphi)$ for every $i \in [m]$, by $\iterm_{\parseInt(\sterm)}$, where $\iterm_{\parseInt(\sterm)} = \iterm_{t,1}$ such that $(\iterm_{t,i})_{i \in [m]}$ and $(\ell_{t, i})_{i \in [m]}$ are inductively defined as follows: 
 \begin{itemize}
 \item if $\alpha_m \in \Sigma_{\textit{num}}$, then $\iterm_{t, m} = \alpha_m$ and $\ell_{t, m} = 1$, otherwise, $\iterm_{t, m} = \flatten_{\flatfun_\varphi}(\parseInt(\alpha_m))$ and $\ell_{t, m} = \sum \limits_{j \in [k_{\alpha_m}]} |w_{\alpha_m, j}| \#_{\alpha_m, j}$,
 %
 \item for $i \in [m-1]$, if $\alpha_i \in \Sigma_{\textit{num}}$, then $\iterm_{t, i} = \alpha_i 10^{\ell_{t, i+1}} + \iterm_{t, i+1}$ and $\ell_{t, i} = \ell_{t, i+1}+1$, otherwise, $\iterm_{t, i} = 
 \flatten_{\flatfun_\varphi}(\parseInt(\alpha_i))10^{\ell_{t, i+1}}  + \iterm_{t, i+1}$ and $\ell_{t, i} = \ell_{t, i+1} + \sum \limits_{j \in [k_{\alpha_i}]} |w_{\alpha_i, j}| \#_{\alpha_i, j}$.
 \end{itemize}
-\end{itemize}
+%
+\item Let $\iterm'_1 \op \iterm'_2$ be the formula resulting from the aforementioned replacements. (Note that strictly speaking, $\iterm'_1 \op \iterm'_2$ is not a $\paexp$ formula since it contains divisions.) Let $N$ be the least common multiplier of the denominators of $\iterm'_1$ and $\iterm'_2$.  Then $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$ is obtained by multiplying the both sides of $\iterm'_1 \op \iterm'_2$ with $N$,  so that the division operator disappears. 
+\end{enumerate}
 
 \begin{example}
-\zhilin{this example to be cleaned}
-Take $n={\parseInt}((11)^a(10)^b)$ for example.
-\begin{align}
-    n=& {\parseInt}((11)^a)\cdot 2^{2b} + {\parseInt}((10)^b) \notag \\
-    =& {\parseInt}(11)\cdot \frac{2^{2a}-1}{2^2-1}\cdot 2^{2b} + 
-    {\parseInt}(10) \cdot \frac{2^{2b}-1}{2^2-1} \notag 
-\end{align}
-
-So we have 
-\begin{equation}
-    3\cdot n = 3\cdot 2^{2a+2b}-3\cdot 2^{2b}+2\cdot 2^{2b}-2. \notag
-\end{equation}
+Suppose $\parseInt(\svarx) = 2\ivarx$ is an atomic constraint and $\flatfun_\varphi(\svarx) = (12)^*(34)^*$. Then 
+\[
+\small
+\begin{array}{l l}
+& \flatten_{\flatfun_\varphi}(\parseInt(\svarx)  =  2\ivarx)  \\
+\equiv & \parseInt(12) \frac{10^{2\#_{\svarx,1}}-1}{10^2-1}10^{2\#_{\svarx,2}}  + \parseInt(34) \frac{10^{2\#_{\svarx,2}}-1}{10^2-1} = 2\ivarx   \\
+\equiv & 12 (10^{2\#_{\svarx,1}+2\#_{\svarx,2}} - 10^{2\#_{\svarx,2}})  + 34 (10^{2\#_{\svarx,2}}-1) = 198\ivarx.
+\end{array}
+\]
+%Take $n={\parseInt}((11)^a(10)^b)$ for example.
+%\begin{align}
+%    n=& {\parseInt}((11)^a)\cdot 2^{2b} + {\parseInt}((10)^b) \notag \\
+%    =& {\parseInt}(11)\cdot \frac{2^{2a}-1}{2^2-1}\cdot 2^{2b} + 
+%    {\parseInt}(10) \cdot \frac{2^{2b}-1}{2^2-1} \notag 
+%\end{align}
 \end{example}
 
 
