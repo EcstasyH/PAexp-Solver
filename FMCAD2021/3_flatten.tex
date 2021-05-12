@@ -37,9 +37,9 @@ In $\strint$, there are two types of variables, namely, the string variables $\s
 A $\strint$ formula $\varphi$ is defined by the following rules, where $\len(\sterm)$ denotes the length of a string $\sterm$.
 \[
 \begin{array}{l c l}
-\sterm & ::= & a \mid \svarx \mid \sterm \concat \sterm, \\
-\iterm & ::= & n \mid \ivarx \mid \len(\sterm) \mid \parseInt(\sterm) \mid \iterm + \iterm \mid \iterm - \iterm,\\
-\varphi & ::= & \sterm = \sterm \mid x \in \Aut \mid \iterm\ \op\ \iterm \mid \varphi \wedge \varphi \mid \varphi \vee \varphi \mid \neg \varphi,
+\sterm & \Def & a \mid \svarx \mid \sterm \concat \sterm, \\
+\iterm & \Def & n \mid \ivarx \mid \len(\sterm) \mid \parseInt(\sterm) \mid \iterm + \iterm \mid \iterm - \iterm,\\
+\varphi & \Def & \sterm = \sterm \mid x \in \Aut \mid \iterm\ \op\ \iterm \mid \varphi \wedge \varphi \mid \varphi \vee \varphi \mid \neg \varphi,
 \end{array}
 \]
 where $a \in (\Sigma_{\textit{num}})_\varepsilon$, $n \in \Nat$, $\Aut$ is an FA, and $\op \in \{=, < , >, \le, \ge\}$. Let us call $\sterm$ as string terms, $\iterm$ as integer terms, $\sterm = \sterm$ as string equality constraints, $x \in \Aut$ as regular constraints, $\iterm \op\ \iterm$ as arithmetic constraints. 
@@ -142,8 +142,8 @@ The syntax of {\paexp} is obtained from that of {\pa} by adding $10^\iterm$, $\e
 %
  $$
  \begin{array}{ l c l}
- \iterm &::=& c \mid \ivarx \mid \iterm + \iterm \mid \iterm - \iterm \mid 10^\iterm \mid \ell_{10}(\iterm) \mid \lambda_{10}(\iterm), \\
- \phi &::= & \iterm \ \op\ 0 \mid c | \iterm \mid \phi \wedge \phi \mid \phi \vee \phi \mid \neg \phi \mid \exists \ivarx.\ \phi \mid \forall \ivarx.\ \phi.
+ \iterm &\Def& c \mid \ivarx \mid \iterm + \iterm \mid \iterm - \iterm \mid 10^\iterm \mid \ell_{10}(\iterm) \mid \lambda_{10}(\iterm), \\
+ \phi &\Def & \iterm \ \op\ 0 \mid c | \iterm \mid \phi \wedge \phi \mid \phi \vee \phi \mid \neg \phi \mid \exists \ivarx.\ \phi \mid \forall \ivarx.\ \phi.
  \end{array}
  $$
  The semantics of {\paexp} are defined similarly as {\pa}.
@@ -317,13 +317,14 @@ Then $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$ is obtained from $\ite
 \end{enumerate}
 
 \begin{example}
-Suppose $\parseInt(\svarx) = 2\ivarx$ is an atomic constraint and $\flatfun_\varphi(\svarx) = (12)^*(34)^*$. Then 
+Suppose $\parseInt(\svarx) = 2\ivarx$ is an atomic constraint and $\flatfun_\varphi(\svarx) = 1^*2^*$. Then 
 \[
 \small
 \begin{array}{l l}
 & \flatten_{\flatfun_\varphi}(\parseInt(\svarx)  =  2\ivarx)  \\
-\equiv & 12 \frac{10^{2\#_{\svarx,1}}-1}{10^2-1}10^{2\#_{\svarx,2}}  + 34 \frac{10^{2\#_{\svarx,2}}-1}{10^2-1} = 2\ivarx   \\
-\equiv & 12 (10^{2\#_{\svarx,1}+2\#_{\svarx,2}} - 10^{2\#_{\svarx,2}})  + 34 (10^{2\#_{\svarx,2}}-1) = 198\ivarx.
+\Def & 1 \frac{10^{\#_{\svarx,1}}-1}{10-1}10^{\#_{\svarx,2}}  + 2 \frac{10^{\#_{\svarx,2}}-1}{10-1} = 2\ivarx   \\
+\equiv & 10^{\#_{\svarx,1}+\#_{\svarx,2}} - 10^{\#_{\svarx,2}}  + 2 (10^{2\#_{\svarx,2}}-1) = 18\ivarx \\
+\equiv & 10^{\#_{\svarx,1}+\#_{\svarx,2}} +  10^{\#_{\svarx,2}} = 18\ivarx + 2.
 \end{array}
 \]
 %Take $n={\parseInt}((11)^a(10)^b)$ for example.

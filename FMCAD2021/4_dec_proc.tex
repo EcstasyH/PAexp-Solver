@@ -1,5 +1,92 @@
 %!TEX root = paper.tex
 
+Sem\"{e}nov first proved that  {\paexp} admits quantifier elimination in \cite{Semenov84}, thus its satisfiability problem is decidable. However, Sem\"{e}nov did not give a concrete quantifier elimination algorithm. Remedying this, Point proposed a quantifier elimination algorithm for {\paexp} in \cite{Point86}. In the sequel, we are going to illustrate how Point's quantifier elimination algorithm works. Points' algorithm is non-elementary in the worst case and a faithful implementation of the algorithm would not scale\footnote{We did implemented Point's algorithm and discovered that the implementation could only solve formulas of very small size.}. In the next section, we will propose various optimizations to Point's algorithm, aiming at an efficient implementation. 
+
+Specifically, in the sequel, we are going to show that for every {\paexp} formula $\exists \ivarx.\ \varphi \in \paexp$, where $\varphi$ is quantifier-free, can be transformed into an equivalent quantifier-free formula $\varphi' \in \paexp$.
+% such that $\free(\varphi') = \free(\varphi) \setminus \{\ivarx\}$. 
+%From this, we can easily derive that every {\paexp} formula $\varphi$ can be transformed effectively into an equivalent quantifier-free Presburger arithmetic formula $\varphi'$.
+
+Before a formal description of the quantifier elimination procedure, let us use a simple example to illustrate the main idea and give an overview of the procedure.
+
+%\begin{example}
+\subsection{Overview of the quantifier elimination procedure}
+Consider $\varphi \Def \exists \ivarx_2.\ 10^{\ivarx_1 + \ivarx_2} - 10^{\ivarx_2} \le \ivary + 1001$. 
+
+At first, we \emph{normalize} $\varphi$ by introducing a fresh variable $\ivarx_3$ for $\ivarx_1 + \ivarx_2$ and get the formula 
+$$\varphi_1 \Def \exists \ivarx_3 \exists \ivarx_2.\ 10^{\ivarx_3} - 10^{\ivarx_2} \le \ivary + 1001 \wedge \ivarx_3 = \ivarx_1 + \ivarx_2.$$
+
+Then, we enumerate different \emph{orders} of the quantified variables, i.e. $\ivarx_2$ and $\ivarx_3$. Since $\ivarx_3 = \ivarx_1 + \ivarx_2$, there is only one possible order, that is, $\ivarx_3 \ge \ivarx_2$.
+
+Next, we illustrate how to eliminate the quantifier $\exists \ivarx_3$, assuming $\ivarx_3 \ge \ivarx_2$. The elimination of $\exists \ivarx_2$ is similar and simpler, thus omitted.
+
+The elimination of $\exists \ivarx_3$ consists of two steps, namely, eliminating the exponential occurrences of $\ivarx_3$ first, and the linear occurrences next.
+
+The main idea of the elimination of the exponential occurrences of $\ivarx_3$ is to observe that if $\ivarx_3 \ge \ell_{10}(\ivary+1001)+2$ and $\ivarx_3 \ge \ivarx_2 + 3$, then $10^{\ivarx_3} - 10^{\ivarx_2}$ is dominated by $10^{\ivarx_3}$, that is, $10^{\ivarx_3} - 10^{\ivarx_2} \ge 10^{\ivarx_3} - 10^{\ivarx_3 - 3} = (1-10^{-3}) 10^{\ivarx_3} \ge 10^{\ell_{10}(\ivary+1001)+1} = 10\lambda_{10}(\ivary+1001) > \ivary+1001$. Therefore, a necessary condition for $10^{\ivarx_3} - 10^{\ivarx_2} \le \ivary + 1001$ is that either $\ivarx_3 \le \ell_{10}(\ivary+1001)+1$ or $\ivarx_3 \le \ivarx_2 + 2$ holds.  
+\begin{itemize}
+\item If $\ivarx_3 \le \ell_{10}(\ivary+1001)+1$, then we distinguish between whether $\ivarx_3 \le \ell_{10}(\ivary+1001)$ or  $\ivarx_3 = \ell_{10}(\ivary+1001)+1$. 
+\begin{itemize}
+\item If $\ivarx_3 \le \ell_{10}(\ivary+1001)$, then $10^{\ivarx_3} - 10^{\ivarx_2} \le 10^{\ell_{10}(\ivary+1001)} = \lambda_{10}(\ivary+1001) \le \ivary + 1001$. In this case, $10^{\ivarx_3} - 10^{\ivarx_2} \le \ivary + 1001 \wedge \ivarx_3 = \ivarx_1 + \ivarx_2$ can simplified into $\ltrue$.
+%
+\item If $\ivarx_3 = \ell_{10}(\ivary+1001)+1$, then $10^{\ivarx_3} - 10^{\ivarx_2} \le \ivary + 1001$ can be turned into $10^{\ell_{10}(\ivary+1001)+1} - 10^{\ivarx_2} \le \ivary + 1001 \equiv 10 \lambda_{10}(\ivary+1001) - 10^{\ivarx_2} \le \ivary + 1001 $.
+\end{itemize} 
+%
+\item If $\ivarx_3 \le \ivarx_2 + 2$, then $\ivarx_3 = \ivarx_2 + j$ for $j \in \{0,1,2\}$. Thus $10^{\ivarx_3} - 10^{\ivarx_2} \le \ivary + 1001$ can be transformed to $\bigvee \limits_{j \in \{0,1,2\}} 10^{\ivarx_2 + j} - 10^{\ivarx_2} \le \ivary + 1001$.
+\end{itemize}
+
+To summarize, $\varphi_1$ is transformed into 
+\[
+\small
+\begin{array}{l}
+\varphi_2 \Def \exists \ivarx_3 \exists \ivarx_2. \\
+\begin{array}{l}
+\vspace{2mm}
+\left(
+\begin{array}{l}
+\ivarx_3 \le \ell_{10}(\ivary+1001)\ \vee \\
+\left(
+\begin{array}{l}
+\ivarx_3 = \ell_{10}(\ivary+1001)+1\ \wedge \\
+10 \lambda_{10}(\ivary+1001) - 10^{\ivarx_2} \le \ivary + 1001 
+\end{array}
+\right) \vee \\
+%
+ \bigvee \limits_{j \in \{0,1,2\}}  \left(\ivarx_3 = \ivarx_2 +j \wedge 10^{\ivarx_2 + j} - 10^{\ivarx_2} \le \ivary + 1001\right)
+\end{array}
+\right) 
+\wedge \\
+ \ivarx_3 = \ivarx_1 + \ivarx_2.
+ \end{array}
+\end{array}
+\]
+Note that $\varphi_2$ contains \emph{only linear} occurrences of $\ivarx_3$.
+
+Finally, we can eliminate the linear occurrences of $\ivarx_3$, thus the quantifier $\exists \ivarx_3$, by applying the quantifier elimination algorithm of {\pa}, e.g. Cooper's algorithm in \cite{Cooper72}. The elimination of $\ivarx_3$ in $\varphi_2$ is simple, with $\ivarx_3$ replaced by $\ivarx_1 + \ivarx_2$, resulting into  
+\[
+\small
+\begin{array}{l}
+\varphi_3 \Def \exists \ivarx_2.\ 
+\ivarx_1 + \ivarx_2 \le \ell_{10}(\ivary+1001)\ \vee \\
+\left(
+\begin{array}{l}
+\ivarx_1 + \ivarx_2 = \ell_{10}(\ivary+1001)+1\ \wedge \\
+10 \lambda_{10}(\ivary+1001) - 10^{\ivarx_2} \le \ivary + 1001 
+\end{array}
+\right) \vee \\
+%
+ \bigvee \limits_{j \in \{0,1,2\}}  \left(\ivarx_1 + \ivarx_2 = \ivarx_2 +j \wedge 10^{\ivarx_2 + j} - 10^{\ivarx_2} \le \ivary + 1001\right).
+\end{array}
+\]
+
+In the remaining part of this section, we are going to describe the steps of the decision procedures, namely, the normalization, the enumeration of the orders of variables, 
+the elimination of the exponential occurrences of variables, and the elimination of the  linear occurrences.
+
+\zhilin{stopped here}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 \begin{definition}
     For a strictly increasing function $f:\mathbb{N}\mapsto \mathbb{N}$, 
     $f$ is said to be \emph{compatible with addition}
@@ -36,6 +123,10 @@ In each iteration, according the given (decreasing) order of quantified variable
 During each iteration of the inner \emph{for} loop, if the maximal $x_i$ in $\bar{x}$ occurs in an exponential term in an atom, we will invoke \textbf{Elim-exp} to produce an equivalent formula where $x_i$ occurs linearly. Then \textbf{Elim-linear} will eliminate all linear occurrences of $x_i$, which is similar to the classic Cooper's QE algorithm for PA \cite{Cooper72}. 
 
 A more detailed description is given below.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \subsection{Normalization}
 
