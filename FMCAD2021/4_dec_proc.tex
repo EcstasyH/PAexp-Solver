@@ -77,11 +77,12 @@ Finally, we can eliminate the linear occurrences of $\ivarx_3$, thus the quantif
 \end{array}
 \]
 
-In the remaining part of this section, we are going to describe the steps of the decision procedures, namely, the normalization, the enumeration of the orders of variables, 
-the elimination of the exponential occurrences of variables, and the elimination of the  linear occurrences.
+\smallskip
 
-\zhilin{stopped here}
+In the remainder of this section, we are going to describe the aforementioned steps of the decision procedures: Normalization, the enumeration of the variable orders, 
+the elimination of the exponential occurrences of variables. The elimination of the  linear occurrences of variables is essentially the quantifier elimination of the {\pa} and omitted.
 
+Let us assume that $\varphi \Def \exists \ivarx.\ \varphi'(\ivarx, \vec{\ivary})$, where $\varphi'$ is a quantifier-free formula. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -130,6 +131,9 @@ A more detailed description is given below.
 
 \subsection{Normalization}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 In order to show $(\mathbb{N},+,2^x)$ admits QE , 
 it is sufficient to show that any 1-existential formula $\exists x.\theta(x,\bar{y})$ indeed does, 
 where $\theta(x,\bar{y})$ is a quantifier-free formula. 
@@ -140,8 +144,30 @@ $$\exists x\exists x_1.2^{x_1}>10 \wedge x_1 =3x+y+1\,.$$
 
 Logarithm functions are replaced by exponential functions, take $\exists x.l_2(x)>3$ for example, $l_2(x)$ is replaced by a new variable $x_1$, and we have  
 $$\exists x\exists x_1. x_1 > 3 \wedge 2^{x_1}\le x \wedge x\le 2^{x_1+1}-1\,.$$
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The \textbf{Normalization} step goes like this, first transform the given formula $\theta(x,\bar{y})$ into the Negation Normal Form (NNF).
+The normalization step comprises the following sub-steps.
+\begin{enumerate}
+\item At first, we transform $\varphi'(\ivarx,\vec{\ivary})$ into the NNF (negation normal form). Moreover, we remove the occurrences of $\neg$ by replacing $\neg c | \iterm$ with $\bigvee \limits_{j \in [c-1]} c | (\iterm+j)$, $\neg \iterm_1 = \iterm_2$ with $\iterm_1 < \iterm_2 \vee \iterm_2 < \iterm_1$, $\neg \iterm_1 < \iterm_2$ with $\iterm_2 \le \iterm_1$, $\neg \iterm_1 \le \iterm_2$ with $\iterm_2 < \iterm_1$, and so on.
+%
+\item Repeat the following procedure, until there are no $\lambda_{10}(\iterm)$ where $\ivarx$ occurs: Replace each occurrence of $\lambda_{10}$ in $\varphi'$, say $\lambda_{10}(\iterm)$, such that $\ivarx$ occurs in $\iterm$, by $10^{\ell_{10}(\iterm)}$. Let the resulting formula be $\varphi''$.
+%
+\item Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ where $\ivarx$ occurs, we have $\iterm = \ivarx$: For each occurrence of the $\ell_{10}$ in $\varphi''$, say $\ell_{10}(\iterm)$, such that it contains $\ivarx$ but is not $\ivarx$, introduce a fresh variable, say $\ivarz$, 
+%and let $\varphi''':= \exists \ivarz.\ \varphi''[\ivarz/\ell_{10}(\iterm)] \wedge 10^\ivarz \le \iterm < 10^{\ivarz + 1}$. 
+and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add the constraint $10^\ivarz \le \iterm < 10^{\ivarz + 1}$ as a conjunct. Let $\varphi'''$ denote the resulting formula.  
+%
+\item Do the following replacements to $\varphi'''$ so that all the atomic formulas are of the form $\iterm_1 \le \iterm_2$ or $c | \iterm$: Replace every occurrence of $\iterm_1 \ge \iterm_2$ with $\iterm_2 \le \iterm_1$. Replace every occurrence of $\iterm_1 < \iterm_2$ (resp. $\iterm_1 > \iterm_2$) with $\iterm_1 \le \iterm_2 - 1$ (resp. $\iterm_2 \le \iterm_1-1$). Replace ever occurrence of $\iterm_1 = \iterm_2$ wtih $\iterm_2 \le \iterm_1 \wedge \iterm_1 \le \iterm_2$. Let $\varphi^\dag$ the resulting formula. 
+%
+\item Let $\vec{\ivarz} = \ivarz_1,\ldots, \ivarz_k$ be an enumeration of the freshly introduced variables. Then the result of the normalization procedure is 
+$\exists \vec{\ivarz}\exists \ivarx.\ \varphi^\dag$.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 Then $\theta(x,\bar{y})$ becomes a Boolean combination (with only $\wedge$ and $\vee$) of literals.
 
 Make substitutions by introducing new variables according to the \textit{while} statements in the pseudo-code. For consistency, we rename the original $x$ to be $x_0$ and assume $n$ new quantified variables are introduced.
@@ -180,8 +206,14 @@ Other terms including constants and terms of free variables $\bar{y}$ are collec
    
     \caption{Normalization}
 \end{algorithm}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Enumerate-Orders} 
+\subsection{Enumeration of the variable orders} 
+
+\zhilin{stopped here}
+
 In the \textbf{Normalization} step, we simplify the origin formula at the cost of more quantified variables. Suppose we get $\exists \bar{x}.\theta(\bar{x},\bar{y})$ and it has $n$ new variables $x_i$. As a consequence, we need to eliminate all $(n+1)$ quantified variables one by one. 
 
 %To the end, 
