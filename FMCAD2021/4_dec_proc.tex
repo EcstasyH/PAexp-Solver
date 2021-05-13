@@ -213,7 +213,7 @@ Other terms including constants and terms of free variables $\bar{y}$ are collec
 \subsection{Enumeration of the variable orders} 
 
 Let the output of the normalization procedure be $\exists \vec{\ivarx}.\ \varphi'$ with $\vec{\ivarx} = (\ivarx_1,\ldots, \ivarx_n)$. 
-We then enumerate all the linear orders of $\{\ivarx_1,\ldots, \ivarx_n\}$. Each linear order can represented by a permutation $\sigma \in \mathcal{S}_n$ (where $\mathcal{S}_n$ is the permutation group on $[n]$), with the intention that $\ivarx_{\sigma(n)} \ge \cdots \ge \ivarx_{\sigma(1)}$.
+We then enumerate all the linear orders of $\{\ivarx_1,\ldots, \ivarx_n\}$. Each linear order can be represented by a permutation $\sigma \in \mathcal{S}_n$ (where $\mathcal{S}_n$ is the permutation group on $[n]$), with the intention that $\ivarx_{\sigma(n)} \ge \cdots \ge \ivarx_{\sigma(1)}$.
 
 Assuming a linear order $\sigma \in \mathcal{S}_n$ of $\{\ivarx_1,\ldots, \ivarx_n\}$, we then consider $\varphi'_\sigma  = \exists \vec{\ivarx}.\ \varphi' \wedge \bigwedge \limits_{i \in [n-1]} \ivarx_{\sigma(i)} \le \ivarx_{\sigma(i+1)}$ and eliminate the quantifiers $\exists \ivarx_{\sigma(n)}$, $\ldots$, $\exists \ivarx_{\sigma(1)}$,  one by one and from left to right. Let $\varphi''_\sigma$ denote the resulting formula.
 
@@ -596,7 +596,6 @@ When $x_i \ge \alpha+2$,
 So we conclude that %when $x_i \ge \alpha+2,x_i\ge B',x_i \ge x_{i-1}+\delta$,
 $\tau(x_i,\bar{x},\bar{y})$ keeps \textit{false} in this case.
 
-%\znj{I think there are some mistakes in the above proof, pls check it!}
 When $x_i \le \alpha-1$, similarly we have
 \begin{align}
     \tau(x_i,\bar{x},\bar{y})\notag 
