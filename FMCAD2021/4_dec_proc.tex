@@ -272,8 +272,192 @@ At thef{Ordering and QE}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \subsection{Elimination of  exponential occurrences of variables}\label{sec-elim-exp}
 
+Let $i \in [n]$ and $\exists \ivarx_{\sigma(i)} \ldots \exists \ivarx_{\sigma(1)}.\ \varphi''_{\sigma,i}(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ be the formula obtained from $\varphi'_\sigma$ by eliminating the quantifiers $\exists \ivarx_{\sigma(n)}$, $\ldots$, $\exists \ivarx_{\sigma(i+1)}$. We show how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\varphi''_{\sigma,i}$. The elimination is \emph{local} in the sense that it is applied to the atomic formulas independently. 
+
+Recall that after normalization, the atomic formulas are of the form $\iterm_1 \le \iterm_2$ or $c | \iterm$. Therefore, we can assume that the atomic formulas in $\varphi''_{\sigma,i}$ are  of the form 
+%
+$$a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary})$$
+or  
+$$c \big | \big(a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})\big).$$
+%
+For convenience, let us call these formulas as inequality respectively divisibility atomic formulas. In the sequel, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for these two types of atomic formulas.
+
+\medskip
+
+\paragraph{Inequality atomic formulas} Let us consider 
+$$
+\begin{array}{l}
+\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
+\hspace{4mm} 
+a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary}).
+\end{array}
+$$
+
+The elimination of the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ relies on the following lemma. Intuitively, the lemma states the fact that if $\ivarx_{\sigma(i)}$ is sufficiently greater than $\ivarx_{\sigma(i-1)}$, then the left-hand-side of $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is \emph{dominated} by $a_i10^{\ivarx_{\sigma(i)}}$, moreover, if $a_i > 0$ and the value of $\ivarx_{\sigma(i)}$ is sufficiently small (resp. big), then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds (resp. does not hold), similarly for $a_i < 0$.
+
+\begin{lemma} \label{lem:exp-ineq}
+Let  
+%
+$$
+\begin{array}{l}
+\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
+\hspace{4mm} 
+a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary}).
+\end{array}
+$$
+%
+with $a_i \neq 0$, $A\Def \sum_{j=1}^{i-1}|a_j|$, 
+%$B\Def  \sum_{j=1}^{i}|b_j|$, 
+$B \Def 2(\ell_{10}(\sum_{j=1}^{i}|b_j|)+3)$,
+and $\delta\Def  \ell_{10}(A)+3$. 
+\begin{itemize}
+    \item If $a_i > 0$, let $\alpha(\vec{\ivary}) \Def \ell_{10}(\iterm(\ivary))- \ell_{10}(a_i)$, then 
+    \begin{itemize}
+        \item if $\ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta $, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds,
+        \item if $\ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})  +2$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)}  \ge \ivarx_{\sigma(i-1)} +\delta$, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \textbf{does not} hold.
+    \end{itemize}
+    \item If $a_i < 0$, let $\alpha(\vec{\ivary})  \Def \ell_{10}(-\iterm(\ivary))- \ell_{10}(-(a_i))$, then 
+    \begin{itemize}
+        \item if $\ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta $, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \textbf{does not} hold,
+        \item if $\ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})  +2$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta $, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds.
+    \end{itemize}
+\end{itemize}
+\end{lemma}
+
+If $a_i > 0$, then from Lemma~\ref{lem:exp-ineq}, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+\[
+\small
+\begin{array}{l}
+\bigvee \limits_{p=0}^{B-1} a_i 10^{p}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + b_i p + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary}) \\
+\bigvee \big(\ivarx_{\sigma(i)} \ge B \wedge \ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1  \wedge \ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta \big)\\
+\bigvee 
+\left(
+\begin{array}{l}
+\ivarx_{\sigma(i)} \ge B \wedge \ivarx_{\sigma(i)} = \alpha(\vec{\ivary})\ \wedge \\
+\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[\alpha(\vec{\ivary})/\ivarx_{\sigma(i)}]
+\end{array}
+\right)  \\
+\bigvee 
+\left(
+\begin{array}{l}
+\ivarx_{\sigma(i)} \ge B \wedge \ivarx_{\sigma(i)} = \alpha(\vec{\ivary})+1\ \wedge \\
+\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[\alpha(\vec{\ivary})+1/\ivarx_{\sigma(i)}]
+\end{array}
+\right)  \\
+\bigvee \bigvee \limits_{p=0}^{\delta-1} 
+\left(
+\begin{array}{l}
+\ivarx_{\sigma(i)} \ge B \wedge \ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})+2\ \wedge \\
+ \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[\ivarx_{\sigma(i-1)}+ p /\ivarx_{\sigma(i)}]
+\end{array}
+\right),
+\end{array}
+\]
+where exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
+
+The elimination of the exponential occurrences of $\ivarx_{\sigma(i)}$ for the case $a_i < 0$ is similar. 
+
+\medskip
+
+\paragraph{Divisibility atomic formulas} Consider
+%
+$$
+\begin{array}{l}
+\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
+c\ \big |\ \big(a_i 10^{\ivarx_{\sigma(i)}} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
++ \iterm(\vec{\ivary}) \big)
+\end{array}
+$$
+with $a_i \neq 0$.
+%
+
+Let $c = 2^{r_1} 5^{r_2}  c_0$ such that $c_0$ is divisible by neither $2$ nor $5$. Moreover, let $r = \max(r_1, r_2)$. Then $c | (10^rc_0)$. 
+
+If $c_0 = 1$, then $10^r$ is divisible by $c = 2^{r_1}5^{r_2}$. Thus for every $n \ge r$, $c \ |\ 10^n$.  Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+\[
+\small
+\begin{array}{l}
+\bigvee \limits_{p = 0}^{r - 1} c\ \big | \big(a_i 10^{p} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + b_kp + \sum_{k=1}^{i-1} b_k \ivarx_{\sigma(k)} 
++ \iterm(\vec{\ivary}) \big)\\
+%
+\vee \big(\ivarx_{\sigma(i)} \ge r \wedge c\ \big | \big(\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
++ \iterm(\vec{\ivary}) \big)\big),
+\end{array}
+\]
+where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
+
+Next, let us assume $c_0 > 1$. Since $10$ and $c_0$ are relatively prime, according to Euler's theorem (cf. \cite{HW80}), $10^{\phi(c_0)} \equiv 1 \bmod c_0$, where $\phi$ is the Euler function. Suppose $10^{\phi(c_0)} = kc_0 + 1$ for some $k \in \Nat$. 
+Then for every $n \in \Nat$ with $n \ge r$, 
+$$
+\begin{array}{l}
+10^{n + \phi(c_0)} \bmod c =10^{n-r} 10^r (kc_0 + 1) \bmod c = \\
+10^{n-r} (k 10^rc_0 + 10^r) \bmod c = \\
+10^{n-r} (0+10^r) \bmod c = 10^n \bmod c.
+\end{array}
+$$
+
+Then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+\[
+\begin{array}{l}
+\bigvee \limits_{p=0}^{r-1} \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[p/\ivarx_{\sigma(i)}]\ \vee \\
+\left(
+\begin{array}{l}
+\ivarx_{\sigma(i)} \ge r\ \wedge \\
+\bigvee \limits_{q = 0}^{\phi(c_0)-1} 
+\left(
+\begin{array}{l}
+\phi(c_0)\ \big |\ (\ivarx_{\sigma(i)} - r - q)\ \wedge \\
+c\ \big | 
+\left(
+\begin{array}{l}
+a_i 10^{r+q} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \\
+\sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})
+\end{array}
+\right) 
+\end{array}
+\right)
+\end{array}
+\right),
+\end{array}
+\]
+where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+Let $d = 2^rd_0$, $d_0$ is an odd natural number. 
+According to Euler's Theorem, 
+$gcd(2,d_0)=1$ implies
+$2^{\phi(d_0)} \text{mod}\ d_0 = 1$,
+where $\phi$ is the Euler function.
+Consider function $f(n)=(2^n\ \text{mod} \ d)$,
+when $n\ge r$, 
+$f(n)$ becomes a periodic function and its period is a divisor of $\phi(d_0)$ because
+\begin{align}
+    f(n+\phi(d_0)) 
+    &=2^{n+\phi(d_0)}\ \text{mod}\ d &\notag\\
+    &=2^n\cdot 2^{\phi(d_0)}\ \text{mod}\ d &\notag\\
+    &=2^n\cdot (k d_0 + 1) \ \text{mod}\ d &
+    (\mbox{assume } 2^{\phi(d_0)}=k d_0 +1) \notag \\
+    &= 2^n \ \text{mod}\ d &
+    (\mbox{when } n\ge r, 2^n d_0\ \text{mod}\ d = 0 )\notag\\
+    &= f(n) \notag
+\end{align}
+
+When $x_i\le r-1$, we just enumerate all possible value of $x_i$, i.e., 
+$$\rho_5 \Def \bigvee_{p=0}^{r-1} \tau(p,\bar{x},\bar{y})\,.$$
+When $x_i\ge r$, $\tau(x_i,\bar{x},\bar{y})$ is equivalent to
+$$
+\rho_6 \Def \bigvee_{q=0}^{\phi(d_0)-1} [d|(a_i 2^{r+q}+\sum_{j=0}^{i-1} a_j 2^{x_j}
++  \sum_{k=0}^{i} b_k x_k+t(\bar{y})) \wedge \phi(d_0)|(x_i-r-q) \wedge x_i \ge r] \,.
+$$
+            Therefore,  $\tau(x_i,\bar{x},\bar{y})$ is equivalent to  $\rho_5 \vee \rho_6$.
+            
 \textbf{Elim-exp} is the most technical part of our QE algorithm. As mentioned, \textbf{Elim-exp} takes $\theta_{\sigma}(\bar{x},\bar{y})$ and  variable $x_{\sigma(i)}$ (the maximal variable among all quantified variables that are not eliminated yet according to $\sigma$) as inputs, and outputs an equivalent formula in which $x_{\sigma(i)}$ occurs linearly.
 The ideal case is that the formula $\theta(\bar{x},\bar{y})$ itself contains no $2^{x_{\sigma(i)}}$ terms, so we can omit this step and directly go to \textbf{Elim-linear}.
 For simplicity, we will abuse notations $x_i$ for $x_{\sigma(i)}$, and $\bar{x}$ for $(x_{\sigma(0)},...,x_{\sigma(i-1)})$ ( remind that $x_{\sigma(i+1)},...,x_n$ have been eliminated already).
@@ -458,9 +642,16 @@ $$
 +  \sum_{k=0}^{i} b_k x_k+t(\bar{y})) \wedge \phi(d_0)|(x_i-r-q) \wedge x_i \ge r] \,.
 $$
             Therefore,  $\tau(x_i,\bar{x},\bar{y})$ is equivalent to  $\rho_5 \vee \rho_6$.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\znj{\textbf{Solved}.More explanation or a formal proof is needed. }
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 \subsection{Elim-linear}
 
 After \textbf{Elim-exp}, 
@@ -591,7 +782,9 @@ It is well known that transforming an arbitrary formula into
 DNF is costly and the length of the formula may increase exponentially.
 So our algorithm remove these limitations and assume no special forms of
 the formula other than NNF.
-
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
