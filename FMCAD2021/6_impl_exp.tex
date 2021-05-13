@@ -1,11 +1,34 @@
 %!TEX root = paper.tex
 
-Implementation and experiments.
+We have implemented a prototype of our algorithm in Wolfram Mathematica, called  $\paexp$-Solver. Any postive Integer is allowed to be the base of exponential functions in our algorithm, but $\parseInt$ in Z3 and CVC4 only takes a numeric string as input. For this reason, we fix the exponential function to be $10^x$ in our experiments.
+
+Our solver takes an existential quantified {$\paexp$} formula together with an upper bound for variables. As we have mentioned in \textbf{modified Elim-exp}, if there is no variables only occurs linearly in exponential constraints, the upper bound can be omitted, otherwise it needs to be specified manually. So for arithmetic constraints, we have generated benchmarks of two forms, named \textbf{BOUND} and \textbf{UNBOUND}, depends on whether the bound is needed.
+
+The outputs of our solver can be SAT, UNSAT, B-UNSAT (short for bounded unsat) or TIMEOUT. For satisfiable cases, if a satisfying assignment is found, our solver returns ``SAT" together with the model. For unsatisfiable cases, our solver will decide whether the manually specified bound for variables is needed. The output ``UNSAT" means the formula is unsatisfiable over $\Nat$, while ``B-UNSAT" means no solution within the range. ``TIMEOUT" will be returned if the computation excesses the time limit. 
+
+We are not aware of any SMT solver or constraints solver that directly support arithmetic formulas with exponential functions over Integer domain. In Z3 and CVC4, we need to define exponential functions as recursive functions. Whereas string constraints with $\parseInt$ constraints are supported in Z3, CVC4 and other string constraints solvers like Trau, HAMPI etc. Therefore, we designed two benchmarks to evaluate our $\paexp$-Solver. The first benchmark is pure arithmetic formulas with exponential functions generated randomly, we compared our solver with Z3 and CVC4. The second benchmark is string constraints about hash functions, we tranlated them to arithmetic constraints for our solver and compared the result with Z3, CVC4 and Trau, who treated this benchmark as just string constraints. The details of the two benchmarks will be illustrate following:
+
+\paragraph{arithmetic}
+
+We have 8 groups of experiments for arithmetic constraints in all, including 4 groups for \textbf{BOUND} case and 4 for \textbf{UNBOUND} case.
+
+Each group consists of 100 trails paratrized by 4 natuaral number parameters, which in turn represent the number of exponential variables, linear variables, exponential inequalities and linear inequalities.For \textbf{BOUND} case, assume $m$ exponential variables and $(n-m)$ linear variables, an exponential inequalities is of the form
+$$\sum_{i=1}^m a_i 10^{x_i} + \sum_{j=1}^n b_j x_j \le c$$
+
+For \textbf{UNBOUND} case, we further restrict in the exponential inequalities, $a_i\neq 0$ for $i:1\le i\le m$ and $b_j=0$ for $j:m+1\le j \le n$.
+
+For both cases, we always require the number of constraints is more than the number variables. It is reasonable because the coefficients are randomly generated and some constraints may become inactive. We also have 2 groups include equalities by changing the first exponential inequality into equality.  
+
+Coefficients $a_i$, $b_j$ and $c$ are generated randomly for each constarint within the same range. We set $a_i\in [-10,10]$, and $b_j,c\in[-10^5,10^5]$. $a_i$ is set smaller so that exponential terms will not always dominate the left hand side of an inequality.
 
 \paragraph{string hash function}
  flat pattern and arbitrarys pattern
 
-\paragraph{arithmetic}
-, the forms of generated tests, range of parameters 
 
-base selection?
+All experiments were run on an Intel Core i5 1.4GHz with 8GB RAM.
+
+In our benchmark, the coefficients in inequalities are generated randomly within a range. As a consequence, some inequalities may not actually work, for example, $-10^{x_1} - x_1 \le 1$. So we always set the number of exponential  inequalities is one more than number of exponential variables, and the same for the linear comterpart. Since exponential terms with large coefficients are more likely to dominate the summation, coefficients of exponential terms are in the range $[-10,10]$ while other coefficients and constarints are generated randomly in $[-10^5,10^5]$.
+
+For each 
+
+
