@@ -49,7 +49,7 @@ The basic idea of our approach can be sketched as follows:  similar to \cite{A},
 
 In \cite{Semenov84}, Semen\"{o}v just proved the decidability and did not provide an explicit decision procedure. So, in  \cite{Point86}, Point presented a first decision procedure for the satisfiability of $\paexp$ in a mathematical way, which is difficult to understand and therefore no implementation available based on which up to now to the best of our knowledge. So, another contribution of this paper is that we present a more understandable algorithm for $\paexp$'s satisfiability in a computational way and its prototypical implementation. Although the general framework of our algorithm is quite similar to Point's,  it contains the following improvements and corrections: 
 
-\wuhao{to do}
+The syntax of Presburger arithmetic with exponential functions (denoted by $\paexp$) in our setting is more natural and easy to understand. In the algorihm, Point's algorithm needs to transform the formula into DNF (disjunction normal form) before  eliminating any variables. In our algorithm, we assume no special form of the formula other than NNF (negation normal form). A sub-case of eliminating exponential terms in Point's algorithm is incorrect, we correct it in our lemma \ref{lem:exp-ineq} $a_i<0$ case.
 
 How we did it? Also mention the quantifier elimination procedure. Optimizations
 
