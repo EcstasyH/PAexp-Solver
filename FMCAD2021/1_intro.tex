@@ -32,18 +32,24 @@ This approach is taken in earlier generation solvers such as Hampi and Kuluza~\c
 Although they are useful in handling many practical cases, they fail short when the all string solutions exceed the selected bound.
 For example, a constraint of the form $x.y \neq z  \wedge |x| > 2000$ would be quite challenging to handle using those solvers.
 
-One more recent approach is flattening~\cite{}.
+One more recent approach is flattening~\cite{A}.
 The idea is to restrict the solution space of string variables to some pattern defined by \emph{flat automata} (see Section~\ref{PA} for more details). 
 The major benefit of considering this class is two folds.
 First, even under the restriction, often the potential solution space is still infinite, which gives us a higher potential of finding solutions.
 For instance, we can find a solution for $x.y \neq z  \wedge |x| > 2000$ under a very simple restriction: all variables are in $a^*$, which $a$ is a character in our alphabet.
-Second, and more importantly, because we can convert the membership problem of a flat automaton to a satisfiability problem of Presburgh formula, the class of word equation + regular constraints + length constraints is decidable.
+Second, and more importantly, because we can convert the membership problem of a flat automaton to a satisfiability problem of Presburgher formula, the class of word equation + regular constraints + length constraints is decidable.
 
 The paper of Abdulla et al. has considered adding string/number conversion constraints to the above class.
 The paper proposes a decision procedure with a restricted form of flat automata.
 For string/number conversion, their approach projects the solution to string/number conversion to, in terms of numerical solutions, a finite solution space.
+
 In this paper, we propose a complete solution to this problem.
-We propose a decision procedure for the class of word equation + regular constraints + length constraints + string/number conversion under arbitrary flat automata.
+We propose a decision procedure for the class of word equation + regular constraints + length constraints + string/number conversion under arbitrary flat automata (denoted by $\strint$).
+The basic idea of our approach can be sketched as follows:  similar to \cite{A}, we first reduce the satisfiability problem of $\strint$ to the corresponding satisfiability problem of the theory of Presburger Arithmetic with exponential functions (denoted by $\paexp$); then, according to the decidability of $\paexp$ \cite{Semenov84}, we therefore obtain the decidability of the satisfiability of $\strint$.  
+
+In \cite{Semenov84}, Semen\"{o}v just proved the decidability and did not provide an explicit decision procedure. So, in  \cite{Point86}, Point presented a first decision procedure for the satisfiability of $\paexp$ in a mathematical way, which is difficult to understand and therefore no implementation available based on which up to now to the best of our knowledge. So, another contribution of this paper is that we present a more understandable algorithm for $\paexp$'s satisfiability in a computational way and its prototypical implementation. Although the general framework of our algorithm is quite similar to Point's,  it contains the following improvements and corrections: 
+
+\wuhao{to do}
 
 How we did it? Also mention the quantifier elimination procedure. Optimizations
 

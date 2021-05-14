@@ -1,5 +1,6 @@
 %!TEX root = paper.tex
 
+\subsection{Implementation}
 We have implemented a prototype of our algorithm in Wolfram Mathematica, called  $\paexp$-Solver. Any postive Integer is allowed to be the base of exponential functions in our algorithm, but $\parseInt$ in Z3 and CVC4 only takes a numeric string as input. For this reason, we fix the exponential function to be $10^x$ in our experiments.
 
 Our solver takes an existential quantified {$\paexp$} formula together with an upper bound for variables. As we have mentioned in \textbf{modified Elim-exp}, if there is no variables only occurs linearly in exponential constraints, the upper bound can be omitted, otherwise it needs to be specified manually. So for arithmetic constraints, we have generated benchmarks of two forms, named \textbf{BOUND} and \textbf{UNBOUND}, depends on whether the bound is needed.
@@ -22,13 +23,109 @@ For both cases, we always require the number of constraints is more than the num
 Coefficients $a_i$, $b_j$ and $c$ are generated randomly for each constarint within the same range. We set $a_i\in [-10,10]$, and $b_j,c\in[-10^5,10^5]$. $a_i$ is set smaller so that exponential terms will not always dominate the left hand side of an inequality.
 
 \paragraph{string hash function}
-flat pattern and arbitrarys pattern
+
+In the sequel, we consider string hash functions of the form  
+\begin{equation}
+    \text{hash}(x)= \parseInt(x) \mod m_1  \notag
+\end{equation}
+where $m_1$ is usually a large (prime) number. We would like to find if there exists strings that match desired patterns and are hashed into certain integer values. In our benchmark, we focus string constraints of the form
+\begin{equation}
+    \left( \parseInt(x) \mod m_1\right) \mod m_2 = 0   \notag
+\end{equation}
+where $x$ either has a prefix ``12345'' or a suffix ``6789'' or both, for example $x=``12345"y``6789"$. We choose 2 patterns for $y$ to match: 
+
+The first pattern is a FL with 2 cycles, $y \in (a)^+(b)^+$. Here we assume each cycle repeat at least once so that it will not degrade into FL with 1 cycle. The constraints is encoded to a $\paexp$ formula where two exponential variables denote the number of cycle $a$ and $b$ respectively.\wuhao{Need example?}
+
+The Second pattern is arbitrary string, that is $y\in \Sigma_{num}^*$. We use languages of the form $(a^1_1)^* (a^2_1...a^2_l)$ to under-approximate arbitrary strings, the first part is a single digit and the second part is a string length $l$, which can be seen as a FL with 2 cycles and force the second cycle do not repeat. We first set $l=1$ and enumerate $a^1_1$ from $1$ to $9$, for each case we obtain an arithmetic formula with $1$ exponential variables. If no satisfying model is found, we increase $l$ by 1 and repeat this procedure until it finds a model or timeout. This strategy is similar to \cite{Abdulla2020} with the difference that they force $a^1_1=0$ so that no exponential terms will occur.
+
+\subsection{Experiment Results}
+
+All experiments are run on a Intel i5 1.4GHz with 8GB RAM with TIMEOUT set to be 60 seconds. 
+
+\wuhao{where to place tables?}
+
+From Table \ref{table:arithmetic}, we can see that for all cases except bounded 4-5-5-6 case, $\paexp$-Solver answers more \textit{sat} and \textit{unsat} than Z3 and CVC4. Our solver significantly outperforms when equalities are included. The average time needed to assert \textit{sat} or \textit{unsat} increase when we add more exponential variables.\wuhao{more details needed}
 
 
-All experiments were run on an Intel Core i5 1.4GHz with 8GB RAM.
-
-In our benchmark, the coefficients in inequalities are generated randomly within a range. As a consequence, some inequalities may not actually work, for example, $-10^{x_1} - x_1 \le 1$. So we always set the number of exponential  inequalities is one more than number of exponential variables, and the same for the linear comterpart. Since exponential terms with large coefficients are more likely to dominate the summation, coefficients of exponential terms are in the range $[-10,10]$ while other coefficients and constarints are generated randomly in $[-10^5,10^5]$.
-
-For each 
+For string hash function benchmark, we did compared our solver with Z3, CVC4 and Trau, but the experiments show that Trau would incorrectly answer \textit{unsat} in most cases even though a model can be found. So in \ref{table:string}, we still show the results of the other 3 solvers. As we can see, for flat patterns $(a)^*(b)^*$, Z3 and CVC4 would run out of time on most cases while $\paexp$-solver can give an answer for almost all trails. For arbitrary strings $(\Sigma_{num})^*$, CVC4 and Z3 seem to be biased against trails with surfix or prefix. By applying the under-approximation technique, our tool is able to find a match on all trails. \wuhao{more details needed}
 
 
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table*}[]
+    \label{table:arithmetic}
+    \caption{Results of Z3, CVC4 and $\paexp$-Solver on arithmetic benchmark}
+    \begin{tabular}{cc|cc|cc|cc}
+    \multicolumn{1}{l}{} &  & \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} & \multicolumn{2}{c}{MySolver} \\
+    \multicolumn{1}{l}{} &  & number & avg & number & avg & number & avg \\ \hline
+    \multirow{3}{*}{\begin{tabular}[c]{@{}c@{}}unbound\\ 2-3-3-4\end{tabular}} & SAT & 31 & \textless{}0.1 & 26 & 1.2 & 35 & \textless{}0.1 \\
+     & UNSAT & 37 & \textless{}0.1 & 38 & \textless{}0.1 & 65 & 0.3 \\
+     & TIMEOUT & 32 &  & 36 &  & 0 &  \\ \hline
+    \multirow{3}{*}{\begin{tabular}[c]{@{}c@{}}unbound\\ 3-4-4-5\end{tabular}} & SAT & 27 & \textless{}0.1 & 16 & \textless{}0.1 & 34 & 0.4 \\
+     & UNSAT & 22 & \textless{}0.1 & 24 & \textless{}0.1 & 66 & 2.8 \\
+     & TIMEOUT & 51 &  & 60 &  & 0 &  \\ \hline
+    \multirow{3}{*}{\begin{tabular}[c]{@{}c@{}}unbound\\ 3-4-4-5 \\ with equality\end{tabular}} & SAT & 4 & 19 & 0 & \textless{}0.1 & 16 & 3.7 \\
+     & UNSAT & 30 & \textless{}0.1 & 31 & 0.2 & 44 & \textless{}0.1 \\
+     & TIMEOUT & 66 &  & 69 &  & 28 & 19.6 \\ \hline
+    \multirow{3}{*}{\begin{tabular}[c]{@{}c@{}}unbound\\ 4-5-5-6\end{tabular}} & SAT & 20 & 0.2 & 15 & 8.2 & 33 & 5.2 \\
+     & UNSAT & 22 & \textless{}0.1 & 23 & 0.2 & 50 & 4.8 \\
+     & TIMEOUT & 58 &  & 62 &  & 17 &  \\ \hline\hline
+    \multirow{4}{*}{\begin{tabular}[c]{@{}c@{}}bound\\ 2-3-3-4\end{tabular}} & SAT & 31 & \textless{}0.1 & 14 & \textless{}0.1 & 37 & 0,6 \\
+     & UNSAT & 31 & \textless{}0.1 & 30 & \textless{}0.1 & 46 & \textless{}0.1 \\
+     & B-UNSAT &  &  &  &  & 17 & 9.3 \\
+     & TIMEOUT & 38 &  & 56 &  & 0 &  \\ \hline
+    \multirow{4}{*}{\begin{tabular}[c]{@{}c@{}}bound\\ 3-4-4-5\end{tabular}} & SAT & 31 & 0.8 & 13 & \textless{}0.1 & 36 & 3.2 \\
+     & UNSAT & 20 & \textless{}0.1 & 20 & \textless{}0.1 & 42 & \textless{}0.1 \\
+     & B-UNSAT &  &  &  &  & 3 & 54 \\
+     & TIMEOUT & 49 &  & 67 &  & 19 &  \\ \hline
+    \multirow{4}{*}{\begin{tabular}[c]{@{}c@{}}bound\\ 3-4-4-5 \\ with equality\end{tabular}} & SAT & 3 & 23 & 1 & 39 & 14 & 27.5 \\
+     & UNSAT & 25 & \textless{}0.1 & 25 & \textless{}0.1 & 47 & \textless{}0.1 \\
+     & B-UNSAT &  &  &  &  & 2 & 57.9 \\
+     & TIMEOUT & 72 &  & 74 &  & 37 &  \\ \hline
+    \multirow{4}{*}{\begin{tabular}[c]{@{}c@{}}bound\\ 4-5-5-6\end{tabular}} & SAT & 29 & 2 & 11 & \textless{}0.1 & 28 & 10 \\
+     & UNSAT & 20 & \textless{}0.1 & 20 & \textless{}0.1 & 38 & \textless{}0.1 \\
+     & B-UNSAT &  &  &  &  & 0 &  \\
+     & TIMEOUT & 51 &  & 69 &  & 34 & 
+    \end{tabular}
+\end{table*}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table*}[]
+    \label{table:string}
+    \caption{Results of Z3, CVC4 and $\paexp$-Solver on string hash function benchmark}
+    \begin{tabular}{c|c|ccc|ccc|ccc}
+                                                       &     & \multicolumn{3}{c|}{Z3} & \multicolumn{3}{c|}{CVC4} & \multicolumn{3}{c}{MySolver}       \\
+    PATTERN                                            & $\ell_{10}(m_1)$   & SAT  & UNSAT  & TIMEOUT & SAT   & UNSAT  & TIMEOUT  & SAT & UNSAT & TIMEOUT              \\ \hline
+    \multirow{5}{*}{12345(a)*(b)*}                     & 2   & 5    &        & 20      & 23    &        & 2        & 24  & 1     & 0                    \\
+                                                       & 3   & 0    &        & 25      & 4     &        & 21       & 10  & 14    & 1                    \\
+                                                       & 4   & 0    &        & 25      & 1     &        & 24       & 2   & 22    & 1                    \\
+                                                       & 5   & 0    &        & 25      & 1     &        & 24       & 1   & 23    & 1                    \\
+                                                       & total & 5    &        & 95      & 29    &        & 71       & 37  & 60    & 3                    \\ \hline
+    \multirow{5}{*}{12345(a)*(b)*6789}                 & 2   & 10   &        & 15      & 18    &        & 7        & 24  & 1     & 0                    \\
+                                                       & 3   & 1    &        & 24      & 8     &        & 17       & 10  & 15    & 0                    \\
+                                                       & 4   & 0    &        & 25      & 3     &        & 22       & 3   & 22    & 0                    \\
+                                                       & 5   & 0    &        & 25      & 0     &        & 25       & 0   & 25    & 0                    \\
+                                                       & total & 11   &        & 89      & 29    &        & 71       & 37  & 63    & 0                    \\ \hline
+    \multirow{5}{*}{(a)*(b)*6789}                      & 2   & 14   &        & 11      & 23    &        & 2        & 22  & 3     & 0                    \\
+                                                       & 3   & 4    &        & 21      & 6     & 1      & 18       & 15  & 10    & 0                    \\
+                                                       & 4   & 0    &        & 25      & 1     &        & 24       & 3   & 22    & 0                    \\
+                                                       & 5   & 0    &        & 25      & 0     &        & 25       & 1   & 24    & 0                    \\
+                                                       & total & 18   &        & 82      & 30    & 1      & 69       & 41  & 59    & 0                    \\ \hline\hline
+    \multirow{5}{*}{12345$(\Sigma_{num})^*$}     & 2   & 25   &        & 0       & 25    &        & 0        & 25  &       &                      \\
+                                                       & 3   & 25   &        & 0       & 25    &        & 0        & 25  &       &                      \\
+                                                       & 4   & 23   &        & 2       & 25    &        & 0        & 25  &       &                      \\
+                                                       & 5   & 9    &        & 16      & 25    &        & 0        & 25  &       &                      \\
+                                                       & total & 82   &        & 18      & 100   &        & 0        & 100 &       &                      \\ \hline
+    \multirow{5}{*}{12345$(\Sigma_{num})^*$6789} & 2   & 25   &        & 0       & 15    &        & 10       & 25  &       & \multicolumn{1}{l}{} \\
+                                                       & 3   & 23   &        & 2       & 1     &        & 24       & 25  &       & \multicolumn{1}{l}{} \\
+                                                       & 4   & 9    &        & 16      & 1     &        & 24       & 25  &       & \multicolumn{1}{l}{} \\
+                                                       & 5   & 3    &        & 22      & 0     &        & 25       & 25  &       &                      \\
+                                                       & total & 60   &        & 40      & 17    &        & 83       & 100 &       &                      \\ \hline
+    \multirow{5}{*}{$(\Sigma_{num})^*$6789}      & 2   & 25   &        & 0       & 19    &        & 6        & 25  &       & \multicolumn{1}{l}{} \\
+                                                       & 3   & 25   &        & 0       & 4     &        & 21       & 25  &       & \multicolumn{1}{l}{} \\
+                                                       & 4   & 16   &        & 9       & 4     &        & 21       & 25  &       & \multicolumn{1}{l}{} \\
+                                                       & 5   & 2    &        & 23      & 0     &        & 25       & 25  &       & \multicolumn{1}{l}{} \\
+                                                       & total & 68   &        & 32      & 27    &        & 73       & 100 &       &                     
+    \end{tabular}
+\end{table*}

@@ -801,8 +801,8 @@ the formula other than NNF.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\iffalse
-\subsection{Complexity Analysis and Case Study}
+\subsection{Complexity Analysis}
+\wuhao{To be checked}
 In this section, we give a complexity analysis of our decision procedure, and provide an example to demonstrate the procedure.
 %\subsection{Complexity Analysis}
 
@@ -900,55 +900,3 @@ since the super exponential term dominates the number of permutations $n^{O(n)}$
 this upper bound still holds.
 
 
-
- 
-%\subsection{Example}
-
-We apply our algorithm to a simple example to 
-illustrate its function.
-Given $\Sigma = \{0,1\}$
-Suppose $\mathcal{A}$ is a finite state automaton
-that recognizes language $L = \{ w \mid \#w('1') \text{ is odd}\}$.
-Consider the following string constraint
-$$y\in L(\mathcal{A})\wedge 4\le  \parseInt(y) < 16\,.$$
-
-We need an abstraction parameter $alpha$ to restrict interpretations
-for $x$, for simplicity, set $\alpha\Def \langle 2,1 \rangle$.
-The generic $\langle 2,1 \rangle$-flat language is the union of 
-$\langle 2,1 \rangle$-flat languages $(11)^*,(10)^*,(01)^*,(00)^*,1^*,0^*$.
-Here we divide the problem into 6 sub-cases by restricting $y$
-to one of the $\langle 2,1 \rangle$-flat language.
-Another approach is to directly restrict $y$ to 
-the generic $\langle 2,1 \rangle$-flat language,
-at the cost of more introduced variables.
-Since the complexity is related to the number of variables,
-we wish it to be as little as possible.
-
-When $y$ is in language $1^*$, assume $y = 1^x$ where $x$
-is a fresh integer variable.
-Note that the Parikh image of $L(\mathcal{A})$ is $2|( x+1)$, 
-so the constraint is converted to a PA formula $\phi$
-$$\phi\Def \exists x. 2|(x+1) \wedge 5 \le 2^{x} < 17\,.$$
-
-Observe that when $x=3$ the formula holds,
-so we can easily deduce that $\phi$ is true.  
-By applying our algorithm,
-after \textbf{Normalization},
-$\phi$ is transformed into the form 
-
-$$\exists x_0. 2|(x+1)\wedge  2^{x}\le 16 \wedge -2^{x}\le -5\,.$$
-
-Since there is only one variable, 
-\textbf{Enumerate-Orders} can be omitted.
-We send $2^x\le 16$ and $-2^x \le -5$ to \textbf{Elim-exp} and obtain
-$$2^x\le 16 \equiv x \le 4$$
-$$-2^x\le -5 \equiv 3\le x\,.$$ 
-Then we apply \textbf{Elim-linear} on formula $\exists x_0. 2|(x+1) \wedge x\le 4 \wedge 3\le x$ and get
-$$\bigvee_{j=0}^1(2| j+1 \wedge \textit{false} \wedge \textit{true})\vee \bigvee_{j=0}^1 (2|4-j+i\wedge 4-j\le 4 \wedge 3\le 4-j) \,.$$
-which evaluates \textit{true} and we can deduce $j=1\implies x=3$, so $y$ is string $111$.
-
-Other sub-cases are similar. However, when the abstraction parameter becomes larger,
-say, $\alpha =\langle 2,2 \rangle$,
-the complexity will grow rapidly,
-because \textbf{Enumerate-Orders} can not always be omitted and formulas in \textbf{Elim-exp} can not be simplified easily.
-\fi

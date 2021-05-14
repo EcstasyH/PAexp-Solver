@@ -4,3 +4,6 @@ FMCAD2021/*.aux
 FMCAD2021/*.fbd_latexmk
 FMCAD2021/*.synctex.gz
 FMCAD2021/*.md
+FMCAD2021/*.bbl
+FMCAD2021/*.blg
+
