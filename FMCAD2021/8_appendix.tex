@@ -1,0 +1,157 @@
+%!TEX root = paper.tex
+
+\noindent {\bf Lemma~\ref{lem:exp-ineq}}.
+\emph{Let  
+%
+$$
+\begin{array}{l}
+\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
+\hspace{4mm} 
+a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary}).
+\end{array}
+$$
+%
+with $a_i \neq 0$, $A\Def \sum_{j=1}^{i-1}|a_j|$, 
+%$B\Def  \sum_{j=1}^{i}|b_j|$, 
+$B \Def 2(\ell_{10}(\sum_{j=1}^{i}|b_j|)+3)$,
+and $\delta\Def  \ell_{10}(A)+3$. 
+\begin{itemize}
+    \item If $a_i > 0$, let $\alpha(\vec{\ivary}) \Def \ell_{10}(\iterm(\ivary))- \ell_{10}(a_i)$, then 
+    \begin{itemize}
+        \item if $\ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta $, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds,
+        \item if $\ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})  +2$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)}  \ge \ivarx_{\sigma(i-1)} +\delta$, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \textbf{does not} hold.
+    \end{itemize}
+    \item If $a_i < 0$, let $\alpha(\vec{\ivary})  \Def \ell_{10}(-\iterm(\ivary))- \ell_{10}(-(a_i))$, then 
+    \begin{itemize}
+        \item if $\ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta $, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \textbf{does not} hold,
+        \item if $\ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})  +2$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta $, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds.
+    \end{itemize}
+\end{itemize}
+}
+
+We need the following proposition for the proof of Lemma~\ref{lem:exp-ineq}.
+
+\begin{proposition} \label{prop:1}
+If $n\ge m\ge 1$ and $p \ge 10(\ell_{10}(n)- \ell_{10}(m)+1)$, then 
+$n p \le m10^p$ holds.
+\end{proposition}
+
+\begin{proof}
+By an induction on $n'$, we first show that for any $n' \in \Nat$, if $p \ge 10n'$, then $10^{n'} p \le 10^p$. 
+
+If $ p \ge 10 (\ell_{10}(n) - \ell_{10}(m)+1)$, then  $n p \le 10\lambda_{10}(n) p = 10 * 10^{\ell_{10}(n)} p = 10^{\ell_{10}(n)-\ell_{10}(m) + 1}  10^{\ell_{10}(m)} p$.
+
+Because $p \ge 10(\ell_{10}(n)-\ell_{10}(m) + 1)$, we deduce that $10^{\ell_{10}(n)-\ell_{10}(m) + 1}  p \le 10^p$.  Therefore, $10^{\ell_{10}(n)-\ell_{10}(m) + 1}  10^{\ell_{10}(m)} p \le 10^{\ell_{10}(m)} 10^p \le m 10^p$.
+We conclude that $np \le m 10^p$.
+\end{proof}
+
+
+%Then we give the proof for Theorem~\ref{thm:exp-ineq}.
+\begin{proof}[Proof of Lemma~\ref{lem:exp-ineq}]
+We only prove for the case $a_i > 0$, the other case is symmetric. 
+
+
+Let $A\Def \sum_{j=1}^{i-1}|a_j|$, $B \Def 10(\ell_{10}(\sum_{j=1}^{i}|b_j|)+3)$, and $\delta\Def  \ell_{10}(A)+3$. 
+
+Suppose $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} + \delta$. Moreover, let $\alpha(\vec{\ivary}) \Def  \ell_{10}(\iterm(\ivary))- \ell_{10}(a_i)$.
+
+Note that
+ \begin{equation} 
+   A10^{-\delta} =A 10^{-\ell_{10}(A)-3} = \frac{A}{1000\lambda_{10}(A)} \le \frac{1}{100}.   \label{eq:thm-ineq-1}
+ \end{equation}
+ 
+ From $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} + \delta$ and $\ivarx_{\sigma(i-1)} \ge \ldots \ge \ivarx_{\sigma(1)}$, 
+we know   
+$$-A 10^{\ivarx_{\sigma(i)} - \delta} \le  \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} \le A 10^{\ivarx_{\sigma(i)} - \delta}$$
+and
+$$-(\sum_{j=1}^{i}|b_j|) \ivarx_{\sigma(i)} \le \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} \le (\sum_{j=1}^{i}|b_j|) \ivarx_{\sigma(i)}.$$ 
+
+Moreover, let $n = 100\sum_{j=1}^{i}|b_j|$, $m = 1$, and $p = \ivarx_{\sigma(i)}$, then 
+$n \ge m \ge 1$. From $10(\ell_{10}(n)- \ell_{10}(m)+1) = 10 (\ell_{10}(100 \sum_{j=1}^{i}|b_j|) + 1) = 10 (\ell_{10}(\sum_{j=1}^{i}|b_j|) + 3) = B$, we deduce that $p = \ivarx_{\sigma(i)} \ge B = 10(\ell_{10}(n)- \ell_{10}(m)+1)$.
+Then according to Proposition~\ref{prop:1}, 
+$$100(\sum_{j=1}^{i}|b_j|)\ivarx_{\sigma(i)} = np \le m 10^p = 10^{\ivarx_{\sigma(i)}}.$$
+Thus 
+$(\sum_{j=1}^{i}|b_j|)\ivarx_{\sigma(i)}  \le \frac{1}{100} 10^{\ivarx_{\sigma(i)}}.$
+
+
+If $\ivarx_{\sigma(i)} \ge   \alpha(\vec{\ivary}) + 2$, then 
+
+$
+\begin{array}{l}
+a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \ge \\
+a_i 10^{\ivarx_{\sigma(i)}} - A 10^{\ivarx_{\sigma(i)} - \delta} - (\sum_{j=1}^{i}|b_j|) \ivarx_{\sigma(i)}  \ge \\
+a_i 10^{\ivarx_{\sigma(i)}} - \frac{1}{100}10^{\ivarx_{\sigma(i)}} - \frac{1}{100} 10^{\ivarx_{\sigma(i)}} = \\
+(a_i - \frac{1}{50}) 10^{\ivarx_{\sigma(i)}} \ge (a_i - \frac{1}{50}) 10^{ \alpha(\vec{\ivary}) + 2} = \\
+(a_i - \frac{1}{50}) 10^{  \ell_{10}(\iterm(\ivary))- \ell_{10}(a_i) + 2} = \\
+\frac{10(a_i - \frac{1}{50})}{10^{\ell_{10}(a_i)} } 10^{ \ell_{10}(\iterm(\ivary))+1} \ge \frac{10(a_i - \frac{1}{50})} {a_i} 10^{ \ell_{10}(\iterm(\ivary))+1} \ge \\
+(10 - \frac{1}{5a_i}) 10^{ \ell_{10}(\iterm(\ivary))+1} > 10^{ \ell_{10}(\iterm(\ivary))+1} \ge \iterm(\ivary).
+\end{array}
+$
+
+Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \emph{does not} hold.
+
+If $\ivarx_{\sigma(i)} \le   \alpha(\vec{\ivary}) - 1$, then 
+
+$
+\begin{array}{l}
+a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \\
+a_i 10^{\ivarx_{\sigma(i)}} + A 10^{\ivarx_{\sigma(i)} - \delta} + (\sum_{j=1}^{i}|b_j|) \ivarx_{\sigma(i)} \le \\
+a_i 10^{\ivarx_{\sigma(i)}} + \frac{A} {10^\delta}10^{\ivarx_{\sigma(i)}} + \frac{1}{100} 10^{\ivarx_{\sigma(i)}} \le \\
+(a_i + \frac{1}{100} + \frac{1}{100})10^{\ivarx_{\sigma(i)}} = (a_i + \frac{1}{50}) 10^{\ivarx_{\sigma(i)}} \le \\
+(a_i + \frac{1}{50}) 10^{\alpha(\vec{\ivary}) - 1} = (a_i + \frac{1}{50}) 10^{\ell_{10}(\iterm(\ivary))- \ell_{10}(a_i) - 1} = \\
+\frac{a_i + \frac{1}{50}} {10^{\ell_{10}(a_i) + 1}} 10^{\ell_{10}(\iterm(\ivary))} = \frac{a_i + \frac{1}{50}} {10 \lambda_{10}(a_i)} 10^{\ell_{10}(\iterm(\ivary))} \le \\
+\frac{a_i + \frac{1}{50}} {a_i+1} 10^{\ell_{10}(\iterm(\ivary))} \le 10^{\ell_{10}(\iterm(\ivary))} \le \iterm(\ivary).
+\end{array}
+$
+
+Therefore,  in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+\begin{align}
+    a_i2^{x_i}+ \sum_{j=0}^{i-1} a_j 2^{x_j} + \sum_{k=0}^{i} b_k x_k 
+    & \ge a_i 2^{x_i} - 2^{x_i -\delta}A  - Bx_i & \notag \\
+     & \ge 2^{x_i}(a_i -\frac{1}{4} -\frac{1}{4}) &  (\mbox{by \eqref{eq:thm-ineq-1} and  \eqref{eq:thm-ineq-2}})\notag \\
+    %= &(a_i-\frac{1}{2})2^{x_i} \notag \\
+    %\ge &\frac{a_i}{2}2^{x_i} \notag \\
+    & \ge  \frac{a_i}{2}\frac{4\lambda_2(t(\bar{y}))}{\lambda_2(a_i)} & 
+      (\mbox{ Def. of } \alpha) & \notag \\
+     & \ge  t(\bar{y}) & \notag 
+\end{align}
+
+
+If $\ivarx_{\sigma(i)} \ge  \alpha(\vec{\ivary}) + 2$, then 
+
+The goal is to find a bound for $x_i$ such that 
+the values of the atoms containing $x_i$ keep constant when $x_i$ is greater than the bound.
+ 
+When $x_i \ge \alpha+2$,
+\begin{align}
+    a_i2^{x_i}+ \sum_{j=0}^{i-1} a_j 2^{x_j} + \sum_{k=0}^{i} b_k x_k 
+    & \ge a_i 2^{x_i} - 2^{x_i -\delta}A  - Bx_i & \notag \\
+     & \ge 2^{x_i}(a_i -\frac{1}{4} -\frac{1}{4}) &  (\mbox{by \eqref{eq:thm-ineq-1} and  \eqref{eq:thm-ineq-2}})\notag \\
+    %= &(a_i-\frac{1}{2})2^{x_i} \notag \\
+    %\ge &\frac{a_i}{2}2^{x_i} \notag \\
+    & \ge  \frac{a_i}{2}\frac{4\lambda_2(t(\bar{y}))}{\lambda_2(a_i)} & 
+      (\mbox{ Def. of } \alpha) & \notag \\
+     & \ge  t(\bar{y}) & \notag 
+\end{align}
+So we conclude that %when $x_i \ge \alpha+2,x_i\ge B',x_i \ge x_{i-1}+\delta$,
+$\tau(x_i,\bar{x},\bar{y})$ keeps \textit{false} in this case.
+
+%\znj{I think there are some mistakes in the above proof, pls check it!}
+When $x_i \le \alpha-1$, similarly we have
+\begin{align}
+    \tau(x_i,\bar{x},\bar{y})\notag 
+    & \le  a_i 2^{x_i} + 2^{x_i -\delta}A  + Bx_i &  \notag \\
+    & \le  2^{x_i}(a_i +\frac{1}{4} +\frac{1}{4}) &(\mbox{by \eqref{eq:thm-ineq-1} and  \eqref{eq:thm-ineq-2}}) \notag \\
+   & \le  2\lambda_2(a_i)\frac{\lambda_2(t(\bar{y}))}{2\lambda_2(a_i)} &  (\mbox{ Def. of } \alpha) \notag \\
+   &  \le  t(\bar{y}) & \notag 
+\end{align}
+which indicates that when  $x_i \le \alpha-1$, $\tau(x_i,\bar{x},\bar{y})$ keeps \textit{true}. \qed 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{proof}
