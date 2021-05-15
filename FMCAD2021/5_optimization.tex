@@ -56,16 +56,17 @@ To avoid applying the quantifier elimination algorithm of {\pa}, we consider the
 \[\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}) \Def \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le c - b_i  \ivarx_{\sigma(i)}.\]
 %\end{equation}
 Let us assume $a_{i-1} > 0$.
-It is easy to observe that $c - |b_i|10^u \le c - b_i \ivarx_{\sigma(i)} \le c + |b_i|10^u$.
+Define $c_1, c_2$ as follows: If $b_i > 0$, then $c_1 = c- b_i 10^u$ and $c_2 = c$, otherwise, $c_1 = c$ and $c_2 = c - b_i 10^u$.
+It is easy to observe that $c_1 \le c - b_i \ivarx_{\sigma(i)} \le c_2$.
 Then we can apply Lemma~\ref{lem:exp-ineq} to the following two inequalities to eliminate $10^{\ivarx_{\sigma(i-1)}}$,
 \begin{equation}\label{eqn-lb}
-\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le c - |b_i|10^u
+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le c_1
 \end{equation}
 and
 \begin{equation}\label{eqn-ub}
-\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le c + |b_i|10^u.
+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le c_2.
 \end{equation}
-Let $\alpha_1 = \ell_{10}(c - |b_i|10^u) -  \ell_{10}(a_{i-1})$ and $\alpha_2 = \ell_{10}(c + |b_i|10^u) -  \ell_{10}(a_{i-1})$. Then from Lemma~\ref{lem:exp-ineq}, 
+Let $\alpha_1 = \ell_{10}(c_1) -  \ell_{10}(a_{i-1})$ and $\alpha_2 = \ell_{10}(c_2) -  \ell_{10}(a_{i-1})$. Then from Lemma~\ref{lem:exp-ineq}, 
 \begin{itemize}
 \item if $\ivarx_{\sigma(i-1)} \ge B$, $\ivarx_{\sigma(i-1)} \le \alpha_1 - 1$, and $\ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)} + \delta$, then inequality (\ref{eqn-lb}), thus also $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, is evaluated to $\ltrue$,
 \item if $\ivarx_{\sigma(i-1)} \ge B$, $\ivarx_{\sigma(i-1)} \ge \alpha_2 + 2$, and $\ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)} + \delta$, then inequality (\ref{eqn-ub}), thus also $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, is evaluated to $\lfalse$.
