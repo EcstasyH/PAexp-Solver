@@ -1,5 +1,43 @@
 %!TEX root = paper.tex
 
+In the last section, we illustrated the main idea of the decision procedure for  {\paexp}. The decision procedure has a high complexity in the sense that the elimination of the exponential occurrences   of each variable incurs an exponential blow-up, similarly for linear occurrences. Note that this high complexity holds even for quantifier-free formulas containing exponential terms: For a quantifier-free formula $\varphi$ containing exponential terms, we solve its satisfiability problem by adding the existential quantifiers for all the variables occurring in $\varphi$, then eliminate the quantifiers one by one, resulting into $\ltrue$ or $\lfalse$ in the end. The original formula $\varphi$ is satisfiable if $\ltrue$ is obtained in the end.
+
+In this section, we focus on quantifier-free {\paexp} formulas (or existential {$\paexp$} formulas since they are satisfiability-equivalent), and present various optimizations of the decision procedure for {\paexp}, aiming at an efficient implementation. The focus on quantifier-free {\paexp} formulas is motivated by the following two facts: 1) the flattening of {$\strint$} string constraints results into such formulas, 2) these formulas are already challenging for the state-of-the-art SMT solvers e.g. CVC4 and Z3 (with exponential functions defined as recursive functions). 
+
+Let $\varphi$ be a quantifier-free {\paexp} formula in the remainder of this section. Moreover, we assume that $\varphi$ is normalized since the optimizations presented in the sequel are for normalized formulas.
+
+\paragraph{Reducing the number of enumerated variable orders by over approximation}
+
+Recall that in the decision procedure for {\paexp}, after the normalization, the orders of variables are enumerated and for each order, the exponential as well as linear occurrences of variables are eliminated. Since the quantifier elimination is expensive and applied to each possible order of variables, if we could reduce the candidate variable orders in the very beginning, it would facilitate considerable speed-up for the decision procedure. 
+
+Our main idea is to consider an over approximation of $\varphi$, which is a {\pa} formula $\varphi'$, and use $\varphi'$ to remove the infeasible candidate variable orders.
+
+Note that all the exponential terms in $\varphi$ is of the form $10^{\ivarz}$ for some integer variable $\ivarz$. 
+%
+The over approximation is based on the observation that $10^n \ge 9 n + 1$ for every $n \in \Nat$. Then we obtain the over approximation $\varphi'$ from $\varphi$ by replacing each exponential term $10^{\ivarz}$ with a fresh variable $\ivarz'$ and add $\ivarz' \ge 9 \ivarz +1$ as a conjunct.
+
+Then during the enumeration of the linear orders for the variables $\ivarx_1, \ldots, \ivarx_n$, we can quickly remove those infeasible candidates $\sigma$ such that $\varphi' \wedge \bigwedge \limits_{i \in [n-1]}\ivarx_{\sigma(i)} \le \ivarx_{\sigma(i+1)}$ is unsatisfiable. A special case is that if $\varphi'$ is unsatisfiable, then we can directly conclude that original formula $\varphi$ is unsatisfiable.
+
+%Given any formula in $\paexp$, we first invoke \textbf{Normalization} to translate it into a simpler form. Then we  try to detect if there are obvious conflicts, for example, if the linear constraints combined are unsatisfiable, the whole formula is of course unsatisfiable.
+
+%Suppose the normalized formula $\theta$ contains variables $\{x_i:i\in[n]\}$, so the exponential terms could be $e^{x_i}$. For each $e^{x_i}$, we subtitute $e^{x_i}$ by a fresh variable $y_i$ in $\theta$ and add the constraints $(e-1)x_i+1\le y_i$ to get $\theta'$. Since $(e-1)x_i+1\le e^{x_i}$ holds for all $e,x\in \Nat$, $\theta'$ is an over-approximation of $\theta$ and if $\theta'$ is unsatisfiable over positive reals, then $\theta$ is unsatisfiable over $\Nat$.
+
+\zhilin{stopped here}
+
+\paragraph{Avoid the elimination of linear occurrences of variables by under approximation}
+
+
+xxx
+
+\paragraph{Avoid the formula-size blow-up by depth-first search}
+
+xxx
+
+\paragraph{pruning and preprocessing}
+
+xxx
+
+
 In the last section, 
 we introduced quantifier elimination as a decision procedure for {$\paexp$}. According to theorem \ref{thm:string-parInt}, the satisfiability of {$\strint$} fragment is decidable.
 However, it is not practical to directly apply quantifier elimination when solving constraints over {$\paexp$} due to two main reasons.
