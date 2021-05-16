@@ -1,0 +1,1265 @@
+begin test using CVC4 ...
+1
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_76843 Int)) Int (ite (= BOUND_VARIABLE_76843 8) 63799 (ite (= BOUND_VARIABLE_76843 6) 2369 (ite (= BOUND_VARIABLE_76843 7) 23690 0))))
+(define-fun x1 () Int 7)
+(define-fun x2 () Int 8)
+(define-fun x3 () Int 7)
+(define-fun x4 () Int 361)
+(define-fun x5 () Int 376)
+(define-fun x6 () Int 13)
+(define-fun x7 () Int 3)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+2
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_120107 Int)) Int (ite (= BOUND_VARIABLE_120107 13) 1811200 (ite (= BOUND_VARIABLE_120107 19) 3667 (ite (= BOUND_VARIABLE_120107 12) 181120 (ite (= BOUND_VARIABLE_120107 20) 36670 (ite (= BOUND_VARIABLE_120107 11) 18112 (ite (= BOUND_VARIABLE_120107 21) 366700 0)))))))
+(define-fun x1 () Int 13)
+(define-fun x2 () Int 21)
+(define-fun x3 () Int 13)
+(define-fun x4 () Int 2)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 5)
+(define-fun x7 () Int 47)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 60 seconds
+3
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+4
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+5
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_110299 Int)) Int (ite (= BOUND_VARIABLE_110299 246) (- 16268) (ite (= BOUND_VARIABLE_110299 248) (- 1626800) (ite (= BOUND_VARIABLE_110299 247) (- 162680) 0))))
+(define-fun x1 () Int 247)
+(define-fun x2 () Int 247)
+(define-fun x3 () Int 248)
+(define-fun x4 () Int 3)
+(define-fun x5 () Int 4)
+(define-fun x6 () Int 7)
+(define-fun x7 () Int 542)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+6
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 10 seconds
+7
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+8
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_94266 Int)) Int (ite (= BOUND_VARIABLE_94266 14) 139296 (ite (= BOUND_VARIABLE_94266 2) (- 134000) (ite (= BOUND_VARIABLE_94266 1) (- 13400) (- 1340)))))
+(define-fun x1 () Int 14)
+(define-fun x2 () Int 2)
+(define-fun x3 () Int 2)
+(define-fun x4 () Int 80)
+(define-fun x5 () Int 2)
+(define-fun x6 () Int 35)
+(define-fun x7 () Int 89)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+9
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_108509 Int)) Int (ite (= BOUND_VARIABLE_108509 279679) (- 3627160411) (ite (= BOUND_VARIABLE_108509 2) (- 3377116000) (ite (= BOUND_VARIABLE_108509 1) (- 337711600) (- 33771160)))))
+(define-fun x1 () Int 279679)
+(define-fun x2 () Int 2)
+(define-fun x3 () Int 2)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 0)
+(define-fun x7 () Int 1)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+10
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_34267 Int)) Int (ite (= BOUND_VARIABLE_34267 57) (- 406151) (ite (= BOUND_VARIABLE_34267 1) 52670 5267)))
+(define-fun x1 () Int 1)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 57)
+(define-fun x4 () Int 1)
+(define-fun x5 () Int 3)
+(define-fun x6 () Int 29)
+(define-fun x7 () Int 0)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+11
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+12
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+13
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_74958 Int)) Int (ite (= BOUND_VARIABLE_74958 14) 0 (ite (= BOUND_VARIABLE_74958 13) 0 (ite (= BOUND_VARIABLE_74958 12) 0 (ite (= BOUND_VARIABLE_74958 (- 1)) 0 (ite (= BOUND_VARIABLE_74958 1) 270442 1))))))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 14)
+(define-fun x4 () Int 15)
+(define-fun x5 () Int 9)
+(define-fun x6 () Int 0)
+(define-fun x7 () Int 4)
+; cardinality of I_pow is 5
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+)
+It took 60 seconds
+14
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_74690 Int)) Int (ite (= BOUND_VARIABLE_74690 7) 7613 (ite (= BOUND_VARIABLE_74690 8) 76130 (ite (= BOUND_VARIABLE_74690 3) (- 43900) (ite (= BOUND_VARIABLE_74690 2) (- 4390) (ite (= BOUND_VARIABLE_74690 1) (- 439) 0))))))
+(define-fun x1 () Int 3)
+(define-fun x2 () Int 3)
+(define-fun x3 () Int 8)
+(define-fun x4 () Int 1)
+(define-fun x5 () Int 3)
+(define-fun x6 () Int 4)
+(define-fun x7 () Int 6)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+15
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_108812 Int)) Int (ite (= BOUND_VARIABLE_108812 17) 123221763 (ite (= BOUND_VARIABLE_108812 19) 12322176300 (ite (= BOUND_VARIABLE_108812 18) 1232217630 (ite (= BOUND_VARIABLE_108812 22) 73935910500 (ite (= BOUND_VARIABLE_108812 21) 7393591050 (ite (= BOUND_VARIABLE_108812 (- 1)) 0 1)))))))
+(define-fun x1 () Int 22)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 19)
+(define-fun x4 () Int 24)
+(define-fun x5 () Int 24)
+(define-fun x6 () Int 2)
+(define-fun x7 () Int 0)
+; cardinality of I_pow is 6
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+)
+It took 60 seconds
+16
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 1 seconds
+17
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_114497 Int)) Int (ite (= BOUND_VARIABLE_114497 8088) 86866 (ite (= BOUND_VARIABLE_114497 8089) 868660 (ite (= BOUND_VARIABLE_114497 8090) 8686600 (ite (= BOUND_VARIABLE_114497 8091) 86866000 (ite (= BOUND_VARIABLE_114497 (- 1)) 775 1))))))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 8091)
+(define-fun x3 () Int 8090)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 1)
+(define-fun x6 () Int 1)
+(define-fun x7 () Int 320946)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 60 seconds
+18
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+19
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_70322 Int)) Int (ite (= BOUND_VARIABLE_70322 761674) 754615215 (ite (= BOUND_VARIABLE_70322 761676) (- 620937990) (ite (= BOUND_VARIABLE_70322 761677) (- 6209379900) (ite (= BOUND_VARIABLE_70322 761675) 7546152150 0)))))
+(define-fun x1 () Int 761675)
+(define-fun x2 () Int 761677)
+(define-fun x3 () Int 761677)
+(define-fun x4 () Int 3)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 389035)
+(define-fun x7 () Int 567613)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 60 seconds
+20
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+21
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_25989 Int)) Int (ite (= BOUND_VARIABLE_25989 22) 6814 (ite (= BOUND_VARIABLE_25989 1) 164300 16430)))
+(define-fun x1 () Int 1)
+(define-fun x2 () Int 22)
+(define-fun x3 () Int 22)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 269)
+(define-fun x6 () Int 7)
+(define-fun x7 () Int 1)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+22
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+23
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_55431 Int)) Int (ite (= BOUND_VARIABLE_55431 727) (- 12172982) (ite (= BOUND_VARIABLE_55431 129) 1833160 (ite (= BOUND_VARIABLE_55431 128) 183316 0))))
+(define-fun x1 () Int 129)
+(define-fun x2 () Int 129)
+(define-fun x3 () Int 727)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 332)
+(define-fun x6 () Int 3)
+(define-fun x7 () Int 1)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+24
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_71121 Int)) Int (ite (= BOUND_VARIABLE_71121 167034) 1641801329 (ite (= BOUND_VARIABLE_71121 167035) 16418013290 (ite (= BOUND_VARIABLE_71121 571404) (- 8877928300) (ite (= BOUND_VARIABLE_71121 571403) (- 887792830) (ite (= BOUND_VARIABLE_71121 571402) (- 88779283) 0))))))
+(define-fun x1 () Int 167035)
+(define-fun x2 () Int 571404)
+(define-fun x3 () Int 571404)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 1)
+(define-fun x6 () Int 1)
+(define-fun x7 () Int 729409)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+25
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+26
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_85514 Int)) Int (ite (= BOUND_VARIABLE_85514 145) (- 23580) (ite (= BOUND_VARIABLE_85514 146) (- 235800) (ite (= BOUND_VARIABLE_85514 144) (- 2358) (ite (= BOUND_VARIABLE_85514 3) (- 1327200) (ite (= BOUND_VARIABLE_85514 (- 1)) 772564 (ite (= BOUND_VARIABLE_85514 2) (- 132720) (ite (= BOUND_VARIABLE_85514 1) (- 13272) 1))))))))
+(define-fun x1 () Int 3)
+(define-fun x2 () Int 146)
+(define-fun x3 () Int 0)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 104)
+(define-fun x6 () Int 354)
+(define-fun x7 () Int 1)
+; cardinality of I_pow is 7
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+; rep: @uc_I_pow_5
+; rep: @uc_I_pow_6
+)
+It took 60 seconds
+27
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_120381 Int)) Int (ite (= BOUND_VARIABLE_120381 175) 1007040 (ite (= BOUND_VARIABLE_120381 176) 10070400 (ite (= BOUND_VARIABLE_120381 174) 100704 (ite (= BOUND_VARIABLE_120381 (- 1)) 7537 1)))))
+(define-fun x1 () Int 176)
+(define-fun x2 () Int 175)
+(define-fun x3 () Int 0)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 752)
+(define-fun x7 () Int 0)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+28
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_362778 Int)) Int (ite (= BOUND_VARIABLE_362778 4) 83480 (ite (= BOUND_VARIABLE_362778 3) 8348 120357)))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 4)
+(define-fun x3 () Int 4)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 7)
+(define-fun x6 () Int 0)
+(define-fun x7 () Int 0)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+29
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+30
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_69058 Int)) Int (ite (= BOUND_VARIABLE_69058 44) (- 26997) (ite (= BOUND_VARIABLE_69058 46) (- 2699700) (ite (= BOUND_VARIABLE_69058 45) (- 269970) (ite (= BOUND_VARIABLE_69058 2) 878400 (ite (= BOUND_VARIABLE_69058 1) 87840 0))))))
+(define-fun x1 () Int 2)
+(define-fun x2 () Int 46)
+(define-fun x3 () Int 2)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 29)
+(define-fun x6 () Int 39)
+(define-fun x7 () Int 30)
+; cardinality of I_pow is 5
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+)
+It took 60 seconds
+31
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+32
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_82475 Int)) Int (ite (= BOUND_VARIABLE_82475 1761374) (- 13984303330) (ite (= BOUND_VARIABLE_82475 1761373) (- 1398430333) (ite (= BOUND_VARIABLE_82475 3) (- 24798999200) (ite (= BOUND_VARIABLE_82475 2) (- 2479899920) (ite (= BOUND_VARIABLE_82475 1) (- 247989992) 0))))))
+(define-fun x1 () Int 3)
+(define-fun x2 () Int 3)
+(define-fun x3 () Int 1761374)
+(define-fun x4 () Int 5318828)
+(define-fun x5 () Int 1885442)
+(define-fun x6 () Int 11)
+(define-fun x7 () Int 231)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+33
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_82396 Int)) Int (ite (= BOUND_VARIABLE_82396 903) (- 8323) (ite (= BOUND_VARIABLE_82396 904) (- 83230) (ite (= BOUND_VARIABLE_82396 905) (- 832300) 0))))
+(define-fun x1 () Int 905)
+(define-fun x2 () Int 905)
+(define-fun x3 () Int 905)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 1)
+(define-fun x6 () Int 1009)
+(define-fun x7 () Int 56)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+34
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+35
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+36
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_112435 Int)) Int (ite (= BOUND_VARIABLE_112435 44) 1528 (ite (= BOUND_VARIABLE_112435 46) 152800 (ite (= BOUND_VARIABLE_112435 45) 15280 (ite (= BOUND_VARIABLE_112435 4) (- 812030) (ite (= BOUND_VARIABLE_112435 3) (- 81203) 0))))))
+(define-fun x1 () Int 46)
+(define-fun x2 () Int 46)
+(define-fun x3 () Int 4)
+(define-fun x4 () Int 2)
+(define-fun x5 () Int 1)
+(define-fun x6 () Int 1)
+(define-fun x7 () Int 100)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+37
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+38
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_132080 Int)) Int (ite (= BOUND_VARIABLE_132080 3) 36288 (ite (= BOUND_VARIABLE_132080 (- 1)) 0 (ite (= BOUND_VARIABLE_132080 1) 10 1))))
+(define-fun x1 () Int 3)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 1)
+(define-fun x4 () Int 126)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 0)
+(define-fun x7 () Int 80)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+39
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+40
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+41
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_67562 Int)) Int (ite (= BOUND_VARIABLE_67562 144) 3426000 (ite (= BOUND_VARIABLE_67562 143) 342600 (ite (= BOUND_VARIABLE_67562 141) 3426 (ite (= BOUND_VARIABLE_67562 142) 34260 0)))))
+(define-fun x1 () Int 143)
+(define-fun x2 () Int 144)
+(define-fun x3 () Int 143)
+(define-fun x4 () Int 724)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 16)
+(define-fun x7 () Int 4)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+42
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_71722 Int)) Int (ite (= BOUND_VARIABLE_71722 5) 1400 (ite (= BOUND_VARIABLE_71722 6) 14000 (ite (= BOUND_VARIABLE_71722 7) 140000 (ite (= BOUND_VARIABLE_71722 1) (- 127740) (- 12774))))))
+(define-fun x1 () Int 7)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 1)
+(define-fun x4 () Int 1)
+(define-fun x5 () Int 17)
+(define-fun x6 () Int 2)
+(define-fun x7 () Int 0)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+43
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+44
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_67248 Int)) Int (ite (= BOUND_VARIABLE_67248 13) 519150 (ite (= BOUND_VARIABLE_67248 12) 51915 0)))
+(define-fun x1 () Int 12)
+(define-fun x2 () Int 13)
+(define-fun x3 () Int 12)
+(define-fun x4 () Int 57)
+(define-fun x5 () Int 157)
+(define-fun x6 () Int 0)
+(define-fun x7 () Int 136)
+; cardinality of I_pow is 2
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+)
+It took 60 seconds
+45
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_88257 Int)) Int (ite (= BOUND_VARIABLE_88257 4) (- 34987) (ite (= BOUND_VARIABLE_88257 2) (- 32480) (ite (= BOUND_VARIABLE_88257 1) (- 3248) 0))))
+(define-fun x1 () Int 2)
+(define-fun x2 () Int 2)
+(define-fun x3 () Int 4)
+(define-fun x4 () Int 1)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 2)
+(define-fun x7 () Int 1)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+46
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+47
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_82695 Int)) Int (ite (= BOUND_VARIABLE_82695 15) (- 6626) (ite (= BOUND_VARIABLE_82695 16) (- 66260) (ite (= BOUND_VARIABLE_82695 5) 83070 (ite (= BOUND_VARIABLE_82695 4) 8307 0)))))
+(define-fun x1 () Int 16)
+(define-fun x2 () Int 5)
+(define-fun x3 () Int 5)
+(define-fun x4 () Int 6)
+(define-fun x5 () Int 11)
+(define-fun x6 () Int 0)
+(define-fun x7 () Int 2)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 60 seconds
+48
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_70823 Int)) Int (ite (= BOUND_VARIABLE_70823 7) (- 237700) (ite (= BOUND_VARIABLE_70823 5) (- 2377) (ite (= BOUND_VARIABLE_70823 6) (- 23770) (ite (= BOUND_VARIABLE_70823 1) 134780 13478)))))
+(define-fun x1 () Int 7)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 7)
+(define-fun x4 () Int 3)
+(define-fun x5 () Int 20)
+(define-fun x6 () Int 3)
+(define-fun x7 () Int 12)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+49
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_130952 Int)) Int (ite (= BOUND_VARIABLE_130952 60598) (- 445428) (ite (= BOUND_VARIABLE_130952 60599) (- 4454280) (ite (= BOUND_VARIABLE_130952 60601) (- 445428000) (ite (= BOUND_VARIABLE_130952 60600) (- 44542800) 0)))))
+(define-fun x1 () Int 60600)
+(define-fun x2 () Int 60600)
+(define-fun x3 () Int 60601)
+(define-fun x4 () Int 1)
+(define-fun x5 () Int 236529)
+(define-fun x6 () Int 182345)
+(define-fun x7 () Int 19565)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+50
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+51
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+52
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_126430 Int)) Int (ite (= BOUND_VARIABLE_126430 11) 89830 (ite (= BOUND_VARIABLE_126430 (- 1)) (- 1225) (ite (= BOUND_VARIABLE_126430 2) (- 133944) (ite (= BOUND_VARIABLE_126430 10) 8983 1)))))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 11)
+(define-fun x3 () Int 2)
+(define-fun x4 () Int 1)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 38)
+(define-fun x7 () Int 62)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+53
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+54
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_83134 Int)) Int (ite (= BOUND_VARIABLE_83134 3) (- 17377) (ite (= BOUND_VARIABLE_83134 2) 18500 (ite (= BOUND_VARIABLE_83134 1) 1850 185))))
+(define-fun x1 () Int 2)
+(define-fun x2 () Int 3)
+(define-fun x3 () Int 2)
+(define-fun x4 () Int 1)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 2)
+(define-fun x7 () Int 2)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 60 seconds
+55
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_95554 Int)) Int (ite (= BOUND_VARIABLE_95554 47) 15764 (ite (= BOUND_VARIABLE_95554 48) 157640 (ite (= BOUND_VARIABLE_95554 6) (- 51880) (ite (= BOUND_VARIABLE_95554 7) (- 518800) (ite (= BOUND_VARIABLE_95554 5) (- 5188) 0))))))
+(define-fun x1 () Int 7)
+(define-fun x2 () Int 48)
+(define-fun x3 () Int 7)
+(define-fun x4 () Int 21)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 0)
+(define-fun x7 () Int 4)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+56
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+57
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_102490 Int)) Int (ite (= BOUND_VARIABLE_102490 9) (- 52100) (ite (= BOUND_VARIABLE_102490 7) (- 521) (ite (= BOUND_VARIABLE_102490 5) (- 4162) (ite (= BOUND_VARIABLE_102490 8) (- 5210) (ite (= BOUND_VARIABLE_102490 6) (- 41620) 0))))))
+(define-fun x1 () Int 6)
+(define-fun x2 () Int 9)
+(define-fun x3 () Int 9)
+(define-fun x4 () Int 27)
+(define-fun x5 () Int 19756)
+(define-fun x6 () Int 1)
+(define-fun x7 () Int 0)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+58
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_47788 Int)) Int (ite (= BOUND_VARIABLE_47788 2) 5400 (ite (= BOUND_VARIABLE_47788 1) 540 5911)))
+(define-fun x1 () Int 2)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 2)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 1)
+(define-fun x6 () Int 0)
+(define-fun x7 () Int 1)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+59
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_107129 Int)) Int (ite (= BOUND_VARIABLE_107129 19) 59974 (ite (= BOUND_VARIABLE_107129 22) (- 141012) (ite (= BOUND_VARIABLE_107129 1) (- 506280) (- 50628)))))
+(define-fun x1 () Int 1)
+(define-fun x2 () Int 19)
+(define-fun x3 () Int 22)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 0)
+(define-fun x7 () Int 0)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+60
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_125296 Int)) Int (ite (= BOUND_VARIABLE_125296 13) (- 27100) (ite (= BOUND_VARIABLE_125296 11) (- 271) (ite (= BOUND_VARIABLE_125296 12) (- 2710) (ite (= BOUND_VARIABLE_125296 (- 1)) 0 1)))))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 13)
+(define-fun x3 () Int 0)
+(define-fun x4 () Int 2)
+(define-fun x5 () Int 17)
+(define-fun x6 () Int 0)
+(define-fun x7 () Int 5)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+61
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_82475 Int)) Int (ite (= BOUND_VARIABLE_82475 368360) (- 2225619) (ite (= BOUND_VARIABLE_82475 368361) (- 22256190) (ite (= BOUND_VARIABLE_82475 368363) (- 2225619000) (ite (= BOUND_VARIABLE_82475 368362) (- 222561900) 0)))))
+(define-fun x1 () Int 368362)
+(define-fun x2 () Int 368363)
+(define-fun x3 () Int 368363)
+(define-fun x4 () Int 10)
+(define-fun x5 () Int 12)
+(define-fun x6 () Int 19)
+(define-fun x7 () Int 539766)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 60 seconds
+62
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 1 seconds
+63
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_95425 Int)) Int (ite (= BOUND_VARIABLE_95425 32) (- 309332) (ite (= BOUND_VARIABLE_95425 1) 308935 0)))
+(define-fun x1 () Int 32)
+(define-fun x2 () Int 1)
+(define-fun x3 () Int 1)
+(define-fun x4 () Int 66)
+(define-fun x5 () Int 66)
+(define-fun x6 () Int 1)
+(define-fun x7 () Int 119)
+; cardinality of I_pow is 2
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+)
+It took 60 seconds
+64
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+65
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_77740 Int)) Int (ite (= BOUND_VARIABLE_77740 72) (- 41768) (ite (= BOUND_VARIABLE_77740 73) (- 417680) (ite (= BOUND_VARIABLE_77740 1) (- 173980) (- 17398)))))
+(define-fun x1 () Int 1)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 73)
+(define-fun x4 () Int 142)
+(define-fun x5 () Int 1)
+(define-fun x6 () Int 6)
+(define-fun x7 () Int 64)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+66
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_220927 Int)) Int (ite (= BOUND_VARIABLE_220927 7) (- 3465100) (ite (= BOUND_VARIABLE_220927 6) (- 346510) 4807787)))
+(define-fun x1 () Int 7)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 6)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 5)
+(define-fun x7 () Int 2)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+67
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_63777 Int)) Int (ite (= BOUND_VARIABLE_63777 17) 376052 (ite (= BOUND_VARIABLE_63777 8) (- 253600) (ite (= BOUND_VARIABLE_63777 6) (- 2536) (ite (= BOUND_VARIABLE_63777 7) (- 25360) 0)))))
+(define-fun x1 () Int 8)
+(define-fun x2 () Int 17)
+(define-fun x3 () Int 8)
+(define-fun x4 () Int 19)
+(define-fun x5 () Int 1)
+(define-fun x6 () Int 20)
+(define-fun x7 () Int 0)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+68
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+69
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_78870 Int)) Int (ite (= BOUND_VARIABLE_78870 94) (- 2867) (ite (= BOUND_VARIABLE_78870 96) (- 286700) (ite (= BOUND_VARIABLE_78870 95) (- 28670) (ite (= BOUND_VARIABLE_78870 16) 61842 (ite (= BOUND_VARIABLE_78870 17) 618420 0))))))
+(define-fun x1 () Int 96)
+(define-fun x2 () Int 96)
+(define-fun x3 () Int 17)
+(define-fun x4 () Int 62)
+(define-fun x5 () Int 4)
+(define-fun x6 () Int 0)
+(define-fun x7 () Int 0)
+; cardinality of I_pow is 5
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+)
+It took 61 seconds
+70
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_108016 Int)) Int (ite (= BOUND_VARIABLE_108016 176) (- 17200) (ite (= BOUND_VARIABLE_108016 118) 624269 (ite (= BOUND_VARIABLE_108016 175) (- 1720) (ite (= BOUND_VARIABLE_108016 174) (- 172) (ite (= BOUND_VARIABLE_108016 119) 6242690 0))))))
+(define-fun x1 () Int 176)
+(define-fun x2 () Int 119)
+(define-fun x3 () Int 119)
+(define-fun x4 () Int 134)
+(define-fun x5 () Int 2)
+(define-fun x6 () Int 49)
+(define-fun x7 () Int 1)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+71
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+72
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_112084 Int)) Int (ite (= BOUND_VARIABLE_112084 7) (- 14280) (ite (= BOUND_VARIABLE_112084 6) (- 1428) (ite (= BOUND_VARIABLE_112084 2) 31590 (ite (= BOUND_VARIABLE_112084 1) 3159 0)))))
+(define-fun x1 () Int 7)
+(define-fun x2 () Int 2)
+(define-fun x3 () Int 2)
+(define-fun x4 () Int 318681)
+(define-fun x5 () Int 4)
+(define-fun x6 () Int 1)
+(define-fun x7 () Int 11)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 60 seconds
+73
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_97983 Int)) Int (ite (= BOUND_VARIABLE_97983 4) 10260 (ite (= BOUND_VARIABLE_97983 3) 1026 (ite (= BOUND_VARIABLE_97983 (- 1)) 0 (ite (= BOUND_VARIABLE_97983 2) 100 (ite (= BOUND_VARIABLE_97983 1) 10 1))))))
+(define-fun x1 () Int 2)
+(define-fun x2 () Int 4)
+(define-fun x3 () Int 2)
+(define-fun x4 () Int 40)
+(define-fun x5 () Int 1)
+(define-fun x6 () Int 38)
+(define-fun x7 () Int 182)
+; cardinality of I_pow is 5
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+)
+It took 61 seconds
+74
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+75
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_108437 Int)) Int (ite (= BOUND_VARIABLE_108437 30) 315220 (ite (= BOUND_VARIABLE_108437 31) 3152200 (ite (= BOUND_VARIABLE_108437 29) 31522 (ite (= BOUND_VARIABLE_108437 (- 1)) 24326 1)))))
+(define-fun x1 () Int 31)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 31)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 1)
+(define-fun x6 () Int 2)
+(define-fun x7 () Int 4071182425)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 60 seconds
+76
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+77
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+78
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_105315 Int)) Int (ite (= BOUND_VARIABLE_105315 141932) (- 2385516) (ite (= BOUND_VARIABLE_105315 141933) (- 23855160) (ite (= BOUND_VARIABLE_105315 141934) (- 238551600) (ite (= BOUND_VARIABLE_105315 141935) (- 2385516000) 0)))))
+(define-fun x1 () Int 141935)
+(define-fun x2 () Int 141934)
+(define-fun x3 () Int 141933)
+(define-fun x4 () Int 1)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 37)
+(define-fun x7 () Int 374309)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+79
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+80
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+81
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+82
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_70502 Int)) Int (ite (= BOUND_VARIABLE_70502 9) 3729 (ite (= BOUND_VARIABLE_70502 10) 37290 0)))
+(define-fun x1 () Int 10)
+(define-fun x2 () Int 9)
+(define-fun x3 () Int 10)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 2066)
+(define-fun x6 () Int 1164)
+(define-fun x7 () Int 315)
+; cardinality of I_pow is 2
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+)
+It took 61 seconds
+83
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_53360 Int)) Int (ite (= BOUND_VARIABLE_53360 4) (- 1553) (ite (= BOUND_VARIABLE_53360 5) (- 15530) (ite (= BOUND_VARIABLE_53360 2) 79763 0))))
+(define-fun x1 () Int 5)
+(define-fun x2 () Int 5)
+(define-fun x3 () Int 2)
+(define-fun x4 () Int 1)
+(define-fun x5 () Int 4)
+(define-fun x6 () Int 26)
+(define-fun x7 () Int 11)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+84
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_72329 Int)) Int (ite (= BOUND_VARIABLE_72329 34) 284600 (ite (= BOUND_VARIABLE_72329 33) 28460 (ite (= BOUND_VARIABLE_72329 32) 2846 (ite (= BOUND_VARIABLE_72329 27) 4740 (ite (= BOUND_VARIABLE_72329 28) 47400 1))))))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 34)
+(define-fun x3 () Int 28)
+(define-fun x4 () Int 35)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 40)
+(define-fun x7 () Int 2)
+; cardinality of I_pow is 5
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+)
+It took 60 seconds
+85
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_42165 Int)) Int (ite (= BOUND_VARIABLE_42165 8587) (- 111335864) (ite (= BOUND_VARIABLE_42165 88257) (- 76789710) (ite (= BOUND_VARIABLE_42165 88256) (- 7678971) 0))))
+(define-fun x1 () Int 88257)
+(define-fun x2 () Int 8587)
+(define-fun x3 () Int 88257)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 36)
+(define-fun x6 () Int 0)
+(define-fun x7 () Int 1146819)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+86
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_102380 Int)) Int (ite (= BOUND_VARIABLE_102380 161100) (- 5598456) (ite (= BOUND_VARIABLE_102380 161101) (- 55984560) (ite (= BOUND_VARIABLE_102380 161102) (- 559845600) (ite (= BOUND_VARIABLE_102380 (- 1)) (- 667) 1)))))
+(define-fun x1 () Int 0)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 161102)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 863674)
+(define-fun x6 () Int 109280)
+(define-fun x7 () Int 552788)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+87
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_86691 Int)) Int (ite (= BOUND_VARIABLE_86691 4163) (- 3836515) (ite (= BOUND_VARIABLE_86691 339) (- 12110) (ite (= BOUND_VARIABLE_86691 338) (- 1211) 0))))
+(define-fun x1 () Int 4163)
+(define-fun x2 () Int 339)
+(define-fun x3 () Int 339)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 2700)
+(define-fun x6 () Int 4443)
+(define-fun x7 () Int 6615)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+88
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+89
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+90
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 1 seconds
+91
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_55932 Int)) Int (ite (= BOUND_VARIABLE_55932 113) 4180 (ite (= BOUND_VARIABLE_55932 114) 41800 (ite (= BOUND_VARIABLE_55932 112) 418 (ite (= BOUND_VARIABLE_55932 115) 418000 424896)))))
+(define-fun x1 () Int 115)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 115)
+(define-fun x4 () Int 1)
+(define-fun x5 () Int 1)
+(define-fun x6 () Int 96)
+(define-fun x7 () Int 0)
+; cardinality of I_pow is 5
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+; rep: @uc_I_pow_4
+)
+It took 60 seconds
+92
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_83588 Int)) Int (ite (= BOUND_VARIABLE_83588 5) (- 32400) (ite (= BOUND_VARIABLE_83588 3) (- 324) (ite (= BOUND_VARIABLE_83588 4) (- 3240) (ite (= BOUND_VARIABLE_83588 2) 20570 (ite (= BOUND_VARIABLE_83588 1) 2057 0))))))
+(define-fun x1 () Int 5)
+(define-fun x2 () Int 2)
+(define-fun x3 () Int 2)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 10)
+(define-fun x7 () Int 5)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+93
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_56720 Int)) Int (ite (= BOUND_VARIABLE_56720 1422) (- 6954046) (ite (= BOUND_VARIABLE_56720 375) 7096413 (ite (= BOUND_VARIABLE_56720 (- 1)) (- 696688) 1))))
+(define-fun x1 () Int 1422)
+(define-fun x2 () Int 0)
+(define-fun x3 () Int 375)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 2)
+(define-fun x6 () Int 3)
+(define-fun x7 () Int 1)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+94
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_136652 Int)) Int (ite (= BOUND_VARIABLE_136652 7) 117045 (ite (= BOUND_VARIABLE_136652 4) 6020 (ite (= BOUND_VARIABLE_136652 5) 60200 (ite (= BOUND_VARIABLE_136652 3) 602 0)))))
+(define-fun x1 () Int 4)
+(define-fun x2 () Int 5)
+(define-fun x3 () Int 7)
+(define-fun x4 () Int 6)
+(define-fun x5 () Int 22)
+(define-fun x6 () Int 4)
+(define-fun x7 () Int 0)
+; cardinality of I_pow is 4
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+; rep: @uc_I_pow_3
+)
+It took 61 seconds
+95
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+96
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_80647 Int)) Int (ite (= BOUND_VARIABLE_80647 168) (- 6886) (ite (= BOUND_VARIABLE_80647 169) (- 68860) (ite (= BOUND_VARIABLE_80647 4) (- 6976070) (ite (= BOUND_VARIABLE_80647 3) (- 697607) 0)))))
+(define-fun x1 () Int 169)
+(define-fun x2 () Int 169)
+(define-fun x3 () Int 4)
+(define-fun x4 () Int 1)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 710)
+(define-fun x7 () Int 2)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 61 seconds
+97
+unknown
+(model
+(define-fun pow ((BOUND_VARIABLE_119646 Int)) Int (ite (= BOUND_VARIABLE_119646 32) 100129 (ite (= BOUND_VARIABLE_119646 4) (- 25989) (ite (= BOUND_VARIABLE_119646 5) (- 259890) 0))))
+(define-fun x1 () Int 32)
+(define-fun x2 () Int 32)
+(define-fun x3 () Int 5)
+(define-fun x4 () Int 0)
+(define-fun x5 () Int 0)
+(define-fun x6 () Int 3)
+(define-fun x7 () Int 0)
+; cardinality of I_pow is 3
+(declare-sort I_pow 0)
+; rep: @uc_I_pow_0
+; rep: @uc_I_pow_1
+; rep: @uc_I_pow_2
+)
+It took 60 seconds
+98
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+99
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
+100
+unsat
+(error "Cannot get model unless immediately preceded by SAT/NOT_ENTAILED or UNKNOWN response.")
+It took 0 seconds
