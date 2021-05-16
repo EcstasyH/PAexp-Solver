@@ -45,14 +45,14 @@ The six groups of string constraints are characterized by different classes of r
 \begin{itemize}
 \item For flat regular constraints, we generate the {\paexp} formulas corresponding to the string constraints, as the input to the {\paexp}-solver.
 %
-\item For non-flat regular constraints, we use flat languages $(a^1_1)^* (a^2_1...a^2_k)$ to under approximate 
-$\Sigma_{\sf num}^*$,  where $a^i_j \in \Sigma_{\sf num}$. 
+\item For non-flat regular constraints, we use flat languages $(a)^* (b_{1} \ldots b_{k})$ to under approximate 
+$\Sigma_{\sf num}^*$,  where $a, b_1,\ldots, b_k \in \Sigma_{\sf num}$. 
 %
 %the first part is a single digit and the second part is a string length $l$, which can be seen as a FL with 2 cycles and force the second cycle do not repeat. 
 %
-We iterate the following procedure to find a model or reach the time limit: first set $k=1$ and iterate by assigning $0, \ldots, 9$ to $a^1_1$. For each assignment, we encode the resulting string constraints into the {\paexp} formulas with only one exponential variables. If the resulting {\paexp} formula is unsatisfiable, then we increase $k$ by 1 and repeat this process. 
+We iterate the following procedure to find a model or reach the time limit: first set $k=1$ and iterate by assigning $0, \ldots, 9$ to $a$. For each assignment, we encode the resulting string constraints into the {\paexp} formulas with only one exponential variables. If the resulting {\paexp} formula is unsatisfiable, then we increase $k$ by 1 and repeat this process. 
 \end{itemize}
-We would like to remark that the flattening strategy for non-flat regular constraints is a strict generalization of that in \cite{Parosh:20:PLDI}: Patterns of the form $0^*(a^2_1...a^2_k)$ were considered therein and {\pa} formulas are sufficient to encode such patterns. On the other hand, we consider patterns of the form e.g. $12345 (a^1_1)^* (a^2_1...a^2_k) 6789$, which requires {\paexp} formulas to encode.
+We would like to remark that the flattening strategy for non-flat regular constraints is a strict generalization of that in \cite{Parosh:20:PLDI}: Patterns of the form $0^*(b_1...b_k)$ were considered therein and {\pa} formulas are sufficient to encode such patterns. On the other hand, we consider patterns of the form e.g. $12345 (a)^* (b_1 \ldots b_k) 6789$ (where $a \in \Sigma_{\sf num}$ can be nonzero), which requires {\paexp} formulas to encode.
 
 %\end{itemize}
 
