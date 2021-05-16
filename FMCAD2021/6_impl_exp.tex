@@ -43,7 +43,7 @@ $$\svarx \in \Aut \wedge \left( \parseInt(\svarx) \bmod m \right) \bmod m^\prime
 where $\Aut$ is an FA, $m, m^\prime \ge 2.$ 
 The six groups of string constraints are characterized by different classes of regular constraints, namely, $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, $w^+_1 w^+_2 6789$, $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, and $\Sigma_{\sf num}^* 6789$, where $w_1,w_2 \in \Sigma^+_{\sf num}$. The first three are flat languages, while the latter three are not. We generate the SMTLib2 files for these string constraints, as inputs to the SMT solvers. For the {\paexp}-solver, we do the following.   
 \begin{itemize}
-\item For flat regular constraints, we generate the {\paexp} formulas corresponding to the string constraints, as the input to the {\paexp}-solver.
+\item For flat regular constraints, we generate the {\paexp} formulas corresponding to the string constraints, as the inputs to the {\paexp}-solver.
 %
 \item For non-flat regular constraints, we use flat languages $(a)^* (b_{1} \ldots b_{k})$ to under approximate 
 $\Sigma_{\sf num}^*$,  where $a, b_1,\ldots, b_k \in \Sigma_{\sf num}$. 
@@ -93,12 +93,20 @@ The Second pattern is arbitrary string, that is $y\in \Sigma_{num}^*$. We use la
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Experiment Results}
+
+We compare the {\paexp}-solver against the state-of-the-art SMT solvers on the generated benchmarks. Specifically, 
+\begin{itemize}
+\item over the ARITHMETIC benchmark suite, we compare the {\paexp}-solver against CVC4 and Z3,
+\item over the STRINGHASH benchmark suite, we compare the {\paexp}-solver against CVC4, Z3, and Trau. 
+\end{itemize}
+All the experiments are run on a lap-top with the Intel i5 1.4GHz CPU and 8GB memory. We set the timeout threshold as 60 seconds per problem instance. 
+
+The experiment results are summarized in Table ~\ref{xxx}. 
+
 \zhilin{stopped here}
 
 
-\subsection{Experiment Results}
-
-All experiments are run on a Intel i5 1.4GHz with 8GB RAM with TIMEOUT set to be 60 seconds. 
 
 \wuhao{where to place tables?}
 
