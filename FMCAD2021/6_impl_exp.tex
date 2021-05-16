@@ -26,19 +26,39 @@ To evaluate the performance of the {\paexp}-solver, we created two benchmark sui
 %\item 
 
 \paragraph{The ARITHMETIC benchmark suite} 
-This suite comprises four groups of randomly generated {\paexp} formulas. Each group is characterized by four parameters ($EV$, $LV$, $EI$, $LI$), where $EV, LV$ represent the number of variables with exponential occurrences and with only linear occurrences respectively, and $EI, LI$ represent the number of inequalities with exponential terms and with only linear terms respectively. 
-We consider the following parameter classes, 
-The ARITHMETIC benchmark suite consists of 200 randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-10, 10]$ and the other coefficients/constants are randomly selected from the interval $[-10^5, 10^5]$. The two intervals are chosen with intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities. 
+This suite comprises three groups of randomly generated {\paexp} formulas. Each group is characterized by four parameters ($EV$, $LV$, $EI$, $LI$), where $EV, LV$ represent the number of variables with exponential occurrences and with only linear occurrences respectively, and $EI, LI$ represent the number of inequalities with exponential terms and with only linear terms respectively. 
+We consider three parameter classes, $(2, 3, 3, 4)$, $(3, 4, 4, 5)$, and $(4, 5, 5, 6)$. 
+Each group of the ARITHMETIC benchmark suite consists of 200\zhilin{check later} randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-10, 10]$ and the other coefficients/constants are randomly selected from the interval $[-10^5, 10^5]$. The two intervals are chosen with the intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities. Moreover, we randomly replace some occurrences of $\le$ by $=$ in order to include some equalities in the problem instances. We also create SMTLib2 files for each problem instance, in order to facilitate the comparison with the state-of-the-art of SMT solvers CVC4 and Z3. Because neither CVC4 nor Z3 supports the exponential functions natively,  in the SMTLib2 files, we encode $10^x$ as a recursive function $f(x)$ defined by: $f(0) = 10$ and $f(n+1) = 10*f(n)$.
 
 %
 %\item 
 
 \paragraph{The STRINGHASH benchmark suite} 
-This suite comprises 
+This suite comprises six groups of string constraints generated from the string hash functions ${\sf hash}(w)$ such that for each $w= a_1 \ldots a_n$, 
+${\sf hash}(w) = \sum \limits_{i = 1}^n a_i p^{n-i} \bmod m$, where $p, m \in \Int^+$ with $p, m \ge 2$. It is easy to see that ${\sf hash}(w)$ can be seen as a generalization of $\parseInt$ followed by a modulo operation. In particular, if $\Sigma = \Sigma_{\sf num}$ and $p = 10$, then ${\sf hash}(w) = \parseInt(w) \bmod m$. 
+Aiming at a comparison with the state-of-the-art string constraint solvers that support $\parseInt$, e.g. CVC4, Z3, and Trau, we assume $\Sigma =\Sigma_{\sf num}$ and $p = 10$, so that the string hash function can be encoded by $\parseInt$. 
+
+The string constraints in the STRINGHASH benchmark suite are of the form 
+$$\svarx \in \Aut \wedge \left( \parseInt(\svarx) \bmod m \right) \bmod m^\prime = 0   \notag \wedge \len(\svarx) < 100,$$ 
+where $\Aut$ is an FA, $m, m^\prime \ge 2.$ 
+The six groups of string constraints are characterized by different classes of regular constraints, namely, $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, $w^+_1 w^+_2 6789$, $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, and $\Sigma_{\sf num}^* 6789$, where $w_1,w_2 \in \Sigma^+_{\sf num}$. The first three are flat languages, while the latter three are not. We generate the SMTLib2 files for these string constraints, as inputs to the SMT solvers. For the {\paexp}-solver, we do the following.   
+\begin{itemize}
+\item For flat regular constraints, we generate the {\paexp} formulas corresponding to the string constraints, as the input to the {\paexp}-solver.
+%
+\item For non-flat regular constraints, we use flat languages $(a^1_1)^* (a^2_1...a^2_k)$ to under approximate 
+$\Sigma_{\sf num}^*$,  where $a^i_j \in \Sigma_{\sf num}$. 
+%
+%the first part is a single digit and the second part is a string length $l$, which can be seen as a FL with 2 cycles and force the second cycle do not repeat. 
+%
+We iterate the following procedure to find a model or reach the time limit: first set $k=1$ and iterate by assigning $0, \ldots, 9$ to $a^1_1$. For each assignment, we encode the resulting string constraints into the {\paexp} formulas with only one exponential variables. If the resulting {\paexp} formula is unsatisfiable, then we increase $k$ by 1 and repeat this process. 
+\end{itemize}
+We would like to remark that the flattening strategy for non-flat regular constraints is a strict generalization of that in \cite{Parosh:20:PLDI}: Patterns of the form $0^*(a^2_1...a^2_k)$ were considered therein and {\pa} formulas are sufficient to encode such patterns. On the other hand, we consider patterns of the form e.g. $12345 (a^1_1)^* (a^2_1...a^2_k) 6789$, which requires {\paexp} formulas to encode.
+
 %\end{itemize}
 
-\zhilin{stopped here}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 We are not aware of any SMT solver or constraints solver that directly support arithmetic formulas with exponential functions over Integer domain. In Z3 and CVC4, we need to define exponential functions as recursive functions. Whereas string constraints with $\parseInt$ constraints are supported in Z3, CVC4 and other string constraints solvers like Trau, HAMPI etc. Therefore, we designed two benchmarks to evaluate our $\paexp$-Solver. The first benchmark is pure arithmetic formulas with exponential functions generated randomly, we compared our solver with Z3 and CVC4. The second benchmark is string constraints about hash functions, we tranlated them to arithmetic constraints for our solver and compared the result with Z3, CVC4 and Trau, who treated this benchmark as just string constraints. The details of the two benchmarks will be illustrate following:
 
 \paragraph{arithmetic}
@@ -54,7 +74,7 @@ For both cases, we always require the number of constraints is more than the num
 
 Coefficients $a_i$, $b_j$ and $c$ are generated randomly for each constarint within the same range. We set $a_i\in [-10,10]$, and $b_j,c\in[-10^5,10^5]$. $a_i$ is set smaller so that exponential terms will not always dominate the left hand side of an inequality.
 
-\paragraph{string hash function}
+%\paragraph{string hash function}
 
 In the sequel, we consider string hash functions of the form  
 \begin{equation}
@@ -69,6 +89,12 @@ where $x$ either has a prefix ``12345'' or a suffix ``6789'' or both, for exampl
 The first pattern is a FL with 2 cycles, $y \in (a)^+(b)^+$. Here we assume each cycle repeat at least once so that it will not degrade into FL with 1 cycle. The constraints is encoded to a $\paexp$ formula where two exponential variables denote the number of cycle $a$ and $b$ respectively.\wuhao{Need example?}
 
 The Second pattern is arbitrary string, that is $y\in \Sigma_{num}^*$. We use languages of the form $(a^1_1)^* (a^2_1...a^2_l)$ to under-approximate arbitrary strings, the first part is a single digit and the second part is a string length $l$, which can be seen as a FL with 2 cycles and force the second cycle do not repeat. We first set $l=1$ and enumerate $a^1_1$ from $1$ to $9$, for each case we obtain an arithmetic formula with $1$ exponential variables. If no satisfying model is found, we increase $l$ by 1 and repeat this procedure until it finds a model or timeout. This strategy is similar to \cite{Abdulla2020} with the difference that they force $a^1_1=0$ so that no exponential terms will occur.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\zhilin{stopped here}
+
 
 \subsection{Experiment Results}
 
