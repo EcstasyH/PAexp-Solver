@@ -44,7 +44,7 @@ All experiments are run on a Intel i5 1.4GHz with 8GB RAM with TIMEOUT set to be
 
 \wuhao{where to place tables?}
 
-From Table \ref{table:arithmetic}, we can see that for all cases except bounded 4-5-5-6 case, $\paexp$-Solver answers more \textit{sat} and \textit{unsat} than Z3 and CVC4. Our solver significantly outperforms when equalities are included. The average time needed to assert \textit{sat} or \textit{unsat} increase when we add more exponential variables.\wuhao{more details needed}
+From Table \ref{table:arithmetic}, we can see that for all cases except bounded 4-5-5-6 case, $\paexp$-Solver answers more \textit{sat} and \textit{unsat} than Z3 and CVC4. Our solver significantly outperforms when equalities are included. The average time needed to assert \textit{sat} or \textit{unsat} increase when we add more exponential variables.\wuhao{results of unsat cases are not correct!}
 
 
 For string hash function benchmark, we did compared our solver with Z3, CVC4 and Trau, but the experiments show that Trau would incorrectly answer \textit{unsat} in most cases even though a model can be found. So in \ref{table:string}, we still show the results of the other 3 solvers. As we can see, for flat patterns $(a)^*(b)^*$, Z3 and CVC4 would run out of time on most cases while $\paexp$-solver can give an answer for almost all trails. For arbitrary strings $(\Sigma_{num})^*$, CVC4 and Z3 seem to be biased against trails with surfix or prefix. By applying the under-approximation technique, our tool is able to find a match on all trails. \wuhao{more details needed}

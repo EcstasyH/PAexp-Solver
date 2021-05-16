@@ -31,9 +31,12 @@ for testno in range(1,totaltests+1):
             coef = random.randint(-10,10)
         expr = expr + coef * pow(x[j])
         g.write("%d," %coef)
-    for j in range (1,expnum+linearnum+1):
+    for j in range (1,expnum+1):
         coef = random.randint(-10**5,10**5)
         expr = expr + coef * x[j]
+        g.write("%d," %coef)
+    for j in range (1,linearnum+1):
+        coef = 0
         g.write("%d," %coef)
     num = random.randint(-10**5,10**5)
     s.add(expr == num)
