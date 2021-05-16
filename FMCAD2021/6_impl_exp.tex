@@ -1,11 +1,32 @@
 %!TEX root = paper.tex
 
 \subsection{Implementation}
-We have implemented a prototype of our algorithm in Wolfram Mathematica, called  $\paexp$-Solver. Any postive Integer is allowed to be the base of exponential functions in our algorithm, but $\parseInt$ in Z3 and CVC4 only takes a numeric string as input. For this reason, we fix the exponential function to be $10^x$ in our experiments.
+We implemented the decision procedure in Wolfram Mathematica, and obtain a solver, called the {\paexp}-solver, which is able to solve the satisfiability of quantifier-free {\paexp} formulas.
 
+The {\paexp}-solver takes a quantifier-free {\paexp} formula as the input. Moreover, it allows specifying a constant upper bound $10^u$ for the values of variables. If a constant upper bound $10^u$ is specified, then the problem is to decide whether there is an assignment of values no more than $10^u$ to variables satisfying the given {\paexp} formula.
+
+The outputs of the {\paexp}-solver are either ``SAT'', ``UNSAT'', ``B-UNSAT'', or ``TIMEOUT'', corresponding to the facts that the given formula is satisfiable, unsatisfiable, unsatisfiable up to $10^u$, or the search goes beyond the predetermined time limit. If the output is ``SAT'', then a model (namely, an assignment of values to variables) is also returned.
+
+%a prototype of our algorithm in Wolfram Mathematica, called  $\paexp$-Solver. Any postive Integer is allowed to be the base of exponential functions in our algorithm, but $\parseInt$ in Z3 and CVC4 only takes a numeric string as input. For this reason, we fix the exponential function to be $10^x$ in our experiments.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 Our solver takes an existential quantified {$\paexp$} formula together with an upper bound for variables. As we have mentioned in \textbf{modified Elim-exp}, if there is no variables only occurs linearly in exponential constraints, the upper bound can be omitted, otherwise it needs to be specified manually. So for arithmetic constraints, we have generated benchmarks of two forms, named \textbf{BOUND} and \textbf{UNBOUND}, depends on whether the bound is needed.
 
 The outputs of our solver can be SAT, UNSAT, B-UNSAT (short for bounded unsat) or TIMEOUT. For satisfiable cases, if a satisfying assignment is found, our solver returns ``SAT" together with the model. For unsatisfiable cases, our solver will decide whether the manually specified bound for variables is needed. The output ``UNSAT" means the formula is unsatisfiable over $\Nat$, while ``B-UNSAT" means no solution within the range. ``TIMEOUT" will be returned if the computation excesses the time limit. 
+}
+
+\subsection{Benchmarks}
+
+To evaluate the performance of the {\paexp}-solver, we created two benchmark suites, ARITHMETIC, and STRINGHASH.
+\begin{itemize}
+\item The ARITHMETIC benchmark suite comprises the {\paexp} formulas.
+%
+\item The STRINGHASH benchmark suite comprises 
+\end{itemize}
+
+\zhilin{stopped here}
 
 We are not aware of any SMT solver or constraints solver that directly support arithmetic formulas with exponential functions over Integer domain. In Z3 and CVC4, we need to define exponential functions as recursive functions. Whereas string constraints with $\parseInt$ constraints are supported in Z3, CVC4 and other string constraints solvers like Trau, HAMPI etc. Therefore, we designed two benchmarks to evaluate our $\paexp$-Solver. The first benchmark is pure arithmetic formulas with exponential functions generated randomly, we compared our solver with Z3 and CVC4. The second benchmark is string constraints about hash functions, we tranlated them to arithmetic constraints for our solver and compared the result with Z3, CVC4 and Trau, who treated this benchmark as just string constraints. The details of the two benchmarks will be illustrate following:
 
