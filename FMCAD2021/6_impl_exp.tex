@@ -73,6 +73,34 @@ For string hash function benchmark, we did compared our solver with Z3, CVC4 and
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
+% Merge bound and unbound 
+\begin{table*}[]
+    \label{table:arithmetic}
+    \caption{Results of Z3, CVC4 and $\paexp$-Solver on arithmetic benchmark}
+    \begin{tabular}{cc|cc|cc|cc}
+    \multicolumn{1}{l}{} &  & \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} & \multicolumn{2}{c}{MySolver} \\
+    \multicolumn{1}{l}{} &  & number & avg & number & avg & number & avg \\ \hline
+    \multirow{4}{*}{2-3-3-4} & SAT & 62 & \textless{}0.1 & 40 & 0.8 & 72 & 0.1 \\
+     & UNSAT & 68 & \textless{}0.1 & 68 & \textless{}0.1 & 111 & 0.3 \\
+     & \multicolumn{1}{l|}{B-UNSAT} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & 17 & 9.3 \\
+     & TIMEOUT & 70 &  & 92 &  & 0 &  \\ \hline
+    \multirow{4}{*}{3-4-4-5} & SAT & 58 & 0.5 & 29 & 0.3 & 70 & 2.1 \\
+     & UNSAT & 42 & \textless{}0.1 & 44 & \textless{}0.1 & 97 & 1.8 \\
+     & \multicolumn{1}{l|}{B-UNSAT} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & 14 & 18.0 \\
+     & TIMEOUT & 100 &  & 127 &  & 19 &  \\ \hline
+    \multirow{4}{*}{\begin{tabular}[c]{@{}c@{}}3-4-4-5 \\ with equality\end{tabular}} & SAT & 3 & 23 & 1 & 39.0 & 14 & 7.5 \\
+     & UNSAT & 63 & \textless{}0.1 & 66 & 0.2 & 124 & 3.4 \\
+     & \multicolumn{1}{l|}{B-UNSAT} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & 25 & 13.4 \\
+     & TIMEOUT & 134 &  & 133 &  & 37 &  \\ \hline
+    \multirow{4}{*}{4-5-5-6} & SAT & 49 & 1.2 & 26 & 4.8 & 58 & 13.4 \\
+     & UNSAT & 42 & \textless{}0.1 & 43 & 0.1 & 82 & \textless{}0.1 \\
+     & \multicolumn{1}{l|}{B-UNSAT} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & 1 & 39 \\
+     & TIMEOUT & 109 &  & 131 &  & 59 & 
+    \end{tabular}
+\end{table*}
+
+
+\hide{
 \begin{table*}[]
     \label{table:arithmetic}
     \caption{Results of Z3, CVC4 and $\paexp$-Solver on arithmetic benchmark}
@@ -109,6 +137,7 @@ For string hash function benchmark, we did compared our solver with Z3, CVC4 and
      & TIMEOUT & 51 &  & 69 &  & 34 & 
     \end{tabular}
 \end{table*}
+}
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
