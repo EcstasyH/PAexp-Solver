@@ -16,15 +16,26 @@ Our solver takes an existential quantified {$\paexp$} formula together with an u
 
 The outputs of our solver can be SAT, UNSAT, B-UNSAT (short for bounded unsat) or TIMEOUT. For satisfiable cases, if a satisfying assignment is found, our solver returns ``SAT" together with the model. For unsatisfiable cases, our solver will decide whether the manually specified bound for variables is needed. The output ``UNSAT" means the formula is unsatisfiable over $\Nat$, while ``B-UNSAT" means no solution within the range. ``TIMEOUT" will be returned if the computation excesses the time limit. 
 }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Benchmarks}
 
 To evaluate the performance of the {\paexp}-solver, we created two benchmark suites, ARITHMETIC, and STRINGHASH.
-\begin{itemize}
-\item The ARITHMETIC benchmark suite comprises the {\paexp} formulas.
+%\begin{itemize}
+%\item 
+
+\paragraph{The ARITHMETIC benchmark suite} 
+This suite comprises four groups of randomly generated {\paexp} formulas. Each group is characterized by four parameters ($EV$, $LV$, $EI$, $LI$), where $EV, LV$ represent the number of variables with exponential occurrences and with only linear occurrences respectively, and $EI, LI$ represent the number of inequalities with exponential terms and with only linear terms respectively. 
+We consider the following parameter classes, 
+The ARITHMETIC benchmark suite consists of 200 randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-10, 10]$ and the other coefficients/constants are randomly selected from the interval $[-10^5, 10^5]$. The two intervals are chosen with intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities. 
+
 %
-\item The STRINGHASH benchmark suite comprises 
-\end{itemize}
+%\item 
+
+\paragraph{The STRINGHASH benchmark suite} 
+This suite comprises 
+%\end{itemize}
 
 \zhilin{stopped here}
 
