@@ -107,6 +107,51 @@ where all exponential occurrences of $\ivarx_{\sigma(i-1)}$ are eliminated.
 
 Similarly, we can eliminate the exponential occurrences of $\ivarx_{\sigma(i-2)}$ from $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-2)} + p /\ivarx_{\sigma(i-1)}]$ and  $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[p /\ivarx_{\sigma(i-1)}]$. Eventually, we obtain a {\pa} formula.
 
+\paragraph{Perform the elimination of exponential occurrences of variables in parallel on atomic formulas}
+
+Note that when Lemma~\ref{lem:exp-ineq} is applied to an atomic formula $\tau$ to eliminate exponential occurrences of $\ivarx$, it computes 4 parameters, namingly $(\alpha^\tau_1,\alpha^\tau_2,B^\tau,\delta^\tau)$, and obtains an equivalent {\pa} formula according to these parameters. Since the parameters are used as boundary conditions in enumeration, we can choose the strictest boundary conditions and apply to all atomic formulas.  
+
+More specifically, we first compute $(\alpha^\tau_1,\alpha^\tau_2,B^\tau,\delta^\tau)$ 
+for all atomic formulas that contain $10^\ivarx$. Let $\alpha^{\min}_1$ denote the minimal element in $\{\alpha^\tau_1\}_\tau$, let $\alpha^{\max}_2,B^{\max},\delta^{\max}$ denote the maximal element in $\{\alpha^\tau_2\}_\tau$, $\{B^\tau\}_\tau$ and $\{\delta^\tau\}_\tau$ respectively. Then, we apply $(\alpha^{\min}_1,\alpha^{\max}_2,B^{\max},\delta^{\max})$ to all atomic formulas $\tau$ in parallel and obtain $\varphi'$ equivalent to $\varphi$. 
+
+For instance, assume coefficients of $10^\ivarx$ in atomic formulas of $\varphi$ are all non-negative. Let $\varphi^+$ denote the formula obtained by replace atomic formulas where coefficients of $10^\ivarx$ are positive by $\ltrue$. The resulted formula $\varphi'$ is
+\[
+\small
+\begin{array}{l}
+\bigvee \limits_{p=0}^{B^{\max}-1} ( \ivarx_{\sigma(i-1)} = p \wedge \varphi(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}) [p/\ivarx_{\sigma(i-1)}])   \\
+\bigvee \left(
+    \begin{array}{l}
+        \ivarx_{\sigma(i-1)} \ge B^{\max} \wedge \ivarx_{\sigma(i-1)} \le \alpha^{\min}_1  - 1  \wedge \\
+        \ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)} +\delta^{\max} \wedge \varphi^+  
+    \end{array}
+    \right)\\
+%
+\bigvee \bigvee \limits_{p=0}^{\delta^{\max}-1} 
+\left(
+\begin{array}{l}
+\ivarx_{\sigma(i-1)} \ge B^{\max} \wedge \ivarx_{\sigma(i-1)} \le \alpha^{\min}_1  -1 \ \wedge \\
+ \ivarx_{\sigma(i-1)} = \ivarx_{\sigma(i-2)} +p\ \wedge\\
+ \varphi(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-2)} + p /\ivarx_{\sigma(i-1)}] 
+\end{array}
+\right)\\
+\bigvee \bigvee \limits_{p=0}^{\delta^{\max}-1} 
+\left(
+\begin{array}{l}
+\ivarx_{\sigma(i-1)} \ge B^{\max} \wedge \ivarx_{\sigma(i-1)} \ge \alpha^{\max}_2 + 2 \ \wedge \\
+ \ivarx_{\sigma(i-1)} = \ivarx_{\sigma(i-2)} +p\ \wedge\\
+ \varphi(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-2)} + p /\ivarx_{\sigma(i-1)}] 
+\end{array}
+\right)\\
+\bigvee \bigvee \limits_{p = \alpha^{\min}_1}^{\alpha^{\max}_2 + 1}
+\left(
+\begin{array}{l}
+\ivarx_{\sigma(i-1)} \ge B^{\max} \wedge \ivarx_{\sigma(i-1)} = p\ \wedge \\
+ \varphi(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[p /\ivarx_{\sigma(i-1)}] 
+\end{array}
+\right),
+\end{array}
+\]
+
 
 \paragraph{Avoid the formula-size blow-up by depth-first search}
 
