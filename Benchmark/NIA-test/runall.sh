@@ -2,7 +2,7 @@
 echo "begin test..."
 
 cd new-test
-    cd 1-2-2-3
+    cd 3-4-4-4
     ./runz3.sh > z3-result 
     cd ..
     #cd 2-3-3-4

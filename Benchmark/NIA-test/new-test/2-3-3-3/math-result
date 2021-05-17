@@ -1,0 +1,438 @@
+1
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 15088, 
+  Subscript[x, 4] -> 14018, Subscript[x, 5] -> 6795}}
+Time:0.152753
+2
+SAT
+{{Subscript[x, 1] -> 2, Subscript[x, 2] -> 0, Subscript[x, 3] -> 3, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 0}}
+Time:0.1931
+3
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 233863, 
+  Subscript[x, 4] -> 47111, Subscript[x, 5] -> 68055}}
+Time:0.096206
+4
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 590, Subscript[x, 5] -> 2102}}
+Time:0.083316
+5
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 6, Subscript[x, 3] -> 73, 
+  Subscript[x, 4] -> 402, Subscript[x, 5] -> 87}}
+Time:0.610821
+6
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 7, Subscript[x, 3] -> 1223, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 59260}}
+Time:1.50919
+7
+UNSAT
+0
+Time:0.009855
+8
+SAT
+{{Subscript[x, 1] -> 25, Subscript[x, 2] -> 0, Subscript[x, 3] -> 19, 
+  Subscript[x, 4] -> 78, Subscript[x, 5] -> 4}}
+Time:0.112313
+9
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 8, Subscript[x, 3] -> 11786, 
+  Subscript[x, 4] -> 13344, Subscript[x, 5] -> 93}}
+Time:2.32452
+10
+UNSAT
+0
+Time:0.007144
+11
+SAT
+{{Subscript[x, 1] -> 6, Subscript[x, 2] -> 0, Subscript[x, 3] -> 745, 
+  Subscript[x, 4] -> 427, Subscript[x, 5] -> 231}}
+Time:0.623687
+12
+BOUNDED UNSAT
+0
+Time:12.1354
+13
+SAT
+{{Subscript[x, 1] -> 25, Subscript[x, 2] -> 26, Subscript[x, 3] -> 1210, 
+  Subscript[x, 4] -> 384, Subscript[x, 5] -> 0}}
+Time:0.766175
+14
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 7, Subscript[x, 3] -> 566, 
+  Subscript[x, 4] -> 1373, Subscript[x, 5] -> 301}}
+Time:1.56504
+15
+UNSAT
+0
+Time:0.010278
+16
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 9, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 14}}
+Time:0.077354
+17
+UNSAT
+0
+Time:0.006764
+18
+BOUNDED UNSAT
+0
+Time:9.60226
+19
+SAT
+{{Subscript[x, 1] -> 5, Subscript[x, 2] -> 0, Subscript[x, 3] -> 256, 
+  Subscript[x, 4] -> 174, Subscript[x, 5] -> 49}}
+Time:0.501139
+20
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 1, Subscript[x, 5] -> 0}}
+Time:0.077121
+21
+SAT
+{{Subscript[x, 1] -> 5, Subscript[x, 2] -> 1, Subscript[x, 3] -> 261, 
+  Subscript[x, 4] -> 24, Subscript[x, 5] -> 65}}
+Time:1.49918
+22
+UNSAT
+0
+Time:0.00648
+23
+UNSAT
+0
+Time:0.007307
+24
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 7, Subscript[x, 3] -> 3417, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 1916}}
+Time:1.74966
+25
+UNSAT
+0
+Time:0.00853
+26
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 3, Subscript[x, 5] -> 3}}
+Time:0.094444
+27
+SAT
+{{Subscript[x, 1] -> 1, Subscript[x, 2] -> 1, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 0}}
+Time:0.16965
+28
+UNSAT
+0
+Time:0.007039
+29
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 6, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 216, Subscript[x, 5] -> 215}}
+Time:0.692457
+30
+SAT
+{{Subscript[x, 1] -> 3, Subscript[x, 2] -> 0, Subscript[x, 3] -> 2, 
+  Subscript[x, 4] -> 3, Subscript[x, 5] -> 0}}
+Time:0.221223
+31
+UNSAT
+0
+Time:0.006874
+32
+SAT
+{{Subscript[x, 1] -> 1, Subscript[x, 2] -> 1, Subscript[x, 3] -> 34685, 
+  Subscript[x, 4] -> 1789, Subscript[x, 5] -> 18661}}
+Time:0.152332
+33
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 505, Subscript[x, 5] -> 1703}}
+Time:0.087315
+34
+BOUNDED UNSAT
+0
+Time:11.3557
+35
+UNSAT
+0
+Time:0.008425
+36
+UNSAT
+0
+Time:0.007026
+37
+UNSAT
+0
+Time:0.008956
+38
+BOUNDED UNSAT
+0
+Time:11.9974
+39
+UNSAT
+0
+Time:0.006595
+40
+BOUNDED UNSAT
+0
+Time:4.63382
+41
+BOUNDED UNSAT
+0
+Time:4.27767
+42
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 1, Subscript[x, 5] -> 1}}
+Time:0.073501
+43
+UNSAT
+0
+Time:0.022601
+44
+BOUNDED UNSAT
+0
+Time:3.97269
+45
+SAT
+{{Subscript[x, 1] -> 1, Subscript[x, 2] -> 5, Subscript[x, 3] -> 60, 
+  Subscript[x, 4] -> 368, Subscript[x, 5] -> 63}}
+Time:0.493546
+46
+UNSAT
+0
+Time:0.009649
+47
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 4, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 6, Subscript[x, 5] -> 3}}
+Time:0.2479
+48
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 3, Subscript[x, 5] -> 0}}
+Time:0.076452
+49
+BOUNDED UNSAT
+0
+Time:9.81456
+50
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 1, 
+  Subscript[x, 4] -> 1, Subscript[x, 5] -> 2}}
+Time:0.07878
+51
+BOUNDED UNSAT
+0
+Time:10.8982
+52
+SAT
+{{Subscript[x, 1] -> 6, Subscript[x, 2] -> 0, Subscript[x, 3] -> 2, 
+  Subscript[x, 4] -> 170, Subscript[x, 5] -> 1044}}
+Time:0.465316
+53
+BOUNDED UNSAT
+0
+Time:9.57024
+54
+UNSAT
+0
+Time:0.010315
+55
+UNSAT
+0
+Time:0.00667
+56
+SAT
+{{Subscript[x, 1] -> 25, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 0}}
+Time:0.150681
+57
+BOUNDED UNSAT
+0
+Time:9.82979
+58
+SAT
+{{Subscript[x, 1] -> 6, Subscript[x, 2] -> 4, Subscript[x, 3] -> 1747, 
+  Subscript[x, 4] -> 1961, Subscript[x, 5] -> 5}}
+Time:1.32502
+59
+UNSAT
+0
+Time:0.009011
+60
+UNSAT
+0
+Time:0.006509
+61
+BOUNDED UNSAT
+0
+Time:4.25226
+62
+UNSAT
+0
+Time:0.007111
+63
+UNSAT
+0
+Time:0.006506
+64
+UNSAT
+0
+Time:0.008455
+65
+UNSAT
+0
+Time:0.00791
+66
+UNSAT
+0
+Time:0.008014
+67
+UNSAT
+0
+Time:0.007221
+68
+SAT
+{{Subscript[x, 1] -> 5, Subscript[x, 2] -> 5, Subscript[x, 3] -> 34, 
+  Subscript[x, 4] -> 129, Subscript[x, 5] -> 51}}
+Time:0.574848
+69
+UNSAT
+0
+Time:0.007056
+70
+BOUNDED UNSAT
+0
+Time:11.2939
+71
+SAT
+{{Subscript[x, 1] -> 2, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 1}}
+Time:0.148801
+72
+BOUNDED UNSAT
+0
+Time:11.249
+73
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 1, Subscript[x, 5] -> 6}}
+Time:0.07733
+74
+BOUNDED UNSAT
+0
+Time:12.5044
+75
+BOUNDED UNSAT
+0
+Time:5.02803
+76
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 4, Subscript[x, 3] -> 2, 
+  Subscript[x, 4] -> 5, Subscript[x, 5] -> 2}}
+Time:0.348284
+77
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 0, Subscript[x, 5] -> 0}}
+Time:0.076092
+78
+UNSAT
+0
+Time:0.021207
+79
+UNSAT
+0
+Time:0.007028
+80
+UNSAT
+0
+Time:0.006255
+81
+UNSAT
+0
+Time:0.008392
+82
+UNSAT
+0
+Time:0.008798
+83
+UNSAT
+0
+Time:0.007661
+84
+BOUNDED UNSAT
+0
+Time:10.2676
+85
+UNSAT
+0
+Time:0.028032
+86
+BOUNDED UNSAT
+0
+Time:5.50864
+87
+UNSAT
+0
+Time:0.009059
+88
+BOUNDED UNSAT
+0
+Time:4.85458
+89
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 4, Subscript[x, 3] -> 0, 
+  Subscript[x, 4] -> 6, Subscript[x, 5] -> 0}}
+Time:0.398193
+90
+UNSAT
+0
+Time:0.006614
+91
+BOUNDED UNSAT
+0
+Time:15.2691
+92
+UNSAT
+0
+Time:0.006684
+93
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 2, Subscript[x, 3] -> 2, 
+  Subscript[x, 4] -> 1, Subscript[x, 5] -> 0}}
+Time:0.158188
+94
+UNSAT
+0
+Time:0.007509
+95
+BOUNDED UNSAT
+0
+Time:12.6384
+96
+UNSAT
+0
+Time:0.007301
+97
+SAT
+{{Subscript[x, 1] -> 0, Subscript[x, 2] -> 0, Subscript[x, 3] -> 8333, 
+  Subscript[x, 4] -> 43360, Subscript[x, 5] -> 74743}}
+Time:0.081468
+98
+UNSAT
+0
+Time:0.006981
+99
+UNSAT
+0
+Time:0.008645
+100
+BOUNDED UNSAT
+0
+Time:9.32768
