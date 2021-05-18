@@ -2,7 +2,7 @@
 echo "begin test using CVC4 ..."
 
 count=1
-while(( $count<= 100 ))
+while(( $count<= 200 ))
 do
     START=$(date +%s)
     # do something

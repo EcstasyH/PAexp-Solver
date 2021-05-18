@@ -28,7 +28,7 @@ To evaluate the performance of the {\paexp}-solver, we created two benchmark sui
 \paragraph{The ARITHMETIC benchmark suite} 
 This suite comprises three groups of randomly generated {\paexp} formulas. Each group is characterized by four parameters ($EV$, $LV$, $EI$, $LI$), where $EV, LV$ represent the number of variables with exponential occurrences and with only linear occurrences respectively, and $EI, LI$ represent the number of inequalities with exponential terms and with only linear terms respectively. 
 We consider three parameter classes, $(2, 3, 3, 4)$, $(3, 4, 4, 5)$, and $(4, 5, 5, 6)$. 
-Each group of the ARITHMETIC benchmark suite consists of 200\zhilin{check later} randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-10, 10]$ and the other coefficients/constants are randomly selected from the interval $[-10^5, 10^5]$. The two intervals are chosen with the intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities. Moreover, we randomly replace some occurrences of $\le$ by $=$ in order to include some equalities in the problem instances. We also create SMTLib2 files for each problem instance, in order to facilitate the comparison with the state-of-the-art of SMT solvers CVC4 and Z3. Because neither CVC4 nor Z3 supports the exponential functions natively,  in the SMTLib2 files, we encode $10^x$ as a recursive function $f(x)$ defined by: $f(0) = 10$ and $f(n+1) = 10*f(n)$.
+Each group of the ARITHMETIC benchmark suite consists of 200\zhilin{check later} randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-100, 100]$ and the other coefficients/constants are randomly selected from the interval $[-10^5, 10^5]$. The two intervals are chosen with the intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities.\wuhao{Moreover, in order to include some equalities in the problem instances, we randomly select some instances and replace the occurrence of $\le$ by $=$ in the first inequality with exponential terms.} We also create SMTLib2 files for each problem instance, in order to facilitate the comparison with the state-of-the-art of SMT solvers CVC4 and Z3. Because neither CVC4 nor Z3 supports the exponential functions natively, in the SMTLib2 files, we encode $10^x$ as a recursive function $f(x)$ defined by: $f(0) = 10$ and $f(n+1) = 10*f(n)$.
 
 %
 %\item 
@@ -126,19 +126,19 @@ For string hash function benchmark, we did compared our solver with Z3, CVC4 and
     \begin{tabular}{cc|cc|cc|cc}
         \multicolumn{1}{l}{} &  & \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} & \multicolumn{2}{c}{MySolver} \\
         \multicolumn{1}{l}{} &  & number & avg & number & avg & number & avg \\ \hline
-        \multirow{4}{*}{2-3-3-4} & SAT & 27 & 0.6 &  &  & 31 & 0.4 \\
-         & UNSAT & 37 & \textless{}0.1 &  &  & 49 & \textless{}0.1 \\
-         & B-UNSAT & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & 20 & 10.4 \\
-         & TIMEOUT & 36 &  &  &  & 0 &  \\ \hline
-        \multirow{4}{*}{3-4-4-5} & SAT & 20 & 0.1 &  &  & 29 & 3.5 \\
-         & UNSAT & 26 & \textless{}0.1 &  &  & 42 & \textless{}0.1 \\
-         & B-UNSAT & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & 1 & 53.8 \\
-         & TIMEOUT & 54 &  &  &  & 28 &  \\ \hline
-        \multirow{4}{*}{4-5-5-6} & SAT & 22 & 1.8 &  &  & 27 & 20.0 \\
-         & UNSAT & 21 & 0.4 &  &  & 36 & 0.1 \\
+        \multirow{4}{*}{2-3-3-4} & SAT & 56 & 0.4 & 42 & 2.3 & 64 & 0.4 \\
+         & UNSAT & 69 & \textless{}0.1 & 72 & \textless{}0.1 & 89 & \textless{}0.1 \\
+         & B-UNSAT & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & 47 & 9.5 \\
+         & TIMEOUT & 75 &  & 86 &  & 0 &  \\ \hline
+        \multirow{4}{*}{3-4-4-5} & SAT & 33 & 1.4 & 25 & 2.9 & 52 & 3.3 \\
+         & UNSAT & 59 & \textless{}0.1 & 60 & \textless{}0.1 & 88 & \textless{}0.1 \\
+         & B-UNSAT & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & 1 & 54.0 \\
+         & TIMEOUT & 108 &  & 115 &  & 59 &  \\ \hline
+        \multirow{4}{*}{4-5-5-6} & SAT & 35 & 1.8 & 19 & 6.6 & 47 & 22.4 \\
+         & UNSAT & 36 & 0.3 & 39 & 0.4 & 72 & 0.1 \\
          & B-UNSAT & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & 0 &  \\
-         & TIMEOUT & 57 &  &  &  & 37 & 
-    \end{tabular}
+         & TIMEOUT & 129 &  & 142 &  & 81 & 
+        \end{tabular}
 \end{table*}
 
 % Please add the following required packages to your document preamble:

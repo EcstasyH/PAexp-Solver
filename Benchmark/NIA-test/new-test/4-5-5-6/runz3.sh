@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "begin test using Z3 ..."
 
-count=1
-while(( $count<= 100 ))
+count=101
+while(( $count<= 200 ))
 do
     START=$(date +%s)
     # do something
