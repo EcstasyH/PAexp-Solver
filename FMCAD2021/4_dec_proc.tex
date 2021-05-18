@@ -9,7 +9,10 @@ The goal of this section is to illustrate how Point's quantifier elimination alg
 %
 As Point's algorithm is quite expensive and a faithful implementation would not scale\footnote{We did implemented Point's algorithm and discovered that the implementation could only solve formulas of very small size.}, in the next section, we will propose various optimizations to Point's algorithm, aiming at an efficient implementation. 
 
-In the sequel, we are going to show that every {\paexp} formula $\exists \ivarx.\ \varphi \in \paexp$, where $\varphi$ is quantifier-free, can be transformed into an equivalent quantifier-free formula $\varphi' \in \paexp$.
+As $\forall \ivarx. \ \varphi$ is equivalent to $\neg \exists \ivarx. \ \neg \varphi$,  thus in the sequel, we only need to  show that every {\paexp} formula $\exists \ivarx.\ \varphi \in \paexp$, where $\varphi$ is quantifier-free, can be transformed into an equivalent quantifier-free formula $\varphi' \in \paexp$.
+
+% when the quantifier elimination problem of $\paexp$  can be easily reduced to the above special case. 
+
 % such that $\free(\varphi') = \free(\varphi) \setminus \{\ivarx\}$. 
 %From this, we can easily derive that every {\paexp} formula $\varphi$ can be transformed effectively into an equivalent quantifier-free Presburger arithmetic formula $\varphi'$.
 
