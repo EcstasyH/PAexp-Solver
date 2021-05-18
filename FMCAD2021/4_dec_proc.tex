@@ -29,6 +29,8 @@ Next, we illustrate how to eliminate the quantifier $\exists \ivarx_3$, assuming
 The elimination of $\exists \ivarx_3$ consists of two steps, namely, eliminating the exponential occurrences of $\ivarx_3$ first, and the linear occurrences next.
 
 The main idea of the elimination of the exponential occurrences of $\ivarx_3$ is to observe that if $\ivarx_3 \ge \ell_{10}(\ivary+1001)+2$ and $\ivarx_3 \ge \ivarx_2 + 3$, then $10^{\ivarx_3} - 10^{\ivarx_2}$ is dominated by $10^{\ivarx_3}$, that is, $10^{\ivarx_3} - 10^{\ivarx_2} \ge 10^{\ivarx_3} - 10^{\ivarx_3 - 3} = (1-10^{-3}) 10^{\ivarx_3} \ge 10^{\ell_{10}(\ivary+1001)+1} = 10\lambda_{10}(\ivary+1001) > \ivary+1001$. Therefore, a necessary condition for $10^{\ivarx_3} - 10^{\ivarx_2} \le \ivary + 1001$ is that either $\ivarx_3 \le \ell_{10}(\ivary+1001)+1$ or $\ivarx_3 \le \ivarx_2 + 2$ holds.  
+
+\yfc{why $+2$ and $+3$ in $\ivarx_3 \ge \ell_{10}(\ivary+1001)+2$ and $\ivarx_3 \ge \ivarx_2 + 3$?}
 \begin{itemize}
 \item If $\ivarx_3 \le \ell_{10}(\ivary+1001)+1$, then we distinguish between whether $\ivarx_3 \le \ell_{10}(\ivary+1001)$ or  $\ivarx_3 = \ell_{10}(\ivary+1001)+1$. 
 \begin{itemize}
@@ -157,11 +159,11 @@ $$\exists x\exists x_1. x_1 > 3 \wedge 2^{x_1}\le x \wedge x\le 2^{x_1+1}-1\,.$$
 
 The normalization step comprises the following sub-steps.
 \begin{enumerate}
-\item At first, we transform $\varphi'(\ivarx,\vec{\ivary})$ into the NNF (negation normal form). Moreover, we remove the occurrences of $\neg$ by replacing $\neg c | \iterm$ with $\bigvee \limits_{j \in [c-1]} c | (\iterm+j)$, $\neg \iterm_1 = \iterm_2$ with $\iterm_1 < \iterm_2 \vee \iterm_2 < \iterm_1$, $\neg \iterm_1 < \iterm_2$ with $\iterm_2 \le \iterm_1$, $\neg \iterm_1 \le \iterm_2$ with $\iterm_2 < \iterm_1$, and so on.
+\item At first, we transform $\varphi'(\ivarx,\vec{\ivary})$ into the NNF (negation normal form). Moreover, we remove the occurrences of $\neg$ by (a) replacing $\neg c | \iterm$ with $\bigvee \limits_{j \in [c-1]} c | (\iterm+j)$, (b)  $\neg (\iterm_1 = \iterm_2)$ with $\iterm_1 < \iterm_2 \vee \iterm_2 < \iterm_1$, (c) $\neg (\iterm_1 < \iterm_2)$ with $\iterm_2 \le \iterm_1$, (d) $\neg (\iterm_1 \le \iterm_2)$ with $\iterm_2 < \iterm_1$, and so on.
 %
-\item Repeat the following procedure, until there are no $\lambda_{10}(\iterm)$ where $\ivarx$ occurs: Replace each occurrence of $\lambda_{10}$ in $\varphi'$, say $\lambda_{10}(\iterm)$, such that $\ivarx$ occurs in $\iterm$, by $10^{\ell_{10}(\iterm)}$. Let the resulting formula be $\varphi''$.
+\item Repeat the following procedure, until there are no $\lambda_{10}(\iterm)$ with $\ivarx$ occurs in $\iterm$: Replace each occurrence of $\lambda_{10}$ in $\varphi'$, say $\lambda_{10}(\iterm)$, such that $\ivarx$ occurs in $\iterm$, by $10^{\ell_{10}(\iterm)}$. Let the resulting formula be $\varphi''$.
 %
-\item Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ where $\ivarx$ occurs, we have $\iterm = \ivarx$: For each occurrence of the $\ell_{10}$ in $\varphi''$, say $\ell_{10}(\iterm)$, such that it contains $\ivarx$ but is not $\ivarx$, introduce a fresh variable, say $\ivarz$, 
+\item Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ with $\ivarx$ occurs in $\iterm$, we have $\iterm = \ivarx$: For each occurrence of the $\ell_{10}$ in $\varphi''$, say $\ell_{10}(\iterm)$, such that $\iterm$ contains $\ivarx$ but is not $\ivarx$, introduce a fresh variable, say $\ivarz$, 
 %and let $\varphi''':= \exists \ivarz.\ \varphi''[\ivarz/\ell_{10}(\iterm)] \wedge 10^\ivarz \le \iterm < 10^{\ivarz + 1}$. 
 and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add the constraint $10^\ivarz \le \iterm < 10^{\ivarz + 1}$ as a conjunct. Let $\varphi'''$ denote the resulting formula.  
 %
@@ -171,7 +173,7 @@ and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add th
 $\exists \vec{\ivarz}\exists \ivarx.\ \varphi^\dag$.
 \end{enumerate}
 
-
+\yfc{Maybe describe the shape of normalized formula here. After normalization, all formulae are in the form ...}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \hide{
@@ -229,7 +231,7 @@ Finally, $\exists \vec{\ivarx}.\ \varphi'$ is transformed into the quantifier-fr
 In the sequel, assuming a linear order $\sigma \in \mathcal{S}_n$, for $i \in [n]$, let $\exists \ivarx_{\sigma(i)} \ldots \exists \ivarx_{\sigma(1)}.\ \varphi''_{\sigma,i}$ be the formula obtained from $\varphi'_\sigma$ by eliminating the quantifiers $\exists \ivarx_{\sigma(n)}$, $\ldots$, $\exists \ivarx_{\sigma(i+1)}$, we show how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\exists \ivarx_{\sigma(i)} \ldots \exists \ivarx_{\sigma(1)}.\ \varphi''_{\sigma,i}$. We would like to remark that the linear occurrences of $\ivarx_{\sigma(i)}$ should be eliminated further so that the quantifier $\exists \ivarx_{\sigma(i)}$ can be eliminated. The elimination of linear occurrences of $\ivarx_{\sigma(i)}$ is essentially the quantifier elimination algorithm of {\pa}.
 %$\varphi'_\sigma =  \exists \vec{\ivarx}.\ \varphi' \wedge \bigwedge \limits_{i \in [n-1]} \ivarx_{\sigma(i)} \le \ivarx_{\sigma(i+1)}$.
 
-
+\yfc{Explain why only the largest variable can  be eliminated. Which part of the procedure we need this condition? Or if we do not have the order, what can be wrong?}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \hide{
