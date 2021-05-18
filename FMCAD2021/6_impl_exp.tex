@@ -28,7 +28,7 @@ To evaluate the performance of the {\paexp}-solver, we created two benchmark sui
 \paragraph{The ARITHMETIC benchmark suite} 
 This suite comprises three groups of randomly generated {\paexp} formulas. Each group is characterized by four parameters ($EV$, $LV$, $EI$, $LI$), where $EV, LV$ represent the number of variables with exponential occurrences and with only linear occurrences respectively, and $EI, LI$ represent the number of inequalities with exponential terms and with only linear terms respectively. 
 We consider three parameter classes, $(2, 3, 3, 4)$, $(3, 4, 4, 5)$, and $(4, 5, 5, 6)$. 
-Each group of the ARITHMETIC benchmark suite consists of 200\zhilin{check later} randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-100, 100]$ and the other coefficients/constants are randomly selected from the interval $[-10^5, 10^5]$. The two intervals are chosen with the intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities.\wuhao{Moreover, in order to include some equalities in the problem instances, we randomly select some instances and replace the occurrence of $\le$ by $=$ in the first inequality with exponential terms.} We also create SMTLib2 files for each problem instance, in order to facilitate the comparison with the state-of-the-art of SMT solvers CVC4 and Z3. Because neither CVC4 nor Z3 supports the exponential functions natively, in the SMTLib2 files, we encode $10^x$ as a recursive function $f(x)$ defined by: $f(0) = 10$ and $f(n+1) = 10*f(n)$.
+Each group of the ARITHMETIC benchmark suite consists of 200 randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-10^2, 10^2]$ and the other coefficients/constants are randomly selected from the interval $[-10^5, 10^5]$. The two intervals are chosen with the intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities.\wuhao{Moreover, in order to include some equalities in the problem instances, we randomly select some instances and replace the occurrence of $\le$ by $=$ in the first inequality with exponential terms. The upper bound for variables is set to be $10^{20}$ for $\paexp$-solver because the largest number represented by 64 bits is less than $10^{20}$} We also create SMTLib2 files for each problem instance, in order to facilitate the comparison with the state-of-the-art of SMT solvers CVC4 and Z3. Because neither CVC4 nor Z3 supports the exponential functions natively, in the SMTLib2 files, we encode $10^x$ as a recursive function $f(x)$ defined by: $f(0) = 10$ and $f(n+1) = 10*f(n)$.
 
 %
 %\item 
@@ -41,7 +41,7 @@ Aiming at a comparison with the state-of-the-art string constraint solvers that 
 The string constraints in the STRINGHASH benchmark suite are of the form 
 $$\svarx \in \Aut \wedge \left( \parseInt(\svarx) \bmod m \right) \bmod m^\prime = 0   \notag \wedge \len(\svarx) < 100,$$ 
 where $\Aut$ is an FA, $m, m^\prime \ge 2.$ 
-The six groups of string constraints are characterized by different classes of regular constraints, namely, $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, $w^+_1 w^+_2 6789$, $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, and $\Sigma_{\sf num}^* 6789$, where $w_1,w_2 \in \Sigma^+_{\sf num}$. The first three are flat languages, while the latter three are not. We generate the SMTLib2 files for these string constraints, as inputs to the SMT solvers. For the {\paexp}-solver, we do the following.   
+The six groups of string constraints are characterized by different classes of regular constraints, namely, $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, $w^+_1 w^+_2 6789$, $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, and $\Sigma_{\sf num}^* 6789$, where $w_1,w_2 \in \Sigma^+_{\sf num}$. The first three are flat languages, while the latter three are not. Each group has 100 randomly generated problem instances, where $m$ is a prime number in the interval $[10^2, 10^5]$ and $m' \le m-1$. \wuhao{selection of $m,m'$}We generate the SMTLib2 files for these string constraints, as inputs to the SMT solvers. For the {\paexp}-solver, we do the following:   
 \begin{itemize}
 \item For flat regular constraints, we generate the {\paexp} formulas corresponding to the string constraints, as the inputs to the {\paexp}-solver.
 %
@@ -102,18 +102,15 @@ We compare the {\paexp}-solver against the state-of-the-art SMT solvers on the g
 \end{itemize}
 All the experiments are run on a lap-top with the Intel i5 1.4GHz CPU and 8GB memory. We set the timeout threshold as 60 seconds per problem instance. 
 
-The experiment results are summarized in Table ~\ref{xxx}. 
+The experiment results are summarized in Table \ref{table:arithmetic} and Table \ref{table:string}.  
 
 \zhilin{stopped here}
 
+On ARITHMETIC benchmark (Table \ref{table:arithmetic}), $\paexp$-Solver answers roughly 50\% more SAT and (B-)UNSAT than Z3 and CVC4, which means it can tackle some difficult instances. However, there are some instances are answered SAT or UNSAT by other solvers but timeout in $\paexp$-solver, e.g. 12 instances in 3-4-4-5 group. The reason is that $\paexp$-solver must seach for all possible assignments before answering B-UNSAT, and the number of variables with exponential occurrences has a dramatic impact on the time complexity due to the non-elementary complexity upper bound.
 
 
-\wuhao{where to place tables?}
+On STRINGHASH benchmark (Table \ref{table:string}), $\paexp$-solver significantly outperforms than all other three solvers on both two types of constraints. For flat regular constraints, Z3 and CVC fail on most of the instances while Trau may answer UNSAT incorrectly to some satisfiable instances. $\paexp$-solver work out all but 3 instances in 60 seconds and an extra experiment shows it will the remaining 3 instances can be solved in 70 seconds. For non-flat regular constraints, the results show a different bias for differenct pattern (with or without preffix and suffix) both in Z3 and CVC4, whereas $\paexp$-solver work out all problem instances in similar time. 
 
-From Table \ref{table:arithmetic}, we can see that for all cases except bounded 4-5-5-6 case, $\paexp$-Solver answers more \textit{sat} and \textit{unsat} than Z3 and CVC4. Our solver significantly outperforms when equalities are included. The average time needed to assert \textit{sat} or \textit{unsat} increase when we add more exponential variables.\wuhao{results of unsat cases are not correct!}
-
-
-For string hash function benchmark, we did compared our solver with Z3, CVC4 and Trau, but the experiments show that Trau would incorrectly answer \textit{unsat} in most cases even though a model can be found. So in \ref{table:string}, we still show the results of the other 3 solvers. As we can see, for flat patterns $(a)^*(b)^*$, Z3 and CVC4 would run out of time on most cases while $\paexp$-solver can give an answer for almost all trails. For arbitrary strings $(\Sigma_{num})^*$, CVC4 and Z3 seem to be biased against trails with surfix or prefix. By applying the under-approximation technique, our tool is able to find a match on all trails. \wuhao{more details needed}
 
 
 % Please add the following required packages to your document preamble:
@@ -150,22 +147,22 @@ For string hash function benchmark, we did compared our solver with Z3, CVC4 and
     \begin{tabular}{cc|cc|cc|cc|cc}
         &  & \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} & \multicolumn{2}{c|}{Trau} & \multicolumn{2}{c}{mysovler} \\
        PATTERN &  & number & time & number & time & number & time & number & time \\ \hline
-       \multirow{3}{*}{12345(a)+(b)+} & SAT & 5 & 14.0 & 29 & 8.5 & 3 & \textless{}0.1 & 37 & 9.9 \\
+       \multirow{3}{*}{$12345(w_1)^+(w_2)^+$} & SAT & 5 & 14.0 & 29 & 8.5 & 3 & \textless{}0.1 & 37 & 9.9 \\
         & UNSAT & 0 &  & 0 &  & 60 & 1.3 & 60 & 47.2 \\
         & FAIL & 95 &  & 71 &  & 32 &  & 3 &  \\ \hline
-       \multirow{3}{*}{12345(a)+(b)+6789} & SAT & 11 & 13.0 & 29 & 12.0 & 0 &  & 37 & 10.6 \\
+       \multirow{3}{*}{$12345(w_1)^+(w_2)^+6789$} & SAT & 11 & 13.0 & 29 & 12.0 & 0 &  & 37 & 10.6 \\
         & UNSAT & 0 &  & 0 &  & 63 & 1.2 & 63 & 50.0 \\
         & FAIL & 89 &  & 71 &  & 37 &  & 0 &  \\ \hline
-       \multirow{3}{*}{(a)+(b)+6789} & SAT & 18 & 24.0 & 30 & 9.3 & 2 & \textless{}0.1 & 41 & 16.1 \\
+       \multirow{3}{*}{$(w_1)^+(w_2)^+6789$} & SAT & 18 & 24.0 & 30 & 9.3 & 2 & \textless{}0.1 & 41 & 16.1 \\
         & UNSAT & 0 &  & 1 & 4.0 & 59 & 2.5 & 59 & 45.8 \\
         & FAIL & 82 &  & 69 &  & 39 &  & 0 &  \\ \hline
-       \multirow{3}{*}{12345(\textbackslash{}Sigma)*} & SAT & 82 & 8.7 & 100 & 2.2 & 28 & 5.9 & 100 & 18.5 \\
+       \multirow{3}{*}{$12345\Sigma_{\sf num}^*$} & SAT & 82 & 8.7 & 100 & 2.2 & 28 & 5.9 & 100 & 18.5 \\
         & UNSAT & 0 &  & 0 &  & 0 &  & 0 &  \\
         & FAIL & 18 &  & 0 &  & 72 &  & 0 &  \\ \hline
-       \multirow{3}{*}{12345(\textbackslash{}Sigma)*6789} & SAT & 60 & 9.3 & 17 & 7.8 & 3 & 0.3 & 100 & 16.0 \\
+       \multirow{3}{*}{$12345\Sigma_{\sf num}^*6789$} & SAT & 60 & 9.3 & 17 & 7.8 & 3 & 0.3 & 100 & 16.0 \\
         & UNSAT & 0 &  & 0 &  & 0 &  & 0 &  \\
         & FAIL & 40 &  & 83 &  & 97 &  & 0 &  \\ \hline
-       \multirow{3}{*}{(\textbackslash{}Sigma)*6789} & SAT & 68 & 5.5 & 27 & 13.0 & 24 & 9.0 & 100 & 15.7 \\
+       \multirow{3}{*}{$\Sigma_{\sf num}^*6789$} & SAT & 68 & 5.5 & 27 & 13.0 & 24 & 9.0 & 100 & 15.7 \\
         & UNSAT & 0 &  & 0 &  & 0 &  & 0 &  \\
         & FAIL & 32 &  & 73 &  & 76 &  & 0 & 
        \end{tabular}
