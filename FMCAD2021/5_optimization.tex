@@ -105,11 +105,17 @@ Therefore, $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, thus also $\
 \]
 where all exponential occurrences of $\ivarx_{\sigma(i-1)}$ are eliminated.
 
-Similarly, we can eliminate the exponential occurrences of $\ivarx_{\sigma(i-2)}$ from $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-2)} + p /\ivarx_{\sigma(i-1)}]$ and  $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[p /\ivarx_{\sigma(i-1)}]$. Eventually, we obtain a {\pa} formula.
+Similarly, we can eliminate the exponential occurrences of $\ivarx_{\sigma(i-2)}$ from $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-2)} + p /\ivarx_{\sigma(i-1)}]$ as well as  $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[p /\ivarx_{\sigma(i-1)}]$, and so on. Eventually, we obtain a {\pa} formula.
 
-\paragraph{Perform the elimination of exponential occurrences of variables in parallel on atomic formulas}
 
-Note that when Lemma~\ref{lem:exp-ineq} is applied to an atomic formula $\tau$ to eliminate exponential occurrences of $\ivarx$, it computes 4 parameters, namingly $(\alpha^\tau_1,\alpha^\tau_2,B^\tau,\delta^\tau)$, and obtains an equivalent {\pa} formula according to these parameters. Since the parameters are used as boundary conditions in enumeration, we can choose the strictest boundary conditions and apply to all atomic formulas.  
+\paragraph{Synchronize the elimination of exponential occurrences of the same variable in different atomic formulas}
+
+Although Lemma~\ref{lem:exp-ineq} is stated for a single atomic formula, the elimination of the exponential occurrences of the same variable in different atomic formulas can actually be synchronized. That is,  let $\alpha^\tau_{1}, \alpha^\tau_{2}, B^\tau, \delta^\tau$ be the constants as stated in the aforementioned under-approximation of an inequality $\tau$, define $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ as the minimum of $\alpha^\tau_1$, the maximum of $\alpha^\tau_2$, the maximum of $B^\tau$, and the maximum of $\delta^\tau$ respectively with $\tau$ ranging over the inequalities of $\varphi$. Then we can use the same constants $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ for different inequalities when eliminating the exponential occurrences of the same variable. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+Note that when Lemma~\ref{lem:exp-ineq} is applied to an atomic formula $\tau$ to eliminate exponential occurrences of $\ivarx$, it computes 4 parameters, namely $(\alpha^\tau_1,\alpha^\tau_2,B^\tau,\delta^\tau)$, and obtains an equivalent {\pa} formula according to these parameters. Since the parameters are used as boundary conditions in enumeration, we can choose the strictest boundary conditions and apply to all atomic formulas.  
 
 More specifically, we first compute $(\alpha^\tau_1,\alpha^\tau_2,B^\tau,\delta^\tau)$ 
 for all atomic formulas that contain $10^\ivarx$. Let $\alpha^{\min}_1$ denote the minimal element in $\{\alpha^\tau_1\}_\tau$, let $\alpha^{\max}_2,B^{\max},\delta^{\max}$ denote the maximal element in $\{\alpha^\tau_2\}_\tau$, $\{B^\tau\}_\tau$ and $\{\delta^\tau\}_\tau$ respectively. Then, we apply $(\alpha^{\min}_1,\alpha^{\max}_2,B^{\max},\delta^{\max})$ to all atomic formulas $\tau$ in parallel and obtain $\varphi'$ equivalent to $\varphi$. 
@@ -151,13 +157,16 @@ For instance, assume coefficients of $10^\ivarx$ in atomic formulas of $\varphi$
 \right),
 \end{array}
 \]
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \paragraph{Avoid the formula-size blow-up by depth-first search}
 
-The {\pa} formula resulting from the elimination of exponential occurrences is essentially a big disjunction of the formulas of small size. If we store this big disjunction naively, then the formula size quickly blows up and exhausts the memory. Instead, we choose to do a depth-first search (DFS) and consider the disjuncts, which are of small sizes, one by one, and solve the satisfiability problem for these disjuncts. If during the search, a satisfiable disjunct is found, then the search terminates and ``SAT'' result is reported.
+The {\pa} formula resulting from the elimination of exponential occurrences is essentially a big disjunction of the formulas of small size. If we store this big disjunction naively, then the formula size quickly blows up and exhausts the memory. Instead, we choose to do a depth-first search (DFS) and consider the disjuncts, which are of small sizes, one by one, and solve the satisfiability problem for these disjuncts. If during the search, a satisfiable disjunct is found, then the search terminates and ``SAT'' is reported.
 
-\paragraph{Preprocessing with small upper bound}
+\paragraph{Preprocess with small upper bound}
 
 We believe that if a quantifier-free {\paexp} formula is satisfiable, then most probably it is satisfiable with small values assigned to variables. Consequently, as a preprocessing step, we put a small upper bound, e.g. the biggest constant occurring in the formula, on the values of variables, and perform a depth-first search, so that a model can be quickly found, if there is any. If this preprocessing is unsuccessful, then we continue the search with the greater upper bound $10^u$ for some proper $u \ge 1$.
 
