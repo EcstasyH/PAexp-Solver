@@ -194,7 +194,7 @@ The flattening of $\varphi \in \strint$ under a flat domain restriction $\flatfu
 %
 More concretely, $\flatten_{\flatfun_\varphi}(\varphi)$ is a formula over the integer variables $\ivar(\varphi)$,  and Parikh variables $\pvar_{\flatfun_\varphi}(\varphi) = \bigcup_{\svarx \in \svar(\varphi)} \pvar_{\flatfun_\varphi}(\svarx)$, where $\pvar_{\flatfun_\varphi}(\svarx) = \{\#_{\svarx,i} \mid i \in [k_\svarx]\}$, called \emph{flattening variables}, plus some other auxiliary variables, such that 
 %
-$$\llbracket \phi \rrbracket_\kell =\decode_{\flatfun_\varphi}(\llbracket \flatten_{\flatfun_\varphi}(\varphi) \rrbracket |_{\ivar(\phi) \cup \pvar_{\flatfun_\varphi}(\varphi)})$$
+$$\llbracket \varphi \rrbracket_{\flatfun_\varphi} =\decode_{\flatfun_\varphi}(\llbracket \flatten_{\flatfun_\varphi}(\varphi) \rrbracket |_{\ivar(\phi) \cup \pvar_{\flatfun_\varphi}(\varphi)})$$
 %
 The decoding function above decodes an interpretation of integer and flattening variables $I_e: \ivar(\varphi) \cup \pvar_{\flatfun_\varphi}(\varphi) \rightarrow \Nat$ as a set $\decode_{\flatfun_\varphi}(I_e)$ of interpretations of the $\varphi$'s integer and string variables $(I_s, I_i)$ with $I_s: \svar(\varphi) \rightarrow \Sigma^*$ and $I_i: \ivar(\phi) \rightarrow \Nat$ such that 
 \begin{itemize}
@@ -405,5 +405,7 @@ are ranged over flat strings is decidable.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
+%The correctness of the flattening approach is stated below.
+%\begin{proposition}
+%$\llbracket \varphi \rrbracket_{\flatfun_\varphi}$ is nonempty iff $\flatten_{\flatfun_\varphi}(\varphi)$ is satisfiable.
+%\end{proposition}

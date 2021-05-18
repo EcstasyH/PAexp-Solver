@@ -1,8 +1,15 @@
 %!TEX root = paper.tex
 
-Sem\"{e}nov first proved that  {\paexp} admits quantifier elimination in \cite{Semenov84}, thus its satisfiability problem is decidable. However, Sem\"{e}nov did not give a concrete quantifier elimination algorithm. Remedying this, Point proposed a quantifier elimination algorithm for {\paexp} in \cite{Point86}. In the sequel, we are going to illustrate how Point's quantifier elimination algorithm works. Points' algorithm is non-elementary in the worst case and a faithful implementation of the algorithm would not scale\footnote{We did implemented Point's algorithm and discovered that the implementation could only solve formulas of very small size.}. In the next section, we will propose various optimizations to Point's algorithm, aiming at an efficient implementation. 
+Sem\"{e}nov first proved that  {\paexp} admits quantifier elimination in \cite{Semenov84}, thus its satisfiability problem is decidable. However, Sem\"{e}nov did not give a concrete quantifier elimination algorithm. Remedying this, Point proposed a quantifier elimination algorithm for {\paexp} in \cite{Point86}. 
+The goal of this section is to illustrate how Point's quantifier elimination algorithm works. Moreover, we give a complexity analysis to Point's algorithm, which was missing in \cite{Point86}.
+%
+\begin{theorem}\label{thm-paexp}
+{\paexp} admits quantifier elimination of doubly-exponential complexity.
+\end{theorem}
+%
+As Point's algorithm is quite expensive and a faithful implementation would not scale\footnote{We did implemented Point's algorithm and discovered that the implementation could only solve formulas of very small size.}, in the next section, we will propose various optimizations to Point's algorithm, aiming at an efficient implementation. 
 
-Specifically, in the sequel, we are going to show that every {\paexp} formula $\exists \ivarx.\ \varphi \in \paexp$, where $\varphi$ is quantifier-free, can be transformed into an equivalent quantifier-free formula $\varphi' \in \paexp$.
+In the sequel, we are going to show that every {\paexp} formula $\exists \ivarx.\ \varphi \in \paexp$, where $\varphi$ is quantifier-free, can be transformed into an equivalent quantifier-free formula $\varphi' \in \paexp$.
 % such that $\free(\varphi') = \free(\varphi) \setminus \{\ivarx\}$. 
 %From this, we can easily derive that every {\paexp} formula $\varphi$ can be transformed effectively into an equivalent quantifier-free Presburger arithmetic formula $\varphi'$.
 
