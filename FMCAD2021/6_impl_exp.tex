@@ -102,22 +102,26 @@ We compare the {\paexp}-solver against the state-of-the-art SMT solvers on the g
 \end{itemize}
 All the experiments are run on a lap-top with the Intel i5 1.4GHz CPU and 8GB memory. We set the timeout threshold as 60 seconds per problem instance. 
 
-The experiment results are summarized in Table \ref{table:arithmetic} and Table \ref{table:string}.  
+The experiment results are summarized in Table~\ref{table:arithmetic}-\ref{table:string}, where ``Fail'' means either timeout, unknown, or wrong answers. 
 
-\zhilin{stopped here}
+On the ARITHMETIC benchmark suite (Table~\ref{table:arithmetic}), the $\paexp$-solver solves around $20\%$-$60\%$ more instances than Z3, and $30\%$-$100\%$ more instances than CVC4. Moreover, the gap becomes bigger as the the sizes of the formulas increase, which demonstrates that the $\paexp$-solver is more scalable in solving formulas of greater sizes. The average time of the $\paexp$-solver is comparable with Z3 and CVC4. The $\paexp$-solver reports ``B-UNSAT'' for 47 instances of the $(2, 3, 3, 4)$-group, while it does not report ``B-UNSAT'' (except one) for the other two groups. If more time is allowed, the $\paexp$-solver can report ``B-UNSAT'' for the ``TIMEOUT'' instances in the ARITHMETIC benchmark. 
 
-On ARITHMETIC benchmark (Table \ref{table:arithmetic}), $\paexp$-Solver answers roughly 50\% more SAT and (B-)UNSAT than Z3 and CVC4, which means it can tackle some difficult instances. However, there are some instances are answered SAT or UNSAT by other solvers but timeout in $\paexp$-solver, e.g. 12 instances in 3-4-4-5 group. The reason is that $\paexp$-solver must seach for all possible assignments before answering B-UNSAT, and the number of variables with exponential occurrences has a dramatic impact on the time complexity due to the non-elementary complexity upper bound.
+%which means it can tackle some difficult instances. However, there are some instances are answered SAT or UNSAT by other solvers but timeout in $\paexp$-solver, e.g. 12 instances in 3-4-4-5 group. The reason is that $\paexp$-solver must seach for all possible assignments before answering B-UNSAT, and the number of variables with exponential occurrences has a dramatic impact on the time complexity due to the non-elementary complexity upper bound.
 
 
-On STRINGHASH benchmark (Table \ref{table:string}), $\paexp$-solver significantly outperforms than all other three solvers on both two types of constraints. For flat regular constraints, Z3 and CVC fail on most of the instances while Trau may answer UNSAT incorrectly to some satisfiable instances. $\paexp$-solver work out all but 3 instances in 60 seconds and an extra experiment shows it will the remaining 3 instances can be solved in 70 seconds. For non-flat regular constraints, the results show a different bias for differenct pattern (with or without preffix and suffix) both in Z3 and CVC4, whereas $\paexp$-solver work out all problem instances in similar time. 
+On the STRINGHASH benchmark suite (Table~\ref{table:string}), in overall, the $\paexp$-solver solves significantly more problem instances, especially those satisfiable instances, than Z3, CVC4, and Trau. For instance, for flat regular constraints, the $\paexp$-solver solves almost all 300 problem instances, except 3 of them\footnote{These three instances can actually be solved in 70 seconds.}, while  Z3, CVC4, Trau solve only 34, 89, 187 instances respectively.  Trau gets wrong answers for some problem instances, e.g. it reports ``UNSAT'' for some satisfiable instances. While the $\paexp$-solver is more precise than the other solvers, it is slower than the other solvers (although still in a reasonable amount of time), especially for those unsatisfiable problem instances.
+
+
+% for the pattern $12345\Sigma^*_{\sf num}6789$,  the $\paexp$-solver solves all the problem instances, while Z3, CVC4, and Trau solve only 60, 17, 3 of them.
+%
+% than all other three solvers on both two types of constraints. For flat regular constraints, Z3 and CVC fail on most of the instances while Trau may answer UNSAT incorrectly to some satisfiable instances. $\paexp$-solver work out all but 3 instances in 60 seconds and an extra experiment shows it will the remaining 3 instances can be solved in 70 seconds. For non-flat regular constraints, the results show a different bias for differenct pattern (with or without preffix and suffix) both in Z3 and CVC4, whereas $\paexp$-solver work out all problem instances in similar time. 
 
 
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 % Merge bound and unbound 
-\begin{table*}[]
-    \label{table:arithmetic}
+\begin{table*}[ht]
         \caption{Experimental Results on ARITHMETIC, \\
     $\#_{\rm prb}$: number of problems, $T_{\rm avg}$: average time in seconds}
     \centering
@@ -152,13 +156,13 @@ On STRINGHASH benchmark (Table \ref{table:string}), $\paexp$-solver significantl
          & TIMEOUT & 129 & - & 142 & - & {\bf 81} & -\\
          \hline
         \end{tabular}
+            \label{table:arithmetic}
 \end{table*}
 
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
-\begin{table*}[]
-    \label{table:string}
+\begin{table*}[ht]
     \caption{Experimental results on STRINGHASH, \\ $\#_{\rm prb}$: number of problems, $T_{\rm avg}$: average time in seconds}
     \centering
 
@@ -206,6 +210,6 @@ On STRINGHASH benchmark (Table \ref{table:string}), $\paexp$-solver significantl
          \cline{2-10}
         & FAIL & 32 & - & 73 & - & 76 & - & {\bf 0} &- \\
         \hline
-
        \end{tabular}
+           \label{table:string}
 \end{table*}
