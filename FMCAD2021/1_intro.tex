@@ -50,12 +50,13 @@ The basic idea of our approach can be sketched as follows:  similar to \cite{A},
 In \cite{Semenov84}, Semen\"{o}v just proved that $\paexp$ admits quantifier elimination property and 
 therefore obtained that its satisfiability is decidable, but  did not provide an explicit decision procedure. So, in  \cite{Point86}, Point presented a first decision procedure for the satisfiability of $\paexp$ in a mathematical way, which is difficult to understand and therefore no implementation available based on which up to now to the best of our knowledge. So, another contribution of this paper is that we present a more understandable algorithm for $\paexp$'s satisfiability in a computational way and its prototypical implementation. Although the general framework of our algorithm is quite akin to Point's,  it contains the following improvements and corrections: 
 \begin{itemize}
-	\item[i)] The syntax of Presburger arithmetic with exponential functions in our setting is more natural and easy to understand; Point's algorithm needs to transform the formula into DNF (disjunction normal form) before  eliminating any variables, that could increase the length of the considered $\paexp$ exponentially. In contrast, our algorithm just assumes that formulas are NNF (negation normal form). Therefore, our algorithm is much easy to follow and more efficient.
+	\item[i)] The syntax of Presburger arithmetic with exponential functions in our setting is more natural and easy to understand; Point's algorithm needs to transform the formula into DNF (disjunction normal form) before  eliminating any variables, that could increase the length of the considered $\paexp$ formula exponentially. In contrast, our algorithm just assumes that formulas are NNF (negation normal form). Therefore, our algorithm is much easy to follow and more efficient.
 \item[ii)] Unlike in Point's algorithm to eliminate the exponential part and then the linear part of the largest variable according to the given order one by one, in contrast, our algorithm eliminates the exponential parts of 
 	all variables according to the order and then the resulted linear part, that improve the efficiency very much.
 \item[iii)] Additionally, a sub-case of eliminating exponential terms in Point's algorithm is incorrect, we correct it by Lemma \ref{lem:exp-ineq} (see later).
 \end{itemize}
  
+
 
 How we did it? Also mention the quantifier elimination procedure. Optimizations
 
