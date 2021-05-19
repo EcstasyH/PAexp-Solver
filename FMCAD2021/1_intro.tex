@@ -57,7 +57,7 @@ therefore obtained that its satisfiability is decidable, but  did not provide an
 \item[iii)] Additionally, a sub-case of eliminating exponential terms in Point's algorithm is incorrect, we correct it by Lemma \ref{lem:exp-ineq} (see later).
 \end{itemize}
  
-We propose various optimizations for satisfiability problem of quantifier-free $\paexp$ formula for an efficient implement. Two important optimizations are that we avoid the elimination of linear occurrences of variables by under approximation and perform the elimination of exponential occurrences of variables parallelly for all atomic formulas. We also apply an over approximation to reduce the number of subcases and adopt DFS with preprocessing to find possible solutions. 
+We propose various optimizations for satisfiability problem of quantifier-free $\paexp$ formula for an efficient implement. Two important optimizations are that we avoid the elimination of linear occurrences of variables by under approximation and synchronize the elimination of exponential occurrences of the same variable in different atomic formulas. We also apply an over approximation to reduce the number of subcases and adopt DFS with preprocessing to find possible solutions. 
 
 How we did it? Also mention the quantifier elimination procedure. Optimizations
 

@@ -3,3 +3,15 @@ begin test using Z3 ...
 timeout
 It took 60 seconds
 2
+timeout
+It took 60 seconds
+3
+timeout
+It took 60 seconds
+4
+timeout
+It took 60 seconds
+5
+timeout
+It took 60 seconds
+6

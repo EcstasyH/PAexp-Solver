@@ -28,7 +28,7 @@ To evaluate the performance of the {\paexp}-solver, we created two benchmark sui
 \paragraph{The ARITHMETIC benchmark suite} 
 This suite comprises three groups of randomly generated {\paexp} formulas. Each group is characterized by four parameters ($EV$, $LV$, $EI$, $LI$), where $EV, LV$ represent the number of variables with exponential occurrences and with only linear occurrences respectively, and $EI, LI$ represent the number of inequalities with exponential terms and with only linear terms respectively. 
 We consider three parameter classes, $(2, 3, 3, 4)$, $(3, 4, 4, 5)$, and $(4, 5, 5, 6)$. 
-Each group of the ARITHMETIC benchmark suite consists of 200 randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-10^2, 10^2]$ and the other coefficients/constants are randomly selected from the interval $[-10^5, 10^5]$. The two intervals are chosen with the intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities.\wuhao{Moreover, in order to include some equalities in the problem instances, we randomly select some instances and replace the occurrence of $\le$ by $=$ in the first inequality with exponential terms. The upper bound for variables is set to be $10^{20}$ for $\paexp$-solver because the largest number represented by 64 bits is less than $10^{20}$} We also create SMTLib2 files for each problem instance, in order to facilitate the comparison with the state-of-the-art of SMT solvers CVC4 and Z3. Because neither CVC4 nor Z3 supports the exponential functions natively, in the SMTLib2 files, we encode $10^x$ as a recursive function $f(x)$ defined by: $f(0) = 10$ and $f(n+1) = 10*f(n)$.
+Each group of the ARITHMETIC benchmark suite consists of 200 randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-10^2, 10^2]$ and the other coefficients/constants are randomly selected from the interval $[-10^5, 10^5]$. The two intervals are chosen with the intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities. Moreover, aiming at a better coverage of the syntactical ingredients of {\paexp}, we randomly choose some problem instances and replace the $\le$ symbol of their first inequalities by $=$. The constant upper bound for the values of variables is set to be $10^{20}$, motivated by the fact that the largest 64-bit integer is less than $10^{20}$. We also create an SMTLib2 file for each problem instance, to facilitate the comparison with the state-of-the-art of SMT solvers CVC4 and Z3. Because neither CVC4 nor Z3 supports the exponential functions natively, in the SMTLib2 files, we encode $10^x$ as a recursive function $f(x)$ defined by: $f(0) = 1$ and $f(n+1) = 10*f(n)$.
 
 %
 %\item 
@@ -41,7 +41,7 @@ Aiming at a comparison with the state-of-the-art string constraint solvers that 
 The string constraints in the STRINGHASH benchmark suite are of the form 
 $$\svarx \in \Aut \wedge \left( \parseInt(\svarx) \bmod m \right) \bmod m^\prime = 0   \notag \wedge \len(\svarx) < 100,$$ 
 where $\Aut$ is an FA, $m, m^\prime \ge 2.$ 
-The six groups of string constraints are characterized by different classes of regular constraints, namely, $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, $w^+_1 w^+_2 6789$, $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, and $\Sigma_{\sf num}^* 6789$, where $w_1,w_2 \in \Sigma^+_{\sf num}$. The first three are flat languages, while the latter three are not. Each group has 100 randomly generated problem instances, where $m$ is a prime number in the interval $[10^2, 10^5]$ and $m' \le m-1$. \wuhao{selection of $m,m'$}We generate the SMTLib2 files for these string constraints, as inputs to the SMT solvers. For the {\paexp}-solver, we do the following:   
+The six groups of string constraints are characterized by different classes of regular constraints, namely, $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, $w^+_1 w^+_2 6789$, $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, and $\Sigma_{\sf num}^* 6789$, where $w_1,w_2 \in \Sigma^+_{\sf num}$. The first three are flat languages, while the latter three are not. Each group has 100 randomly generated problem instances, where $m$ is a randomly chosen prime number in the interval $[10^2, 10^5]$ and $1 \le m' < m$ ($m'$ is not necessarily a prime number). We generate the SMTLib2 files for these string constraints, as inputs to the SMT solvers. For the {\paexp}-solver, we do the following:   
 \begin{itemize}
 \item For flat regular constraints, we generate the {\paexp} formulas corresponding to the string constraints, as the inputs to the {\paexp}-solver.
 %
@@ -50,9 +50,9 @@ $\Sigma_{\sf num}^*$,  where $a, b_1,\ldots, b_k \in \Sigma_{\sf num}$.
 %
 %the first part is a single digit and the second part is a string length $l$, which can be seen as a FL with 2 cycles and force the second cycle do not repeat. 
 %
-We iterate the following procedure to find a model or reach the time limit: first set $k=1$ and iterate by assigning $0, \ldots, 9$ to $a$. For each assignment, we encode the resulting string constraints into the {\paexp} formulas with only one exponential variables. If the resulting {\paexp} formula is unsatisfiable, then we increase $k$ by 1 and repeat this process. 
+We iterate the following procedure until a model is found or the time limit is reached: Initially, set $k=1$ and iterate by assigning $0, \ldots, 9$ to $a$. For each assignment, we encode the resulting string constraint into an {\paexp} formula with only one exponential variable. If the resulting {\paexp} formula is unsatisfiable, then we increase $k$ by 1 and repeat this process. 
 \end{itemize}
-We would like to remark that the flattening strategy for non-flat regular constraints is a strict generalization of that in \cite{Parosh:20:PLDI}: Patterns of the form $0^*(b_1...b_k)$ were considered therein and {\pa} formulas are sufficient to encode such patterns. On the other hand, we consider patterns of the form e.g. $12345 (a)^* (b_1 \ldots b_k) 6789$ (where $a \in \Sigma_{\sf num}$ can be nonzero), which requires {\paexp} formulas to encode.
+We would like to remark that the flattening strategy for non-flat regular constraints is a strict generalization of that in \cite{Parosh:20:PLDI}: Patterns of the form $0^*(b_1...b_k)$ were considered therein and {\pa} formulas are sufficient to encode such patterns. On the other hand, we consider patterns of the form e.g. $(a)^* (b_1 \ldots b_k)$ (where $a \in \Sigma_{\sf num}$ can be nonzero), which requires {\paexp} formulas to encode.
 
 %\end{itemize}
 
@@ -93,7 +93,7 @@ The Second pattern is arbitrary string, that is $y\in \Sigma_{num}^*$. We use la
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Experiment Results}
+\subsection{Experiments}
 
 We compare the {\paexp}-solver against the state-of-the-art SMT solvers on the generated benchmarks. Specifically, 
 \begin{itemize}
