@@ -1,0 +1,5 @@
+begin test using Z3 ...
+1
+timeout
+It took 60 seconds
+2

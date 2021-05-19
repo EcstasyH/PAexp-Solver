@@ -6,14 +6,14 @@ Due to the high demand, in recent years, there is a boosting amount of publicati
 
 However, research progress of string constraint solving has been hampered by many major obstacles in both theory and tool implementation aspects (including long-standing open problems). 
 Logical theories over strings have to allow string concatenation, which is arguably the most fundamental operation of strings. 
-The most celebrated result concerning theories of strings is Makanin’s result on deciding the satisfiability problem for \emph{word equations}~\cite{}.
+The most celebrated result concerning theories of strings is Makanin’s result on deciding the satisfiability problem for \emph{word equations}~\cite{makanin77}.
 A simple example of a word equation is $xaby = ybax$, where $x, y$ are variables, and $a, b \in \Sigma$ are constant letters. 
 A word equation is satisfiable if it has a solution, i.e., an assignment that maps variables to strings over the alphabet $\Sigma$ which equate the left-hand side with the right-hand side of the equation.
 The correctness proof of Makanin’s algorithm is arguably one of the most complex termination proofs in computer science. 
 Makanin’s result can be extended to include \emph{regular constraints} (a.k.a. regular expression matching, e.g., $x \in (ba)^*)$, and arbitrary Boolean connectives.
 This extension is called word equations with regular constraints. 
 However, the satisfiability problem of word equation together with length constraints (e.g., $|x|=|y|+1 \wedge wx=yx$) is still open.
-The complexity of the satisfiability of word equations with regular constraints was proven to be PSPACE-complete by Plandowski~\cite{}, after decades of improvement of the original algorithm by Makanin.
+The complexity of the satisfiability of word equations with regular constraints was proven to be PSPACE-complete by Plandowski~\cite{plandowski99}, after decades of improvement of the original algorithm by Makanin.
 
 Satisfiability of word equations is a special instance of Hilbert’s 10th problem. 
 In the past, the original motivation of studying word equations was for finding an undecidability proof of Hilbert’s 10th problem. 
@@ -57,7 +57,7 @@ therefore obtained that its satisfiability is decidable, but  did not provide an
 \item[iii)] Additionally, a sub-case of eliminating exponential terms in Point's algorithm is incorrect, we correct it by Lemma \ref{lem:exp-ineq} (see later).
 \end{itemize}
  
-
+We propose various optimizations for satisfiability problem of quantifier-free $\paexp$ formula for an efficient implement. Two important optimizations are that we avoid the elimination of linear occurrences of variables by under approximation and perform the elimination of exponential occurrences of variables parallelly for all atomic formulas. We also apply an over approximation to reduce the number of subcases and adopt DFS with preprocessing to find possible solutions. 
 
 How we did it? Also mention the quantifier elimination procedure. Optimizations
 

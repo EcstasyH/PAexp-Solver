@@ -27,7 +27,7 @@ Then during the enumeration of the linear orders for the variables $\ivarx_1, \l
 %Suppose the normalized formula $\theta$ contains variables $\{x_i:i\in[n]\}$, so the exponential terms could be $e^{x_i}$. For each $e^{x_i}$, we subtitute $e^{x_i}$ by a fresh variable $y_i$ in $\theta$ and add the constraints $(e-1)x_i+1\le y_i$ to get $\theta'$. Since $(e-1)x_i+1\le e^{x_i}$ holds for all $e,x\in \Nat$, $\theta'$ is an over-approximation of $\theta$ and if $\theta'$ is unsatisfiable over positive reals, then $\theta$ is unsatisfiable over $\Nat$.
 
 
-\paragraph{Avoid the elimination of linear occurrences of variables by under approximation}
+\paragraph{Avoid the elimination of linear occurrences of variables by under approximation}\label{para: opt under appro}
 
 In Section~\ref{sec-dec}, the decision procedure of {\paexp} requires the elimination of both exponential and linear occurrences of variables. Considering the fact that {\pa} formulas can be solved efficiently by the state-of-the-art solvers, e.g. CVC4 and Z3, one natural idea is to try to eliminate only the exponential occurrences, but not the linear occurrences, of variables, and obtain the {\pa} formulas in the end, which can then be solved by the state-of-the-art solvers.
 
@@ -107,7 +107,7 @@ where all exponential occurrences of $\ivarx_{\sigma(i-1)}$ are eliminated.
 
 Similarly, we can eliminate the exponential occurrences of $\ivarx_{\sigma(i-2)}$ from $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-2)} + p /\ivarx_{\sigma(i-1)}]$ and  $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[p /\ivarx_{\sigma(i-1)}]$. Eventually, we obtain a {\pa} formula.
 
-\paragraph{Perform the elimination of exponential occurrences of variables in parallel on atomic formulas}
+\paragraph{Perform the elimination of exponential occurrences of variables in parallel on atomic formulas} \label{para: opt parallel}
 
 Note that when Lemma~\ref{lem:exp-ineq} is applied to an atomic formula $\tau$ to eliminate exponential occurrences of $\ivarx$, it computes 4 parameters, namingly $(\alpha^\tau_1,\alpha^\tau_2,B^\tau,\delta^\tau)$, and obtains an equivalent {\pa} formula according to these parameters. Since the parameters are used as boundary conditions in enumeration, we can choose the strictest boundary conditions and apply to all atomic formulas.  
 
