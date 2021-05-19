@@ -24,9 +24,9 @@ In order to simplify presentation, we assume all string variables ranging over n
     for every $w\in \Sigma_{\textit{num}}^+$,
     \begin{itemize}
 %        \item if $|w|=0$, i.e., $w=\epsilon$,  ${\parseInt}(w)=0$;
-        \item \yfc{better use `$i$' or $``i"$ instead of $'i'$} if $w={'i'}$ for $i \in \Sigma_{\textit{num}}$, then ${\parseInt}('i')=i$;
-        \item for $w = w_1 {'i'}$ for $i \in \Sigma_{\textit{num}}$ with $|w_1| \ge 1$, 
-        ${\parseInt}(w) = 10*{\parseInt}(w_1)+{\parseInt}({'i'})$.
+        \item  if $w=$`$i$' for $i \in \Sigma_{\textit{num}}$, then ${\parseInt}$$($`$i$'$)=i$;
+        \item for $w = w_1$`$i$' for $i \in \Sigma_{\textit{num}}$ with $|w_1| \ge 1$, 
+        ${\parseInt}(w) = 10*{\parseInt}(w_1)+{\parseInt}($`$i$'$)$.
     \end{itemize} 
 %\end{definition}
 Note that $\parseInt$ is undefined with $\varepsilon$ as the input.
@@ -94,7 +94,7 @@ The $\strint$ formulas are interpreted on $I=(I_s, I_i)$ where $I_s$ is a partia
 Let us use $\lVert \varphi \rVert$ to denote the set of $I = (I_s, I_i)$ satisfying $\varphi$.
 
 \begin{example}
-some example for $\strint$ here
+$\svarx \in \Aut \wedge \parseInt(\svarx) = 109\ivarx \wedge \len(\svarx) < 100$, where $\Aut$ is an FA, is an $\strint$ formula.
 \end{example}
 
 %As usual, an interpretation $I$ is a mapping from the set of variables $X\cup Z$ to the respective domain, 
@@ -149,11 +149,11 @@ The syntax of {\paexp} is obtained from that of {\pa} by adding $10^\iterm$, $\e
  The semantics of {\paexp} are defined similarly to {\pa}. The quantifier-free as well as existential {\paexp} formulas are defined similarly to {\pa} as well.
 
 \begin{example}
-Some example of  {\paexp} here.
+$10^{\ivarx+ \ivary} + 3 * 10^{\ivary}  = 2 \ivarz +1 $ is an {\paexp} formula.
 \end{example} 
  
 %Moreover, we introduce an abbreviation $\lambda_{10}(\ivarx) \equiv 2^{\ell_{10}(\ivarx)}$.
-From the definition of $\lambda_{10}(\ivarx)$, we know that for all $n \ge 1$, $\lambda_{10}(n) \le n \le 10\lambda_{10}(n)-1$ holds.
+From the definition of $\lambda_{10}(\ivarx)$, we know that for all $n \ge 1$, $\lambda_{10}(n) \le n < 10\lambda_{10}(n)$ holds.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
