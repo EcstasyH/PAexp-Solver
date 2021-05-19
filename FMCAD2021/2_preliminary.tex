@@ -81,6 +81,9 @@ $\Delta\subseteq Q\times \Sigma_\epsilon\times Q$ is the transition relation,
 $q_{\textit{init}}$ is the initial state, $F \subseteq Q$ is the set of accepting states. 
 A \emph{run} of $\Aut$ on a string $w = a_1 \ldots a_n$ is a sequence $q_0 \xrightarrow{b_1} q_1  \xrightarrow{b_2}  \ldots   \xrightarrow{b_{m-1}}  q_{m-1} \xrightarrow{b_m} q_m$ such that $q_0 = q_{\textit{init}}$, $(q_{i-1}, b_i, q_i) \in \Delta$ for every $i \in [m]$, and $a_1 \ldots a_n = b_1 \ldots b_m$. A \emph{run} $q_0 \xrightarrow{b_1} q_1  \xrightarrow{b_2}  \ldots   \xrightarrow{b_{m-1}}  q_{m-1} \xrightarrow{b_m} q_m$ is \emph{accepting} if $q_m  \in F$. A string $w$ is \emph{accepted} by $\Aut$ if there is an accepting run of $\Aut$ on $w$. Let $\Lang(\Aut)$ denote the set of strings accepted by $\Aut$. A language $L \subseteq \Sigma^*$ is \emph{regular} if it can be defined by some FA $\Aut$, namely, $L = \Lang(\Aut)$.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 \paragraph{Parikh Image}
 %Given an alphabet $\Sigma$ and a string $w\in \Sigma^*$, 
 %we define the set of Parikh variables 
@@ -96,7 +99,8 @@ then $\parikh(w)(\#a)=3$ and $\parikh(w)(\#b)=2$.
 Given an alphabet $\Sigma$, let $\#\Sigma$ denote the set of Parikh variables $\{\#a | a \in \Sigma\}$. 
 %The Parikh image of $w$ is a function $\parikh(w): \#\Sigma \rightarrow \mathbb{N}$ such that $\parikh(w)(\#a) = |w|_a$, for each $a \in \Sigma$. 
 The Parikh image of a language $L$ is defined as $\parikh(L) = \{\parikh(w) \mid w \in L\}$. It is well known that the Parikh image of a regular language can be characterized by an existential PA formula~\cite{SSMH04}.
-
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %For a language $L\subseteq \Sigma^*$, 
 %define the Parikh image of $L$ to be 

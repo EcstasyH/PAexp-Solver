@@ -162,5 +162,84 @@ which indicates that when  $x_i \le \alpha-1$, $\tau(x_i,\bar{x},\bar{y})$ keeps
 
 
 
-\subsection{Complexity analysis of Point's algorithm}
+%\subsection{Complexity analysis of Point's algorithm}
 
+\subsection{Elimination of exponential occurrences of variables for divisibility atomic formulas}\label{app-div}
+
+Consider
+%
+$$
+\begin{array}{l}
+\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
+c\ \big |\ \big(a_i 10^{\ivarx_{\sigma(i)}} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
++ \iterm(\vec{\ivary}) \big)
+\end{array}
+$$
+with $a_i \neq 0$.
+%
+
+Let $c = 2^{r_1} 5^{r_2}  c_0$ such that $c_0$ is divisible by neither $2$ nor $5$. Moreover, let $r = \max(r_1, r_2)$. Then $c | (10^rc_0)$. 
+
+If $c_0 = 1$, then $10^r$ is divisible by $c = 2^{r_1}5^{r_2}$. Thus for every $n \ge r$, $c \ |\ 10^n$.  Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+\[
+\small
+\begin{array}{l}
+\bigvee \limits_{p = 0}^{r - 1} c\ \big | \big(a_i 10^{p} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + b_kp + \sum_{k=1}^{i-1} b_k \ivarx_{\sigma(k)} 
++ \iterm(\vec{\ivary}) \big)\\
+%
+\vee \big(\ivarx_{\sigma(i)} \ge r \wedge c\ \big | \big(\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
++ \iterm(\vec{\ivary}) \big)\big),
+\end{array}
+\]
+where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
+
+Next, let us assume $c_0 > 1$. Since $10$ and $c_0$ are relatively prime, according to Euler's theorem (cf. \cite{HW80}), $10^{\phi(c_0)} \equiv 1 \bmod c_0$, where $\phi$ is the Euler function. Suppose $10^{\phi(c_0)} = kc_0 + 1$ for some $k \in \Nat$. 
+Then for every $n \in \Nat$ with $n \ge r$, 
+$$
+\begin{array}{l}
+10^{n + \phi(c_0)} \bmod c =10^{n-r} 10^r (kc_0 + 1) \bmod c = \\
+10^{n-r} (k 10^rc_0 + 10^r) \bmod c = \\
+10^{n-r} (0+10^r) \bmod c = 10^n \bmod c.
+\end{array}
+$$
+
+Then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+\[
+\begin{array}{l}
+\bigvee \limits_{p=0}^{r-1} \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[p/\ivarx_{\sigma(i)}]\ \vee \\
+\left(
+\begin{array}{l}
+\ivarx_{\sigma(i)} \ge r\ \wedge \\
+\bigvee \limits_{q = 0}^{\phi(c_0)-1} 
+\left(
+\begin{array}{l}
+\phi(c_0)\ \big |\ (\ivarx_{\sigma(i)} - r - q)\ \wedge \\
+c\ \big | 
+\left(
+\begin{array}{l}
+a_i 10^{r+q} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \\
+\sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})
+\end{array}
+\right) 
+\end{array}
+\right)
+\end{array}
+\right),
+\end{array}
+\]
+where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
+
+
+\subsection{Some additional optimizations of the decision procedure for {\paexp}}\label{app-opt}
+
+\paragraph{Synchronize the elimination of exponential occurrences of the same variable in different atomic formulas}
+
+Although Lemma~\ref{lem:exp-ineq} is stated for a single atomic formula, the elimination of the exponential occurrences of the same variable in different atomic formulas can actually be synchronized. That is,  let $\alpha^\tau_{1}, \alpha^\tau_{2}, B^\tau, \delta^\tau$ be the constants as stated in the aforementioned under-approximation of an inequality $\tau$, define $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ as the minimum of $\alpha^\tau_1$, the maximum of $\alpha^\tau_2$, the maximum of $B^\tau$, and the maximum of $\delta^\tau$ respectively with $\tau$ ranging over the inequalities of $\varphi$. Then we can use the same constants $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ for different inequalities when eliminating the exponential occurrences of the same variable. 
+
+\paragraph{Avoid the formula-size blow-up by depth-first search}
+
+The {\pa} formula resulting from the elimination of exponential occurrences is essentially a big disjunction of the formulas of small size. If we store this big disjunction naively, then the formula size quickly blows up and exhausts the memory. Instead, we choose to do a depth-first search (DFS) and consider the disjuncts, which are of small sizes, one by one, and solve the satisfiability problem for these disjuncts. If during the search, a satisfiable disjunct is found, then the search terminates and ``SAT'' is reported.
+
+\paragraph{Preprocess with small upper bound}
+
+We believe that if a quantifier-free {\paexp} formula is satisfiable, then most probably it is satisfiable with small values assigned to variables. Consequently, as a preprocessing step, we put a small upper bound, e.g. the biggest constant occurring in the formula, on the values of variables, and perform a depth-first search, so that a model can be quickly found, if there is any. If this preprocessing is unsuccessful, then we continue the search with the greater upper bound $10^u$ for some proper $u \ge 1$.
