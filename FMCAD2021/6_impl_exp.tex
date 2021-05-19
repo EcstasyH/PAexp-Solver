@@ -121,16 +121,17 @@ On the STRINGHASH benchmark suite (Table~\ref{table:string}), in overall, the $\
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 % Merge bound and unbound 
+
 \begin{table*}[ht]
-        \caption{Experimental Results on ARITHMETIC, \\
-    $\#_{\rm prb}$: number of problems, $T_{\rm avg}$: average time in seconds}
+        \caption{Experimental Results on ARITHMETIC, 
+    $\#_{\mathrm{prb}}$: number of problems, $T_{\mathrm{avg}}$: average time in seconds}
     \centering
     \renewcommand{\arraystretch}{1.2}
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
     \hline
         \multirow{2}{*}{Param. }  & \multirow{2}{*}{Output} & \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} & \multicolumn{2}{c|}{$\paexp$} \\
         \cline{3-8}
-        &  & $\#_{\rm prb}$ & $T_{\rm avg}$  & $\#_{\rm prb}$ & $T_{\rm avg}$  & $\#_{\rm prb}$ & $T_{\rm avg}$  \\ \hline
+        &  & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$  & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$  & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$  \\ \hline
         \multirow{4}{*}{(2,3,3,4)} & SAT & 56 & {\bf 0.4} & 42 & 2.3 & {\bf 64} & {\bf 0.4} \\
         \cline{2-8}
          & UNSAT & 69 & {\bf \textless{}0.1} & 72 &  {\bf \textless{}0.1} & {\bf 89} & {\bf \textless{}0.1} \\
@@ -163,7 +164,7 @@ On the STRINGHASH benchmark suite (Table~\ref{table:string}), in overall, the $\
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 \begin{table*}[ht]
-    \caption{Experimental results on STRINGHASH, \\ $\#_{\rm prb}$: number of problems, $T_{\rm avg}$: average time in seconds}
+    \caption{Experimental results on STRINGHASH,  $\#_{\mathrm{prb}}$: number of problems, $T_{\mathrm{avg}}$: average time in seconds}
     \centering
 
     \renewcommand{\arraystretch}{1.2}
@@ -171,7 +172,7 @@ On the STRINGHASH benchmark suite (Table~\ref{table:string}), in overall, the $\
     \hline
         \multirow{2}{*} {Pattern}  &  \multirow{2}{*} {Output}  &  \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} & \multicolumn{2}{c|}{Trau} & \multicolumn{2}{c|}{$\paexp$} \\
         \cline{3-10}
-       &  & $\#_{\rm prb}$ & $T_{\rm avg}$ &  $\#_{\rm prb}$ & $T_{\rm avg}$ & $\#_{\rm prb}$ & $T_{\rm avg}$ &  $\#_{\rm prb}$ & $T_{\rm avg}$ \\ 
+       &  & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$ &  $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$ & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$ &  $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$ \\ 
        \hline
        \cline{1-10}
        \multirow{3}{*}{$12345(w_1)^+(w_2)^+$} & SAT & 5 & 14.0 & 29 & 8.5 & 3 & {\bf \textless{}0.1} & {\bf 37} & 9.9 \\
