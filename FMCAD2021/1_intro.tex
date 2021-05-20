@@ -63,4 +63,8 @@ How we did it? Also mention the quantifier elimination procedure. Optimizations
 
 Say the problem is challenging for state-of-the-art solvers, mention the hash function example.
 
+${\sf hash}(w) = \sum \limits_{i = 1}^n a_i p^{n-i} \bmod m$, where $p, m \in \Int^+$ with $p, m \ge 2$. It is easy to see that ${\sf hash}(w)$ can be seen as a generalization of $\parseInt$ followed by a modulo operation. In particular, if $\Sigma = \Sigma_{\sf num}$ and $p = 10$, then ${\sf hash}(w) = \parseInt(w) \bmod m$. 
+
+
+
 Experimental results.
