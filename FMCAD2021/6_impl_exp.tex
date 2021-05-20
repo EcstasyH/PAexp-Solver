@@ -34,18 +34,19 @@ Each group of the benchmark suite consists of 200 randomly generated problem ins
 %\item 
 
 \paragraph{The STRINGHASH benchmark suite} 
-This suite comprises six groups of string constraints generated from the string hash functions ${\sf hash}(w)$ encoded by $\parseInt$.
+This suite comprises two groups of string constraints generated from the string hash functions ${\sf hash}(w)$ encoded by $\parseInt$.
 %Aiming at a comparison with the state-of-the-art string constraint solvers that support $\parseInt$, we assume that $\Sigma =\Sigma_{\sf num}$ and $p = 10$ and the string hash function is encoded by $\parseInt$.
 %, so that the string hash function can be encoded by $\parseInt$. 
 
 The string constraints in the STRINGHASH benchmark suite are of the form 
 $$\svarx \in \Aut \wedge \left( \parseInt(\svarx) \bmod m \right) \bmod m^\prime = 0   \notag \wedge \len(\svarx) < 100,$$ 
 where $\Aut$ is an FA, $m, m^\prime \ge 2.$ 
-The six groups of string constraints are characterized by different classes of regular constraints, namely, $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, $w^+_1 w^+_2 6789$, $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, and $\Sigma_{\sf num}^* 6789$, where $w_1,w_2 \in \Sigma^+_{\sf num}$. The first three are flat languages, while the latter three are not. Each group has 100 randomly generated problem instances, where $m$ is a randomly chosen prime number in the interval $[10^2, 10^5]$ and $1 \le m' < m$ ($m'$ is not necessarily a prime number). We generate the SMTLib2 files for these string constraints, as inputs to the string constraint solvers. On the other hand, for the {\paexp}-solver, we do the following:   
+The two groups of string constraints are characterized by flat and non-flat regular constraints respectively.
+The flat group comprises 300 problem instances, where the flat languages are of the form $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, or $w^+_1 w^+_2 6789$, with $w_1,w_2 \in \Sigma^+_{\sf num}$. The non-flat group comprises 300 problem instances, where the non-flat languages are of the form $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, or $\Sigma_{\sf num}^* 6789$. Moreover, the number $m$ is a randomly chosen prime number in the interval $[10^2, 10^5]$ and $1 \le m' < m$ ($m'$ is not necessarily a prime number). We generate the SMTLib2 files for these string constraints, as inputs to the string constraint solvers. On the other hand, for the {\paexp}-solver, we do the following:   
 \begin{itemize}
-\item For flat regular constraints, we generate the {\paexp} formulas corresponding to the string constraints, as the inputs to the {\paexp}-solver.
+\item For flat instances, we generate the {\paexp} formulas corresponding to the string constraints, as the inputs to the {\paexp}-solver.
 %
-\item For non-flat regular constraints, we use flat languages $(a)^* (b_{1} \ldots b_{k})$ to under approximate 
+\item For non-flat instances, we use flat languages $(a)^* (b_{1} \ldots b_{k})$ to under approximate 
 $\Sigma_{\sf num}^*$,  where $a, b_1,\ldots, b_k \in \Sigma_{\sf num}$. 
 %
 %the first part is a single digit and the second part is a string length $l$, which can be seen as a FL with 2 cycles and force the second cycle do not repeat. 
@@ -121,35 +122,34 @@ On the STRINGHASH benchmark suite (Table~\ref{table:string}), in overall, the $\
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 % Merge bound and unbound 
-
 \begin{table}[ht]
-        \caption{Experimental Results, S:SAT, U: UNSAT, B: Bounded UNSAT, F: Fail, 
-    $\#_{\mathrm{prb}}$: number of problems, $T_{\mathrm{avg}}$: average time in seconds}
+        \caption{Experimental Results, O: Output, S:SAT, U: UNSAT, B: Bounded UNSAT, F: Fail, 
+    $\#$: number of problems, $T$: average time in seconds}
     \centering
-    \renewcommand{\arraystretch}{1.2}
+    \renewcommand{\arraystretch}{1.1}
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
     \hline
-        \multirow{2}{*}{Group }  & \multirow{2}{*}{Out} & \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} &  \multicolumn{2}{c|}{Trau} & \multicolumn{2}{c|}{$\paexp$} \\
+        \multirow{2}{*}{Group }  & \multirow{2}{*}{O} & \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} &  \multicolumn{2}{c|}{Trau} & \multicolumn{2}{c|}{$\paexp$} \\
         \cline{3-10}
-        &  & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$  & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$  & - & - & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$  \\ \hline
+        &  & \scriptsize{$\#$} & \scriptsize{$T$}  & \scriptsize{$\#$} & \scriptsize{$T$}  & \scriptsize{$\#$} & \scriptsize{$T$} & \scriptsize{$\#$} & \scriptsize{$T$}  \\ \hline
         \multirow{4}{*}{
-        \newline (2,3,3,4)} & S & 56 & {\bf 0.4} & 42 & 2.3 & - & - &  {\bf 64} & {\bf 0.4} \\
+        \newline \scriptsize{(2,3,3,4)}} & S & 56 & {\bf 0.4} & 42 & 2.3 & - & - &  {\bf 64} & {\bf 0.4} \\
         \cline{2-10}
-         & U & 69 & {\bf \textless{}0.1} & 72 &  {\bf \textless{}0.1} & - & - &  {\bf 89} & {\bf \textless{}0.1} \\
+         & U & 69 & {\bf 0.1} & 72 &  {\bf 0.1} & - & - &  {\bf 89} & {\bf 0.1} \\
          \cline{2-10}
          & B & - & - & - & - & - & - &  47 & 9.5 \\
          \cline{2-10}
          & F & 75 & - & 86 & - & - & - &  {\bf 0} & - \\ \hline
          \cline{1-10}
-        \multirow{4}{*}{(3,4,4,5)} & S & 33 & {\bf 1.4} & 25 & 2.9 & - & - &  {\bf 52} & 3.3 \\
+        \multirow{4}{*}{\scriptsize{(3,4,4,5)}} & S & 33 & {\bf 1.4} & 25 & 2.9 & - & - &  {\bf 52} & 3.3 \\
         \cline{2-10}
-         & U & 59 & {\bf \textless{}0.1} & 60 & {\bf \textless{}0.1} & - & - &  {\bf 88} & {\bf \textless{}0.1} \\
+         & U & 59 & {\bf 0.1} & 60 & {\bf 0.1} & - & - &  {\bf 88} & {\bf 0.1} \\
          \cline{2-10}
          & B & -  & - &  - & -  & - & - &  1 & 54.0 \\
          \cline{2-10}
          & F & 108 & - & 115 & - & - & - &  {\bf 59} & - \\ \hline
          \cline{1-10}
-        \multirow{4}{*}{(4,5,5,6)} & S & 35 & {\bf 1.8} & 19 & 6.6 & - & - &  {\bf 47} & 22.4 \\
+        \multirow{4}{*}{\scriptsize{(4,5,5,6)}} & S & 35 & {\bf 1.8} & 19 & 6.6 & - & - &  {\bf 47} & 22.4 \\
         \cline{2-10}
          & U & 36 & 0.3 & 39 & 0.4 & - & - &  {\bf 72} & {\bf 0.1} \\
          \cline{2-10}
@@ -158,19 +158,19 @@ On the STRINGHASH benchmark suite (Table~\ref{table:string}), in overall, the $\
          & F & 129 & - & 142 & - & - & - &  {\bf 81} & -\\
          \hline
          \cline{1-10}
-        \multirow{3}{*}{Flat} 
-         & S & 34 & 19.0 & 88 & 12.7 & 5 & {\bf \textless{}0.1}& 115  & 12.3\\
+        \multirow{3}{*}{\scriptsize{Flat}} 
+         & S & 34 & 19.0 & 88 & 12.7 & 5 & {\bf 0.1}& {\bf 115}  & 12.3\\
         \cline{2-10}
-         & U & 0 & - & 1 & 4.0 & 182 & 2.5 & 182 & 47.7 \\
+         & U & 0 & - & 1 & 4.0 & 182 & {\bf 2.5} & {\bf 182} & 47.7 \\
          \cline{2-10}
-         & F & 266 & - & 211 & - & 113 & - & 3 & - \\ \hline
+         & F & 266 & - & 211 & - & 113 & - & {\bf 3} & - \\ \hline
          \cline{1-10}
-        \multirow{3}{*}{Non-flat}
+        \multirow{3}{*}{\scriptsize{Non-flat}}
          & S & 210 & 7.8 & 144 & 4.9 & 55 & 5.9 &{\bf 300} & 16.7 \\
         \cline{2-10}
          & U & 0 & - & 0 & - & 0 & - & 0 & - \\
          \cline{2-10}
-         & F & 90 & - & 156 & - & 245 & - & 0 & - \\ \hline
+         & F & 90 & - & 156 & - & 245 & - & {\bf 0} & - \\ \hline
          \cline{1-10}
         \end{tabular}
             \label{table:arithmetic}
