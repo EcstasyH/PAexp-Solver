@@ -269,55 +269,57 @@ We believe that if a quantifier-free {\paexp} formula is satisfiable, then most 
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
-\begin{table*}[ht]
-    \caption{Experimental results on STRINGHASH,  $\#_{\mathrm{prb}}$: number of problems, $T_{\mathrm{avg}}$: average time in seconds}
+\begin{table}[ht]
+    \caption{Experimental results on STRINGHASH,  O: Output, S:SAT, U: UNSAT, B: Bounded UNSAT, F: Fail, 
+    $\#$: number of problems, $T$: average time in seconds}
     \centering
 
-    \renewcommand{\arraystretch}{1.2}
+    \renewcommand{\arraystretch}{1.1}
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
     \hline
-        \multirow{2}{*} {Pattern}  &  \multirow{2}{*} {Output}  &  \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} & \multicolumn{2}{c|}{Trau} & \multicolumn{2}{c|}{$\paexp$} \\
+        \multirow{2}{*}{Group }  & \multirow{2}{*}{O} & \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} &  \multicolumn{2}{c|}{Trau} & \multicolumn{2}{c|}{$\paexp$} \\
         \cline{3-10}
-       &  & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$ &  $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$ & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$ &  $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$ \\ 
+       &  & $\#$ & $T$ &  $\#$ & $T$ & $\#$ & $T$ &  $\#$ & $T$ \\ 
        \hline
        \cline{1-10}
-       \multirow{3}{*}{$12345(w_1)^+(w_2)^+$} & SAT & 5 & 14.0 & 29 & 8.5 & 3 & {\bf \textless{}0.1} & {\bf 37} & 9.9 \\
+       \multirow{3}{*}{\scriptsize{$12345(w_1)^+(w_2)^+$}} & S & 5 & 14.0 & 29 & 8.5 & 3 & {\bf  0.1} & {\bf 37} & 9.9 \\
          \cline{2-10}
-        & UNSAT & 0 & - & 0 & - & {\bf 60} & {\bf 1.3} & {\bf 60} & 47.2 \\
+        & U & 0 & - & 0 & - & {\bf 60} & {\bf 1.3} & {\bf 60} & 47.2 \\
          \cline{2-10}
-        & FAIL & 95 & - & 71 & - & 32 & - & {\bf 3} & - \\ \hline
+        & F & 95 & - & 71 & - & 32 & - & {\bf 3} & - \\ \hline
         \cline{1-10}
-       \multirow{3}{*}{$12345(w_1)^+(w_2)^+6789$} & SAT & 11 & 13.0 & 29 & 12.0 & 0 & - & {\bf 37} & {\bf 10.6} \\
+       \multirow{3}{*}{\scriptsize{$\begin{array}{l}12345(w_1)^+ \\
+       \hspace{2mm}(w_2)^+6789\end{array}$}} & S & 11 & 13.0 & 29 & 12.0 & 0 & - & {\bf 37} & {\bf 10.6} \\
         \cline{2-10}
-        & UNSAT & 0 & - & 0 & - & {\bf 63} & {\bf 1.2} & {\bf 63} & 50.0 \\
+        & U & 0 & - & 0 & - & {\bf 63} & {\bf 1.2} & {\bf 63} & 50.0 \\
          \cline{2-10}
-        & FAIL & 89 & - & 71 & - & 37 & - & {\bf 0} & - \\ \hline
+        & F & 89 & - & 71 & - & 37 & - & {\bf 0} & - \\ \hline
         \cline{1-10}
-       \multirow{3}{*}{$(w_1)^+(w_2)^+6789$} & SAT & 18 & 24.0 & 30 & 9.3 & 2 & {\bf \textless{}0.1} & {\bf 41} & 16.1 \\
+       \multirow{3}{*}{\scriptsize{$(w_1)^+(w_2)^+6789$}} & S & 18 & 24.0 & 30 & 9.3 & 2 & {\bf  0.1} & {\bf 41} & 16.1 \\
       	 \cline{2-10}
-        & UNSAT & 0 & - & 1 & 4.0 & {\bf 59} & {\bf 2.5} & {\bf 59} & 45.8 \\
+        & U & 0 & - & 1 & 4.0 & {\bf 59} & {\bf 2.5} & {\bf 59} & 45.8 \\
          \cline{2-10}
-        & FAIL & 82 &  & 69 &  & 39 &  & {\bf 0} &  \\ \hline
+        & F & 82 &  & 69 &  & 39 &  & {\bf 0} &  \\ \hline
         \cline{1-10}
-       \multirow{3}{*}{$12345\Sigma^*_{\sf num}$} & SAT & 82 & 8.7 & {\bf 100} & {\bf 2.2} & 28 & 5.9 & {\bf 100} & 18.5 \\
+       \multirow{3}{*}{\scriptsize{$12345\Sigma^*_{\sf num}$}} & S & 82 & 8.7 & {\bf 100} & {\bf 2.2} & 28 & 5.9 & {\bf 100} & 18.5 \\
         \cline{2-10}
-        & UNSAT & 0 & - & 0 & - & 0 & - & 0 & - \\
+        & U & 0 & - & 0 & - & 0 & - & 0 & - \\
          \cline{2-10}
-        & FAIL & 18 & - & {\bf 0} & - & 72 & - & {\bf 0} & - \\ \hline
+        & F & 18 & - & {\bf 0} & - & 72 & - & {\bf 0} & - \\ \hline
         \cline{1-10}
-       \multirow{3}{*}{$12345\Sigma^*_{\sf num}6789$} & SAT & 60 & 9.3 & 17 & 7.8 & 3 & {\bf 0.3} & {\bf 100} & 16.0 \\
+       \multirow{3}{*}{\scriptsize{$12345\Sigma^*_{\sf num}6789$}} & S & 60 & 9.3 & 17 & 7.8 & 3 & {\bf 0.3} & {\bf 100} & 16.0 \\
         \cline{2-10}
-        & UNSAT & 0 & - & 0 & - & 0 & - & 0 & - \\
+        & U & 0 & - & 0 & - & 0 & - & 0 & - \\
          \cline{2-10}
-        & FAIL & 40 & - & 83 & - & 97 & - & {\bf 0} & - \\ \hline
+        & F & 40 & - & 83 & - & 97 & - & {\bf 0} & - \\ \hline
         \cline{1-10}
-       \multirow{3}{*}{$\Sigma^*_{\sf num}6789$} & SAT & 68 & 5.5 & 27 & 13.0 & 24 & {\bf 9.0} & {\bf 100} & 15.7 \\
+       \multirow{3}{*}{\scriptsize{$\Sigma^*_{\sf num}6789$}} & S & 68 & 5.5 & 27 & 13.0 & 24 & {\bf 9.0} & {\bf 100} & 15.7 \\
         \cline{2-10}
-        & UNSAT & 0 & - & 0 & - & 0 & - & 0 & - \\
+        & U & 0 & - & 0 & - & 0 & - & 0 & - \\
          \cline{2-10}
-        & FAIL & 32 & - & 73 & - & 76 & - & {\bf 0} &- \\
+        & F & 32 & - & 73 & - & 76 & - & {\bf 0} &- \\
         \hline
        \end{tabular}
            \label{table:string}
-\end{table*}
+\end{table}
 
