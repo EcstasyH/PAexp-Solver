@@ -1,3 +1,4 @@
+%!TEX root = paper.tex
 
 The emerging of scripting languages boosted the needs of better approaches and tools to ensure program quality.
 Comparing with traditional programming languages, string data type plays a more critical role in its analysis.
@@ -17,58 +18,75 @@ The complexity of the satisfiability of word equations with regular constraints 
 
 Satisfiability of word equations is a special instance of Hilbert’s 10th problem. 
 In the past, the original motivation of studying word equations was for finding an undecidability proof of Hilbert’s 10th problem. 
-However, the motivation is no longer valid since Makanin finds a decision procedure. Interestingly, in the last decade, driven by the need for program analysis, people start to revisit the problem and its extensions to describe the complete string library APIs in conventional programming languages.
+However, the motivation is no longer valid since Makanin finds a decision procedure. Interestingly, in the last decade, driven by the need for program analysis, people started to revisit the problem and its extensions to describe the complete string library APIs in conventional programming languages.
 
-The satisfiability of \emph{string/number conversion constraints}, e.g., $wx=yx \wedge |x| > \parseInt(y)$, has been proven undecidable in~\cite{DayGHMN18}. 
-However, this kind of constraint is pervasive in scripting language programs. 
-For example, it is common that programs read string input from text files and converts a part of the string input to numbers.
-Even more crucially, in many programming languages, the string-number conversion is a part of the definition of their core semantics. 
+The satisfiability of \emph{string-number conversion constraints}, e.g., $wx=yx \wedge |x| > \parseInt(y)$, has been proven undecidable in~\cite{DayGHMN18}. 
+However, this kind of constraints is pervasive in scripting language programs. 
+For example, it is common that programs read string inputs from text files and converts a part of the string input to numbers.
+Even more crucially, in many programming languages, the string-number conversion is a part of the definition of their core semantics \zhilin{reference here ?}. 
 JavaScript, which powers most interactive content on the Web and increasingly server-side code with Node.js, is one of such languages. 
 
 Due to the difficulties in solving string constraints and, in practice, satisfiable string constraints are more critical for automatic testing, one idea is to have separate specialized procedures for solving satisfiable sub-problems. 
 Currently, there are two main specialized approaches for proving satisfiability.
 The first is to consider only strings of bounded length.
-This approach is taken in earlier generation solvers such as Hampi~\cite{KiezunGAGHE12} and Kuluza~\cite{SaxenaAHMMS10}.
+This approach is taken in the first-generation solvers such as Hampi~\cite{KiezunGAGHE12} and Kuluza~\cite{SaxenaAHMMS10}.
 Although they are useful in handling many practical cases, they fail short when the all string solutions exceed the selected bound.
 For example, a constraint of the form $x.y \neq z  \wedge |x| > 2000$ would be quite challenging to handle using those solvers.
 
 One more recent approach is flattening~\cite{Parosh:20:PLDI,AbdullaACDHRR18,AbdullaACDHRR17}.
-The idea is to restrict the solution space of string variables to some pattern defined by \emph{flat automata} (see Section~\ref{sec:string-solving} for more details). 
+The idea is to restrict the solution space of string variables to some pattern defined by \emph{flat languages} (see Section~\ref{sec:string-solving} for more details). 
 The major benefit of considering this class is two folds.
 First, even under the restriction, often the potential solution space is still infinite, which gives us a higher potential of finding solutions.
 For instance, we can find a solution for $x.y \neq z  \wedge |x| > 2000$ under a very simple restriction: all variables are in $a^*$, which $a$ is a character in our alphabet.
-Second, and more importantly, because we can convert the membership problem of a flat automaton to a satisfiability problem of Presburgher formula, the class of word equation + regular constraints + length constraints is decidable.
+Second, and more importantly, because we can convert the membership problem of a flat language to the satisfiability problem of a Presburgher formula, the class of word equation + flat languages + length constraints is decidable.
 
-The paper of Abdulla et al.~\cite{Parosh:20:PLDI} has considered adding string/number conversion constraints to the above class.
-The paper proposes a decision procedure with a restricted form of flat automata.
-For string/number conversion, their approach projects the solution to string/number conversion to, in terms of numerical solutions, a finite solution space.
+The paper of Abdulla et al.~\cite{Parosh:20:PLDI} has considered adding string-number conversion constraints to the above class.
+The paper proposed an algorithm for a restricted form of flat languages and left the support of general flat languages as an open problem.
+For string-number conversion, their approach projects the solution to string-number conversion to
+%, in terms of numerical solutions, 
+a finite solution space.
 
 In this paper, we propose a complete solution to this problem.
-We propose a decision procedure for the class of word equation + regular constraints + length constraints + string/number conversion under arbitrary flat automata (denoted by $\strint$).
-The basic idea of our approach can be sketched as follows: we first reduce the satisfiability problem of $\strint$ to the corresponding satisfiability problem of the theory of Presburger Arithmetic with exponential functions (denoted by $\paexp$); then, according to the decidability of $\paexp$ \cite{Semenov84}, we therefore obtain the decidability of the satisfiability of $\strint$.  
+We propose a decision procedure for the class of word equation + flat languages + length constraints + string-number conversion.
+The basic idea of our approach can be sketched as follows: we first reduce the satisfiability problem to the corresponding satisfiability problem of the theory of Presburger Arithmetic with exponential functions (denoted by $\paexp$); then, according to the decidability of $\paexp$, we obtain the decidability of the original satisfiability problem.  
 
-In \cite{Semenov84}, Semen\"{o}v just proved that $\paexp$ admits quantifier elimination property and 
-therefore obtained that its satisfiability is decidable, but  did not provide an explicit decision procedure. So, in  \cite{Point86}, Point presented a first decision procedure for the satisfiability of $\paexp$ in a mathematical way, which is difficult to understand and therefore no implementation available based on which up to now to the best of our knowledge. So, another contribution of this paper is that we present a more understandable algorithm for $\paexp$'s satisfiability in a computational way and its prototypical implementation. Although the general framework of our algorithm is quite akin to Point's,  it contains the following improvements and corrections: 
+The decidability of $\paexp$ was first shown by Semen\"{o}v in \cite{Semenov84}. Nevertheless, Semen\"{o}v did not provide an explicit decision procedure. To remedy this, in \cite{Point86}, Point presented the first quantifier elimination procedure for the satisfiability of $\paexp$. Partially attributed to the fact that Semen\"{o}v decidability proof in \cite{Semenov84} was quite abstract and Point's procedure in \cite{Point86} was presented  in a mathematical and dense way, this line of work has eluded the attentions of computer science researchers, to the best of our knowledge. Therefore, no implementation based on Point's procedure has been available up to now. 
+
+Aiming at introducing this line of work to computer science researchers, we reformulate (and slightly improve) Point's procedure in a way, which, hopefully, is more accessible for computer science researchers (Section~\ref{sec-dec}). This, by our humble opinion, can be seen as another contribution of this paper.
+%
+Furthermore, we propose various optimizations (Section~\ref{sec-opt}) and achieve the first prototypical implementation of Point's procedure (Section~\ref{sec-exp}). 
+
+%
+%The optimizations include 
+%over approximation to reduce the number of subcases
+% the elimination of linear occurrences of variables by under approximation and synchronize the elimination of exponential occurrences of the same variable in different atomic formulas. We also apply an over approximation to reduce the number of subcases and adopt DFS with preprocessing to find possible solutions. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+Although the general framework of our algorithm is quite akin to Point's,  it contains the following improvements and corrections: 
 \begin{itemize}
 	\item[i)] The syntax of Presburger arithmetic with exponential functions in our setting is more natural and easy to understand; Point's algorithm needs to transform the formula into DNF (disjunction normal form) before  eliminating any variables, that could increase the length of the considered $\paexp$ formula exponentially. In contrast, our algorithm just assumes that formulas are NNF (negation normal form). Therefore, our algorithm is much easy to follow and more efficient.
 \item[ii)] Unlike in Point's algorithm to eliminate the exponential part and then the linear part of the largest variable according to the given order one by one, in contrast, our algorithm eliminates the exponential parts of 
 	all variables according to the order and then the resulted linear part, that improve the efficiency very much.
-	
-Moreover, we propose various optimizations for satisfiability problem of quantifier-free $\paexp$ formula for an efficient implementation. Two important optimizations are that we avoid the elimination of linear occurrences of variables by under approximation and synchronize the elimination of exponential occurrences of the same variable in different atomic formulas. We also apply an over approximation to reduce the number of subcases and adopt DFS with preprocessing to find possible solutions. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+%Moreover, we propose various optimizations for satisfiability problem of quantifier-free $\paexp$ formula for an efficient implementation. 
+Two important optimizations are that we avoid the elimination of linear occurrences of variables by under approximation and synchronize the elimination of exponential occurrences of the same variable in different atomic formulas. We also apply an over approximation to reduce the number of subcases and adopt DFS with preprocessing to find possible solutions. 
 
 \item[iii)] Additionally, a sub-case of eliminating exponential terms in Point's algorithm is incorrect, we correct it by Lemma \ref{lem:exp-ineq} (see later).
 \end{itemize}
- 
+ }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In fact, other than the theoretical difficulties, in practice, the string-number constraints are quite challenging for state-of-the-art solvers. 
+In fact, other than the theoretical difficulties, in practice, the string-number conversion is quite challenging for state-of-the-art solvers. 
 Here we illustrate a toy example that mimic the ``mining'' step of block-chain construction. 
-Essentially, giving a hash function ${\sf hash}(w)$, the goal of the mining step is to find an input $w$ such that ${\sf hash}(w)$ satisfies certain pattern, e.g., the last $k$ digits are zeros. 
+Essentially, given a string hash function ${\sf hash}(w)$, the goal of the mining step is to find an input $w$ such that ${\sf hash}(w)$ satisfies a certain pattern, e.g., the last $k$ digits are zeros. 
 Below we consider a simple hash function:
 $${\sf hash}(w) = \sum \limits_{i = 1}^n a_i p^{n-i} \bmod m,$$ 
 where $p, m \in \Int^+$ with $p, m \ge 2$. 
 It is easy to see that ${\sf hash}(w)$ can be seen as a generalization of $\parseInt$ followed by a modulo operation. 
-In particular, if $\Sigma = \Sigma_{\sf num}$ and $p = 10$, then ${\sf hash}(w) = \parseInt(w) \bmod m$. Thus the problem of finding a suitable input $w$ such that the last $k$ digits of ${\sf hash}(w)$ are zeros can be modeled as a $\strint$ formula. Although the example is seemingly simple, most state-of-the-art solvers have difficulty to handle it, c.f., Section~\ref{sec-exp} for our experimental results. 
-With several optimizations introduces in Section~\ref{sec-opt}, we manage to solve several variants of the hash function examples as well as some more randomly generated cases better than most state-of-the-art solvers. 
+In particular, if $\Sigma = \Sigma_{\sf num}$ and $p = 10$, then ${\sf hash}(w) = \parseInt(w) \bmod m$. Thus, the problem of finding a suitable input $w$ such that the last $k$ digits of ${\sf hash}(w)$ are zeros can be modeled as a string constraint with $\parseInt$. Although the example is seemingly simple, it is already challenging for most state-of-the-art solvers, as shown by our experiment results in Section~\ref{sec-exp}. 
+With the optimizations introduced in Section~\ref{sec-opt}, 
+our implementation manages to solve several variants of the string-hash examples as well as some randomly generated problem instances better than the state-of-the-art solvers. 
  
 
 
