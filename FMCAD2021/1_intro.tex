@@ -25,7 +25,7 @@ For example, it is common that programs read string input from text files and co
 Even more crucially, in many programming languages, the string-number conversion is a part of the definition of their core semantics. 
 JavaScript, which powers most interactive content on the Web and increasingly server-side code with Node.js, is one of such languages. 
 
-Due to the difficulties in solving string constraints and, in practice, satisfiable string constraints are more critical for automatic testing, one idea is to have separate specialized procedures for solving satisfiable instances. 
+Due to the difficulties in solving string constraints and, in practice, satisfiable string constraints are more critical for automatic testing, one idea is to have separate specialized procedures for solving satisfiable sub-problems. 
 Currently, there are two main specialized approaches for proving satisfiability.
 The first is to consider only strings of bounded length.
 This approach is taken in earlier generation solvers such as Hampi~\cite{KiezunGAGHE12} and Kuluza~\cite{SaxenaAHMMS10}.
@@ -53,10 +53,12 @@ therefore obtained that its satisfiability is decidable, but  did not provide an
 	\item[i)] The syntax of Presburger arithmetic with exponential functions in our setting is more natural and easy to understand; Point's algorithm needs to transform the formula into DNF (disjunction normal form) before  eliminating any variables, that could increase the length of the considered $\paexp$ formula exponentially. In contrast, our algorithm just assumes that formulas are NNF (negation normal form). Therefore, our algorithm is much easy to follow and more efficient.
 \item[ii)] Unlike in Point's algorithm to eliminate the exponential part and then the linear part of the largest variable according to the given order one by one, in contrast, our algorithm eliminates the exponential parts of 
 	all variables according to the order and then the resulted linear part, that improve the efficiency very much.
+	
+Moreover, we propose various optimizations for satisfiability problem of quantifier-free $\paexp$ formula for an efficient implementation. Two important optimizations are that we avoid the elimination of linear occurrences of variables by under approximation and synchronize the elimination of exponential occurrences of the same variable in different atomic formulas. We also apply an over approximation to reduce the number of subcases and adopt DFS with preprocessing to find possible solutions. 
+
 \item[iii)] Additionally, a sub-case of eliminating exponential terms in Point's algorithm is incorrect, we correct it by Lemma \ref{lem:exp-ineq} (see later).
 \end{itemize}
  
-We propose various optimizations for satisfiability problem of quantifier-free $\paexp$ formula for an efficient implementation. Two important optimizations are that we avoid the elimination of linear occurrences of variables by under approximation and synchronize the elimination of exponential occurrences of the same variable in different atomic formulas. We also apply an over approximation to reduce the number of subcases and adopt DFS with preprocessing to find possible solutions. 
 
 In fact, other than the theoretical difficulties, in practice, the string-number constraints are quite challenging for state-of-the-art solvers. 
 Here we illustrate a toy example that mimic the ``mining'' step of block-chain construction. 
