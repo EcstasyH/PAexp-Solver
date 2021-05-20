@@ -59,12 +59,15 @@ therefore obtained that its satisfiability is decidable, but  did not provide an
 We propose various optimizations for satisfiability problem of quantifier-free $\paexp$ formula for an efficient implement. Two important optimizations are that we avoid the elimination of linear occurrences of variables by under approximation and synchronize the elimination of exponential occurrences of the same variable in different atomic formulas. We also apply an over approximation to reduce the number of subcases and adopt DFS with preprocessing to find possible solutions. 
 
 In fact, other than the theoretical difficulties, in practice, the string-number constraints are quite challenging for state-of-the-art solvers. 
-Here we illustrate a toy example that mimic the ``mining'' step of block-chain construction. Essentially, giving a hash function ${\sf hash}(w)$, the goal of the mining step is to find an input $w$ such that ${\sf hash}(w)$ satisfies certain pattern, e.g., the last $k$ digits are zeros. Below we consider a simple hash function:
+Here we illustrate a toy example that mimic the ``mining'' step of block-chain construction. 
+Essentially, giving a hash function ${\sf hash}(w)$, the goal of the mining step is to find an input $w$ such that ${\sf hash}(w)$ satisfies certain pattern, e.g., the last $k$ digits are zeros. 
+Below we consider a simple hash function:
 $${\sf hash}(w) = \sum \limits_{i = 1}^n a_i p^{n-i} \bmod m,$$ 
-where $p, m \in \Int^+$ with $p, m \ge 2$. It is easy to see that ${\sf hash}(w)$ can be seen as a generalization of $\parseInt$ followed by a modulo operation. In particular, if $\Sigma = \Sigma_{\sf num}$ and $p = 10$, then ${\sf hash}(w) = \parseInt(w) \bmod m$. Thus the problem of finding a suitable input $w$ such that the last $k$ digits of ${\sf hash}(w)$ are zeros can be modeled as a $\strint$ formula. Although the example is seemingly simple, most state-of-the-art solvers have difficulty to handle it, c.f., Section~\ref{sec-exp} for our experimental results. 
-
+where $p, m \in \Int^+$ with $p, m \ge 2$. 
+It is easy to see that ${\sf hash}(w)$ can be seen as a generalization of $\parseInt$ followed by a modulo operation. 
+In particular, if $\Sigma = \Sigma_{\sf num}$ and $p = 10$, then ${\sf hash}(w) = \parseInt(w) \bmod m$. Thus the problem of finding a suitable input $w$ such that the last $k$ digits of ${\sf hash}(w)$ are zeros can be modeled as a $\strint$ formula. Although the example is seemingly simple, most state-of-the-art solvers have difficulty to handle it, c.f., Section~\ref{sec-exp} for our experimental results. 
 With several optimizations introduces in Section~\ref{sec-opt}, we manage to solve several variants of the hash function examples as well as some more randomly generated cases better than most state-of-the-art solvers. 
  
-\yfc{todo: a short description of optimizations}
+
 
 
