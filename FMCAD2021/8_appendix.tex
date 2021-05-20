@@ -1,5 +1,25 @@
 %!TEX root = paper.tex
 
+
+\subsection{Details of the normalization step}\label{app-norm}
+%
+The normalization step comprises the following sub-steps.
+\begin{enumerate}
+\item At first, we transform $\varphi'(\ivarx,\vec{\ivary})$ into the NNF (negation normal form). Moreover, we remove the occurrences of $\neg$ by (a) replacing $\neg c | \iterm$ with $\bigvee \limits_{j \in [c-1]} c | (\iterm+j)$, (b)  $\neg (\iterm_1 = \iterm_2)$ with $\iterm_1 < \iterm_2 \vee \iterm_2 < \iterm_1$, (c) $\neg (\iterm_1 < \iterm_2)$ with $\iterm_2 \le \iterm_1$, (d) $\neg (\iterm_1 \le \iterm_2)$ with $\iterm_2 < \iterm_1$, and so on.
+%
+\item Repeat the following procedure, until there are no $\lambda_{10}(\iterm)$ with $\ivarx$ occurs in $\iterm$: Replace each occurrence of $\lambda_{10}$ in $\varphi'$, say $\lambda_{10}(\iterm)$, such that $\ivarx$ occurs in $\iterm$, by $10^{\ell_{10}(\iterm)}$. Let the resulting formula be $\varphi''$.
+%
+\item Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ with $\ivarx$ occurs in $\iterm$, we have $\iterm = \ivarx$: For each occurrence of the $\ell_{10}$ in $\varphi''$, say $\ell_{10}(\iterm)$, such that $\iterm$ contains $\ivarx$ but is not $\ivarx$, introduce a fresh variable, say $\ivarz$, 
+%and let $\varphi''':= \exists \ivarz.\ \varphi''[\ivarz/\ell_{10}(\iterm)] \wedge 10^\ivarz \le \iterm < 10^{\ivarz + 1}$. 
+and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add the constraint $10^\ivarz \le \iterm < 10^{\ivarz + 1}$ as a conjunct. Let $\varphi'''$ denote the resulting formula.  
+%
+\item Do the following replacements to $\varphi'''$, so that all the atomic formulas in $\varphi^\dag$ are of the form $\iterm_1 \le \iterm_2$ or $c | \iterm$: Replace every occurrence of $\iterm_1 \ge \iterm_2$ with $\iterm_2 \le \iterm_1$. Replace every occurrence of $\iterm_1 < \iterm_2$ (resp. $\iterm_1 > \iterm_2$) with $\iterm_1 \le \iterm_2 - 1$ (resp. $\iterm_2 \le \iterm_1-1$). Replace ever occurrence of $\iterm_1 = \iterm_2$ wtih $\iterm_2 \le \iterm_1 \wedge \iterm_1 \le \iterm_2$. Let $\varphi^\dag$ the resulting formula. 
+%
+\item Let $\vec{\ivarz} = \ivarz_1,\ldots, \ivarz_n$ be an enumeration of the freshly introduced variables. Then the result of the normalization procedure is 
+$\exists \vec{\ivarz}\exists \ivarx.\ \varphi^\dag$.
+\end{enumerate}
+
+
 \subsection{Proof of Lemma~\ref{lem:exp-ineq}}
 
 
@@ -162,5 +182,142 @@ which indicates that when  $x_i \le \alpha-1$, $\tau(x_i,\bar{x},\bar{y})$ keeps
 
 
 
-\subsection{Complexity analysis of Point's algorithm}
+%\subsection{Complexity analysis of Point's algorithm}
+
+\subsection{Elimination of exponential occurrences of variables for divisibility atomic formulas}\label{app-div}
+
+Consider
+%
+$$
+\begin{array}{l}
+\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
+c\ \big |\ \big(a_i 10^{\ivarx_{\sigma(i)}} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
++ \iterm(\vec{\ivary}) \big)
+\end{array}
+$$
+with $a_i \neq 0$.
+%
+
+Let $c = 2^{r_1} 5^{r_2}  c_0$ such that $c_0$ is divisible by neither $2$ nor $5$. Moreover, let $r = \max(r_1, r_2)$. Then $c | (10^rc_0)$. 
+
+If $c_0 = 1$, then $10^r$ is divisible by $c = 2^{r_1}5^{r_2}$. Thus for every $n \ge r$, $c \ |\ 10^n$.  Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+\[
+\small
+\begin{array}{l}
+\bigvee \limits_{p = 0}^{r - 1} c\ \big | \big(a_i 10^{p} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + b_kp + \sum_{k=1}^{i-1} b_k \ivarx_{\sigma(k)} 
++ \iterm(\vec{\ivary}) \big)\\
+%
+\vee \big(\ivarx_{\sigma(i)} \ge r \wedge c\ \big | \big(\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
++ \iterm(\vec{\ivary}) \big)\big),
+\end{array}
+\]
+where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
+
+Next, let us assume $c_0 > 1$. Since $10$ and $c_0$ are relatively prime, according to Euler's theorem (cf. \cite{HW80}), $10^{\phi(c_0)} \equiv 1 \bmod c_0$, where $\phi$ is the Euler function. Suppose $10^{\phi(c_0)} = kc_0 + 1$ for some $k \in \Nat$. 
+Then for every $n \in \Nat$ with $n \ge r$, 
+$$
+\begin{array}{l}
+10^{n + \phi(c_0)} \bmod c =10^{n-r} 10^r (kc_0 + 1) \bmod c = \\
+10^{n-r} (k 10^rc_0 + 10^r) \bmod c = \\
+10^{n-r} (0+10^r) \bmod c = 10^n \bmod c.
+\end{array}
+$$
+
+Then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+\[
+\begin{array}{l}
+\bigvee \limits_{p=0}^{r-1} \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[p/\ivarx_{\sigma(i)}]\ \vee \\
+\left(
+\begin{array}{l}
+\ivarx_{\sigma(i)} \ge r\ \wedge \\
+\bigvee \limits_{q = 0}^{\phi(c_0)-1} 
+\left(
+\begin{array}{l}
+\phi(c_0)\ \big |\ (\ivarx_{\sigma(i)} - r - q)\ \wedge \\
+c\ \big | 
+\left(
+\begin{array}{l}
+a_i 10^{r+q} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \\
+\sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})
+\end{array}
+\right) 
+\end{array}
+\right)
+\end{array}
+\right),
+\end{array}
+\]
+where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
+
+
+\subsection{Some additional optimizations of the decision procedure for {\paexp}}\label{app-opt}
+
+\paragraph{Synchronize the elimination of exponential occurrences of the same variable in different atomic formulas}
+
+Although Lemma~\ref{lem:exp-ineq} is stated for a single atomic formula, the elimination of the exponential occurrences of the same variable in different atomic formulas can actually be synchronized. That is,  let $\alpha^\tau_{1}, \alpha^\tau_{2}, B^\tau, \delta^\tau$ be the constants as stated in the aforementioned under-approximation of an inequality $\tau$, define $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ as the minimum of $\alpha^\tau_1$, the maximum of $\alpha^\tau_2$, the maximum of $B^\tau$, and the maximum of $\delta^\tau$ respectively with $\tau$ ranging over the inequalities of $\varphi$. Then we can use the same constants $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ for different inequalities when eliminating the exponential occurrences of the same variable. 
+
+\paragraph{Avoid the formula-size blow-up by depth-first search}
+
+The {\pa} formula resulting from the elimination of exponential occurrences is essentially a big disjunction of the formulas of small size. If we store this big disjunction naively, then the formula size quickly blows up and exhausts the memory. Instead, we choose to do a depth-first search (DFS) and consider the disjuncts, which are of small sizes, one by one, and solve the satisfiability problem for these disjuncts. If during the search, a satisfiable disjunct is found, then the search terminates and ``SAT'' is reported.
+
+\paragraph{Preprocess with small upper bound}
+
+We believe that if a quantifier-free {\paexp} formula is satisfiable, then most probably it is satisfiable with small values assigned to variables. Consequently, as a preprocessing step, we put a small upper bound, e.g. the biggest constant occurring in the formula, on the values of variables, and perform a depth-first search, so that a model can be quickly found, if there is any. If this preprocessing is unsuccessful, then we continue the search with the greater upper bound $10^u$ for some proper $u \ge 1$.
+
+
+\subsection{Detailed experiment results}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table*}[ht]
+    \caption{Experimental results on STRINGHASH,  $\#_{\mathrm{prb}}$: number of problems, $T_{\mathrm{avg}}$: average time in seconds}
+    \centering
+
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+        \multirow{2}{*} {Pattern}  &  \multirow{2}{*} {Output}  &  \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} & \multicolumn{2}{c|}{Trau} & \multicolumn{2}{c|}{$\paexp$} \\
+        \cline{3-10}
+       &  & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$ &  $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$ & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$ &  $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$ \\ 
+       \hline
+       \cline{1-10}
+       \multirow{3}{*}{$12345(w_1)^+(w_2)^+$} & SAT & 5 & 14.0 & 29 & 8.5 & 3 & {\bf \textless{}0.1} & {\bf 37} & 9.9 \\
+         \cline{2-10}
+        & UNSAT & 0 & - & 0 & - & {\bf 60} & {\bf 1.3} & {\bf 60} & 47.2 \\
+         \cline{2-10}
+        & FAIL & 95 & - & 71 & - & 32 & - & {\bf 3} & - \\ \hline
+        \cline{1-10}
+       \multirow{3}{*}{$12345(w_1)^+(w_2)^+6789$} & SAT & 11 & 13.0 & 29 & 12.0 & 0 & - & {\bf 37} & {\bf 10.6} \\
+        \cline{2-10}
+        & UNSAT & 0 & - & 0 & - & {\bf 63} & {\bf 1.2} & {\bf 63} & 50.0 \\
+         \cline{2-10}
+        & FAIL & 89 & - & 71 & - & 37 & - & {\bf 0} & - \\ \hline
+        \cline{1-10}
+       \multirow{3}{*}{$(w_1)^+(w_2)^+6789$} & SAT & 18 & 24.0 & 30 & 9.3 & 2 & {\bf \textless{}0.1} & {\bf 41} & 16.1 \\
+      	 \cline{2-10}
+        & UNSAT & 0 & - & 1 & 4.0 & {\bf 59} & {\bf 2.5} & {\bf 59} & 45.8 \\
+         \cline{2-10}
+        & FAIL & 82 &  & 69 &  & 39 &  & {\bf 0} &  \\ \hline
+        \cline{1-10}
+       \multirow{3}{*}{$12345\Sigma^*_{\sf num}$} & SAT & 82 & 8.7 & {\bf 100} & {\bf 2.2} & 28 & 5.9 & {\bf 100} & 18.5 \\
+        \cline{2-10}
+        & UNSAT & 0 & - & 0 & - & 0 & - & 0 & - \\
+         \cline{2-10}
+        & FAIL & 18 & - & {\bf 0} & - & 72 & - & {\bf 0} & - \\ \hline
+        \cline{1-10}
+       \multirow{3}{*}{$12345\Sigma^*_{\sf num}6789$} & SAT & 60 & 9.3 & 17 & 7.8 & 3 & {\bf 0.3} & {\bf 100} & 16.0 \\
+        \cline{2-10}
+        & UNSAT & 0 & - & 0 & - & 0 & - & 0 & - \\
+         \cline{2-10}
+        & FAIL & 40 & - & 83 & - & 97 & - & {\bf 0} & - \\ \hline
+        \cline{1-10}
+       \multirow{3}{*}{$\Sigma^*_{\sf num}6789$} & SAT & 68 & 5.5 & 27 & 13.0 & 24 & {\bf 9.0} & {\bf 100} & 15.7 \\
+        \cline{2-10}
+        & UNSAT & 0 & - & 0 & - & 0 & - & 0 & - \\
+         \cline{2-10}
+        & FAIL & 32 & - & 73 & - & 76 & - & {\bf 0} &- \\
+        \hline
+       \end{tabular}
+           \label{table:string}
+\end{table*}
 

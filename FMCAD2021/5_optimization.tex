@@ -6,9 +6,11 @@ In this section, we focus on quantifier-free {\paexp} formulas (or existential {
 
 Let $\varphi$ be a quantifier-free {\paexp} formula in the remainder of this section. Moreover, we assume that $\varphi$ is normalized since the optimizations presented in the sequel are for normalized formulas. Furthermore, for technical convenience, we assume that all the inequality atomic formulas are of the form 
 %
-\[\sum_{j=1}^{n} a_j 10^{\ivarx_{j}} + \sum_{k=1}^{n}b_k \ivarx_{k} \le c\]
+$\sum_{j=1}^{n} a_j 10^{\ivarx_{j}} + \sum_{k=1}^{n}b_k \ivarx_{k} \le c$, 
 %
 where $c$ is an integer constant. (Implicitly, we assume that there are no free variables and all the variables are existentially quantified.)
+
+In the sequel, we present two major optimizations and omit some additional optimizations due to the page limit, which can be found in Appendix~\ref{app-opt}. 
 
 \paragraph{Reduce the number of enumerated variable orders by over approximation}
 
@@ -29,7 +31,7 @@ Then during the enumeration of the linear orders for the variables $\ivarx_1, \l
 
 \paragraph{Avoid the elimination of linear occurrences of variables by under approximation}\label{para: opt under appro}
 
-In Section~\ref{sec-dec}, the decision procedure of {\paexp} requires the elimination of both exponential and linear occurrences of variables. Considering the fact that {\pa} formulas can be solved efficiently by the state-of-the-art solvers, e.g. CVC4 and Z3, one natural idea is to try to eliminate only the exponential occurrences, but not the linear occurrences, of variables, and obtain the {\pa} formulas in the end, which can then be solved by the state-of-the-art solvers.
+The decision procedure of {\paexp} in Section~\ref{sec-dec} requires the elimination of both exponential and linear occurrences of variables. Considering the fact that {\pa} formulas can be solved efficiently by the state-of-the-art solvers, e.g. CVC4 and Z3, one natural idea is to try to only eliminate the exponential occurrences, but not the linear occurrences, of variables, and obtain the {\pa} formulas in the end, which can then be solved by the state-of-the-art solvers.
 
 Recall that Lemma~\ref{lem:exp-ineq} enables us to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ from 
 $$
@@ -41,14 +43,15 @@ a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_
 $$
 Actually, Lemma~\ref{lem:exp-ineq} does more in the sense that all occurrences of $\ivarx_{\sigma(i)}$, including the linear ones, are eliminated from the atomic formulas resulted from $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, e.g. $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-1)} + p /\ivarx_{\sigma(i)}]$. Then we can continue eliminating the exponential occurrences of $\ivarx_{\sigma(i-1)}$ from $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-1)} + p /\ivarx_{\sigma(i)}]$, provided that the coefficient of $\ivarx_{\sigma(i-1)}$ therein is nonzero. Iterating this process would produce a {\pa} formula eventually.
 
-Nevertheless, the side condition of Lemma~\ref{lem:exp-ineq}, namely $a_i \neq 0$, undermines the aforementioned natural idea. If $a_i = 0$, but $b_i \neq 0$, namely, 
-$$
-\begin{array}{l}
-\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}) \Def  \\
-\hspace{4mm} 
-\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le c,
-\end{array}
-$$
+Nevertheless, the side condition of Lemma~\ref{lem:exp-ineq}, namely $a_i \neq 0$, undermines the aforementioned natural idea. If $a_i = 0$, but $b_i \neq 0$, 
+%namely, 
+%$$
+%\begin{array}{l}
+%\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}) \Def  \\
+%\hspace{4mm} 
+%\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le c,
+%\end{array}
+%$$
 then we are unable to utilize Lemma~\ref{lem:exp-ineq} to eliminate the linear occurrences of $\ivarx_{\sigma(i)}$ from $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$. In this case, the quantifier elimination algorithm of {\pa} has to be applied to eliminate $\ivarx_{\sigma(i)}$ from $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, so that later on, we can eliminate the exponential occurrences of $\ivarx_{\sigma(i-1)}$, which requires that $\ivarx_{\sigma(i-1)}$ is the maximum variable in the left-hand side of the inequality.
 
 To avoid applying the quantifier elimination algorithm of {\pa}, we consider the following under approximation of $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, namely, we additionally assume that $\ivarx_{\sigma(i)} \le 10^{u}$ for some constant bound $u \in \Nat$ with $u \ge 1$. Then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$ can be rewritten as 
@@ -107,10 +110,15 @@ where all exponential occurrences of $\ivarx_{\sigma(i-1)}$ are eliminated.
 
 Similarly, we can eliminate the exponential occurrences of $\ivarx_{\sigma(i-2)}$ from $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-2)} + p /\ivarx_{\sigma(i-1)}]$ as well as  $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[p /\ivarx_{\sigma(i-1)}]$, and so on. Eventually, we obtain a {\pa} formula.
 
+%We also propose some additional optimizations, which are omitted due to the page limit and can be found in Appendix~\ref{app-opt}.
 
+
+
+\hide{
 \paragraph{Synchronize the elimination of exponential occurrences of the same variable in different atomic formulas}
 
 Although Lemma~\ref{lem:exp-ineq} is stated for a single atomic formula, the elimination of the exponential occurrences of the same variable in different atomic formulas can actually be synchronized. That is,  let $\alpha^\tau_{1}, \alpha^\tau_{2}, B^\tau, \delta^\tau$ be the constants as stated in the aforementioned under-approximation of an inequality $\tau$, define $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ as the minimum of $\alpha^\tau_1$, the maximum of $\alpha^\tau_2$, the maximum of $B^\tau$, and the maximum of $\delta^\tau$ respectively with $\tau$ ranging over the inequalities of $\varphi$. Then we can use the same constants $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ for different inequalities when eliminating the exponential occurrences of the same variable. 
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -162,6 +170,7 @@ For instance, assume coefficients of $10^\ivarx$ in atomic formulas of $\varphi$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+\hide{
 \paragraph{Avoid the formula-size blow-up by depth-first search}
 
 The {\pa} formula resulting from the elimination of exponential occurrences is essentially a big disjunction of the formulas of small size. If we store this big disjunction naively, then the formula size quickly blows up and exhausts the memory. Instead, we choose to do a depth-first search (DFS) and consider the disjuncts, which are of small sizes, one by one, and solve the satisfiability problem for these disjuncts. If during the search, a satisfiable disjunct is found, then the search terminates and ``SAT'' is reported.
@@ -169,6 +178,7 @@ The {\pa} formula resulting from the elimination of exponential occurrences is e
 \paragraph{Preprocess with small upper bound}
 
 We believe that if a quantifier-free {\paexp} formula is satisfiable, then most probably it is satisfiable with small values assigned to variables. Consequently, as a preprocessing step, we put a small upper bound, e.g. the biggest constant occurring in the formula, on the values of variables, and perform a depth-first search, so that a model can be quickly found, if there is any. If this preprocessing is unsuccessful, then we continue the search with the greater upper bound $10^u$ for some proper $u \ge 1$.
+}
 
 %\zhilin{stopped here}
 

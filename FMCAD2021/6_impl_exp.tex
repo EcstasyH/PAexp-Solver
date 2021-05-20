@@ -28,20 +28,20 @@ To evaluate the performance of the {\paexp}-solver, we created two benchmark sui
 \paragraph{The ARITHMETIC benchmark suite} 
 This suite comprises three groups of randomly generated {\paexp} formulas. Each group is characterized by four parameters ($EV$, $LV$, $EI$, $LI$), where $EV, LV$ represent the number of variables with exponential occurrences and with only linear occurrences respectively, and $EI, LI$ represent the number of inequalities with exponential terms and with only linear terms respectively. 
 We consider three parameter classes, $(2, 3, 3, 4)$, $(3, 4, 4, 5)$, and $(4, 5, 5, 6)$. 
-Each group of the ARITHMETIC benchmark suite consists of 200 randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-10^2, 10^2]$ and the other coefficients/constants are randomly selected from the interval $[-10^5, 10^5]$. The two intervals are chosen with the intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities. Moreover, aiming at a better coverage of the syntactical ingredients of {\paexp}, we randomly choose some problem instances and replace the $\le$ symbol of their first inequalities by $=$. The constant upper bound for the values of variables is set to be $10^{20}$, motivated by the fact that the largest 64-bit integer is less than $10^{20}$. We also create an SMTLib2 file for each problem instance, to facilitate the comparison with the state-of-the-art of SMT solvers CVC4 and Z3. Because neither CVC4 nor Z3 supports the exponential functions natively, in the SMTLib2 files, we encode $10^x$ as a recursive function $f(x)$ defined by: $f(0) = 1$ and $f(n+1) = 10*f(n)$.
+Each group of the benchmark suite consists of 200 randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-10^2, 10^2]$ and the other coefficients/constants are randomly selected from $[-10^5, 10^5]$. The two intervals are chosen with the intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities. Moreover, aiming at a better coverage of the syntactical ingredients of {\paexp}, we randomly choose some problem instances and replace the $\le$ symbol of their first inequalities by $=$. The constant upper bound for the values of variables is set to be $10^{20}$, motivated by the fact that the largest 64-bit integer is less than $10^{20}$. We also create an SMTLib2 file for each problem instance, to facilitate the comparison with the state-of-the-art of SMT solvers CVC4 and Z3. Because neither CVC4 nor Z3 supports the exponential functions natively, in the SMTLib2 files, we encode $10^x$ as a recursive function $f(x)$ defined by: $f(0) = 1$ and $f(n+1) = 10*f(n)$.
 
 %
 %\item 
 
 \paragraph{The STRINGHASH benchmark suite} 
-This suite comprises six groups of string constraints generated from the string hash functions ${\sf hash}(w)$ such that for each $w= a_1 \ldots a_n$, 
-${\sf hash}(w) = \sum \limits_{i = 1}^n a_i p^{n-i} \bmod m$, where $p, m \in \Int^+$ with $p, m \ge 2$. It is easy to see that ${\sf hash}(w)$ can be seen as a generalization of $\parseInt$ followed by a modulo operation. In particular, if $\Sigma = \Sigma_{\sf num}$ and $p = 10$, then ${\sf hash}(w) = \parseInt(w) \bmod m$. 
-Aiming at a comparison with the state-of-the-art string constraint solvers that support $\parseInt$, e.g. CVC4, Z3, and Trau, we assume $\Sigma =\Sigma_{\sf num}$ and $p = 10$, so that the string hash function can be encoded by $\parseInt$. 
+This suite comprises six groups of string constraints generated from the string hash functions ${\sf hash}(w)$ encoded by $\parseInt$.
+%Aiming at a comparison with the state-of-the-art string constraint solvers that support $\parseInt$, we assume that $\Sigma =\Sigma_{\sf num}$ and $p = 10$ and the string hash function is encoded by $\parseInt$.
+%, so that the string hash function can be encoded by $\parseInt$. 
 
 The string constraints in the STRINGHASH benchmark suite are of the form 
 $$\svarx \in \Aut \wedge \left( \parseInt(\svarx) \bmod m \right) \bmod m^\prime = 0   \notag \wedge \len(\svarx) < 100,$$ 
 where $\Aut$ is an FA, $m, m^\prime \ge 2.$ 
-The six groups of string constraints are characterized by different classes of regular constraints, namely, $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, $w^+_1 w^+_2 6789$, $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, and $\Sigma_{\sf num}^* 6789$, where $w_1,w_2 \in \Sigma^+_{\sf num}$. The first three are flat languages, while the latter three are not. Each group has 100 randomly generated problem instances, where $m$ is a randomly chosen prime number in the interval $[10^2, 10^5]$ and $1 \le m' < m$ ($m'$ is not necessarily a prime number). We generate the SMTLib2 files for these string constraints, as inputs to the SMT solvers. For the {\paexp}-solver, we do the following:   
+The six groups of string constraints are characterized by different classes of regular constraints, namely, $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, $w^+_1 w^+_2 6789$, $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, and $\Sigma_{\sf num}^* 6789$, where $w_1,w_2 \in \Sigma^+_{\sf num}$. The first three are flat languages, while the latter three are not. Each group has 100 randomly generated problem instances, where $m$ is a randomly chosen prime number in the interval $[10^2, 10^5]$ and $1 \le m' < m$ ($m'$ is not necessarily a prime number). We generate the SMTLib2 files for these string constraints, as inputs to the string constraint solvers. On the other hand, for the {\paexp}-solver, we do the following:   
 \begin{itemize}
 \item For flat regular constraints, we generate the {\paexp} formulas corresponding to the string constraints, as the inputs to the {\paexp}-solver.
 %
@@ -52,7 +52,7 @@ $\Sigma_{\sf num}^*$,  where $a, b_1,\ldots, b_k \in \Sigma_{\sf num}$.
 %
 We iterate the following procedure until a model is found or the time limit is reached: Initially, set $k=1$ and iterate by assigning $0, \ldots, 9$ to $a$. For each assignment, we encode the resulting string constraint into an {\paexp} formula with only one exponential variable. If the resulting {\paexp} formula is unsatisfiable, then we increase $k$ by 1 and repeat this process. 
 \end{itemize}
-We would like to remark that the flattening strategy for non-flat regular constraints is a strict generalization of that in \cite{Parosh:20:PLDI}: Patterns of the form $0^*(b_1...b_k)$ were considered therein and {\pa} formulas are sufficient to encode such patterns. On the other hand, we consider patterns of the form e.g. $(a)^* (b_1 \ldots b_k)$ (where $a \in \Sigma_{\sf num}$ can be nonzero), which requires {\paexp} formulas to encode.
+We would like to remark that the flattening strategy for non-flat regular constraints here is a strict generalization of that in \cite{Parosh:20:PLDI}: Patterns of the form $0^*(b_1...b_k)$ were considered therein and {\pa} formulas are sufficient to encode such patterns. On the other hand, we consider patterns of the form e.g. $(a)^* (b_1 \ldots b_k)$ (where $a \in \Sigma_{\sf num}$ can be nonzero), which requires {\paexp} formulas to encode in general.
 
 %\end{itemize}
 
@@ -100,16 +100,16 @@ We compare the {\paexp}-solver against the state-of-the-art SMT solvers on the g
 \item over the ARITHMETIC benchmark suite, we compare the {\paexp}-solver against CVC4 and Z3,
 \item over the STRINGHASH benchmark suite, we compare the {\paexp}-solver against CVC4, Z3, and Trau. 
 \end{itemize}
-All the experiments are run on a lap-top with the Intel i5 1.4GHz CPU and 8GB memory. We set the timeout threshold as 60 seconds per problem instance. 
+All the experiments are run on a lap-top with the Intel i5 1.4GHz CPU and 8GB memory. We set the time limit as 60 seconds per problem instance. 
 
 The experiment results are summarized in Table~\ref{table:arithmetic}-\ref{table:string}, where ``Fail'' means either timeout, unknown, or wrong answers. 
 
-On the ARITHMETIC benchmark suite (Table~\ref{table:arithmetic}), the $\paexp$-solver solves around $20\%$-$60\%$ more instances than Z3, and $30\%$-$100\%$ more instances than CVC4. Moreover, the gap becomes bigger as the the sizes of the formulas increase, which demonstrates that the $\paexp$-solver is more scalable in solving formulas of greater sizes. The average time of the $\paexp$-solver is comparable with Z3 and CVC4. The $\paexp$-solver reports ``B-UNSAT'' for 47 instances of the $(2, 3, 3, 4)$-group, while it does not report ``B-UNSAT'' (except one) for the other two groups. If more time is allowed, the $\paexp$-solver can report ``B-UNSAT'' for the ``TIMEOUT'' instances in the ARITHMETIC benchmark. 
+On the ARITHMETIC benchmark suite (Table~\ref{table:arithmetic}), the $\paexp$-solver solves around $20\%$-$60\%$ more instances than Z3, and $30\%$-$100\%$ more instances than CVC4. Moreover, the gap becomes bigger as the the sizes of the formulas increase, which demonstrates that the $\paexp$-solver is more scalable in solving formulas of greater sizes. The average time of the $\paexp$-solver is comparable with Z3 and CVC4. The $\paexp$-solver reports ``B-UNSAT'' for 47 instances of the $(2, 3, 3, 4)$-group, while it does not report ``B-UNSAT'' (except one) for the other two groups. If more time is allowed, the $\paexp$-solver can report ``B-UNSAT'' for the ``TIMEOUT'' instances. 
 
 %which means it can tackle some difficult instances. However, there are some instances are answered SAT or UNSAT by other solvers but timeout in $\paexp$-solver, e.g. 12 instances in 3-4-4-5 group. The reason is that $\paexp$-solver must seach for all possible assignments before answering B-UNSAT, and the number of variables with exponential occurrences has a dramatic impact on the time complexity due to the non-elementary complexity upper bound.
 
 
-On the STRINGHASH benchmark suite (Table~\ref{table:string}), in overall, the $\paexp$-solver solves significantly more problem instances, especially those satisfiable instances, than Z3, CVC4, and Trau. For instance, for flat regular constraints, the $\paexp$-solver solves almost all 300 problem instances, except 3 of them\footnote{These three instances can actually be solved in 70 seconds.}, while  Z3, CVC4, Trau solve only 34, 89, 187 instances respectively.  Trau gets wrong answers for some problem instances, e.g. it reports ``UNSAT'' for some satisfiable instances. While the $\paexp$-solver is more precise than the other solvers, it is slower than the other solvers (although still in a reasonable amount of time), especially for those unsatisfiable problem instances.
+On the STRINGHASH benchmark suite (Table~\ref{table:string}), in overall, the $\paexp$-solver solves significantly more problem instances, especially those satisfiable instances, than Z3, CVC4, and Trau. For instance, for flat regular constraints, the $\paexp$-solver solves almost all 300 problem instances, except 3 of them\footnote{These three instances can actually be solved in 70 seconds.}, while  Z3, CVC4, Trau solve only 34, 89, 187 instances respectively.  Trau gets wrong answers for some problem instances, e.g. it reports ``UNSAT'' for some satisfiable instances. While the $\paexp$-solver solves more instances than the other solvers, it is slower (although still in a reasonable amount of time), especially for those unsatisfiable instances.
 
 
 % for the pattern $12345\Sigma^*_{\sf num}6789$,  the $\paexp$-solver solves all the problem instances, while Z3, CVC4, and Trau solve only 60, 17, 3 of them.
@@ -121,95 +121,57 @@ On the STRINGHASH benchmark suite (Table~\ref{table:string}), in overall, the $\
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 % Merge bound and unbound 
-\begin{table*}[ht]
-        \caption{Experimental Results on ARITHMETIC, \\
-    $\#_{\rm prb}$: number of problems, $T_{\mathrm avg}$: average time in seconds}
+
+\begin{table}[ht]
+        \caption{Experimental Results, S:SAT, U: UNSAT, B: Bounded UNSAT, F: Fail, 
+    $\#_{\mathrm{prb}}$: number of problems, $T_{\mathrm{avg}}$: average time in seconds}
     \centering
-    \renewcommand{\arraystretch}{1.2}
-    \begin{tabular}{|c|c|c|c|c|c|c|c|}
-    \hline
-        \multirow{2}{*}{Param. }  & \multirow{2}{*}{Output} & \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} & \multicolumn{2}{c|}{$\paexp$} \\
-        \cline{3-8}
-        &  & $\#_{\rm prb}$ & $T_{\rm avg}$  & $\#_{\rm prb}$ & $T_{\rm avg}$  & $\#_{\rm prb}$ & $T_{\rm avg}$  \\ \hline
-        \multirow{4}{*}{(2,3,3,4)} & SAT & 56 & {\bf 0.4} & 42 & 2.3 & {\bf 64} & {\bf 0.4} \\
-        \cline{2-8}
-         & UNSAT & 69 & {\bf \textless{}0.1} & 72 &  {\bf \textless{}0.1} & {\bf 89} & {\bf \textless{}0.1} \\
-         \cline{2-8}
-         & B-UNSAT & - & - & - & - & 47 & 9.5 \\
-         \cline{2-8}
-         & TIMEOUT & 75 & - & 86 & - & {\bf 0} & - \\ \hline
-         \cline{1-8}
-        \multirow{4}{*}{(3,4,4,5)} & SAT & 33 & {\bf 1.4} & 25 & 2.9 & {\bf 52} & 3.3 \\
-        \cline{2-8}
-         & UNSAT & 59 & {\bf \textless{}0.1} & 60 & {\bf \textless{}0.1} & {\bf 88} & {\bf \textless{}0.1} \\
-         \cline{2-8}
-         & B-UNSAT & -  & - &  - & -  & 1 & 54.0 \\
-         \cline{2-8}
-         & TIMEOUT & 108 & - & 115 & - & {\bf 59} & - \\ \hline
-         \cline{1-8}
-        \multirow{4}{*}{(4,5,5,6)} & SAT & 35 & {\bf 1.8} & 19 & 6.6 & {\bf 47} & 22.4 \\
-        \cline{2-8}
-         & UNSAT & 36 & 0.3 & 39 & 0.4 & {\bf 72} & {\bf 0.1} \\
-         \cline{2-8}
-         & B-UNSAT & -  & -  & - & - & 0 & - \\
-         \cline{2-8}
-         & TIMEOUT & 129 & - & 142 & - & {\bf 81} & -\\
-         \hline
-        \end{tabular}
-            \label{table:arithmetic}
-\end{table*}
-
-
-% Please add the following required packages to your document preamble:
-% \usepackage{multirow}
-\begin{table*}[ht]
-    \caption{Experimental results on STRINGHASH, \\ $\#_{\rm prb}$: number of problems, $T_{\rm avg}$: average time in seconds}
-    \centering
-
     \renewcommand{\arraystretch}{1.2}
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
     \hline
-        \multirow{2}{*} {Pattern}  &  \multirow{2}{*} {Output}  &  \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} & \multicolumn{2}{c|}{Trau} & \multicolumn{2}{c|}{$\paexp$} \\
+        \multirow{2}{*}{Group }  & \multirow{2}{*}{Out} & \multicolumn{2}{c|}{Z3} & \multicolumn{2}{c|}{CVC4} &  \multicolumn{2}{c|}{Trau} & \multicolumn{2}{c|}{$\paexp$} \\
         \cline{3-10}
-       &  & $\#_{\rm prb}$ & $T_{\rm avg}$ &  $\#_{\rm prb}$ & $T_{\rm avg}$ & $\#_{\rm prb}$ & $T_{\rm avg}$ &  $\#_{\rm prb}$ & $T_{\rm avg}$ \\ 
-       \hline
-       \cline{1-10}
-       \multirow{3}{*}{$12345(w_1)^+(w_2)^+$} & SAT & 5 & 14.0 & 29 & 8.5 & 3 & {\bf \textless{}0.1} & {\bf 37} & 9.9 \\
-         \cline{2-10}
-        & UNSAT & 0 & - & 0 & - & {\bf 60} & {\bf 1.3} & {\bf 60} & 47.2 \\
-         \cline{2-10}
-        & FAIL & 95 & - & 71 & - & 32 & - & {\bf 3} & - \\ \hline
-        \cline{1-10}
-       \multirow{3}{*}{$12345(w_1)^+(w_2)^+6789$} & SAT & 11 & 13.0 & 29 & 12.0 & 0 & - & {\bf 37} & {\bf 10.6} \\
+        &  & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$  & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$  & - & - & $\#_{\mathrm{prb}}$ & $T_{\mathrm{avg}}$  \\ \hline
+        \multirow{4}{*}{
+        \newline (2,3,3,4)} & S & 56 & {\bf 0.4} & 42 & 2.3 & - & - &  {\bf 64} & {\bf 0.4} \\
         \cline{2-10}
-        & UNSAT & 0 & - & 0 & - & {\bf 63} & {\bf 1.2} & {\bf 63} & 50.0 \\
+         & U & 69 & {\bf \textless{}0.1} & 72 &  {\bf \textless{}0.1} & - & - &  {\bf 89} & {\bf \textless{}0.1} \\
          \cline{2-10}
-        & FAIL & 89 & - & 71 & - & 37 & - & {\bf 0} & - \\ \hline
-        \cline{1-10}
-       \multirow{3}{*}{$(w_1)^+(w_2)^+6789$} & SAT & 18 & 24.0 & 30 & 9.3 & 2 & {\bf \textless{}0.1} & {\bf 41} & 16.1 \\
-      	 \cline{2-10}
-        & UNSAT & 0 & - & 1 & 4.0 & {\bf 59} & {\bf 2.5} & {\bf 59} & 45.8 \\
+         & B & - & - & - & - & - & - &  47 & 9.5 \\
          \cline{2-10}
-        & FAIL & 82 &  & 69 &  & 39 &  & {\bf 0} &  \\ \hline
-        \cline{1-10}
-       \multirow{3}{*}{$12345\Sigma^*_{\sf num}$} & SAT & 82 & 8.7 & {\bf 100} & {\bf 2.2} & 28 & 5.9 & {\bf 100} & 18.5 \\
+         & F & 75 & - & 86 & - & - & - &  {\bf 0} & - \\ \hline
+         \cline{1-10}
+        \multirow{4}{*}{(3,4,4,5)} & S & 33 & {\bf 1.4} & 25 & 2.9 & - & - &  {\bf 52} & 3.3 \\
         \cline{2-10}
-        & UNSAT & 0 & - & 0 & - & 0 & - & 0 & - \\
+         & U & 59 & {\bf \textless{}0.1} & 60 & {\bf \textless{}0.1} & - & - &  {\bf 88} & {\bf \textless{}0.1} \\
          \cline{2-10}
-        & FAIL & 18 & - & {\bf 0} & - & 72 & - & {\bf 0} & - \\ \hline
-        \cline{1-10}
-       \multirow{3}{*}{$12345\Sigma^*_{\sf num}6789$} & SAT & 60 & 9.3 & 17 & 7.8 & 3 & {\bf 0.3} & {\bf 100} & 16.0 \\
+         & B & -  & - &  - & -  & - & - &  1 & 54.0 \\
+         \cline{2-10}
+         & F & 108 & - & 115 & - & - & - &  {\bf 59} & - \\ \hline
+         \cline{1-10}
+        \multirow{4}{*}{(4,5,5,6)} & S & 35 & {\bf 1.8} & 19 & 6.6 & - & - &  {\bf 47} & 22.4 \\
         \cline{2-10}
-        & UNSAT & 0 & - & 0 & - & 0 & - & 0 & - \\
+         & U & 36 & 0.3 & 39 & 0.4 & - & - &  {\bf 72} & {\bf 0.1} \\
          \cline{2-10}
-        & FAIL & 40 & - & 83 & - & 97 & - & {\bf 0} & - \\ \hline
-        \cline{1-10}
-       \multirow{3}{*}{$\Sigma^*_{\sf num}6789$} & SAT & 68 & 5.5 & 27 & 13.0 & 24 & {\bf 9.0} & {\bf 100} & 15.7 \\
+         & B & -  & -  & - & - & - & - &  0 & - \\
+         \cline{2-10}
+         & F & 129 & - & 142 & - & - & - &  {\bf 81} & -\\
+         \hline
+         \cline{1-10}
+        \multirow{3}{*}{Flat} 
+         & S & 34 & 19.0 & 88 & 12.7 & 5 & {\bf \textless{}0.1}& 115  & 12.3\\
         \cline{2-10}
-        & UNSAT & 0 & - & 0 & - & 0 & - & 0 & - \\
+         & U & 0 & - & 1 & 4.0 & 182 & 2.5 & 182 & 47.7 \\
          \cline{2-10}
-        & FAIL & 32 & - & 73 & - & 76 & - & {\bf 0} &- \\
-        \hline
-       \end{tabular}
-           \label{table:string}
-\end{table*}
+         & F & 266 & - & 211 & - & 113 & - & 3 & - \\ \hline
+         \cline{1-10}
+        \multirow{3}{*}{Non-flat}
+         & S & 210 & 7.8 & 144 & 4.9 & 55 & 5.9 &{\bf 300} & 16.7 \\
+        \cline{2-10}
+         & U & 0 & - & 0 & - & 0 & - & 0 & - \\
+         \cline{2-10}
+         & F & 90 & - & 156 & - & 245 & - & 0 & - \\ \hline
+         \cline{1-10}
+        \end{tabular}
+            \label{table:arithmetic}
+\end{table}
