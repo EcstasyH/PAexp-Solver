@@ -11,8 +11,8 @@ The function  {\parseInt} takes a decimal string as the input and returns the in
 %we define a binary version of {\parseInt},
 %which takes a binary string and returns a decimal integer number.
 For example,
-${\parseInt}('0123') = {\parseInt}('123')=10^2+10*2+3 = 123$. 
-Note here we use the quotation marks to delimit the strings, 
+${\parseInt}($`$0123$'$) = {\parseInt}($`$123$'$)=10^2+10*2+3 = 123$. 
+Note here we use the quotation marks to delimit the strings.
 %Clearly,  our decision procedure given in this paper 
 %can be adapted to string constraints with other string to number conversion function without substantial change. 
 %Single quotation marks are used to distinguish a symbol like $'1'\in \Sigma$
@@ -20,7 +20,7 @@ Note here we use the quotation marks to delimit the strings,
 
 Formally, the semantics of the $\parseInt$ function is defined as follows. 
 %\begin{definition} 
-In order to simplify presentation, we assume all string variables ranging over numerical symbols $\Sigma_{\textit{num}}=\{0,1, \ldots, 9\}$. Note that one can easily extend our approach to allow arbitrary finite alphabet. Then ${\parseInt}: \Sigma_{\textit{num}}^+ \mapsto \Nat$ is recursively defined by
+In order to simplify the presentation, we assume all string variables ranging over numerical symbols $\Sigma_{\textit{num}}=\{0,1, \ldots, 9\}$. Note that one can easily extend our approach to allow arbitrary finite alphabet. Then ${\parseInt}: \Sigma_{\textit{num}}^+ \mapsto \Nat$ is recursively defined by
     for every $w\in \Sigma_{\textit{num}}^+$,
     \begin{itemize}
 %        \item if $|w|=0$, i.e., $w=\epsilon$,  ${\parseInt}(w)=0$;
@@ -188,11 +188,11 @@ We first recall the flattening approach for string constraints in \cite{Parosh:2
 
 A \emph{flat domain restriction} for a string constraint $\varphi$ is a function $\flatfun_\varphi$ that maps each string variable $\svarx \in \svar(\varphi)$ to a flat language $(w_{\svarx,1})^* \cdots (w_{\svarx, k_\svarx})^*$, where $w_{\svarx, i} \in \Sigma_{\textit{num}}^+$ for every $i \in [k_\svarx]$. 
 %
-The flattened semantics of $\phi \in \strint$ is defined as $\llbracket \varphi \rrbracket_{\flatfun_\varphi} = \{(I_s, I_i) \in \llbracket \varphi  \rrbracket \mid \forall \svarx \in \svar(\varphi).\ I_s(x) \in  \flatfun_\varphi(\svarx)\}$.  
+The flattened semantics of $\varphi \in \strint$ is defined as $\llbracket \varphi \rrbracket_{\flatfun_\varphi} = \{(I_s, I_i) \in \llbracket \varphi  \rrbracket \mid \forall \svarx \in \svar(\varphi).\ I_s(x) \in  \flatfun_\varphi(\svarx)\}$.  
 
 The flattening of $\varphi \in \strint$ under a flat domain restriction $\flatfun_\varphi$ is a {\paexp} formula, denoted by $\flatten_{\flatfun_\varphi}(\varphi)$, that encodes its flattened semantics.
 %
-More concretely, $\flatten_{\flatfun_\varphi}(\varphi)$ is a formula over the integer variables $\ivar(\varphi)$,  and Parikh variables $\pvar_{\flatfun_\varphi}(\varphi) = \bigcup_{\svarx \in \svar(\varphi)} \pvar_{\flatfun_\varphi}(\svarx)$, where $\pvar_{\flatfun_\varphi}(\svarx) = \{\#_{\svarx,i} \mid i \in [k_\svarx]\}$, called \emph{flattening variables}, plus some other auxiliary variables, such that 
+More concretely, $\flatten_{\flatfun_\varphi}(\varphi)$ is a formula over the integer variables $\ivar(\varphi)$,  and flattening variables $\pvar_{\flatfun_\varphi}(\varphi) = \bigcup_{\svarx \in \svar(\varphi)} \pvar_{\flatfun_\varphi}(\svarx)$, where $\pvar_{\flatfun_\varphi}(\svarx) = \{\#_{\svarx,i} \mid i \in [k_\svarx]\}$, plus some other auxiliary variables, such that 
 %
 $$\llbracket \varphi \rrbracket_{\flatfun_\varphi} =\decode_{\flatfun_\varphi}(\llbracket \flatten_{\flatfun_\varphi}(\varphi) \rrbracket |_{\ivar(\phi) \cup \pvar_{\flatfun_\varphi}(\varphi)})$$
 %
@@ -287,20 +287,34 @@ Hence, we identify a decidable subset of string constraints, which is the larges
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Before presenting the construction of $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$, for every $\svarx \in \svar(\varphi)$, we define $\flatten_{\flatfun_\varphi}(\parseInt(\svarx)) = \iterm_{\svarx,1}$  such that $(\iterm_{\svarx, i})_{i \in [k_\svarx]}$ and $(\ell_{\svarx, i})_{i \in [k_\svarx]}$ are inductively defined as follows: 
+For simplicity, we assume that each occurrence of $\parseInt$ (resp. $\len(t)$) in $\iterm_1 \op \iterm_2$ is of the form $\parseInt(\svarx)$ (resp. $\len(\svarx)$) for a string variable $\svarx$. (Otherwise, we can always introduce a fresh string variable $\svarx'$ for $\parseInt(\sterm)$ or $\len(\sterm)$ and add the constraint $\svarx' = \sterm$.)
+Then $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$ is obtained from $\iterm_1 \op \iterm_2$ by replacing $\parseInt(\svarx)$ with $\flatten_{\flatfun_\varphi}(\parseInt(\svarx))$ and $\len(\svarx)$ with $\flatten_{\flatfun_\varphi}(\len(\svarx))$, where 
+\begin{itemize}
+\item 
+$\flatten_{\flatfun_\varphi}(\parseInt(\svarx)) \Def \iterm_{\svarx,1}$  such that $(\iterm_{\svarx, i})_{i \in [k_\svarx]}$ and $(\ell_{\svarx, i})_{i \in [k_\svarx]}$ are inductively defined as follows: 
 \begin{itemize}
 \item for $i = k_\svarx$, 
-$$\iterm_{\svarx, i} = \frac{\parseInt(w_{\svarx, k_\svarx}) (10^{|w_{\svarx,k_\svarx}| \#_{\svarx, k_\svarx} } -1 )}{(10^{|w_{\svarx, k_\svarx}|} -1 )}$$ 
+$$ \hspace{-4mm} \iterm_{\svarx, i} = \frac{\parseInt(w_{\svarx, k_\svarx}) (10^{|w_{\svarx,k_\svarx}| \#_{\svarx, k_\svarx} } -1 )}{(10^{|w_{\svarx, k_\svarx}|} -1 )}$$ 
 and $\ell_{\svarx, i} = |w_{\svarx,k_\svarx}| \#_{\svarx, k_\svarx}$,
 %
 \item for $i \in [k_\svarx-1]$, 
 %
-$$\iterm_{\svarx, i} =  \frac{\parseInt(w_{\svarx, i}) (10^{|w_{\svarx, i} | \#_{\svarx, i} } -1 ) 10^{\ell_{\svarx, i+1}}} {(10^{|w_{\svarx, i}|} -1 )} + \iterm_{\svarx, i+1}$$
+$$ \hspace{-1.2cm} \iterm_{\svarx, i} =  \frac{\parseInt(w_{\svarx, i}) (10^{|w_{\svarx, i} | \#_{\svarx, i} } -1 ) 10^{\ell_{\svarx, i+1}}} {(10^{|w_{\svarx, i}|} -1 )} + \iterm_{\svarx, i+1}$$
 %
 and $\ell_{\svarx, i} = |w_{\svarx, i} | \#_{\svarx, i} + \ell_{\svarx, i+1}$.
+%
 \end{itemize}
 Notice that here $|w_{\svarx, \textunderscore } |$ and $\ell_{\svarx, \textunderscore}$ are constants while $\#_{\svarx, \textunderscore}$ are (flattening) variables.
+%
+\item $\flatten_{\flatfun_\varphi}(\len(\svarx)) \Def \sum \limits_{i \in [k_{\svarx}]} |w_{\svarx, i} | \#_{\svarx, i}$. 
+\end{itemize} 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+Before presenting the construction of $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$, for every $\svarx \in \svar(\varphi)$, 
 
 Then $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$ is obtained from $\iterm_1 \op \iterm_2$ by the following procedure.
 \begin{enumerate}
@@ -317,7 +331,9 @@ Then $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$ is obtained from $\ite
 %
 \item Let $\iterm'_1 \op \iterm'_2$ be the formula resulting from the aforementioned replacements. (Note that strictly speaking, $\iterm'_1 \op \iterm'_2$ is not a $\paexp$ formula since it contains divisions.) Let $N$ be the least common multiplier of the denominators of $\iterm'_1$ and $\iterm'_2$.  Then $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$ is obtained by multiplying the both sides of $\iterm'_1 \op \iterm'_2$ with $N$,  so that the division operator disappears. 
 \end{enumerate}
-
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{example}
@@ -327,7 +343,7 @@ Suppose $\parseInt(\svarx) = 2\ivarx$ is an atomic constraint and $\flatfun_\var
 \begin{array}{l l}
 & \flatten_{\flatfun_\varphi}(\parseInt(\svarx)  =  2\ivarx)  \\
 \Def & 1 \frac{10^{\#_{\svarx,1}}-1}{10-1}10^{\#_{\svarx,2}}  + 2 \frac{10^{\#_{\svarx,2}}-1}{10-1} = 2\ivarx   \\
-\equiv & 10^{\#_{\svarx,1}+\#_{\svarx,2}} - 10^{\#_{\svarx,2}}  + 2 (10^{2\#_{\svarx,2}}-1) = 18\ivarx \\
+\equiv & 10^{\#_{\svarx,1}+\#_{\svarx,2}} - 10^{\#_{\svarx,2}}  + 2*10^{2\#_{\svarx,2}}- 2 = 18\ivarx \\
 \equiv & 10^{\#_{\svarx,1}+\#_{\svarx,2}} +  10^{\#_{\svarx,2}} = 18\ivarx + 2.
 \end{array}
 \]

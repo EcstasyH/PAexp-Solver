@@ -3,14 +3,14 @@
 %In this section, we introduce some basic concepts and theories that will be used later. 
 %\subsection{Basic Concepts}
 
-In this section, we fix the notations and introduce some basic concepts, including Presburger arithmetic, finite-state automata, Parikh images, flat automata and languages.
+In this section, we fix the notations and introduce some basic concepts, including Presburger arithmetic, finite-state automata, and flat languages.
 
 \paragraph{Integers, strings, and languges}
 Let $\Nat$ denote the set of natural numbers, $\Int$ denote the set of integers, and $\Int^+$ denote the set of positive integers. For $n \in \Int^+$, let $[n]$ denote $\{1,\dots,n\}$.
 
 An \emph{alphabet} $\Sigma$ is a finite set. Elements of $\Sigma$ are called \emph{letters}.
 %Let $\Sigma$ denote a finite alphabet,
-A \emph{string} $w$ over $\Sigma$ is a (possibly empty) finite sequence $a_1\ldots a_n$ with $a_i \in \Sigma$ for every $i \in [n]$. Let $\varepsilon$ denote the empty string, namely, the empty sequence. For a string $w = a_1 \ldots a_n \in \Sigma^*$, let $|w|$ denote the \emph{length} of $|w|$, i.e. $n$. In particular, $|\varepsilon| = 0$.
+A \emph{string} $w$ over $\Sigma$ is a (possibly empty) finite sequence $a_1\ldots a_n$ with $a_i \in \Sigma$ for every $i \in [n]$. Let $\varepsilon$ denote the empty string, namely, the empty sequence. For a string $w = a_1 \ldots a_n \in \Sigma^*$, let $|w|$ denote the \emph{length} of $w$, i.e. $n$. In particular, $|\varepsilon| = 0$.
 %
 For $w_1 = a_1 \ldots a_m, w_2 = b_1 \ldots b_n\in \Sigma^*$, 
 let $w_1\cdot w_2$ denote the \emph{concatenation} of $w_1$ and $w_2$, that is, $a_1 \ldots a_m b_1 \ldots b_n$.
@@ -32,7 +32,7 @@ A Presburger Arithmetic ({\pa}) formula
 
  \end{array}
  $$
-where $\op \in \{=, < , >, \le, \ge\}$ and $\ivarx, c$ are integer variables and constants, respectively. A \emph{quantifier-free} PA (\qfpa) formula is a {\pa} formula containing no quantifiers. A {\pa} formula is in \emph{negation normal form} (NNF) if all occurrences of the negation symbol $\neg$ are before the atomic formulas. A {\pa} formula is called \emph{existential} if it is in NNF and contains no occurrences of universal quantifiers.
+where $\op \in \{=, < , >, \le, \ge\}$ and $\ivarx, c$ are integer variables and constants, respectively. A \emph{quantifier-free} {\pa} (\qfpa) formula is a {\pa} formula containing no quantifiers. A {\pa} formula is in \emph{negation normal form} (NNF) if all occurrences of the negation symbol $\neg$ are before the atomic formulas. A {\pa} formula is called \emph{existential} if it is in NNF and contains no occurrences of universal quantifiers.
 %An \emph{existential} LIA (ELIA) formula is an LIA formula where there are no universal quantifiers and all existential quantifiers are in the scope of an even number of the negation symbols $\neg$. 
 %
 The set of free variables of $\phi$, denoted by $\free(\phi)$, is defined in a standard manner. 
@@ -128,16 +128,16 @@ The Parikh image of a language $L$ is defined as $\parikh(L) = \{\parikh(w) \mid
 
 
 We will present flat languages. This is a high level, language-theoretical view at the flat automata from \cite{Parosh:20:PLDI}. 
-
+%
 %For integers $k$ and $\ell$ and a string variable $x$, 
 %we define the family of indexed \emph{character variables} $\charvars = \{x_j^i \mid 1 \le i \le k, 1 \le j \le \ell\}$. 
 A \emph{flat language} (FL)  over $\Sigma$
 %with the \emph{period} at most $\ell$ and the \emph{cycle count} $k$ 
 is the set of strings 
 that conform to a regular expression of the form
-$$
+$
 (a^1_1\ldots a^1_{\ell_1})^* \cdot \ldots \cdot (a^k_1\ldots a^k_{\ell_k})^*, 
-$$
+$
 where $a^i_j \in \Sigma$ for each $i \in [k]$ and $j \in [\ell_i]$.
 Intuitively, an FL is a set of strings consisting of $k$ consecutive parts, each created by iterating a \emph{cycle}, a string $a^i_1\ldots a^i_{\ell_i}$ of $\ell_i$ letters. 
 %A $\langle \ell, k \rangle$-FL is an FL such that its \emph{period} is at most $\ell$ and the \emph{cycle count} is at most $k$.
