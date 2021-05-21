@@ -79,7 +79,8 @@ Two important optimizations are that we avoid the elimination of linear occurren
 
 In fact, other than the theoretical difficulties, in practice, the string-integer conversion is quite challenging for state-of-the-art solvers. 
 Here we illustrate a toy example that mimic the ``mining'' step of block-chain construction. 
-Essentially, given a string hash function ${\sf hash}(w)$, the goal of the mining step is to find an input $w$ such that ${\sf hash}(w)$ satisfies a certain pattern, e.g., the last $k$ digits are zeros. 
+Essentially, given a string hash function ${\sf hash}(w)$, the goal of the mining step is to find a nonce $n$ such that when inserting $n$ to the text to be protected, say $w_1,w_2$, ${\sf hash}(w_1.n.w_2)$ satisfies a certain pattern, e.g., the last $k$ digits are zeros. 
+If $w_1$ or $w_2$ are modified, one needs to compute another $n$ satisfies the desired pattern.
 Below we consider a simple hash function:
 $${\sf hash}(w) = \sum \limits_{i = 1}^n a_i p^{n-i} \bmod m,$$ 
 where $p, m \in \Int^+$ with $p, m \ge 2$. 
