@@ -2,6 +2,7 @@
 
 In this section, we first define the class of string constraints with string-integer conversion, denoted by $\strint$. Then we define the extension of Presburger arithmetic with exponential functions, denoted by $\paexp$. Finally, we show how to flatten the string constraints in $\strint$ into the arithmetic constraints in $\paexp$.
 
+\vspace*{-3mm}
 \subsection{String constraints with string-integer conversion ($\strint$)}
 
 In the sequel, we shall define $\strint$, the class of string constraints with the string-integer conversion function {\parseInt}.
@@ -32,7 +33,7 @@ In order to simplify the presentation, we assume all string variables ranging ov
 Note that $\parseInt$ is undefined with $\varepsilon$ as the input.
 
 
-In $\strint$, there are two types of variables, namely, the string variables $\svarx,\svary,\ldots \in \svars$ and the integer variables $\ivarx,\ivary,\ldots \in \ivars$.
+In $\strint$, there are two types of variables, i.e. the string variables $\svarx,\svary,\ldots \in \svars$ and the integer variables $\ivarx,\ivary,\ldots \in \ivars$.
 %
 A $\strint$ formula $\varphi$ is defined by the following rules, where $\len(\sterm)$ denotes the length of a string $\sterm$.
 \[
@@ -106,8 +107,8 @@ The satisfiability problem of $\strint$ is to decide for a given constraint $\va
 whether $\lVert  \varphi \rVert \neq \emptyset$.
 %if not, to compute an interpretation $I$ that satisfies $\Psi$.
 
+\vspace*{-2mm}
 \subsection{An Extension of Presburger Arithmetic with Exponential Functions (\paexp)}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -182,9 +183,10 @@ which will be useful in our proof.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\vspace*{-2mm}
 \subsection{Flattening $\strint$ into $\paexp$}
 
-We first recall the flattening approach for string constraints in \cite{Parosh:20:PLDI}, then show how to extend it to deal with the {\parseInt} function.
+We first recall the flattening approach for string constraints in \cite{Parosh:20:PLDI}, then show how to extend it to deal with {\parseInt}.
 
 A \emph{flat domain restriction} for a string constraint $\varphi$ is a function $\flatfun_\varphi$ that maps each string variable $\svarx \in \svar(\varphi)$ to a flat language $(w_{\svarx,1})^* \cdots (w_{\svarx, k_\svarx})^*$, where $w_{\svarx, i} \in \Sigma_{\textit{num}}^+$ for every $i \in [k_\svarx]$. 
 %
@@ -287,7 +289,7 @@ Hence, we identify a decidable subset of string constraints, which is the larges
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For simplicity, we assume that each occurrence of $\parseInt$ (resp. $\len(t)$) in $\iterm_1 \op \iterm_2$ is of the form $\parseInt(\svarx)$ (resp. $\len(\svarx)$) for a string variable $\svarx$. (Otherwise, we can always introduce a fresh string variable $\svarx'$ for $\parseInt(\sterm)$ or $\len(\sterm)$ and add the constraint $\svarx' = \sterm$.)
+For simplicity, we assume that each occurrence of $\parseInt$ (resp. $\len(t)$) in $\iterm_1 \op \iterm_2$ is of the form $\parseInt(\svarx)$ (resp. $\len(\svarx)$) for a string variable $\svarx$. (Otherwise, we can introduce a fresh variable $\svarx'$ for $\sterm$ in $\parseInt(\sterm)$ or $\len(\sterm)$ and add the constraint $\svarx' = \sterm$.)
 Then $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$ is obtained from $\iterm_1 \op \iterm_2$ by replacing $\parseInt(\svarx)$ with $\flatten_{\flatfun_\varphi}(\parseInt(\svarx))$ and $\len(\svarx)$ with $\flatten_{\flatfun_\varphi}(\len(\svarx))$, where 
 \begin{itemize}
 \item 

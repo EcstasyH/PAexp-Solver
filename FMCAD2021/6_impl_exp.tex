@@ -1,5 +1,6 @@
 %!TEX root = paper.tex
 
+\vspace*{-1mm}
 \subsection{Implementation}
 We implemented the decision procedure in Wolfram Mathematica, and obtain a solver, called the {\paexp}-solver, which is able to solve the satisfiability of quantifier-free {\paexp} formulas.
 
@@ -19,6 +20,7 @@ The outputs of our solver can be SAT, UNSAT, B-UNSAT (short for bounded unsat) o
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\vspace*{-3mm}
 \subsection{Benchmarks}
 
 To evaluate the performance of the {\paexp}-solver, we created two benchmark suites, ARITHMETIC, and STRINGHASH.
@@ -46,7 +48,7 @@ The flat group comprises 300 problem instances, where the flat languages are of 
 \begin{itemize}
 \item For flat instances, we generate the {\paexp} formulas corresponding to the string constraints, as the inputs to the {\paexp}-solver.
 %
-\item For non-flat instances, we use flat languages $(a)^* (b_{1} \ldots b_{k})$ to under approximate 
+\item For non-flat instances, we use flat languages $a^* (b_{1} \ldots b_{k})$ to under approximate 
 $\Sigma_{\sf num}^*$,  where $a, b_1,\ldots, b_k \in \Sigma_{\sf num}$. 
 %
 %the first part is a single digit and the second part is a string length $l$, which can be seen as a FL with 2 cycles and force the second cycle do not repeat. 
@@ -94,6 +96,7 @@ The Second pattern is arbitrary string, that is $y\in \Sigma_{num}^*$. We use la
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\vspace*{-2mm}
 \subsection{Experiments}
 
 We compare the {\paexp}-solver against the state-of-the-art SMT solvers on the generated benchmarks. Specifically, 
@@ -124,6 +127,7 @@ From the results, we can see that the $\paexp$-solver achieves a good tradeoff b
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 % Merge bound and unbound 
+\vspace*{-3mm}
 \begin{table}[ht]
         \caption{Experimental Results, O: Output, S:SAT, U: UNSAT, B: Bounded UNSAT, F: Fail, 
     $\#$: number of problems, $T$: average time in seconds}

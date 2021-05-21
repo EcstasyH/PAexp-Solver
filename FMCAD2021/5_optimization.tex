@@ -12,7 +12,8 @@ where $c$ is an integer constant. (Implicitly, we assume that there are no free 
 
 In the sequel, we present two major optimizations and omit some additional optimizations due to the page limit, which can be found in Appendix~\ref{app-opt}. 
 
-\paragraph{Reduce the number of enumerated variable orders by over approximation}
+\vspace*{-3mm}
+\subsection{Reduce the number of enumerated variable orders by over approximation}
 
 Recall that in the decision procedure for {\paexp}, after the normalization, the orders of variables are enumerated and for each order, the exponential as well as linear occurrences of variables are eliminated. Since the quantifier elimination is expensive and applied to each possible order of variables, if we could reduce the candidate variable orders in the very beginning, it would facilitate considerable speed-up for the decision procedure. 
 
@@ -28,8 +29,8 @@ Then during the enumeration of the linear orders for the variables $\ivarx_1, \l
 
 %Suppose the normalized formula $\theta$ contains variables $\{x_i:i\in[n]\}$, so the exponential terms could be $e^{x_i}$. For each $e^{x_i}$, we subtitute $e^{x_i}$ by a fresh variable $y_i$ in $\theta$ and add the constraints $(e-1)x_i+1\le y_i$ to get $\theta'$. Since $(e-1)x_i+1\le e^{x_i}$ holds for all $e,x\in \Nat$, $\theta'$ is an over-approximation of $\theta$ and if $\theta'$ is unsatisfiable over positive reals, then $\theta$ is unsatisfiable over $\Nat$.
 
-
-\paragraph{Avoid the elimination of linear occurrences of variables by under approximation}\label{para: opt under appro}
+\vspace*{-3mm}
+\subsection{Avoid the elimination of linear occurrences of variables by under approximation}\label{para: opt under appro}
 
 The decision procedure of {\paexp} in Section~\ref{sec-dec} requires the elimination of both exponential and linear occurrences of variables. Considering the fact that {\pa} formulas can be solved efficiently by the state-of-the-art solvers, e.g. CVC4 and Z3, one natural idea is to try to only eliminate the exponential occurrences, but not the linear occurrences, of variables, and obtain the {\pa} formulas in the end, which can then be solved by the state-of-the-art solvers.
 
