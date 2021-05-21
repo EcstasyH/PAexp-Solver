@@ -10,9 +10,9 @@ $\sum_{j=1}^{n} a_j 10^{\ivarx_{j}} + \sum_{k=1}^{n}b_k \ivarx_{k} \le c$,
 %
 where $c$ is an integer constant. (Implicitly, we assume that there are no free variables and all the variables are existentially quantified.)
 
-In the sequel, we present two major optimizations and omit some additional optimizations due to the page limit, which can be found in Appendix~\ref{app-opt}. 
+In the sequel, we present two major optimizations and omit some additional ones, which can be found in Appendix~\ref{app-opt}. 
 
-\vspace*{-3mm}
+\vspace*{-4mm}
 \subsection{Reduce the number of enumerated variable orders by over approximation}
 
 Recall that in the decision procedure for {\paexp}, after the normalization, the variable orders are enumerated and for each order, the exponential and linear occurrences of variables are eliminated. Since the quantifier elimination is expensive and applied to each possible order of variables, if we could reduce the candidate variable orders in the very beginning, it would facilitate considerable speed-up for the decision procedure. 

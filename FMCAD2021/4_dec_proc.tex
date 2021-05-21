@@ -310,13 +310,16 @@ $$
 %
 The elimination of the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ relies on the following lemma. Intuitively, the lemma states the fact that if $\ivarx_{\sigma(i)}$ is sufficiently greater than $\ivarx_{\sigma(i-1)}$, then the left-hand-side of $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is \emph{dominated} by $a_i10^{\ivarx_{\sigma(i)}}$, moreover, if $a_i > 0$ and the value of $\ivarx_{\sigma(i)}$ is sufficiently small (resp. big), then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds (resp. does not hold), similarly for $a_i < 0$.
 
+\vspace{-1mm}
 \begin{lemma} \label{lem:exp-ineq}
 Let  
 %
 $$
+\small
 \begin{array}{l}
 \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
 \hspace{4mm} 
+\vspace{-1mm}
 a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary}).
 \end{array}
 $$
@@ -341,6 +344,7 @@ and $\delta\Def  \ell_{10}(A)+3$.
 
 If $a_i > 0$, then the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ can be eliminated by utilizing  Lemma~\ref{lem:exp-ineq} and enumerating the constraints on $\ivarx_{\sigma(i)}$ and $\ivarx_{\sigma(i-1)}$. Specifically, 
 $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+\vspace{-2mm}
 \[
 \small
 \begin{array}{l}
@@ -374,6 +378,7 @@ $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivale
 \begin{array}{l}
 \ivarx_{\sigma(i)} \ge B \wedge \ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})+2\ \wedge\\
  \ivarx_{\sigma(i)} = \ivarx_{\sigma(i-1)} +p\ \wedge \\
+ \vspace{-1mm}
  \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[\ivarx_{\sigma(i-1)}+ p /\ivarx_{\sigma(i)}]
 \end{array}
 \right),

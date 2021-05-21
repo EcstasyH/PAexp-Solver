@@ -5,7 +5,7 @@
 We implemented the decision procedure in Wolfram Mathematica, and obtain a solver, called the {\paexp}-solver, which is able to solve the satisfiability of quantifier-free {\paexp} formulas.
 
 The {\paexp}-solver takes a quantifier-free {\paexp} formula as the input. Moreover, it allows specifying a constant upper bound $10^u$ for the values of variables. If a constant upper bound $10^u$ is specified, then the problem is to decide whether there is an assignment of values no more than $10^u$ to variables satisfying the given {\paexp} formula.
-
+%
 The outputs of the {\paexp}-solver are either ``SAT'', ``UNSAT'', ``B-UNSAT'', or ``TIMEOUT'', corresponding to the facts that the given formula is satisfiable, unsatisfiable, unsatisfiable up to $10^u$, or the search goes beyond the predetermined time limit. If the output is ``SAT'', then a model (namely, an assignment of values to variables) is also returned.
 
 %a prototype of our algorithm in Wolfram Mathematica, called  $\paexp$-Solver. Any postive Integer is allowed to be the base of exponential functions in our algorithm, but $\parseInt$ in Z3 and CVC4 only takes a numeric string as input. For this reason, we fix the exponential function to be $10^x$ in our experiments.
@@ -20,7 +20,7 @@ The outputs of our solver can be SAT, UNSAT, B-UNSAT (short for bounded unsat) o
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\vspace*{-3mm}
+\vspace*{-4mm}
 \subsection{Benchmarks}
 
 To evaluate the performance of the {\paexp}-solver, we created two benchmark suites, ARITHMETIC and STRINGHASH.
@@ -42,7 +42,9 @@ For one of them, we restrict the nonce string conforming some flat pattern, whil
 %, so that the string hash function can be encoded by $\parseInt$. 
 
 The string constraints in the STRINGHASH benchmark suite are of the form 
-$$\svarx \in \Aut \wedge \left( \parseInt(\svarx) \bmod m \right) \bmod m^\prime = 0   \notag \wedge \len(\svarx) < 100,$$ 
+%
+$\svarx \in \Aut \wedge \left( \parseInt(\svarx) \bmod m \right) \bmod m^\prime = 0   \notag \wedge \len(\svarx) < 100,$ 
+%
 where $\Aut$ is an FA, $m, m^\prime \ge 2.$ 
 The two groups of string constraints are characterized by flat and non-flat regular constraints respectively.
 The flat group comprises 300 problem instances, where the flat languages are of the form $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, or $w^+_1 w^+_2 6789$, with $w_1,w_2 \in \Sigma^+_{\sf num}$, where $1234$ and $6789$ are the text to be protected, and $w^+_1 w^+_2$ is the pattern for nonce string. The non-flat group comprises 300 problem instances, where the non-flat languages are of the form $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, or $\Sigma_{\sf num}^* 6789$. Moreover, the number $m$ is a randomly chosen prime number in the interval $[10^2, 10^5]$ and $1 \le m' < m$ ($m'$ is not necessarily a prime number). We generate the SMTLib2 files for these string constraints, as inputs to the string constraint solvers. On the other hand, for the {\paexp}-solver, we do the following:   
