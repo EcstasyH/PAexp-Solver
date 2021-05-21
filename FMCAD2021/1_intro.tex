@@ -5,7 +5,7 @@ Comparing with traditional programming languages, string data type plays a more 
 String constraint solvers are the engine of modern scripting program analysis techniques. 
 Due to the high demand, in recent years, there is a boosting amount of publications on this subject.
 
-However, research progress of string constraint solving has been hampered by many major obstacles in both theory and tool implementation aspects (including long-standing open problems). 
+However, research progress of string constraint solving has been hampered by many major challenges in both theory and tool implementation aspects (including long-standing open problems). 
 Logical theories over strings have to allow string concatenation, which is arguably the most fundamental operation of strings. 
 The most celebrated result concerning theories of strings is Makanin’s result on deciding the satisfiability problem for \emph{word equations}~\cite{makanin77}.
 A simple example of a word equation is $xaby = ybax$, where $x, y$ are variables, and $a, b \in \Sigma$ are constant letters. 
@@ -20,10 +20,10 @@ Satisfiability of word equations is a special instance of Hilbert’s 10th probl
 In the past, the original motivation of studying word equations was for finding an undecidability proof of Hilbert’s 10th problem. 
 However, the motivation is no longer valid since Makanin finds a decision procedure. Interestingly, in the last decade, driven by the need for program analysis, people started to revisit the problem and its extensions to describe the complete string library APIs in conventional programming languages.
 
-The satisfiability of \emph{string-number conversion constraints}, e.g., $wx=yx \wedge |x| > \parseInt(y)$, has been proven undecidable in~\cite{DayGHMN18}. 
+The satisfiability of \emph{string-integer conversion constraints}, e.g., $wx=yx \wedge |x| > \parseInt(y)$, has been proven undecidable in~\cite{DayGHMN18}. 
 However, this kind of constraints is pervasive in scripting language programs. 
-For example, it is common that programs read string inputs from text files and converts a part of the string input to numbers.
-Even more crucially, in many programming languages, the string-number conversion is a part of the definition of their core semantics \zhilin{reference here ?}. 
+For example, it is common that programs read string inputs from text files and converts a part of the string input to integers.
+Even more crucially, in many programming languages, the string-integer conversion is a part of the definition of their core semantics ~\cite{ecmascript2019ecmascript}. 
 JavaScript, which powers most interactive content on the Web and increasingly server-side code with Node.js, is one of such languages. 
 
 Due to the difficulties in solving string constraints and, in practice, satisfiable string constraints are more critical for automatic testing, one idea is to have separate specialized procedures for solving satisfiable sub-problems. 
@@ -40,14 +40,14 @@ First, even under the restriction, often the potential solution space is still i
 For instance, we can find a solution for $x.y \neq z  \wedge |x| > 2000$ under a very simple restriction: all variables are in $a^*$, which $a$ is a character in our alphabet.
 Second, and more importantly, because we can convert the membership problem of a flat language to the satisfiability problem of a Presburgher formula, the class of word equation + flat languages + length constraints is decidable.
 
-The paper of Abdulla et al.~\cite{Parosh:20:PLDI} has considered adding string-number conversion constraints to the above class.
+The paper of Abdulla et al.~\cite{Parosh:20:PLDI} has considered adding string-integer conversion constraints to the above class.
 The paper proposed an algorithm for a restricted form of flat languages and left the support of general flat languages as an open problem.
-For string-number conversion, their approach projects the solution to string-number conversion to
+For string-integer conversion, their approach projects the solution to string-integer conversion to
 %, in terms of numerical solutions, 
 a finite solution space.
 
 In this paper, we propose a complete solution to this problem.
-We propose a decision procedure for the class of word equation + flat languages + length constraints + string-number conversion.
+We propose a decision procedure for the class of word equation + flat languages + length constraints + string-integer conversion.
 The basic idea of our approach can be sketched as follows: we first reduce the satisfiability problem to the corresponding satisfiability problem of the theory of Presburger Arithmetic with exponential functions (denoted by $\paexp$); then, according to the decidability of $\paexp$, we obtain the decidability of the original satisfiability problem.  
 
 The decidability of $\paexp$ was first shown by Semen\"{o}v in \cite{Semenov84}. Nevertheless, Semen\"{o}v did not provide an explicit decision procedure. To remedy this, in \cite{Point86}, Point presented the first quantifier elimination procedure for the satisfiability of $\paexp$. Partially attributed to the fact that Point's procedure in \cite{Point86} was presented  in a mathematical and dense way, this quantifier elimination procedure has mostly eluded the attentions of computer science researchers\footnote{There are only two citations in Google Scholar.}.  To the best of our knowledge, no implementation based on Point's procedure has been available up to now. 
@@ -77,7 +77,7 @@ Two important optimizations are that we avoid the elimination of linear occurren
  }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In fact, other than the theoretical difficulties, in practice, the string-number conversion is quite challenging for state-of-the-art solvers. 
+In fact, other than the theoretical difficulties, in practice, the string-integer conversion is quite challenging for state-of-the-art solvers. 
 Here we illustrate a toy example that mimic the ``mining'' step of block-chain construction. 
 Essentially, given a string hash function ${\sf hash}(w)$, the goal of the mining step is to find an input $w$ such that ${\sf hash}(w)$ satisfies a certain pattern, e.g., the last $k$ digits are zeros. 
 Below we consider a simple hash function:
@@ -88,6 +88,7 @@ In particular, if $\Sigma = \Sigma_{\sf num}$ and $p = 10$, then ${\sf hash}(w) 
 With the optimizations introduced in Section~\ref{sec-opt}, 
 our implementation manages to solve several variants of the string-hash examples as well as some randomly generated problem instances better than the state-of-the-art solvers (Section~\ref{sec-exp}). 
  
-
+\paragraph*{Structure}
+After an introduction to background knowledge in Section~\ref{sec:pre}, we describe how to flatten a string constraint with string-integer conversion to an $\paexp$ formula in Section~\ref{sec:string-solving}. A decision procedure of $\paexp$ formulae is presented in Section~\ref{sec-dec}. We present optimizations in Section~\ref{sec-opt} and show the empirical evaluation results in Section~\ref{sec-exp}.
 
 
