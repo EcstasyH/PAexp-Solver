@@ -36,10 +36,12 @@ Note that $\parseInt$ is undefined with $\varepsilon$ as the input.
 In $\strint$, there are two types of variables, i.e. the string variables $\svarx,\svary,\ldots \in \svars$ and the integer variables $\ivarx,\ivary,\ldots \in \ivars$.
 %
 A $\strint$ formula $\varphi$ is defined by the following rules, where $\len(\sterm)$ denotes the length of a string $\sterm$.
+\vspace{-2mm}
 \[
 \begin{array}{l c l}
 \sterm & \Def & a \mid \svarx \mid \sterm \concat \sterm, \\
 \iterm & \Def & n \mid \ivarx \mid \len(\sterm) \mid \parseInt(\sterm) \mid \iterm + \iterm \mid \iterm - \iterm,\\
+\vspace{-2mm}
 \varphi & \Def & \sterm = \sterm \mid x \in \Aut \mid \iterm\ \op\ \iterm \mid \varphi \wedge \varphi \mid \varphi \vee \varphi \mid \neg \varphi,
 \end{array}
 \]
@@ -107,7 +109,7 @@ The satisfiability problem of $\strint$ is to decide for a given constraint $\va
 whether $\lVert  \varphi \rVert \neq \emptyset$.
 %if not, to compute an interpretation $I$ that satisfies $\Psi$.
 
-\vspace*{-2mm}
+\vspace*{-5mm}
 \subsection{An Extension of Presburger Arithmetic with Exponential Functions (\paexp)}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -141,9 +143,11 @@ This structure of PA that admits QE is denoted by $(\mathbb{N},+)$.
 
 The syntax of {\paexp} is obtained from that of {\pa} by adding $10^\iterm$, $\ell_{10}(\iterm)$ and $\lambda_{10}(\iterm)$ to the definition of integer terms. Specifically, {\paexp} formulas are defined by the rules,
 %
+\vspace{-1mm}
  $$
  \begin{array}{ l c l}
  \iterm &\Def& c \mid \ivarx \mid \iterm + \iterm \mid \iterm - \iterm \mid 10^\iterm \mid \ell_{10}(\iterm) \mid \lambda_{10}(\iterm), \\
+\vspace{-1mm}
  \phi &\Def & \iterm \ \op\ \iterm \mid c | \iterm \mid \phi \wedge \phi \mid \phi \vee \phi \mid \neg \phi \mid \exists \ivarx.\ \phi \mid \forall \ivarx.\ \phi.
  \end{array}
  $$
@@ -196,7 +200,7 @@ The flattening of $\varphi \in \strint$ under a flat domain restriction $\flatfu
 %
 More concretely, $\flatten_{\flatfun_\varphi}(\varphi)$ is a formula over the integer variables $\ivar(\varphi)$,  and flattening variables $\pvar_{\flatfun_\varphi}(\varphi) = \bigcup_{\svarx \in \svar(\varphi)} \pvar_{\flatfun_\varphi}(\svarx)$, where $\pvar_{\flatfun_\varphi}(\svarx) = \{\#_{\svarx,i} \mid i \in [k_\svarx]\}$, plus some other auxiliary variables, such that 
 %
-$$\llbracket \varphi \rrbracket_{\flatfun_\varphi} =\decode_{\flatfun_\varphi}(\llbracket \flatten_{\flatfun_\varphi}(\varphi) \rrbracket |_{\ivar(\phi) \cup \pvar_{\flatfun_\varphi}(\varphi)})$$
+$$\llbracket \varphi \rrbracket_{\flatfun_\varphi} =\decode_{\flatfun_\varphi}(\llbracket \flatten_{\flatfun_\varphi}(\varphi) \rrbracket |_{\ivar(\phi) \cup \pvar_{\flatfun_\varphi}(\varphi)}).$$
 %
 The decoding function above decodes an interpretation of integer and flattening variables $I_e: \ivar(\varphi) \cup \pvar_{\flatfun_\varphi}(\varphi) \rightarrow \Nat$ as a set $\decode_{\flatfun_\varphi}(I_e)$ of interpretations of the $\varphi$'s integer and string variables $(I_s, I_i)$ with $I_s: \svar(\varphi) \rightarrow \Sigma^*$ and $I_i: \ivar(\phi) \rightarrow \Nat$ such that 
 \begin{itemize}

@@ -2,7 +2,7 @@
 
 In the last section, we illustrated the main idea of the decision procedure for  {\paexp}. The decision procedure has a high complexity in the sense that the elimination of the exponential occurrences   of each variable incurs an exponential blow-up, similarly for linear occurrences. Note that this high complexity holds even for quantifier-free formulas containing exponential terms: For a quantifier-free formula $\varphi$ containing exponential terms, we solve its satisfiability problem by adding the existential quantifiers for all the variables occurring in $\varphi$, then eliminate the quantifiers one by one, resulting into $\ltrue$ or $\lfalse$ in the end. The original formula $\varphi$ is satisfiable if $\ltrue$ is obtained in the end.
 
-In this section, we focus on quantifier-free {\paexp} formulas (or existential {$\paexp$} formulas since they are satisfiability-equivalent), and present various optimizations of the decision procedure for {\paexp}, aiming at an efficient implementation. The focus on quantifier-free {\paexp} formulas is motivated by the following two facts: 1) the flattening of {$\strint$} string constraints results into such formulas, 2) these formulas are already challenging for the state-of-the-art SMT solvers e.g. CVC4 and Z3 (with exponential functions defined as recursive functions). 
+In this section, we focus on quantifier-free {\paexp} formulas (or existential {\paexp} formulas since they are satisfiability-equivalent), and present various optimizations of the quantifier elimination procedure for {\paexp}, aiming at an efficient implementation. The focus on quantifier-free {\paexp} formulas is motivated by the following two facts: 1) the flattening of {$\strint$} constraints results into such formulas, 2) these formulas are already challenging for state-of-the-art SMT solvers (with exponential functions defined as recursive functions). 
 
 Let $\varphi$ be a quantifier-free {\paexp} formula in the remainder of this section. Moreover, we assume that $\varphi$ is normalized since the optimizations presented in the sequel are for normalized formulas. Furthermore, for technical convenience, we assume that all the inequality atomic formulas are of the form 
 %
@@ -15,7 +15,7 @@ In the sequel, we present two major optimizations and omit some additional optim
 \vspace*{-3mm}
 \subsection{Reduce the number of enumerated variable orders by over approximation}
 
-Recall that in the decision procedure for {\paexp}, after the normalization, the orders of variables are enumerated and for each order, the exponential as well as linear occurrences of variables are eliminated. Since the quantifier elimination is expensive and applied to each possible order of variables, if we could reduce the candidate variable orders in the very beginning, it would facilitate considerable speed-up for the decision procedure. 
+Recall that in the decision procedure for {\paexp}, after the normalization, the variable orders are enumerated and for each order, the exponential and linear occurrences of variables are eliminated. Since the quantifier elimination is expensive and applied to each possible order of variables, if we could reduce the candidate variable orders in the very beginning, it would facilitate considerable speed-up for the decision procedure. 
 
 Our main idea is to consider an over approximation of $\varphi$, which is a {\pa} formula $\varphi'$, and use $\varphi'$ to remove the infeasible candidate variable orders.
 
@@ -35,10 +35,12 @@ Then during the enumeration of the linear orders for the variables $\ivarx_1, \l
 The decision procedure of {\paexp} in Section~\ref{sec-dec} requires the elimination of both exponential and linear occurrences of variables. Considering the fact that {\pa} formulas can be solved efficiently by the state-of-the-art solvers, e.g. CVC4 and Z3, one natural idea is to try to only eliminate the exponential occurrences, but not the linear occurrences, of variables, and obtain the {\pa} formulas in the end, which can then be solved by the state-of-the-art solvers.
 
 Recall that Lemma~\ref{lem:exp-ineq} enables us to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ from 
+\vspace{-1mm}
 $$
 \begin{array}{l}
 \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}) \Def  \\
 \hspace{4mm} 
+\vspace{-1mm}
 a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le c.
 \end{array}
 $$
@@ -57,16 +59,20 @@ then we are unable to utilize Lemma~\ref{lem:exp-ineq} to eliminate the linear o
 
 To avoid applying the quantifier elimination algorithm of {\pa}, we consider the following under approximation of $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, namely, we additionally assume that $\ivarx_{\sigma(i)} \le 10^{u}$ for some constant bound $u \in \Nat$ with $u \ge 1$. Then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$ can be rewritten as 
 %\begin{equation}\label{eqn-org}
+\vspace{-2mm}
 \[\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}) \Def \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le c - b_i  \ivarx_{\sigma(i)}.\]
+\vspace{-1mm}
 %\end{equation}
 Let us assume $a_{i-1} > 0$.
 Define $c_1, c_2$ as follows: If $b_i > 0$, then $c_1 = c- b_i 10^u$ and $c_2 = c$, otherwise, $c_1 = c$ and $c_2 = c - b_i 10^u$.
 It is easy to observe that $c_1 \le c - b_i \ivarx_{\sigma(i)} \le c_2$.
 Then we can apply Lemma~\ref{lem:exp-ineq} to the following two inequalities to eliminate $10^{\ivarx_{\sigma(i-1)}}$,
+\vspace{-2mm}
 \begin{equation}\label{eqn-lb}
 \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le c_1
 \end{equation}
 and
+\vspace{-2mm}
 \begin{equation}\label{eqn-ub}
 \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le c_2.
 \end{equation}

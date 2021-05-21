@@ -172,7 +172,7 @@ $$\exists x\exists x_1. x_1 > 3 \wedge 2^{x_1}\le x \wedge x\le 2^{x_1+1}-1\,.$$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The normalization step first removes the occurrences of $\lambda_{10}(\iterm)$ and $\ell_{10}(\iterm)$  such that $\ivarx$ occurs  in $\iterm$, by encoding them with the exponential function. Moreover, for each occurrence of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, it introduces a fresh variable $\ivarz$, replaces $10^\iterm$ with $10^\ivarz$, and adds the equality $\ivarz = \iterm$.  It also applies some additional transformations. After the normalization, the resulting formula is of the following shape: 1) it is in NNF (negation normal form),  2) it contains no occurrences of $\lambda_{10}(\iterm)$ as well as $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, 3)  it contains no occurrences of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, but $\iterm \neq \ivarx$, 4) moreover, all the atomic formulas are of the form $\iterm_1 \le \iterm_2$ or $c | \iterm$. More details can be found in Appendix~\ref{app-norm}.
+The normalization step first removes the occurrences of $\lambda_{10}(\iterm)$ and $\ell_{10}(\iterm)$  such that $\ivarx$ occurs  in $\iterm$, by encoding them with the exponential function. Moreover, for each occurrence of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, it introduces a fresh variable $\ivarz$, replaces $10^\iterm$ with $10^\ivarz$, and adds the equality $\ivarz = \iterm$.  It also applies some additional transformations. After the normalization, the resulting formula is of the following shape: 1) it is in NNF (negation normal form),  2) it contains no occurrences of $\lambda_{10}(\iterm)$ as well as $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, 3)  it contains no occurrences of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, but $\iterm \neq \ivarx$, 4) all the atomic formulas are of the form $\iterm_1 \le \iterm_2$ or $c | \iterm$. More details can be found in Appendix~\ref{app-norm}.
 
 
 %\yfc{Maybe describe the shape of normalized formula here. After normalization, all formulae are in the form ...}
@@ -297,7 +297,7 @@ $a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum
 or  
 $c \ \big  | \ \big(a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})\big).$
 %
-For convenience, let us call these formulas as inequality respectively divisibility atomic formulas. In the sequel, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for these the inequality atomic formulas. The elimination of the exponential occurrences of the divisibility formulas are simpler and omitted, which can be found in Appendix~\ref{app-div}. 
+For convenience, let us call these formulas as inequality respectively divisibility atomic formulas. In the sequel, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for these inequality atomic formulas. The elimination of the exponential occurrences of the divisibility formulas are simpler and omitted, which can be found in Appendix~\ref{app-div}. 
 
 Let us consider 
 $$
