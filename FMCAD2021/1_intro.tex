@@ -86,7 +86,7 @@ where $p, m \in \Int^+$ with $p, m \ge 2$.
 It is easy to see that ${\sf hash}(w)$ can be seen as a generalization of $\parseInt$ followed by a modulo operation. 
 In particular, if $\Sigma = \Sigma_{\sf num}$ and $p = 10$, then ${\sf hash}(w) = \parseInt(w) \bmod m$. Thus, the problem of finding a suitable input $w$ such that the last $k$ digits of ${\sf hash}(w)$ are zeros can be modeled as a string constraint with $\parseInt$. Although the example is seemingly simple, it is already challenging for most state-of-the-art solvers, as shown by our experiment results in Section~\ref{sec-exp}. 
 With the optimizations introduced in Section~\ref{sec-opt}, 
-our implementation manages to solve several variants of the string-hash examples as well as some randomly generated problem instances better than the state-of-the-art solvers. 
+our implementation manages to solve several variants of the string-hash examples as well as some randomly generated problem instances better than the state-of-the-art solvers (Section~\ref{sec-exp}). 
  
 
 
