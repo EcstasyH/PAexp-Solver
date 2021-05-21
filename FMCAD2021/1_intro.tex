@@ -18,12 +18,12 @@ The complexity of the satisfiability of word equations with regular constraints 
 
 Satisfiability of word equations is a special instance of Hilbert’s 10th problem. 
 In the past, the original motivation of studying word equations was for finding an undecidability proof of Hilbert’s 10th problem. 
-However, the motivation is no longer valid since Makanin finds a decision procedure. Interestingly, in the last decade, driven by the need for program analysis, people started to revisit the problem and its extensions to describe the complete string library APIs in conventional programming languages.
+However, the motivation is no longer valid since Makanin finds a decision procedure. Recently, driven by the need for program analysis, people started to revisit the problem and its extensions to describe the complete string library APIs in conventional programming languages. Many highly efficient solvers for string constraints, to name a few, CVC4~\cite{cvc4Tool}, Z3~\cite{z3}, Z3-Str3~\cite{zheng2013z3}, S3~\cite{trinh2014s3}, Norn~\cite{abdulla2015norn}, Ostrich~\cite{chen2017decidable}, Sloth~\cite{sloth}, ABC~\cite{aydin2018parameterized}, Stranger~\cite{yu2010stranger}, and Trau~\cite{abdulla2018trau}, are developed in the last decade.
 
 The satisfiability of \emph{string-integer conversion constraints}, e.g., $wx=yx \wedge |x| > \parseInt(y)$, has been proven undecidable in~\cite{DayGHMN18}. 
 However, this kind of constraints is pervasive in scripting language programs. 
 For example, it is common that programs read string inputs from text files and converts a part of the string input to integers.
-Even more crucially, in many programming languages, the string-integer conversion is a part of the definition of their core semantics ~\cite{ecmascript2019ecmascript}. 
+Even more crucially, in many programming languages, the string-integer conversion is a part of the definition of their core semantics~\cite{ecmascript2019ecmascript}. 
 JavaScript, which powers most interactive content on the Web and increasingly server-side code with Node.js, is one of such languages. 
 
 Due to the difficulties in solving string constraints and, in practice, satisfiable string constraints are more critical for automatic testing, one idea is to have separate specialized procedures for solving satisfiable sub-problems. 
@@ -44,7 +44,7 @@ The paper of Abdulla et al.~\cite{Parosh:20:PLDI} has considered adding string-i
 The paper proposed an algorithm for a restricted form of flat languages and left the support of general flat languages as an open problem.
 For string-integer conversion, their approach projects the solution to string-integer conversion to
 %, in terms of numerical solutions, 
-a finite solution space.
+a finite solution space (in a way similar to the PASS~\cite{goudong2013pass} approach).
 
 In this paper, we propose a complete solution to this problem.
 We propose a decision procedure for the class of word equation + flat languages + length constraints + string-integer conversion.
