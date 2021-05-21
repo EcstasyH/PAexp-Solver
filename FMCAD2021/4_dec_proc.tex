@@ -43,7 +43,7 @@ Next, we illustrate how to eliminate the quantifier $\exists \ivarx_3$, assuming
 
 The elimination of $\exists \ivarx_3$ consists of two steps, namely, eliminating the exponential occurrences of $\ivarx_3$ first, and the linear occurrences next.
 
-The main idea of the elimination of the exponential occurrences of $\ivarx_3$ is to observe that if $\ivarx_3 \ge \ell_{10}(\ivary+1001)+2$ and $\ivarx_3 \ge \ivarx_2 + 3$, then $10^{\ivarx_3} - 10^{\ivarx_2}$ is dominated by $10^{\ivarx_3}$, that is, $10^{\ivarx_3} - 10^{\ivarx_2} \ge 10^{\ivarx_3} - 10^{\ivarx_3 - 3} = (1-10^{-3}) 10^{\ivarx_3} \ge 10^{\ell_{10}(\ivary+1001)+1} = 10\lambda_{10}(\ivary+1001) > \ivary+1001$. (See Lemma~\ref{lem:exp-ineq} for the choice of the constants $2$ and $3$ in $\ivarx_3 \ge \ell_{10}(\ivary+1001)+2$ and $\ivarx_3 \ge \ivarx_2 + 3$.)
+The main idea of the elimination of the exponential occurrences of $\ivarx_3$ is to observe that if $\ivarx_3 \ge \ell_{10}(\ivary+1001)+2$ and $\ivarx_3 \ge \ivarx_2 + 3$, then $10^{\ivarx_3} - 10^{\ivarx_2}$ is dominated by $10^{\ivarx_3}$, that is, $10^{\ivarx_3} - 10^{\ivarx_2} \ge 10^{\ivarx_3} - 10^{\ivarx_3 - 3} = (1-10^{-3}) 10^{\ivarx_3} \ge 10^{\ell_{10}(\ivary+1001)+1} = 10\lambda_{10}(\ivary+1001) > \ivary+1001$ (see Lemma~\ref{lem:exp-ineq} for the choice of the constants $2$ and $3$ in $\ivarx_3 \ge \ell_{10}(\ivary+1001)+2$ and $\ivarx_3 \ge \ivarx_2 + 3$.). 
 Therefore, a necessary condition for $10^{\ivarx_3} - 10^{\ivarx_2} \le \ivary + 1001$ is that either $\ivarx_3 \le \ell_{10}(\ivary+1001)+1$ or $\ivarx_3 \le \ivarx_2 + 2$ holds.  
 
 %\yfc{why $+2$ and $+3$ in $\ivarx_3 \ge \ell_{10}(\ivary+1001)+2$ and $\ivarx_3 \ge \ivarx_2 + 3$?}
@@ -85,7 +85,8 @@ To summarize, $\varphi_1$ is transformed into
 \]
 Note that $\varphi_2$ contains \emph{only linear} occurrences of $\ivarx_3$.
 
-Finally, we can eliminate the linear occurrences of $\ivarx_3$, thus the quantifier $\exists \ivarx_3$, by applying the quantifier elimination algorithm of {\pa}, e.g. Cooper's algorithm in \cite{Cooper72}. The elimination of $\ivarx_3$ in $\varphi_2$ here is simple, with $\ivarx_3$ replaced by $\ivarx_1 + \ivarx_2$, resulting into  
+Finally, we can eliminate the linear occurrences of $\ivarx_3$, thus the quantifier $\exists \ivarx_3$, by applying the quantifier elimination algorithm of {\pa}, e.g. Cooper's algorithm in \cite{Cooper72}. The elimination of $\ivarx_3$ in $\varphi_2$ here is simple, with $\ivarx_3$ replaced by $\ivarx_1 + \ivarx_2$. 
+\hide{, resulting into  
 \[
 \small
 \begin{array}{l}
@@ -100,7 +101,7 @@ Finally, we can eliminate the linear occurrences of $\ivarx_3$, thus the quantif
 %
  \bigvee \limits_{j \in \{0,1,2\}}  \left(\ivarx_1 + \ivarx_2 = \ivarx_2 +j \wedge 10^{\ivarx_2 + j} - 10^{\ivarx_2} \le \ivary + 1001\right).
 \end{array}
-\]
+\]}
 
 In the remainder of this section, we are going to describe the aforementioned steps of the decision procedures: Normalization, the enumeration of the variable orders, 
 the elimination of the exponential occurrences of variables. The elimination of the  linear occurrences of variables is essentially the quantifier elimination of the {\pa} and omitted.
