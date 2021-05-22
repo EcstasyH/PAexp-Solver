@@ -151,7 +151,7 @@ The syntax of {\paexp} is obtained from that of {\pa} by adding $10^\iterm$, $\e
  \phi &\Def & \iterm \ \op\ \iterm \mid c | \iterm \mid \phi \wedge \phi \mid \phi \vee \phi \mid \neg \phi \mid \exists \ivarx.\ \phi \mid \forall \ivarx.\ \phi.
  \end{array}
  $$
- The semantics of {\paexp} are defined similarly to {\pa}. The quantifier-free as well as existential {\paexp} formulas are defined similarly to {\pa} as well.
+ The semantics of {\paexp} are defined similarly to {\pa} with the difference that variables are interpreted over $\Nat$, that is, an interpretation is a function $I: \free(\phi) \rightarrow \Nat$. The quantifier-free as well as existential {\paexp} formulas are defined similarly to {\pa} as well.
 
 \begin{example}
 $10^{\ivarx+ \ivary} + 3 * 10^{\ivary}  = 2 \ivarz +1 $ is an {\paexp} formula.
