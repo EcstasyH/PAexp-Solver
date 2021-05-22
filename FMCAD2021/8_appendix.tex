@@ -7,12 +7,11 @@ The normalization step comprises the following sub-steps.
 \begin{enumerate}
 \item At first, we transform $\varphi'(\ivarx,\vec{\ivary})$ into the NNF (negation normal form). Moreover, we remove the occurrences of $\neg$ by (a) replacing $\neg c | \iterm$ with $\bigvee \limits_{j \in [c-1]} c | (\iterm+j)$, (b)  $\neg (\iterm_1 = \iterm_2)$ with $\iterm_1 < \iterm_2 \vee \iterm_2 < \iterm_1$, (c) $\neg (\iterm_1 < \iterm_2)$ with $\iterm_2 \le \iterm_1$, (d) $\neg (\iterm_1 \le \iterm_2)$ with $\iterm_2 < \iterm_1$, and so on.
 %
-\item Repeat the following procedure, until there are no $\lambda_{10}(\iterm)$ with $\ivarx$ occurs in $\iterm$: Replace each occurrence of $\lambda_{10}$ in $\varphi'$, say $\lambda_{10}(\iterm)$, such that $\ivarx$ occurs in $\iterm$, by $10^{\ell_{10}(\iterm)}$. Let the resulting formula be $\varphi''$.
+\item Repeat the following procedure, until there are no $\lambda_{10}(\iterm)$ or $\ell_{10}(\iterm)$ with $\ivarx$ occurs in $\iterm$: Replace each occurrence of $\lambda_{10}$ in $\varphi'$, say $\lambda_{10}(\iterm)$, such that $\ivarx$ occurs in $\iterm$, by $10^{\ell_{10}(\iterm)}$. Then replace each occurrence of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add the constraint $10^\ivarz \le \iterm < 10^{\ivarz + 1}$ as a conjunct. Let the resulting formula be $\varphi''$.
 %
-\item Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ with $\ivarx$ occurs in $\iterm$, we have $\iterm = \ivarx$: For each occurrence of the $\ell_{10}$ in $\varphi''$, say $\ell_{10}(\iterm)$, such that $\iterm$ contains $\ivarx$ but is not $\ivarx$, introduce a fresh variable, say $\ivarz$, 
-%and let $\varphi''':= \exists \ivarz.\ \varphi''[\ivarz/\ell_{10}(\iterm)] \wedge 10^\ivarz \le \iterm < 10^{\ivarz + 1}$. 
-and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add the constraint $10^\ivarz \le \iterm < 10^{\ivarz + 1}$ as a conjunct. Let $\varphi'''$ denote the resulting formula.  
-%
+
+\item Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ with $\ivarx$ occurs in $\iterm$, we have $\iterm = \ivarx$: For each occurrence of the $10^{\iterm}$ in $\varphi''$, such that $\iterm$ contains $\ivarx$ but is not $\ivarx$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $10^{\iterm}$ by $10^\ivarz$, moreover, add the constraint $\ivarz = \iterm$ as a conjunct. Let $\varphi'''$ denote the resulting formula.  
+
 \item Do the following replacements to $\varphi'''$, so that all the atomic formulas in $\varphi^\dag$ are of the form $\iterm_1 \le \iterm_2$ or $c | \iterm$: Replace every occurrence of $\iterm_1 \ge \iterm_2$ with $\iterm_2 \le \iterm_1$. Replace every occurrence of $\iterm_1 < \iterm_2$ (resp. $\iterm_1 > \iterm_2$) with $\iterm_1 \le \iterm_2 - 1$ (resp. $\iterm_2 \le \iterm_1-1$). Replace ever occurrence of $\iterm_1 = \iterm_2$ wtih $\iterm_2 \le \iterm_1 \wedge \iterm_1 \le \iterm_2$. Let $\varphi^\dag$ the resulting formula. 
 %
 \item Let $\vec{\ivarz} = \ivarz_1,\ldots, \ivarz_n$ be an enumeration of the freshly introduced variables. Then the result of the normalization procedure is 
@@ -22,6 +21,7 @@ $\exists \vec{\ivarz}\exists \ivarx.\ \varphi^\dag$.
 
 \subsection{Proof of Lemma~\ref{lem:exp-ineq}}
 
+Note that $\ell_{10}(n)$ is undefined for $n\le 0$ in $\paexp$. For convenience, we define $\ell_{10}(n)=0$ for $n\le 0$ in the following proof. 
 
 \noindent {\bf Lemma~\ref{lem:exp-ineq}}.
 \emph{Let  
@@ -44,7 +44,7 @@ and $\delta\Def  \ell_{10}(A)+3$.
         \item if $\ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta $, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds,
         \item if $\ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})  +2$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)}  \ge \ivarx_{\sigma(i-1)} +\delta$, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \textbf{does not} hold.
     \end{itemize}
-    \item If $a_i < 0$, let $\alpha(\vec{\ivary})  \Def \ell_{10}(-\iterm(\ivary))- \ell_{10}(-(a_i))$, then 
+    \item If $a_i < 0$, let $\alpha(\vec{\ivary})  \Def \ell_{10}(-\iterm(\ivary))- \ell_{10}(-a_i)$, then 
     \begin{itemize}
         \item if $\ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta $, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \textbf{does not} hold,
         \item if $\ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})  +2$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta $, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds.
@@ -55,16 +55,16 @@ and $\delta\Def  \ell_{10}(A)+3$.
 We need the following proposition for the proof of Lemma~\ref{lem:exp-ineq}.
 
 \begin{proposition} \label{prop:1}
-If $n\ge m\ge 1$ and $p \ge 10(\ell_{10}(n)- \ell_{10}(m)+1)$, then 
+If $n\ge m\ge 1$ and $p \ge 2(\ell_{10}(n)- \ell_{10}(m)+1)$, then 
 $n p \le m10^p$ holds.
 \end{proposition}
 
 \begin{proof}
-By an induction on $n'$, we first show that for any $n' \in \Nat$, if $p \ge 10n'$, then $10^{n'} p \le 10^p$. 
+By an induction on $n'$, we first show that for any $n' \in \Nat$, if $p \ge 2n'$, then $10^{n'} p \le 10^p$. 
 
-If $ p \ge 10 (\ell_{10}(n) - \ell_{10}(m)+1)$, then  $n p \le 10\lambda_{10}(n) p = 10 * 10^{\ell_{10}(n)} p = 10^{\ell_{10}(n)-\ell_{10}(m) + 1}  10^{\ell_{10}(m)} p$.
+If $ p \ge 2 (\ell_{10}(n) - \ell_{10}(m)+1)$, then  $n p \le 10\lambda_{10}(n) p = 10 * 10^{\ell_{10}(n)} p = 10^{\ell_{10}(n)-\ell_{10}(m) + 1}  10^{\ell_{10}(m)} p$.
 
-Because $p \ge 10(\ell_{10}(n)-\ell_{10}(m) + 1)$, we deduce that $10^{\ell_{10}(n)-\ell_{10}(m) + 1}  p \le 10^p$.  Therefore, $10^{\ell_{10}(n)-\ell_{10}(m) + 1}  10^{\ell_{10}(m)} p \le 10^{\ell_{10}(m)} 10^p \le m 10^p$.
+Because $p \ge 2(\ell_{10}(n)-\ell_{10}(m) + 1)$, we deduce that $10^{\ell_{10}(n)-\ell_{10}(m) + 1}  p \le 10^p$.  Therefore, $10^{\ell_{10}(n)-\ell_{10}(m) + 1}  10^{\ell_{10}(m)} p \le 10^{\ell_{10}(m)} 10^p \le m 10^p$.
 We conclude that $np \le m 10^p$.
 \end{proof}
 
@@ -74,7 +74,7 @@ We conclude that $np \le m 10^p$.
 We only prove for the case $a_i > 0$, the other case is symmetric. 
 
 
-Let $A\Def \sum_{j=1}^{i-1}|a_j|$, $B \Def 10(\ell_{10}(\sum_{j=1}^{i}|b_j|)+3)$, and $\delta\Def  \ell_{10}(A)+3$. 
+Let $A\Def \sum_{j=1}^{i-1}|a_j|$, $B \Def 2(\ell_{10}(\sum_{j=1}^{i}|b_j|)+3)$, and $\delta\Def  \ell_{10}(A)+3$. 
 
 Suppose $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} + \delta$. Moreover, let $\alpha(\vec{\ivary}) \Def  \ell_{10}(\iterm(\ivary))- \ell_{10}(a_i)$.
 
@@ -90,12 +90,11 @@ and
 $$-(\sum_{j=1}^{i}|b_j|) \ivarx_{\sigma(i)} \le \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} \le (\sum_{j=1}^{i}|b_j|) \ivarx_{\sigma(i)}.$$ 
 
 Moreover, let $n = 100\sum_{j=1}^{i}|b_j|$, $m = 1$, and $p = \ivarx_{\sigma(i)}$, then 
-$n \ge m \ge 1$. From $10(\ell_{10}(n)- \ell_{10}(m)+1) = 10 (\ell_{10}(100 \sum_{j=1}^{i}|b_j|) + 1) = 10 (\ell_{10}(\sum_{j=1}^{i}|b_j|) + 3) = B$, we deduce that $p = \ivarx_{\sigma(i)} \ge B = 10(\ell_{10}(n)- \ell_{10}(m)+1)$.
+$n \ge m \ge 1$. From $2(\ell_{10}(n)- \ell_{10}(m)+1) = 2 (\ell_{10}(100 \sum_{j=1}^{i}|b_j|) + 1) = 2 (\ell_{10}(\sum_{j=1}^{i}|b_j|) + 3) = B$, we deduce that $p = \ivarx_{\sigma(i)} \ge B = 2(\ell_{10}(n)- \ell_{10}(m)+1)$.
 Then according to Proposition~\ref{prop:1}, 
 $$100(\sum_{j=1}^{i}|b_j|)\ivarx_{\sigma(i)} = np \le m 10^p = 10^{\ivarx_{\sigma(i)}}.$$
 Thus 
 $(\sum_{j=1}^{i}|b_j|)\ivarx_{\sigma(i)}  \le \frac{1}{100} 10^{\ivarx_{\sigma(i)}}.$
-
 
 If $\ivarx_{\sigma(i)} \ge   \alpha(\vec{\ivary}) + 2$, then 
 
@@ -130,57 +129,9 @@ $
 Therefore,  in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds.
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-\begin{align}
-    a_i2^{x_i}+ \sum_{j=0}^{i-1} a_j 2^{x_j} + \sum_{k=0}^{i} b_k x_k 
-    & \ge a_i 2^{x_i} - 2^{x_i -\delta}A  - Bx_i & \notag \\
-     & \ge 2^{x_i}(a_i -\frac{1}{4} -\frac{1}{4}) &  (\mbox{by \eqref{eq:thm-ineq-1} and  \eqref{eq:thm-ineq-2}})\notag \\
-    %= &(a_i-\frac{1}{2})2^{x_i} \notag \\
-    %\ge &\frac{a_i}{2}2^{x_i} \notag \\
-    & \ge  \frac{a_i}{2}\frac{4\lambda_2(t(\bar{y}))}{\lambda_2(a_i)} & 
-      (\mbox{ Def. of } \alpha) & \notag \\
-     & \ge  t(\bar{y}) & \notag 
-\end{align}
-
-
-If $\ivarx_{\sigma(i)} \ge  \alpha(\vec{\ivary}) + 2$, then 
-
-The goal is to find a bound for $x_i$ such that 
-the values of the atoms containing $x_i$ keep constant when $x_i$ is greater than the bound.
- 
-When $x_i \ge \alpha+2$,
-\begin{align}
-    a_i2^{x_i}+ \sum_{j=0}^{i-1} a_j 2^{x_j} + \sum_{k=0}^{i} b_k x_k 
-    & \ge a_i 2^{x_i} - 2^{x_i -\delta}A  - Bx_i & \notag \\
-     & \ge 2^{x_i}(a_i -\frac{1}{4} -\frac{1}{4}) &  (\mbox{by \eqref{eq:thm-ineq-1} and  \eqref{eq:thm-ineq-2}})\notag \\
-    %= &(a_i-\frac{1}{2})2^{x_i} \notag \\
-    %\ge &\frac{a_i}{2}2^{x_i} \notag \\
-    & \ge  \frac{a_i}{2}\frac{4\lambda_2(t(\bar{y}))}{\lambda_2(a_i)} & 
-      (\mbox{ Def. of } \alpha) & \notag \\
-     & \ge  t(\bar{y}) & \notag 
-\end{align}
-So we conclude that %when $x_i \ge \alpha+2,x_i\ge B',x_i \ge x_{i-1}+\delta$,
-$\tau(x_i,\bar{x},\bar{y})$ keeps \textit{false} in this case.
-
-%\znj{I think there are some mistakes in the above proof, pls check it!}
-When $x_i \le \alpha-1$, similarly we have
-\begin{align}
-    \tau(x_i,\bar{x},\bar{y})\notag 
-    & \le  a_i 2^{x_i} + 2^{x_i -\delta}A  + Bx_i &  \notag \\
-    & \le  2^{x_i}(a_i +\frac{1}{4} +\frac{1}{4}) &(\mbox{by \eqref{eq:thm-ineq-1} and  \eqref{eq:thm-ineq-2}}) \notag \\
-   & \le  2\lambda_2(a_i)\frac{\lambda_2(t(\bar{y}))}{2\lambda_2(a_i)} &  (\mbox{ Def. of } \alpha) \notag \\
-   &  \le  t(\bar{y}) & \notag 
-\end{align}
-which indicates that when  $x_i \le \alpha-1$, $\tau(x_i,\bar{x},\bar{y})$ keeps \textit{true}. \qed 
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{proof}
 
-
+We would like to remark that Lemma~\ref{lem:exp-ineq} still holds when the base of exponential function is changed to any natural number $n\ge 2$.
 
 %\subsection{Complexity analysis of Point's algorithm}
 
