@@ -60,7 +60,8 @@ $n p \le m10^p$ holds.
 \end{proposition}
 
 \begin{proof}
-By an induction on $n'$, we first show that for any $n' \in \Nat$, if $p \ge 2n'$, then $10^{n'} p \le 10^p$. 
+
+First we show that for any $n' \in \Nat$, if $p \ge 2n'$, then $10^p \ge 10^{n'}10^{(p-n')}\ge 10^{n'}10(p-n')\ge 10^{n'}(5p+5(p-2n'))\ge  10^{n'}p$.
 
 If $ p \ge 2 (\ell_{10}(n) - \ell_{10}(m)+1)$, then  $n p \le 10\lambda_{10}(n) p = 10 * 10^{\ell_{10}(n)} p = 10^{\ell_{10}(n)-\ell_{10}(m) + 1}  10^{\ell_{10}(m)} p$.
 
