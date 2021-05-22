@@ -37,7 +37,7 @@ Each group of the benchmark suite consists of 200 randomly generated problem ins
 
 \paragraph{The STRINGHASH benchmark suite} 
 This suite comprises two groups of string constraints generated from the string hash functions ${\sf hash}(w)$ encoded by $\parseInt$.
-For one of them, we restrict the nonce string conforming some flat pattern, while for the other one, we allow any word from $\Sigma^+_{\sf num}$ to be used as the nonce.
+For one of them, we restrict the nonce string conforming some flat pattern, while for the other one, we allow any word from $\Sigma^*_{\sf num}$ to be used as the nonce.
 %Aiming at a comparison with the state-of-the-art string constraint solvers that support $\parseInt$, we assume that $\Sigma =\Sigma_{\sf num}$ and $p = 10$ and the string hash function is encoded by $\parseInt$.
 %, so that the string hash function can be encoded by $\parseInt$. 
 
@@ -47,7 +47,7 @@ $\svarx \in \Aut \wedge \left( \parseInt(\svarx) \bmod m \right) \bmod m^\prime 
 %
 where $\Aut$ is an FA, $m, m^\prime \ge 2.$ 
 The two groups of string constraints are characterized by flat and non-flat regular constraints respectively.
-The flat group comprises 300 problem instances, where the flat languages are of the form $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, or $w^+_1 w^+_2 6789$, with $w_1,w_2 \in \Sigma^+_{\sf num}$, where $1234$ and $6789$ are the text to be protected, and $w^+_1 w^+_2$ is the pattern for nonce string. The non-flat group comprises 300 problem instances, where the non-flat languages are of the form $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, or $\Sigma_{\sf num}^* 6789$. Moreover, the number $m$ is a randomly chosen prime number in the interval $[10^2, 10^5]$ and $1 \le m' < m$ ($m'$ is not necessarily a prime number). We generate the SMTLib2 files for these string constraints, as inputs to the string constraint solvers. On the other hand, for the {\paexp}-solver, we do the following:   
+The flat group comprises 300 problem instances, where the flat languages are of the form $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, or $w^+_1 w^+_2 6789$, with $w_1,w_2 \in \Sigma^+_{\sf num}$, where $12345$ and $6789$ are the text to be protected, and $w^+_1 w^+_2$ is the pattern for nonce string. The non-flat group comprises 300 problem instances, where the non-flat languages are of the form $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, or $\Sigma_{\sf num}^* 6789$. Moreover, the number $m$ is a randomly chosen prime number in the interval $[10^2, 10^5]$ and $1 \le m' < m$ ($m'$ is not necessarily a prime number). We generate the SMTLib2 files for these string constraints, as inputs to the string constraint solvers. On the other hand, for the {\paexp}-solver, we do the following:   
 \begin{itemize}
 \item For flat instances, we generate the {\paexp} formulas corresponding to the string constraints, as the inputs to the {\paexp}-solver.
 %
