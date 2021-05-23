@@ -1,8 +1,8 @@
 %!TEX root = paper.tex
 
-\vspace*{-1mm}
+\vspace*{-2mm}
 \subsection{Implementation}
-We implemented the decision procedure in Wolfram Mathematica, and obtain a solver, called the {\paexp}-solver, which is able to solve the satisfiability of quantifier-free {\paexp} formulas.
+We implemented the decision procedure in Wolfram Mathematica, and obtain a solver, called the {\paexp}-solver, which is able to solve the satisfiability of {\paexp} formulas.
 
 The {\paexp}-solver takes a quantifier-free {\paexp} formula as the input. Moreover, it allows specifying a constant upper bound $10^u$ for the values of variables. If a constant upper bound $10^u$ is specified, then the problem is to decide whether there is an assignment of values no more than $10^u$ to variables satisfying the given {\paexp} formula.
 %
@@ -23,7 +23,7 @@ The outputs of our solver can be SAT, UNSAT, B-UNSAT (short for bounded unsat) o
 \vspace*{-4mm}
 \subsection{Benchmarks}
 
-To evaluate the performance of the {\paexp}-solver, we created two benchmark suites, ARITHMETIC and STRINGHASH.
+To evaluate the performance of the {\paexp}-solver, we created two benchmark suites, ARITHMETIC and STRINGHASH\footnote{The benchmarks are available at https://github.com/EcstasyH/PAexp-Solver/tree/main/Benchmark}.
 %\begin{itemize}
 %\item 
 
