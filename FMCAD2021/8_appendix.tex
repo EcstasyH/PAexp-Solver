@@ -143,35 +143,35 @@ Consider
 $$
 \begin{array}{l}
 \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
-c\ \big |\ \big(a_i 10^{\ivarx_{\sigma(i)}} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
+d\ \big |\ \big(a_i 10^{\ivarx_{\sigma(i)}} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
 + \iterm(\vec{\ivary}) \big)
 \end{array}
 $$
 with $a_i \neq 0$.
 %
 
-Let $c = 2^{r_1} 5^{r_2}  c_0$ such that $c_0$ is divisible by neither $2$ nor $5$. Moreover, let $r = \max(r_1, r_2)$. Then $c | (10^rc_0)$. 
+Let $d = 2^{r_1} 5^{r_2}  d_0$ such that $d_0$ is divisible by neither $2$ nor $5$. Moreover, let $r = \max(r_1, r_2)$. Then $d | (10^rd_0)$. 
 
-If $c_0 = 1$, then $10^r$ is divisible by $c = 2^{r_1}5^{r_2}$. Thus for every $n \ge r$, $c \ |\ 10^n$.  Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+If $d_0 = 1$, then $10^r$ is divisible by $d = 2^{r_1}5^{r_2}$. Thus for every $n \ge r$, $d \ |\ 10^n$.  Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
 \[
 \small
 \begin{array}{l}
-\bigvee \limits_{p = 0}^{r - 1} c\ \big | \big(a_i 10^{p} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + b_kp + \sum_{k=1}^{i-1} b_k \ivarx_{\sigma(k)} 
+\bigvee \limits_{p = 0}^{r - 1} d\ \big | \big(a_i 10^{p} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + b_kp + \sum_{k=1}^{i-1} b_k \ivarx_{\sigma(k)} 
 + \iterm(\vec{\ivary}) \big)\\
 %
-\vee \big(\ivarx_{\sigma(i)} \ge r \wedge c\ \big | \big(\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
+\vee \big(\ivarx_{\sigma(i)} \ge r \wedge d\ \big | \big(\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
 + \iterm(\vec{\ivary}) \big)\big),
 \end{array}
 \]
 where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
 
-Next, let us assume $c_0 > 1$. Since $10$ and $c_0$ are relatively prime, according to Euler's theorem (cf. \cite{HW80}), $10^{\phi(c_0)} \equiv 1 \bmod c_0$, where $\phi$ is the Euler function. Suppose $10^{\phi(c_0)} = kc_0 + 1$ for some $k \in \Nat$. 
+Next, let us assume $d_0 > 1$. Since $10$ and $d_0$ are relatively prime, according to Euler's theorem (cf. \cite{HW80}), $10^{\phi(d_0)} \equiv 1 \bmod d_0$, where $\phi$ is the Euler function. Suppose $10^{\phi(d_0)} = kd_0 + 1$ for some $k \in \Nat$. 
 Then for every $n \in \Nat$ with $n \ge r$, 
 $$
 \begin{array}{l}
-10^{n + \phi(c_0)} \bmod c =10^{n-r} 10^r (kc_0 + 1) \bmod c = \\
-10^{n-r} (k 10^rc_0 + 10^r) \bmod c = \\
-10^{n-r} (0+10^r) \bmod c = 10^n \bmod c.
+10^{n + \phi(d_0)} \bmod d =10^{n-r} 10^r (kd_0 + 1) \bmod d = \\
+10^{n-r} (k 10^rd_0 + 10^r) \bmod d = \\
+10^{n-r} (0+10^r) \bmod d = 10^n \bmod d.
 \end{array}
 $$
 
@@ -182,11 +182,11 @@ Then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equ
 \left(
 \begin{array}{l}
 \ivarx_{\sigma(i)} \ge r\ \wedge \\
-\bigvee \limits_{q = 0}^{\phi(c_0)-1} 
+\bigvee \limits_{q = 0}^{\phi(d_0)-1} 
 \left(
 \begin{array}{l}
-\phi(c_0)\ \big |\ (\ivarx_{\sigma(i)} - r - q)\ \wedge \\
-c\ \big | 
+\phi(d_0)\ \big |\ (\ivarx_{\sigma(i)} - r - q)\ \wedge \\
+d\ \big | 
 \left(
 \begin{array}{l}
 a_i 10^{r+q} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \\
@@ -201,6 +201,59 @@ a_i 10^{r+q} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \\
 \]
 where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
 
+\subsection{Complexity analysis}
+
+In this part, we will analysis the complexity of the decision procedure described in Section~\ref{sec-dec}. For convenience, we will slightly change the algorithm: the normalization procedure is invoked for all quantified variables in the beginning, which means step 2 and step 3 in the normalization procedure are performed for all quantified variables instead of a specified $\ivarx$. 
+
+Let the formula after the normalization step be $\varphi = \exists \vec{\ivarx}. \theta$ with $\vec{\ivarx} = (\ivarx_1,\dots,\ivarx_m)$. Let $n$ denote the length of formula $\varphi$.
+
+Then we eliminate the exponential occurrences and linear occurrences of variables one by one according to a specified linear order of $\vec{\ivarx}$. Suppose the linear order is $\ivarx_1\ge \dots \ge \ivarx_m$.
+
+We adopt the method in the analysis of the complexity of \pa \ (cf. \cite{Oppen73}).  Let $\varphi'_k = \exists \ivarx_m \dots  \exists \ivarx_{k}\theta'_k$ denote the formula after $k-1$ variables and exponential occurrences of $\ivarx_k$ are eliminated from $\varphi$. Let $\varphi_k$ denote the formula obtained by eliminating linear occurrences of $\ivarx_k$ from $\varphi'_k$ and $\varphi_0=\varphi$.
+
+
+Let $c_k$ be the number of distinct $d$ in atoms of the form $d \ \big | \ \iterm$ plus the number of distinct coefficients of \emph{linear occurrences} of variables in $\varphi_k$. Let $s_k$ be the largest constant (including coefficients) and $a_k$ be the number of atomic formulas in $\varphi_k$. Similarly we define $c'_k$, $s'_k$ and $a'_k$ for $\varphi'_k$. And let $c,s,a$ be $c_0,s_0,a_0$ respectively. We will prove the following lemma.
+\begin{lemma}\label{lem:cpx exp}
+    \begin{align}
+        c'_1&\le c^2 \notag \\
+        s'_1&\le ms^2 \notag\\
+        a'_1&\le sa\notag 
+    \end{align} 
+\end{lemma}
+
+\begin{proof}
+We analyze the complexity in the elimination of exponential occurrences of variable $\ivarx_1$. It will be discussed into 2 cases.
+
+If all atoms are inequalities atomic formulas of the form in Lemma~\ref{lem:exp-ineq}. We know that each atomic formula $\tau$ with exponential occurrence of $\ivarx_1$ is replaced by a new formula. Only the coefficients of linear occurrences of $\ivarx_1$ and $\ivarx_2$ will be changed: constant coefficient $1$ is introduced, and if we substitute $x_1$ by $x_2+p$ for some $p$, coefficient of linear occurrence of $x_2$ will become $b_1+b_2$ ($b_1,b_2$ are coefficients for $x_1$ and $x_2$ in $\tau$, see Lemma~\ref{lem:exp-ineq} ). Since the new coefficient is obtained by adding two linear coefficient together, we have $c'_1\le c^2$. Note that $\delta$ and $B$ are at most $\ell_{10}(ms)$, when we substitute $\ivarx_1$ by $\ivarx_2+\delta-1$ or by $B-1$, the largest constant in the formula is at most $s\cdot  10^{\ell_{10}(ms)}\le ms^2$. And an inequality is replaced by at most $4\ell_{10}(ms)$ atomic formulas, so $a'_1\le 4\ell_{10}(ms)a$.
+
+If all atoms are divisiblilty atomic formulas of the form $d \ \big | \ \iterm$. It is easy to see $c'_1<2c$ because a divisibility atomic formula  will produce at most two form of atomic formulas $d \ \big | \ \iterm$ and $\phi(d) \ \big | \ \iterm$. Note that any constant in $\iterm$ , say $l$, can be replaced by ($l \bmod d)$, so $s'_1\le s$. When $d$ is a large prime number, $\phi(d)=d-1$, a divisibility atomic formula is replaced by roughly $d$ atomic formulas, so $a'_1\le sa$ 
+
+Choose larger upper bound for $c'_1$, $s'_1$ and $a'_1$ respectively then the lemma is proved.
+
+\end{proof}
+
+Since linear occurrences of $\ivarx_1$ are eliminated using Cooper's algorithm, we combine Oppen's analysis and obtain:
+\begin{align}
+    c_1&\le c^8 \notag \\
+    s_1&\le (ms^2)^{4c^2} \notag\\
+    a_1&\le (sa)^4(ms^2)^{2c^2}\notag 
+\end{align} 
+
+Assume $m\le n$, by induction on $k$ we can prove the following lemma.
+
+\begin{lemma}
+    \begin{align}
+        c_k&\le c^{8^k} \notag \\
+        s_k&\le n^{(4c)^{ 8^k}} s^{(8c)^{ 8^k}} \notag\\
+        a_k&\le a^{4^k}n^{(4c)^{ 8^k}} s^{(8c)^{ 8^k}} \notag
+    \end{align} 
+\end{lemma}
+
+Similarly to \cite{Oppen73}, we can assume $c\le n$, $a\le n$ and $s\le n$.So the space required to store $\varphi_k$ is the product of number of atoms $a_k$, the maximum number of constants $2m+2$ per atom, the maximum amount of space $s_k$ to store each constant and some constant $q$:
+ 
+$${\sf space}\le q \cdot a_k \cdot (2m+2) \cdot s_k \le 2^{2^{2^{pn \log n}}}$$
+for some large constant $p$. It is also a bound for deterministic time.
+Since for arbitrary $\paexp$ formula length $n'$, the normalization for all variables results into a formula at most $n'^3$, so the bound is still 3-EXPTIME for $n'$.
 
 \subsection{Some additional optimizations of the decision procedure for {\paexp}}\label{app-opt}
 
@@ -274,4 +327,3 @@ We believe that if a quantifier-free {\paexp} formula is satisfiable, then most 
        \end{tabular}
            \label{table:string}
 \end{table}
-
