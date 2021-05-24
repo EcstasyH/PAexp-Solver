@@ -6,7 +6,7 @@ In this section, we describe how Point's quantifier elimination procedure works.
 %
 \begin{theorem}[\cite{Point86}]
 \label{thm-paexp}
-{\paexp} admits quantifier elimination. \wuhao{And the complexity for quantifer elimination is triply exponential.}
+{\paexp} admits quantifier elimination\wuhao{ in triply exponential deterministic time and space}. 
 \end{theorem}
 %
 Compared to \cite{Point86}, the presentation here is more accessible to computer science researchers. Moreover, the procedure presented here slightly improves Point's procedure, in the following two aspects: 1) DNF (disjunctive normal form) was required in Point's procedure, which is not required here, 2) in Point's procedure, the divisibility constraints produced by the elimination of linear occurrences of a variable should be converted to equality constraints (by introducing fresh variables) before the elimination of exponential occurrences of some other variable, which is unnecessary here, since the divisibility constraints are directly dealt with in the elimination of exponential occurrences of variables.
