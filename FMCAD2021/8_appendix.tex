@@ -203,9 +203,14 @@ where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
 
 \subsection{Complexity analysis}\label{app:cpx}
 
-In this part, we will analysis the complexity of the decision procedure described in Section~\ref{sec-dec}. For convenience, we will slightly change the algorithm: the normalization procedure is invoked for all quantified variables in the beginning, which means step 2 and step 3 in the normalization procedure are performed for all quantified variables instead of a specified $\ivarx$. 
+In this part, we analyse the complexity of the decision procedure for $\paexp$ described in Section~\ref{sec-dec}. For simplicity, we assume that the given formula is normalized
 
-Let the formula after the normalization step be $\varphi = \exists \vec{\ivarx}. \theta$ with $\vec{\ivarx} = (\ivarx_1,\dots,\ivarx_m)$. Let $n$ denote the length of formula $\varphi$.
+We first analyse the preprocessing step, namely the normalization procedure. For the rest of the decision procedure, we adopt the style in the complexity analysis of \pa \ (cf. \cite{Oppen73}).
+
+Recall that in the normalization step, the formula is first transformed into the NNF and then fresh variables are introduced for terms of different forms. The transformation would double the length of the formula in the worst case when all atomic formulas are of the form $\iterm_1 = \iterm_2$ or its negation. \wuhao{How to compute the number of fresh variables in normalization?}
+
+After the normalization step, denote the obtained formula by $\varphi = \exists \vec{\ivarx}. \theta(\vec{\ivarx},\vec{\ivary})$ with quantified variables $\vec{\ivarx} = (\ivarx_1,\dots,\ivarx_m)$ and free variables $\vec{\ivary}$. $\theta$ contains no quantifiers. 
+Let $n$ denote the length of formula $\varphi$.
 
 Then we eliminate the exponential occurrences and linear occurrences of variables one by one according to a specified linear order of $\vec{\ivarx}$. Suppose the linear order is $\ivarx_1\ge \dots \ge \ivarx_m$.
 
