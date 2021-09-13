@@ -203,11 +203,17 @@ where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
 
 \subsection{Complexity analysis}\label{app:cpx}
 
-In this part, we analyse the complexity of the decision procedure for $\paexp$ described in Section~\ref{sec-dec}. For simplicity, we assume that the given formula is normalized
+In this part, we analyse the complexity of the quantifier elimination procedure applied on a formula with one existential quantifer, that is, a formula of the form $\exists \ivarx. \varphi(\ivarx, \vec{\ivary})$. We will prove that the complexity of eliminating one quantifer has a 3-EXPTIME upper bound. Since the quantifier elimination procedure for $\pa$ works as a subprocedure and also has a 3-EXPTIME complexity, the bound may not be improved easily\wuhao{ref Oppen73}.
 
-We first analyse the preprocessing step, namely the normalization procedure. For the rest of the decision procedure, we adopt the style in the complexity analysis of \pa \ (cf. \cite{Oppen73}).
 
-Recall that in the normalization step, the formula is first transformed into the NNF and then fresh variables are introduced for terms of different forms. The transformation would double the length of the formula in the worst case when all atomic formulas are of the form $\iterm_1 = \iterm_2$ or its negation. \wuhao{How to compute the number of fresh variables in normalization?}
+We first analyse the changes of formula length in the preprocessing step (normalization step). For the rest of the decision procedure, we adopt the style in the complexity analysis of \pa \ (cf. \cite{Oppen73}). The idea is that the formula length is bounded (up to a constant) by the product of the number of atoms, the number of coefficients and the length of the maximum constant. So we track the changes of such quantities throughout the procedure.
+
+Given a formula $\exists \ivarx. \varphi(\ivarx, \vec{\ivary})$ with length $n$. After the normalization step, suppose we obtain a formula with $m$ quantified variables $\exists \ivarx_m \dots\exists \ivarx_1. \varphi'(\ivarx_1,\dots, \ivarx_m, \vec{\ivary})$. We show that the length of the new formula is at most $6n$ and the number of quantified variables $m\le n$. In each sub-step of normalization, we analyse the worst situation: (1) \textit{Eliminate negations} suppose all atoms are of the form $\iterm_1=\iterm_2$, then taking negation will double the number of atoms, the length increases to $2n$ at most. (2) \textit{eliminate $\ell_10(\iterm)$ terms} the original formula has at most $n$ terms of the form $\ell_10(\iterm)$, for each of them, we introduce a fresh variable and two conjuncts. The formula length increases to $4n$.
+(3) \textit{flatten $10^\iterm$ terms} similar to (2), the formula has at most $n$ such terms and for each term, a fresh variable and a conjunct are added. The formula length increases to $5n$. (4) \textit{$\le$ atoms} similar to (1), here we assume all atoms are of the form $\iterm_1  = \iterm_2$, so the length of the formula with increase to $10n$ at most. 
+
+The analysis for the normalization step is coarse, for example, the worst case in (1) and (4) or (2) and (3) can not happen at the same time. However, what we need is that the increased length of the formula is bounded by a constant factor. In addition, we can also conclude that the number of fresh variables are less than $n$ since there are at most $n$ different forms. 
+
+\wuhao{stop here}
 
 After the normalization step, denote the obtained formula by $\varphi = \exists \vec{\ivarx}. \theta(\vec{\ivarx},\vec{\ivary})$ with quantified variables $\vec{\ivarx} = (\ivarx_1,\dots,\ivarx_m)$ and free variables $\vec{\ivary}$. $\theta$ contains no quantifiers. 
 Let $n$ denote the length of formula $\varphi$.
