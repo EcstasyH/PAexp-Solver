@@ -275,7 +275,7 @@ Assuming $m\le n$, by induction on $k$ we get
 If we assume $c\le n$, $a\le n$ and $s\le n$, the space required to store the quantifier free formula, $\varphi_k$, is bounded by the product of the number of linear orders $m!$, the number of atoms $a_k$, the maximum number of constants $2m+2$ per atom, the maximum amount of space $s_k$ to store each constant and some constant $q$:
  
 $${\sf space}\le q \cdot m! \cdot a_k \cdot (2m+2) \cdot s_k \le 2^{2^{2^{pn \log n}}}$$
-for some large constant $p$. It is also a bound for deterministic time\wuhao{why}.
+for some large constant $p$. \wuhao{time complexity?}.
 
 \subsection{Some additional optimizations of the decision procedure for {\paexp}}\label{app-opt}
 
