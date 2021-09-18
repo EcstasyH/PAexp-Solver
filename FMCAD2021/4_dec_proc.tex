@@ -1,25 +1,23 @@
 %!TEX root = paper.tex
 
-Sem\"{e}nov first proved that  {\paexp} admits quantifier elimination in \cite{Semenov84}, thus its satisfiability problem is decidable. However, Sem\"{e}nov did not give a concrete quantifier elimination procedure. Remedying this, Point proposed a quantifier elimination procedure for {\paexp} in \cite{Point86}. 
+Semënov first proved that  {\paexp} admits quantifier elimination in \cite{Semenov84}, thus its satisfiability problem is decidable. However, Semënov did not give a concrete quantifier elimination procedure. Remedying this, Point proposed a quantifier elimination procedure for {\paexp} in \cite{Point86}. 
 
 In this section, we describe how Point's quantifier elimination procedure works. 
 %
 \begin{theorem}[\cite{Point86}]
 \label{thm-paexp}
-{\paexp} admits quantifier elimination\wuhao{ in triply exponential deterministic time and space}. 
+{\paexp} admits quantifier elimination. 
 \end{theorem}
 %
 Compared to \cite{Point86}, the presentation here is more accessible to computer science researchers. Moreover, the procedure presented here slightly improves Point's procedure, in the following two aspects: 1) DNF (disjunctive normal form) was required in Point's procedure, which is not required here, 2) in Point's procedure, the divisibility constraints produced by the elimination of linear occurrences of a variable should be converted to equality constraints (by introducing fresh variables) before the elimination of exponential occurrences of some other variable, which is unnecessary here, since the divisibility constraints are directly dealt with in the elimination of exponential occurrences of variables.
-Moreover, we give a complexity analysis in Appendix~\ref{app:cpx}.% which was missing in \cite{Point86}.
-%
+Furthermore, we give a complexity analysis in Appendix~\ref{app:cpx}, which shows that the elimination of one quantifier has a space complexity of 3-EXPSPACE. \wuhao{relation with PA}
 %
 
-Furthermore, as Point's procedure is quite expensive and a faithful implementation would not scale\footnote{We did implement Point's algorithm and discovered that the implementation could only solve formulas of very small size.},
-in the next section, we will propose various optimizations to Point's algorithm, aiming at an efficient implementation. 
+However, Point's procedure is quite expensive and a faithful implementation would not scale\footnote{We did implement Point's algorithm and discovered that the implementation could only solve formulas of very small size.}. In the next section, we will propose various optimizations to Point's algorithm, aiming at an efficient implementation. 
 
 \smallskip
 
-As $\forall \ivarx. \ \varphi$ is equivalent to $\neg \exists \ivarx. \ \neg \varphi$,  thus in the sequel, we only need to  show that every {\paexp} formula $\exists \ivarx.\ \varphi \in \paexp$, where $\varphi$ is quantifier-free, can be transformed into an equivalent quantifier-free formula $\varphi' \in \paexp$.
+As $\forall \ivarx. \ \varphi$ is equivalent to $\neg \exists \ivarx. \ \neg \varphi$,  thus in the sequel, we only need to  show that every $\paexp$ formula $\exists \ivarx.\ \varphi \in \paexp$, where $\varphi$ is quantifier-free, can be transformed into an equivalent quantifier-free formula $\varphi' \in \paexp$.
 
 % when the quantifier elimination problem of $\paexp$  can be easily reduced to the above special case. 
 
@@ -86,131 +84,25 @@ To summarize, $\varphi_1$ is transformed into
 Note that $\varphi_2$ contains \emph{only linear} occurrences of $\ivarx_3$.
 
 Finally, we can eliminate the linear occurrences of $\ivarx_3$, thus the quantifier $\exists \ivarx_3$, by applying the quantifier elimination algorithm of {\pa}, e.g. Cooper's algorithm in \cite{Cooper72}. The elimination of $\ivarx_3$ in $\varphi_2$ here is simple, with $\ivarx_3$ replaced by $\ivarx_1 + \ivarx_2$. 
-\hide{, resulting into  
-\[
-\small
-\begin{array}{l}
-\varphi_3 \Def \exists \ivarx_2.\ 
-\ivarx_1 + \ivarx_2 \le \ell_{10}(\ivary+1001)\ \vee \\
-\left(
-\begin{array}{l}
-\ivarx_1 + \ivarx_2 = \ell_{10}(\ivary+1001)+1\ \wedge \\
-10 \lambda_{10}(\ivary+1001) - 10^{\ivarx_2} \le \ivary + 1001 
-\end{array}
-\right) \vee \\
-%
- \bigvee \limits_{j \in \{0,1,2\}}  \left(\ivarx_1 + \ivarx_2 = \ivarx_2 +j \wedge 10^{\ivarx_2 + j} - 10^{\ivarx_2} \le \ivary + 1001\right).
-\end{array}
-\]}
 
 In the remainder of this section, we are going to describe the aforementioned steps of the decision procedures: Normalization, the enumeration of the variable orders, 
 the elimination of the exponential occurrences of variables. The elimination of the  linear occurrences of variables is essentially the quantifier elimination of the {\pa} and omitted.
 
 Let us assume that $\varphi \Def \exists \ivarx.\ \varphi'(\ivarx, \vec{\ivary})$, where $\varphi'$ is a quantifier-free formula. 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-\begin{definition}
-    For a strictly increasing function $f:\mathbb{N}\mapsto \mathbb{N}$, 
-    $f$ is said to be \emph{compatible with addition}
-    if for every $m\in \mathbb{N}^+$,  $f$ modulo $m$ is periodic, 
-    and for any term $A(x)=\sum_{1\le i\le n} a_i f(x+b_i)$, 
-    where $n \in \mathbb{N}^+, a_i ,b_i \in \mathbb{Z}$,
-    one of the following holds:
-    \begin{itemize}
-        \item $A(x)$ is bounded; 
-        \item there exists a constant $\Delta_A\in \mathbb{N}^+$ such that 
-        $\forall x. A(x+\Delta_A)\ge f(x)$;
-        \item there exists a constant $\Delta_A\in \mathbb{N}^+$ such that 
-        $\forall x. -A(x+\Delta_A)\ge f(x)$.
-    \end{itemize}
-\end{definition}
-
-Semenov proved that for any function $f$ that is compatible with addition, the first order theory $(\mathbb{N},+,f)$ admits QE  and thus is complete and decidable \cite{Semenov84}. Exponential functions are a typical class of compatible with addition functions, and therefore {$\paexp$} is decidable. Particularly, in \cite{Point86} 
-Point gave a detailed QE algorithm for $(\mathbb{N},+,2^x)$.
-%下面这些感觉可以不用说，或者放在后面
-%Unfortunately, Point's algorithm is flawed, one problem lies in the discussion to eliminate exponential terms. For example, after  eliminating variable $x$ in formula $\exists x. y\le 2^x \wedge x\le 10$, the expected result should be $y\le 2^{10} =1024$, but Point's algorithm will return a formula equivalent to $y \le 2^6=64$.
-
-In this section, within Point's framework, we give a revised algorithm to the decision problem of {$\paexp$} with both improvements and corrections, that provides a crucial step to the decision procedure of string constraints with {\parseInt} function according to Theorem~\ref{thm:string-parInt}. 
-
-%\section{Quantifier Elimination Algorithm for $(\mathbb{N},+,2^x)$}
-% Based on Point's work \cite{Point86}, 
-We will present a revised QE algorithm for {$\paexp$} formulas of the form $Qx.\theta(x,\bar{y})$, where $Q$ is a quantifier and $\theta(x,\bar{y})$ is a quantifier-free formula. Since $\forall x. F = \neg \exists x. \neg F$, we further assume the quantifier is an existential quantifier, that is, $\exists x.\theta(x,\bar{y})$. For eliminating quantifiers in arbitrary {$\paexp$} formula, we need to apply the algorithm to the innermost quantified formula and repeat this procedure until all quantifiers are eliminated.
-
-The whole QE algorithm can be divided into 4 steps. The first step \textbf{Normalization} can be viewed as a pre-processing step, which substitutes ``complex" terms like $2^{2^x}$, $l_2(3x+y)$ with ``simple" terms by introducing new variables. After \textbf{Normalization}, we move forward to handle a ``simpler" formula, however, at the cost of more quantified variables.
-
-The other three steps undertake the task to eliminate the newly introduced variables in \textbf{Normalization} step, denoted by $\{x_i:1\le i\le n\}$, and the original variable $x$ (will be denoted by $x_0$) one by one. 
-The main body of \textbf{Enumerate-Orders} step is a loop to enumerate all possible orders among quantified variables $\{x_i : 0\le i \le n\}$. 
-In each iteration, according the given (decreasing) order of quantified variables (corresponding to an outer \emph{for} loop), we invoke \textbf{Elim-exp} and \textbf{Elim-linear} to eliminate these variables one by one. 
-
-During each iteration of the inner \emph{for} loop, if the maximal $x_i$ in $\bar{x}$ occurs in an exponential term in an atom, we will invoke \textbf{Elim-exp} to produce an equivalent formula where $x_i$ occurs linearly. Then \textbf{Elim-linear} will eliminate all linear occurrences of $x_i$, which is similar to the classic Cooper's QE algorithm for PA \cite{Cooper72}. 
-
-A more detailed description is given below.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \vspace*{-3mm}
 \subsection{Normalization}
 
-The normalization step first removes the occurrences of $\lambda_{10}(\iterm)$ and $\ell_{10}(\iterm)$  such that $\ivarx$ occurs  in $\iterm$, by encoding them with the exponential function. Moreover, for each occurrence of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, it introduces a fresh variable $\ivarz$, replaces $10^\iterm$ with $10^\ivarz$, and adds the equality $\ivarz = \iterm$.  It also applies some additional transformations. After the normalization, the resulting formula is of the following shape: 1) it is in NNF (negation normal form),  2) it contains no occurrences of $\lambda_{10}(\iterm)$ as well as $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, 3)  it contains no occurrences of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, but $\iterm \neq \ivarx$, 4) all the atomic formulas are of the form $\iterm_1 \le \iterm_2$ or $c | \iterm$. A formula is \textit{normalized} if it satisfies the above properties. More details can be found in Appendix~\ref{app-norm}.
-
-
-%\yfc{Maybe describe the shape of normalized formula here. After normalization, all formulae are in the form ...}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-Then $\theta(x,\bar{y})$ becomes a Boolean combination (with only $\wedge$ and $\vee$) of literals.
-
-Make substitutions by introducing new variables according to the \textit{while} statements in the pseudo-code. For consistency, we rename the original $x$ to be $x_0$ and assume $n$ new quantified variables are introduced.
-
-%After introducing new variables and substitution, 
-After substitutions, we obtain a formula where if an exponential term contains a quantified variable $x_i$, the term must be $2^{x_i}$.
-We then collect all terms with $x_i (0\le i\le n)$ together, it will be of the form $s(\bar{x}) \Def \sum_{i=0}^{n} a_i 2^{x_i} + \sum_{i=0}^n b_i x_i$, where $a_i,b_i (0\le i \le n)$ are all constants.
-Other terms including constants and terms of free variables $\bar{y}$ are collected, denoted by $t(\bar{y})$. Since $\bar{y}$ are free variables, we will regard $t(\bar{y})$ as a constant. Inequalities and equalities will all be transformed into $s(\bar{x})\le t(\bar{y})$, for example, $s(\bar{x}) = t(\bar{y})$ will be replaced by $s(\bar{x})\le t(\bar{y})\wedge t(\bar{y})\le s(\bar{x})$.
- end, the resulted formula $\theta'$ only contains literals of the forms $s(\bar{x})\le t(\bar{y})$, $k|s(\bar{x})+t(\bar{y})$ and $\neg  (k|s(\bar{x})+t(\bar{y}))$.
-
-
-\begin{algorithm}[t]
-    \SetAlgoLined
-    \KwIn{1-existential formula $\exists x.\theta(x,\bar{y})$}
-    \KwOut{n-existential formula $\exists \bar{x}.\theta'(\bar{x},\bar{y})$}
-    
-    $\theta' :=  \theta(x,\bar{y})$ \;
-    Transform $\theta'$ into NNF\;
-    \tcp{ i is used for counting the introduced variables }
-    $i := 1$\; 
-    \tcp{ $\bar{y}$ are regarded as constants} 
-    \While{there is a term $l_2(t)$, $t$ is not a constant}
-    {
-        $\theta' :=  \theta'[x_i/l_2(t)] \wedge (2^{x_i}\le t) \wedge (t\le 2^{x_i+1}-1)$\;
-        $i:= i+1$\;
-    }
-    \While{there is a term $2^t$, $t$ is not a variable $x_j(j<i)$ or a constant}
-    {
-        $\theta' :=  \theta'[2^{x_i}/2^t]\wedge (x_i\le t) \wedge (t \le x_i)$\;
-        $i:= i+1$\;
-    }
-    $n:= i-1$\;
-    \tcp{ Collect quantified variables}
-    Transform all atoms of $\theta'$ into forms $s(\bar{x})\le t(\bar{y})$, $k|s(\bar{x})+t(\bar{y})$ or $\neg  (k|s(\bar{x})+t(\bar{y}))$\;
-    Return $\exists x_0,...,\exists x_n. \theta'$
-   
-    \caption{Normalization}
-\end{algorithm}
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The normalization step first removes the occurrences of $\ell_{10}(\iterm)$ where $\ivarx$ occurs in $\iterm$, by encoding them with the exponential function. Moreover, for each occurrence of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, it introduces a fresh variable $\ivarz$, replaces $10^\iterm$ with $10^\ivarz$, and adds the equality $\ivarz = \iterm$.  It also applies some additional transformations. After the normalization, the resulting formula is of the following shape: 1) it is in NNF (negation normal form),  2) it contains no occurrences of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, 3)  it contains no occurrences of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, but $\iterm \neq \ivarx$, 4) all the atomic formulas are of the form $\iterm_1 \le \iterm_2$ or $c | \iterm$. Denote the negation of $c | \iterm$ by $c\nmid t$, then the formula contains no negation symbol. A formula is \textit{normalized} if it satisfies the above properties. More details can be found in Appendix~\ref{app-norm}.
 
 \vspace{-2mm}
 \subsection{Enumeration of the variable orders} 
 
+Suppose $n-1$ fresh variables are introduced in the normalization procedure, rename the original variable $\ivarx$ and the $n-1$ introduced variables $\ivarx_i,1\le i\le n$.
 Let the output of the normalization procedure be $\exists \vec{\ivarx}.\ \varphi'$ with $\vec{\ivarx} = (\ivarx_1,\ldots, \ivarx_n)$. 
 We then enumerate all the linear orders of $\{\ivarx_1,\ldots, \ivarx_n\}$. Each linear order can be represented by a permutation $\sigma \in \mathcal{S}_n$ (where $\mathcal{S}_n$ is the permutation group on $[n]$), with the intention that $\ivarx_{\sigma(n)} \ge \cdots \ge \ivarx_{\sigma(1)}$.
 
-Assuming a linear order $\sigma \in \mathcal{S}_n$ of $\{\ivarx_1,\ldots, \ivarx_n\}$, we then consider $\varphi'_\sigma  = \exists \vec{\ivarx}.\ \varphi' \wedge \bigwedge \limits_{i \in [n-1]} \ivarx_{\sigma(i)} \le \ivarx_{\sigma(i+1)}$ and eliminate the quantifiers $\exists \ivarx_{\sigma(n)}$, $\ldots$, $\exists \ivarx_{\sigma(1)}$,  one by one and from the innermost to the outmost. Let $\varphi''_\sigma$ denote the resulting formula.
+Assuming a linear order $\sigma \in \mathcal{S}_n$ of $\{\ivarx_1,\ldots, \ivarx_n\}$, we then consider $\varphi'_\sigma  = \exists \vec{\ivarx}.\ \varphi' \wedge \bigwedge \limits_{i \in [n-1]} \ivarx_{\sigma(i)} \le \ivarx_{\sigma(i+1)}$ and eliminate the quantifiers $\exists \ivarx_{\sigma(n)}$, $\ldots$, $\exists \ivarx_{\sigma(1)}$,  one by one and from $\ivarx_n$ to $\ivarx_1$. Let $\varphi''_\sigma$ denote the resulting formula.
 
 Finally, $\exists \vec{\ivarx}.\ \varphi'$ is transformed into the quantifier-free formula $\bigvee \limits_{\sigma \in \mathcal{S}_n} \varphi''_{\sigma}$. 
 
@@ -220,67 +112,20 @@ In the sequel, assuming a linear order $\sigma \in \mathcal{S}_n$, for $i \in [n
 Note that the order $\ivarx_{\sigma(i)} \ge \ldots \ge \ivarx_{\sigma(1)}$ guarantees the maximality of $\ivarx_{\sigma(i)}$ among $\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}$, which is essential for the elimination of $10^{\ivarx_{\sigma(i)}}$ from $\varphi''_{\sigma,i}$ (see Lemma~\ref{lem:exp-ineq}).
 
 %\yfc{Explain why only the largest variable can  be eliminated. Which part of the procedure we need this condition? Or if we do not have the order, what can be wrong?}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-In the \textbf{Normalization} step, we simplify the origin formula at the cost of more quantified variables. Suppose we get $\exists \bar{x}.\theta(\bar{x},\bar{y})$ and it has $n$ new variables $x_i$. As a consequence, we need to eliminate all $(n+1)$ quantified variables one by one. 
-
-%To the end, 
-We denote the set of all orders among the $(n+1)$ variables by $S_{n+1}$, and then enumerate these orders one by one in the outer \textit{for} loop. For the considered order $\sigma$, we first add the ordering information to $\theta$, and then according to the order, to eliminate $x_{\sigma(i)}$ for $i=n$ to $0$ by invoking \textbf{Elim-exp} first, and then invoking \textbf{Elim-linear} (the inner \textit{for} loop). In each iteration of the inner \textit{for} loop, if $x_{\sigma{(i)}}$ occurs in an exponential term in an atom $\tau$, \textbf{Elim-exp} is invoked to produce a formula, in which $x_i$ occurs linearly, equivalent to $\theta$;  
-then $x_i$ occurs only linearly, thus \textbf{Elim-linear} is further invoked to eliminate all (linear) occurrences of $x_i$. The returned formula is the disjunction of all formulas resulted in all iterations of the outer \textit{for} loop. 
- 
-\iffalse
-put , We now specify an order of $\bar{x}$, and recursively eliminate the maximal element in the remaining $\bar{x}$. 
-That is to say,
-every execution of \textbf{Elim-exp} and \textbf{Elim-linear} will eliminate the largest element $x_i$ in $\bar{x}$.
-However, as you may notice, if there is no clue about the order of $\bar{x}$, 
-we will have to use the idea of permutation group and the number of sub-cases will blow up, in the worst case, $(n+1)!$ cases. 
-
-Here is how \textbf{Elim-exp} and \textbf{Elim-linear} are invoked in
-\textb
-At thef{Ordering and QE}. 
-\fi
-
-\begin{algorithm}[t]
-    \SetAlgoLined
-    \KwIn{a normalized $(n+1)$-existential formula $\exists \bar{x}.\theta(\bar{x},\bar{y})$, where $\bar{x}=(x_0,...,x_n)$} 
-    \KwOut{an equivalent quantifier-free formula without $\bar{x}$}
-    \tcp{Let $S_{n+1}$ denote the group of permutations on $\{0,1,...,n\}$}
-    $\phi := \textit{False}$\;
-    \For{each $\sigma \in S_{n+1}$ }
-    {
-        $\theta_{\sigma}:=  \theta(\bar{x},\bar{y})\wedge \bigwedge_{j=0}^{n-1}(x_{\sigma(j)}\le x_{\sigma(j+1)})$\;
-        
-        \tcp{recursively eliminate the maximal $x_i$ in $\bar{x}$}
-        %\znj{How to effectively determine the maximal $x_i$?} 
-        \For{i from n to 0}
-        {
-            \tcp{if $x_{\sigma(i)}$ occurs exponentially in $\theta_\sigma$}
-            $\theta_{\sigma}:= \textbf{Elim-exp}(x_{\sigma(i)},\theta_{\sigma})$\;
-            \tcp{now $x_{\sigma(i)}$ occurs only linearly in $\theta_\sigma$}
-            $\theta_{\sigma}:= \textbf{Elim-linear}(x_{\sigma(i)},\theta_{\sigma})$\;
-        }
-        $\phi :=  \phi \vee \theta_{\sigma}$\;
-    }
-    output $\phi$
-    \caption{Enumerate-Orders}
-\end{algorithm}
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \vspace*{-3mm}
 \subsection{Elimination of  exponential occurrences of variables}\label{sec-elim-exp}
 
 Let $i \in [n]$ and $\exists \ivarx_{\sigma(1)} \ldots \exists \ivarx_{\sigma(i)}.\ \varphi''_{\sigma,i}(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ be the formula obtained from $\varphi'_\sigma$ by eliminating the quantifiers $\exists \ivarx_{\sigma(n)}$, $\ldots$, $\exists \ivarx_{\sigma(i+1)}$. We show how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\varphi''_{\sigma,i}$. The elimination is \emph{local} in the sense that it is applied to the atomic formulas independently. 
 
-Recall that after normalization, the atomic formulas are of the form $\iterm_1 \le \iterm_2$ or $c | \iterm$. Therefore, we can assume that the atomic formulas in $\varphi''_{\sigma,i}$ are  of the form 
+Recall that after normalization, the atomic formulas are of the form $\iterm_1 \le \iterm_2$, $c | \iterm$ or $c \nmid \iterm$. Therefore, we can assume that the atomic formulas in $\varphi''_{\sigma,i}$ are  of the form 
 %
 $a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary})$
 or  
-$c \ \big  | \ \big(a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})\big).$
-%
-For convenience, let us call these formulas as inequality respectively divisibility atomic formulas. In the sequel, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for these inequality atomic formulas. The elimination of the exponential occurrences of the divisibility formulas are simpler and omitted, which can be found in Appendix~\ref{app-div}. 
+$c \ \big  | \ \big(a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})\big)$
+(or $\nmid$).
+
+For convenience, let us call these formulas as inequality respectively (in)divisibility atomic formulas. In the sequel, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for these inequality atomic formulas. The elimination of the exponential occurrences of the (in)divisibility formulas are simpler and omitted, which can be found in Appendix~\ref{app-div}. 
 
 Let us consider 
 $$

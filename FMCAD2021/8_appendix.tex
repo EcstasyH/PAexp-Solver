@@ -1,19 +1,23 @@
 %!TEX root = paper.tex
 
-
 \subsection{Details of the normalization step}\label{app-norm}
 %
 The normalization step comprises the following sub-steps.
 \begin{enumerate}
-\item At first, we transform $\varphi'(\ivarx,\vec{\ivary})$ into the NNF (negation normal form). Moreover, we remove the occurrences of $\neg$ by (a) replacing $\neg c | \iterm$ with $\bigvee \limits_{j \in [c-1]} c | (\iterm+j)$, (b)  $\neg (\iterm_1 = \iterm_2)$ with $\iterm_1 < \iterm_2 \vee \iterm_2 < \iterm_1$, (c) $\neg (\iterm_1 < \iterm_2)$ with $\iterm_2 \le \iterm_1$, (d) $\neg (\iterm_1 \le \iterm_2)$ with $\iterm_2 < \iterm_1$, and so on.
+\item \textit{NNF transformation} At first, we transform $\varphi'(\ivarx,\vec{\ivary})$ into the NNF (negation normal form). Moreover, we remove the occurrences of $\neg$ by replacing 
+\hide{(a) replacing $\neg c | \iterm$ with $\bigvee \limits_{j \in [c-1]} c | (\iterm+j)$, }
+(a) $\neg c | \iterm$ with $ c \nmid \iterm$, 
+(b) $\neg (\iterm_1 = \iterm_2)$ with $\iterm_1 < \iterm_2 \vee \iterm_2 < \iterm_1$, 
+(c) $\neg (\iterm_1 < \iterm_2)$ with $\iterm_2 \le \iterm_1$, 
+(d) $\neg (\iterm_1 \le \iterm_2)$ with $\iterm_2 < \iterm_1$, and so on.
 %
-\item Repeat the following procedure, until there are no $\lambda_{10}(\iterm)$ or $\ell_{10}(\iterm)$ with $\ivarx$ occurs in $\iterm$: Replace each occurrence of $\lambda_{10}$ in $\varphi'$, say $\lambda_{10}(\iterm)$, such that $\ivarx$ occurs in $\iterm$, by $10^{\ell_{10}(\iterm)}$. Then replace each occurrence of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add the constraint $10^\ivarz \le \iterm < 10^{\ivarz + 1}$ as a conjunct. Let the resulting formula be $\varphi''$.
+\item \textit{replace $\ell_{10}(\iterm)$ terms} Repeat the following procedure, until there are no $\ell_{10}(\iterm)$ with $\ivarx$ occurs in $\iterm$: for each occurrence of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add the constraint $10^\ivarz \le \iterm < 10^{\ivarz + 1}$ as a conjunct. Note that if $\iterm$ contains no variables, then $\ell_{10}(\iterm)$ is a constant. In this case, we can also assume that $\iterm$ contains $\ivarx$ and perform the same replacements, which helps in the analysis of complexity in \ref{app:cpx}. Let the resulting formula be $\varphi''$.
 %
 
-\item Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ with $\ivarx$ occurs in $\iterm$, we have $\iterm = \ivarx$: For each occurrence of the $10^{\iterm}$ in $\varphi''$, such that $\iterm$ contains $\ivarx$ but is not $\ivarx$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $10^{\iterm}$ by $10^\ivarz$, moreover, add the constraint $\ivarz = \iterm$ as a conjunct. Let $\varphi'''$ denote the resulting formula.  
+\item \textit{flatten $10^\iterm$ terms} Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ with $\ivarx$ occurs in $\iterm$, we have $\iterm = \ivarx$: For each occurrence of the $10^{\iterm}$ in $\varphi''$, such that $\iterm$ contains $\ivarx$ but is not $\ivarx$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $10^{\iterm}$ by $10^\ivarz$, moreover, add the constraint $\ivarz = \iterm$ as a conjunct. Let $\varphi'''$ denote the resulting formula.  
 
-\item Do the following replacements to $\varphi'''$, so that all the atomic formulas in $\varphi^\dag$ are of the form $\iterm_1 \le \iterm_2$ or $c | \iterm$: Replace every occurrence of $\iterm_1 \ge \iterm_2$ with $\iterm_2 \le \iterm_1$. Replace every occurrence of $\iterm_1 < \iterm_2$ (resp. $\iterm_1 > \iterm_2$) with $\iterm_1 \le \iterm_2 - 1$ (resp. $\iterm_2 \le \iterm_1-1$). Replace ever occurrence of $\iterm_1 = \iterm_2$ wtih $\iterm_2 \le \iterm_1 \wedge \iterm_1 \le \iterm_2$. Let $\varphi^\dag$ the resulting formula. 
-%
+\item \textit{$\le$ transformation} Do the following replacements to $\varphi'''$, so that all the atomic formulas in $\varphi^\dag$ are of the form $\iterm_1 \le \iterm_2$ ,$c | \iterm$ or $c \nmid \iterm$: Replace every occurrence of $\iterm_1 \ge \iterm_2$ with $\iterm_2 \le \iterm_1$. Replace every occurrence of $\iterm_1 < \iterm_2$ (resp. $\iterm_1 > \iterm_2$) with $\iterm_1 \le \iterm_2 - 1$ (resp. $\iterm_2 \le \iterm_1-1$). Replace ever occurrence of $\iterm_1 = \iterm_2$ wtih $\iterm_2 \le \iterm_1 \wedge \iterm_1 \le \iterm_2$. Let $\varphi^\dag$ the resulting formula. 
+
 \item Let $\vec{\ivarz} = \ivarz_1,\ldots, \ivarz_n$ be an enumeration of the freshly introduced variables. Then the result of the normalization procedure is 
 $\exists \vec{\ivarz}\exists \ivarx.\ \varphi^\dag$.
 \end{enumerate}
@@ -135,9 +139,9 @@ Therefore,  in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, 
 We would like to remark that Lemma~\ref{lem:exp-ineq} still holds when the base of exponential function is changed to any natural number $n\ge 2$.
 
 
-\subsection{Elimination of exponential occurrences of variables for divisibility atomic formulas}\label{app-div}
+\subsection{Elimination of exponential occurrences of variables for (in)divisibility atomic formulas}\label{app-div}
 
-Consider
+Consider a divisiblilty atomic formula 
 %
 $$
 \begin{array}{l}
@@ -146,7 +150,7 @@ d\ \big |\ \big(a_i 10^{\ivarx_{\sigma(i)}} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\
 + \iterm(\vec{\ivary}) \big)
 \end{array}
 $$
-with $a_i \neq 0$.
+with $a_i \neq 0$. The indivisibility case can be treated analogously by taking a negation.
 %
 
 Let $d = 2^{r_1} 5^{r_2}  d_0$ such that $d_0$ is divisible by neither $2$ nor $5$. Moreover, let $r = \max(r_1, r_2)$. Then $d | (10^rd_0)$. 
@@ -202,28 +206,29 @@ where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
 
 \subsection{Complexity analysis}\label{app:cpx}
 
-In this part, we analyse the complexity of the quantifier elimination procedure applied on a formula with one existential quantifer, that is, a formula of the form $\exists \ivarx. \varphi(\ivarx, \vec{\ivary})$. We will prove that the complexity of eliminating one quantifer has a 3-EXPTIME upper bound. Since the quantifier elimination procedure for $\pa$ works as a subprocedure and also has a 3-EXPTIME complexity, the bound may not be improved easily\wuhao{ref Oppen73}.
+In this part, we analyse the complexity of the quantifier elimination procedure applied on a formula with one existential quantifer, that is, a formula of the form $\exists \ivarx. \varphi(\ivarx, \vec{\ivary})$. We will prove that the complexity of eliminating one quantifer has a 3-EXPSPACE upper bound. Since the quantifier elimination procedure for $\pa$ works as a subprocedure (in eliminating linear occurrences of variables) and also has a 3-EXPSPACE complexity, the bound may not be easily improved.
 
+We first analyse the changes of formula length in the normalization step. For the rest of the decision procedure, we adopt the style in the complexity analysis of \pa \ (cf. \cite{Oppen73}). The idea is that the upper bound of the formula length can be expressed using the product of the number of atoms, the number of coefficients and the length of the maximum constant. So we track the changes of such quantities throughout the procedure.
 
-We first analyse the changes of formula length in the preprocessing step (normalization step). For the rest of the decision procedure, we adopt the style in the complexity analysis of \pa \ (cf. \cite{Oppen73}). The idea is that the formula length is bounded (up to a constant) by the product of the number of atoms, the number of coefficients and the length of the maximum constant. So we track the changes of such quantities throughout the procedure.
+Given a formula $\exists \ivarx. \varphi(\ivarx, \vec{\ivary})$ with length $n$. After the normalization step, suppose we obtain a formula with $m$ quantified variables $\exists \ivarx_1 \dots\exists \ivarx_m. \varphi'(\ivarx_1,\dots, \ivarx_m, \vec{\ivary})$. We show that the length of the new formula is at most $10n$ and the number of quantified variables $m\le n$. In each sub-step of normalization, we analyse the worst situation: 
+(1) \textit{NNF transformation} suppose all atoms are of the form $\iterm_1=\iterm_2$, then taking negation will double the number of atoms, the length increases to $2n$ at most. 
+(2) \textit{replace $\ell_{10}(\iterm)$ terms} the original formula has at most $n$ terms of the form $\ell_{10}(\iterm)$, for each of them, we introduce a fresh variable and two conjuncts. The formula length increases to $4n$.
+(3) \textit{flatten $10^\iterm$ terms} similar to (2), the formula has at most $n$ such terms and for each term, a fresh variable and a conjunct are added. The formula length increases to $5n$. 
+(4) \textit{$\le$ transformation} similar to (1), here we assume all atoms are of the form $\iterm_1  = \iterm_2$, so the length of the formula with increase to $10n$ at most. 
 
-Given a formula $\exists \ivarx. \varphi(\ivarx, \vec{\ivary})$ with length $n$. After the normalization step, suppose we obtain a formula with $m$ quantified variables $\exists \ivarx_m \dots\exists \ivarx_1. \varphi'(\ivarx_1,\dots, \ivarx_m, \vec{\ivary})$. We show that the length of the new formula is at most $10n$ and the number of quantified variables $m\le n$. In each sub-step of normalization, we analyse the worst situation: (1) \textit{Eliminate negations} suppose all atoms are of the form $\iterm_1=\iterm_2$, then taking negation will double the number of atoms, the length increases to $2n$ at most. (2) \textit{eliminate $\ell_10(\iterm)$ terms} the original formula has at most $n$ terms of the form $\ell_10(\iterm)$, for each of them, we introduce a fresh variable and two conjuncts. The formula length increases to $4n$.
-(3) \textit{flatten $10^\iterm$ terms} similar to (2), the formula has at most $n$ such terms and for each term, a fresh variable and a conjunct are added. The formula length increases to $5n$. (4) \textit{$\le$ atoms} similar to (1), here we assume all atoms are of the form $\iterm_1  = \iterm_2$, so the length of the formula with increase to $10n$ at most. 
-
-The analysis for the normalization step is coarse, for example, the worst case in (1) and (4) or (2) and (3) can not happen at the same time. However, what we need is that the increased length of the formula is bounded by a constant factor. In addition, we can also conclude that the number of fresh variables are less than $n$ since there are at most $n$ different forms. 
+The analysis for the normalization step is coarse, for example, the worst case in (1)\&(4) or (2)\&(3) can not happen at the same time. However, what we need is that the increased length of the formula is bounded by a constant factor,i.e. 10. In addition, we can also conclude that the number of fresh variables, $m$, is less than $n$ since there are at most $n$ different forms of terms. 
 
 After the normalization step, denote the obtained formula by $\exists \vec{\ivarx}. \varphi(\vec{\ivarx},\vec{\ivary})$ with quantified variables $\vec{\ivarx} = (\ivarx_1,\dots,\ivarx_m)$ and free variables $\vec{\ivary}$. $\varphi$ contains no quantifiers. 
 Let $n'$ denote the length of the formula.
 
 According to our quantifier elimination procedure,we eliminate the quantified variables one by one: each time select the largest variable among $\ivarx_i,1\le i\le m$, first eliminate the exponential occurrences, then linear occurrences. The linear order of quantified variables are given by a permutation. For $m$ quantified variables, there are $m!$ possible linear orders.
 
-Suppose the specified linear order is $\ivarx_1\ge \ivarx_2 \ge \dots \ge \ivarx_m$, otherwise we rename the variables. While eliminating $\ivarx_k$
-The elimination of exponential
-Let $\exists \ivarx_m \dots \exists \ivarx_{k}\varphi'_k$ denote the formula after $k-1$ variables and exponential occurrences of $\ivarx_k$ are eliminated. Let $\varphi_k$ denote the formula obtained by eliminating linear occurrences of $\ivarx_k$ from $\varphi'_k$. For convenience, set $\varphi_0=\varphi$.
+Suppose the specified linear order is $\ivarx_m\ge \dots \ge \ivarx_1$. Let $\exists \ivarx_1\dots \exists\ivarx_{m-k}.\varphi_k$ denote the formula obtained from $\exists \vec{\ivarx}. \varphi(\vec{\ivarx},\vec{\ivary})$ by eliminating quantifiers $\exists \ivarx_m,\dots,\exists\ivarx_{m-k+1}$. Let $\exists \ivarx_1 \dots \exists \ivarx_{m-k+1}.\varphi'_k$ denote the formula obtained from $\exists \ivarx_1\dots \exists\ivarx_{m-k+1}.\varphi_{k-1}$ by eliminating linear occurrences of $\ivarx_{m-k+1}$. Let $\varphi_0$ denote $\varphi$.
 
 Let $c_k$ be the number of distinct $d$ in atoms of the form $d \ \big | \ \iterm$ plus the number of distinct coefficients of \emph{linear occurrences} of quantified variables in $\varphi_k$. Let $s_k$ be the largest constant (including coefficients) and $a_k$ be the number of atomic formulas in $\varphi_k$. Similarly we define $c'_k$, $s'_k$ and $a'_k$ for $\varphi'_k$. Let $c,s,a$ be $c_0,s_0,a_0$ respectively. 
 
-First we analyse the sub-procedure to eliminate exponential occurrences of $\ivarx_1$. We prove the following lemma.
+
+First we analyse the sub-procedure to eliminate exponential occurrences of $\ivarx_m$. We prove the following lemma.
 
 \begin{lemma}\label{lem:cpx exp}
     \begin{align}
@@ -237,7 +242,7 @@ First we analyse the sub-procedure to eliminate exponential occurrences of $\iva
    
 The analysis is separated into 2 cases where all atoms are of the same form (inequalities atoms or divisiblilty atoms). 
 
-If all atoms are inequalities atomic formulas of the form in Lemma~\ref{lem:exp-ineq}. We know that each atomic formula $\tau$ with exponential occurrence of $\ivarx_1$ is replaced by a new formula. Only the coefficients of linear occurrences of $\ivarx_1$ and $\ivarx_2$ will be changed: constant coefficient $1$ is introduced, and if we substitute $x_1$ by $x_2+p$ for some $p$, coefficient of linear occurrence of $x_2$ will become $b_1+b_2$ ($b_1,b_2$ are coefficients for $x_1$ and $x_2$ in $\tau$, see Lemma~\ref{lem:exp-ineq} ). Since the new coefficient is obtained by adding two linear coefficient together, we have $c'_1\le c^2$. Note that $\delta$ and $B$ are at most $\ell_{10}(ms)$, when we substitute $\ivarx_1$ by $\ivarx_2+\delta-1$ or by $B-1$, the largest constant in the formula is at most $s\cdot  10^{\ell_{10}(ms)}\le ms^2$. And an inequality is replaced by at most $4\ell_{10}(ms)$ atomic formulas, so $a'_1\le 4\ell_{10}(ms)a$.
+If all atoms are inequalities atomic formulas of the form in Lemma~\ref{lem:exp-ineq}. We know that each atomic formula $\tau$ with exponential occurrence of $\ivarx_m$ is replaced by a new formula. Only the coefficients of linear occurrences of $\ivarx_m$ and $\ivarx_{m-1}$ will be changed: constant coefficient $1$ is introduced, and if we substitute $x_m$ by $x_{m-1}+p$ for some $p$, coefficient of linear occurrence of $x_{m-1}$ will become $b_m+b_{m-1}$ ($b_m,b_{m-1}$ are coefficients for $x_{m}$ and $x_{m-1}$ in $\tau$, see Lemma~\ref{lem:exp-ineq} ). Since the new coefficient is obtained by adding two linear coefficient together, we have $c'_1\le c^2$. Note that $\delta$ and $B$ are at most $\ell_{10}(ms)$, when we substitute $\ivarx_m$ by $\ivarx_{m-1}+\delta-1$ or by $B-1$, the largest constant in the formula is at most $s\cdot  10^{\ell_{10}(ms)}\le ms^2$. And an inequality is replaced by at most $4\ell_{10}(ms)$ atomic formulas, so $a'_1\le 4\ell_{10}(ms)a$.
 
 If all atoms are divisiblilty atomic formulas of the form $d \ \big | \ \iterm$ or $d \ \nmid \ \iterm$. We have $c'_1<2c$ since a divisibility atomic formula  will produce at most two forms of atomic formulas $d \ \big | \ \iterm$ and $\phi(d) \ \big | \ \iterm$. Note that any constant in $\iterm$ , say $l$, can be replaced by ($l \bmod d)$, so $s'_1\le s$. When $d$ is a large prime number, $\phi(d)=d-1$, a divisibility atomic formula is replaced by roughly $d$ atomic formulas, so $a'_1\le sa$. 
 
@@ -245,7 +250,7 @@ Choose larger upper bound for $c'_1$, $s'_1$ and $a'_1$ respectively, then the l
 
 \end{proof}
 
-Since linear occurrences of $\ivarx_1$ are eliminated using Cooper's algorithm, we combine Oppen's analysis for this sub-procedure:
+Since linear occurrences of $\ivarx_m$ are eliminated using Cooper's algorithm, we combine Oppen's analysis for this sub-procedure:
 
 \begin{lemma}\label{lem:cpx oppen}
     \begin{align}
