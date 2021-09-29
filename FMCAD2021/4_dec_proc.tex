@@ -10,7 +10,7 @@ In this section, we describe how Point's quantifier elimination procedure works.
 \end{theorem}
 %
 Compared to \cite{Point86}, the presentation here is more accessible to computer science researchers. Moreover, the procedure presented here slightly improves Point's procedure, in the following two aspects: 1) DNF (disjunctive normal form) was required in Point's procedure, which is not required here, 2) in Point's procedure, the divisibility constraints produced by the elimination of linear occurrences of a variable should be converted to equality constraints (by introducing fresh variables) before the elimination of exponential occurrences of some other variable, which is unnecessary here, since the divisibility constraints are directly dealt with in the elimination of exponential occurrences of variables.
-Furthermore, we give a complexity analysis in Appendix~\ref{app:cpx}, which shows that the elimination of one quantifier has a space complexity of 3-EXPSPACE. \wuhao{relation with PA}
+Furthermore, we give a complexity analysis in Section~\ref{sec-cpx}, which shows that the elimination of one quantifier has a space complexity of 3-EXPSPACE. 
 %
 
 However, Point's procedure is quite expensive and a faithful implementation would not scale\footnote{We did implement Point's algorithm and discovered that the implementation could only solve formulas of very small size.}. In the next section, we will propose various optimizations to Point's algorithm, aiming at an efficient implementation. 

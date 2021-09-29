@@ -560,7 +560,7 @@ Beijing, China}
     Among algorithms for solving string constraints, flattening is a well-known approach that is particularly useful in handling satisfiable instances.
     As string-integer conversion is an important function appearing in almost all scripting languages, Abdulla et al. extended the flattening approach to this function recently.
     However, their approach supports only a special flattening pattern and leaves the support of the general flat regular constraints as an open problem.
-    In this paper, we fill the gap and propose a complete flattening approach for the string-integer conversion. The approach is built upon a quantifier elimination procedure for the linear-exponential arithmetic constraints (namely, the extension of Presburger arithmetic with exponential functions) proposed by Point in 1986. \wuhao{The complexity of the algorithm is analyzed for the first time and we show that the elimination of one existential quantifier is 3-EXPSPACE.} While the quantifier elimination procedure by Point is too expensive to be implemented efficiently, we propose various optimizations and provide a prototypical implementation.
+    In this paper, we fill the gap and propose a complete flattening approach for the string-integer conversion. The approach is built upon a quantifier elimination procedure for the linear-exponential arithmetic constraints (namely, the extension of Presburger arithmetic with exponential functions) proposed by Point in 1986. The complexity of the quantifier elimination procedure is analyzed for the first time and we show that the elimination of one quantifier is 3-EXPSPACE. While the quantifier elimination procedure by Point is too expensive to be implemented efficiently, we propose various optimizations and provide a prototypical implementation.
     We evaluate the performance of our implementation on the benchmarks that are generated from the string hash functions as well as randomly.
     The experimental results show that our implementation outperforms the state-of-the-art solvers. 
 
@@ -585,24 +585,30 @@ Beijing, China}
 \input{3_flatten.tex}
 
 \vspace*{-4mm}
-\section{Decision procedure for {\paexp}}\label{sec-dec}
 
+\section{Decision procedure for {\paexp}}\label{sec-dec}
 \input{4_dec_proc.tex}
+
+
+\vspace*{-3mm}
+
+\section{Complexity Analysis}\label{sec-cpx}
+\input{5_complexity.tex}
 
 \vspace*{-3mm}
 \section{Optimizations}\label{sec-opt}
 
-\input{5_optimization.tex}
+\input{6_optimization.tex}
 
 \vspace*{-3mm}
 \section{Implementation and Experiments}\label{sec-exp}
 
-\input{6_impl_exp.tex}
+\input{7_impl_exp.tex}
 
 \vspace*{-4mm}
 \section{Conclusion}
 
-\input{7_conclusion.tex}
+\input{8_conclusion.tex}
 
 \newpage
 
@@ -615,7 +621,7 @@ Beijing, China}
 
 \begin{appendix}
 
-\input{8_appendix.tex}
+\input{9_appendix.tex}
 
 \end{appendix}
 
