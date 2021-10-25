@@ -1,28 +1,29 @@
 %!TEX root = paper.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+    \subsection{Details of the normalization step}\label{app-norm}
+    %
+    The normalization step comprises the following sub-steps.
+    \begin{enumerate}
+    \item \textit{NNF transformation} At first, we transform $\varphi'(\ivarx,\vec{\ivary})$ into the NNF (negation normal form). Moreover, we remove the occurrences of $\neg$ by replacing 
+    \hide{(a) replacing $\neg c | \iterm$ with $\bigvee \limits_{j \in [c-1]} c | (\iterm+j)$, }
+    (a) $\neg c | \iterm$ with $ c \nmid \iterm$, 
+    (b) $\neg (\iterm_1 = \iterm_2)$ with $\iterm_1 < \iterm_2 \vee \iterm_2 < \iterm_1$, 
+    (c) $\neg (\iterm_1 < \iterm_2)$ with $\iterm_2 \le \iterm_1$, 
+    (d) $\neg (\iterm_1 \le \iterm_2)$ with $\iterm_2 < \iterm_1$, and so on.
+    %
+    \item \textit{replace $\ell_{10}(\iterm)$ terms} Repeat the following procedure, until there are no $\ell_{10}(\iterm)$ with $\ivarx$ occurs in $\iterm$: for each occurrence of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add the constraint $10^\ivarz \le \iterm < 10^{\ivarz + 1}$ as a conjunct. Note that if $\iterm$ contains no variables, then $\ell_{10}(\iterm)$ is a constant. In this case, we can also assume that $\iterm$ contains $\ivarx$ and perform the same replacements, which helps in the analysis of complexity in \ref{app:cpx}. Let the resulting formula be $\varphi''$.
+    %
 
-\subsection{Details of the normalization step}\label{app-norm}
-%
-The normalization step comprises the following sub-steps.
-\begin{enumerate}
-\item \textit{NNF transformation} At first, we transform $\varphi'(\ivarx,\vec{\ivary})$ into the NNF (negation normal form). Moreover, we remove the occurrences of $\neg$ by replacing 
-\hide{(a) replacing $\neg c | \iterm$ with $\bigvee \limits_{j \in [c-1]} c | (\iterm+j)$, }
-(a) $\neg c | \iterm$ with $ c \nmid \iterm$, 
-(b) $\neg (\iterm_1 = \iterm_2)$ with $\iterm_1 < \iterm_2 \vee \iterm_2 < \iterm_1$, 
-(c) $\neg (\iterm_1 < \iterm_2)$ with $\iterm_2 \le \iterm_1$, 
-(d) $\neg (\iterm_1 \le \iterm_2)$ with $\iterm_2 < \iterm_1$, and so on.
-%
-\item \textit{replace $\ell_{10}(\iterm)$ terms} Repeat the following procedure, until there are no $\ell_{10}(\iterm)$ with $\ivarx$ occurs in $\iterm$: for each occurrence of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add the constraint $10^\ivarz \le \iterm < 10^{\ivarz + 1}$ as a conjunct. Note that if $\iterm$ contains no variables, then $\ell_{10}(\iterm)$ is a constant. In this case, we can also assume that $\iterm$ contains $\ivarx$ and perform the same replacements, which helps in the analysis of complexity in \ref{app:cpx}. Let the resulting formula be $\varphi''$.
-%
+    \item \textit{flatten $10^\iterm$ terms} Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ with $\ivarx$ occurs in $\iterm$, we have $\iterm = \ivarx$: For each occurrence of the $10^{\iterm}$ in $\varphi''$, such that $\iterm$ contains $\ivarx$ but is not $\ivarx$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $10^{\iterm}$ by $10^\ivarz$, moreover, add the constraint $\ivarz = \iterm$ as a conjunct. Let $\varphi'''$ denote the resulting formula.  
 
-\item \textit{flatten $10^\iterm$ terms} Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ with $\ivarx$ occurs in $\iterm$, we have $\iterm = \ivarx$: For each occurrence of the $10^{\iterm}$ in $\varphi''$, such that $\iterm$ contains $\ivarx$ but is not $\ivarx$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $10^{\iterm}$ by $10^\ivarz$, moreover, add the constraint $\ivarz = \iterm$ as a conjunct. Let $\varphi'''$ denote the resulting formula.  
+    \item \textit{$\le$ transformation} Do the following replacements to $\varphi'''$, so that all the atomic formulas in $\varphi^\dag$ are of the form $\iterm_1 \le \iterm_2$ ,$c | \iterm$ or $c \nmid \iterm$: Replace every occurrence of $\iterm_1 \ge \iterm_2$ with $\iterm_2 \le \iterm_1$. Replace every occurrence of $\iterm_1 < \iterm_2$ (resp. $\iterm_1 > \iterm_2$) with $\iterm_1 \le \iterm_2 - 1$ (resp. $\iterm_2 \le \iterm_1-1$). Replace ever occurrence of $\iterm_1 = \iterm_2$ wtih $\iterm_2 \le \iterm_1 \wedge \iterm_1 \le \iterm_2$. Let $\varphi^\dag$ the resulting formula. 
 
-\item \textit{$\le$ transformation} Do the following replacements to $\varphi'''$, so that all the atomic formulas in $\varphi^\dag$ are of the form $\iterm_1 \le \iterm_2$ ,$c | \iterm$ or $c \nmid \iterm$: Replace every occurrence of $\iterm_1 \ge \iterm_2$ with $\iterm_2 \le \iterm_1$. Replace every occurrence of $\iterm_1 < \iterm_2$ (resp. $\iterm_1 > \iterm_2$) with $\iterm_1 \le \iterm_2 - 1$ (resp. $\iterm_2 \le \iterm_1-1$). Replace ever occurrence of $\iterm_1 = \iterm_2$ wtih $\iterm_2 \le \iterm_1 \wedge \iterm_1 \le \iterm_2$. Let $\varphi^\dag$ the resulting formula. 
-
-\item Let $\vec{\ivarz} = \ivarz_1,\ldots, \ivarz_n$ be an enumeration of the freshly introduced variables. Then the result of the normalization procedure is 
-$\exists \vec{\ivarz}\exists \ivarx.\ \varphi^\dag$.
-\end{enumerate}
-
-
+    \item Let $\vec{\ivarz} = \ivarz_1,\ldots, \ivarz_n$ be an enumeration of the freshly introduced variables. Then the result of the normalization procedure is 
+    $\exists \vec{\ivarz}\exists \ivarx.\ \varphi^\dag$.
+    \end{enumerate}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Proof of Lemma~\ref{lem:exp-ineq}}
 
 Note that $\ell_{10}(n)$ is undefined for $n\le 0$ in $\paexp$. For convenience, we define for all $n\le 0$ that $\ell_{10}(n)=\ell_{10}(\max\{1,n\})=0$ in the following proof. 
@@ -139,71 +140,73 @@ Therefore,  in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, 
 We would like to remark that Lemma~\ref{lem:exp-ineq} still holds when the base of exponential function is changed to any natural number $n\ge 2$.
 
 
-\subsection{Elimination of exponential occurrences of variables for (in)divisibility atomic formulas}\label{app-div}
 
-Consider a divisiblilty atomic formula 
-%
-$$
-\begin{array}{l}
-\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
-d\ \big |\ \big(a_i 10^{\ivarx_{\sigma(i)}} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
-+ \iterm(\vec{\ivary}) \big)
-\end{array}
-$$
-with $a_i \neq 0$. The indivisibility case can be treated analogously by taking a negation.
-%
+\hide{
+    \subsection{Elimination of exponential occurrences of variables for (in)divisibility atomic formulas}\label{app-div}
 
-Let $d = 2^{r_1} 5^{r_2}  d_0$ such that $d_0$ is divisible by neither $2$ nor $5$. Moreover, let $r = \max(r_1, r_2)$. Then $d | (10^rd_0)$. 
+    Consider a divisiblilty atomic formula 
+    %
+    $$
+    \begin{array}{l}
+    \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
+    d\ \big |\ \big(a_i 10^{\ivarx_{\sigma(i)}} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
+    + \iterm(\vec{\ivary}) \big)
+    \end{array}
+    $$
+    with $a_i \neq 0$. The indivisibility case can be treated analogously by taking a negation.
+    %
 
-If $d_0 = 1$, then $10^r$ is divisible by $d = 2^{r_1}5^{r_2}$. Thus for every $n \ge r$, $d \ |\ 10^n$.  Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
-\[
-\small
-\begin{array}{l}
-\bigvee \limits_{p = 0}^{r - 1} d\ \big | \big(a_i 10^{p} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + b_kp + \sum_{k=1}^{i-1} b_k \ivarx_{\sigma(k)} 
-+ \iterm(\vec{\ivary}) \big)\\
-%
-\vee \big(\ivarx_{\sigma(i)} \ge r \wedge d\ \big | \big(\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
-+ \iterm(\vec{\ivary}) \big)\big),
-\end{array}
-\]
-where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
+    Let $d = 2^{r_1} 5^{r_2}  d_0$ such that $d_0$ is divisible by neither $2$ nor $5$. Moreover, let $r = \max(r_1, r_2)$. Then $d | (10^rd_0)$. 
 
-Next, let us assume $d_0 > 1$. Since $10$ and $d_0$ are relatively prime, according to Euler's theorem (cf. \cite{HW80}), $10^{\phi(d_0)} \equiv 1 \bmod d_0$, where $\phi$ is the Euler function. Suppose $10^{\phi(d_0)} = kd_0 + 1$ for some $k \in \Nat$. 
-Then for every $n \in \Nat$ with $n \ge r$, 
-$$
-\begin{array}{l}
-10^{n + \phi(d_0)} \bmod d =10^{n-r} 10^r (kd_0 + 1) \bmod d = \\
-10^{n-r} (k 10^rd_0 + 10^r) \bmod d = \\
-10^{n-r} (0+10^r) \bmod d = 10^n \bmod d.
-\end{array}
-$$
+    If $d_0 = 1$, then $10^r$ is divisible by $d = 2^{r_1}5^{r_2}$. Thus for every $n \ge r$, $d \ |\ 10^n$.  Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+    \[
+    \small
+    \begin{array}{l}
+    \bigvee \limits_{p = 0}^{r - 1} d\ \big | \big(a_i 10^{p} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + b_kp + \sum_{k=1}^{i-1} b_k \ivarx_{\sigma(k)} 
+    + \iterm(\vec{\ivary}) \big)\\
+    %
+    \vee \big(\ivarx_{\sigma(i)} \ge r \wedge d\ \big | \big(\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
+    + \iterm(\vec{\ivary}) \big)\big),
+    \end{array}
+    \]
+    where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
 
-Then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
-\[
-\begin{array}{l}
-\bigvee \limits_{p=0}^{r-1} \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[p/\ivarx_{\sigma(i)}]\ \vee \\
-\left(
-\begin{array}{l}
-\ivarx_{\sigma(i)} \ge r\ \wedge \\
-\bigvee \limits_{q = 0}^{\phi(d_0)-1} 
-\left(
-\begin{array}{l}
-\phi(d_0)\ \big |\ (\ivarx_{\sigma(i)} - r - q)\ \wedge \\
-d\ \big | 
-\left(
-\begin{array}{l}
-a_i 10^{r+q} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \\
-\sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})
-\end{array}
-\right) 
-\end{array}
-\right)
-\end{array}
-\right),
-\end{array}
-\]
-where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
+    Next, let us assume $d_0 > 1$. Since $10$ and $d_0$ are relatively prime, according to Euler's theorem (cf. \cite{HW80}), $10^{\phi(d_0)} \equiv 1 \bmod d_0$, where $\phi$ is the Euler function. Suppose $10^{\phi(d_0)} = kd_0 + 1$ for some $k \in \Nat$. 
+    Then for every $n \in \Nat$ with $n \ge r$, 
+    $$
+    \begin{array}{l}
+    10^{n + \phi(d_0)} \bmod d =10^{n-r} 10^r (kd_0 + 1) \bmod d = \\
+    10^{n-r} (k 10^rd_0 + 10^r) \bmod d = \\
+    10^{n-r} (0+10^r) \bmod d = 10^n \bmod d.
+    \end{array}
+    $$
 
+    Then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+    \[
+    \begin{array}{l}
+    \bigvee \limits_{p=0}^{r-1} \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[p/\ivarx_{\sigma(i)}]\ \vee \\
+    \left(
+    \begin{array}{l}
+    \ivarx_{\sigma(i)} \ge r\ \wedge \\
+    \bigvee \limits_{q = 0}^{\phi(d_0)-1} 
+    \left(
+    \begin{array}{l}
+    \phi(d_0)\ \big |\ (\ivarx_{\sigma(i)} - r - q)\ \wedge \\
+    d\ \big | 
+    \left(
+    \begin{array}{l}
+    a_i 10^{r+q} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \\
+    \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})
+    \end{array}
+    \right) 
+    \end{array}
+    \right)
+    \end{array}
+    \right),
+    \end{array}
+    \]
+    where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
+}
 \subsection{Some additional optimizations of the decision procedure for {\paexp}}\label{app-opt}
 
 \paragraph{Synchronize the elimination of exponential occurrences of the same variable in different atomic formulas}

@@ -9,11 +9,11 @@ In this section, we describe how Point's quantifier elimination procedure works.
 {\paexp} admits quantifier elimination. 
 \end{theorem}
 %
-Compared to \cite{Point86}, the presentation here is more accessible to computer science researchers. Moreover, the procedure presented here slightly improves Point's procedure, in the following two aspects: 1) DNF (disjunctive normal form) was required in Point's procedure, which is not required here, 2) in Point's procedure, the divisibility constraints produced by the elimination of linear occurrences of a variable should be converted to equality constraints (by introducing fresh variables) before the elimination of exponential occurrences of some other variable, which is unnecessary here, since the divisibility constraints are directly dealt with in the elimination of exponential occurrences of variables.
-Furthermore, we give a complexity analysis in Section~\ref{sec-cpx}, which shows that the elimination of one quantifier has a space complexity of 3-EXPSPACE. 
+Compared to \cite{Point86}, the presentation here is more accessible to computer science researchers. Moreover, the procedure presented here slightly improves Point's procedure, in the following two aspects: 1) DNF (disjunctive normal form) was required in Point's procedure, which is not required here, 2) in Point's procedure, the divisibility constraints produced by the elimination of linear occurrences of a variable should be converted to equality constraints (by introducing fresh variables) before the elimination of exponential occurrences of some other variable, which is unnecessary here, since the divisibility constraints are directly dealt with in the elimination of exponential occurrences of variables. 
 %
 
-However, Point's procedure is quite expensive and a faithful implementation would not scale\footnote{We did implement Point's algorithm and discovered that the implementation could only solve formulas of very small size.}. In the next section, we will propose various optimizations to Point's algorithm, aiming at an efficient implementation. 
+However, in the next section we analyse the complexity of Point's procedure to be 3-EXPSPACE, which  is quite expensive and a faithful implementation would not scale\footnote{We did implement Point's algorithm and discovered that the implementation could only solve formulas of very small size.}.
+So in Section~\ref{sec-opt}, we will propose various optimizations to Point's algorithm, aiming at an efficient implementation. 
 
 \smallskip
 
@@ -93,7 +93,35 @@ Let us assume that $\varphi \Def \exists \ivarx.\ \varphi'(\ivarx, \vec{\ivary})
 \vspace*{-3mm}
 \subsection{Normalization}
 
+The normalization step comprises the following sub-steps.
+\begin{enumerate}
+\item \textit{NNF transformation} At first, we transform $\varphi'(\ivarx,\vec{\ivary})$ into the NNF (negation normal form). Moreover, we remove the occurrences of $\neg$ by replacing 
+\hide{(a) replacing $\neg c | \iterm$ with $\bigvee \limits_{j \in [c-1]} c | (\iterm+j)$, }
+(a) $\neg c | \iterm$ with $ c \nmid \iterm$, 
+(b) $\neg (\iterm_1 = \iterm_2)$ with $\iterm_1 < \iterm_2 \vee \iterm_2 < \iterm_1$, 
+(c) $\neg (\iterm_1 < \iterm_2)$ with $\iterm_2 \le \iterm_1$, 
+(d) $\neg (\iterm_1 \le \iterm_2)$ with $\iterm_2 < \iterm_1$, and so on.
+%
+\item \textit{replace $\ell_{10}(\iterm)$ terms} Repeat the following procedure, until there are no $\ell_{10}(\iterm)$ with $\ivarx$ occurs in $\iterm$: for each occurrence of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add the constraint $10^\ivarz \le \iterm < 10^{\ivarz + 1}$ as a conjunct. Note that if $\iterm$ contains no variables, then $\ell_{10}(\iterm)$ is a constant. In this case, we can also assume that $\iterm$ contains $\ivarx$ and perform the same replacements, which helps in the analysis of complexity in \ref{app:cpx}. Let the resulting formula be $\varphi''$.
+%
+
+\item \textit{flatten $10^\iterm$ terms} Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ with $\ivarx$ occurs in $\iterm$, we have $\iterm = \ivarx$: For each occurrence of the $10^{\iterm}$ in $\varphi''$, such that $\iterm$ contains $\ivarx$ but is not $\ivarx$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $10^{\iterm}$ by $10^\ivarz$, moreover, add the constraint $\ivarz = \iterm$ as a conjunct. Let $\varphi'''$ denote the resulting formula.  
+
+\item \textit{$\le$ transformation} Do the following replacements to $\varphi'''$, so that all the atomic formulas in $\varphi^\dag$ are of the form $\iterm_1 \le \iterm_2$ ,$c | \iterm$ or $c \nmid \iterm$: Replace every occurrence of $\iterm_1 \ge \iterm_2$ with $\iterm_2 \le \iterm_1$. Replace every occurrence of $\iterm_1 < \iterm_2$ (resp. $\iterm_1 > \iterm_2$) with $\iterm_1 \le \iterm_2 - 1$ (resp. $\iterm_2 \le \iterm_1-1$). Replace ever occurrence of $\iterm_1 = \iterm_2$ wtih $\iterm_2 \le \iterm_1 \wedge \iterm_1 \le \iterm_2$. Let $\varphi^\dag$ the resulting formula. 
+
+\item Let $\vec{\ivarz} = \ivarz_1,\ldots, \ivarz_n$ be an enumeration of the freshly introduced variables. Then the result of the normalization procedure is 
+$\exists \vec{\ivarz}\exists \ivarx.\ \varphi^\dag$.
+\end{enumerate}
+
+Intuitively, the normalization step first absorbs all negation operators by transforming the formula into NNF. Then it removes the occurrences of $\ell_{10}(\iterm)$ where $\ivarx$ occurs in $\iterm$, by encoding them with the exponential function. Moreover, for each occurrence of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, it introduces a fresh variable $\ivarz$, replaces $10^\iterm$ with $10^\ivarz$, and adds the equality $\ivarz = \iterm$. All equalities and inequalities will be rewritten into the form $\iterm_1\le\iterm_2$. Finally, add quantifiers for the introduced fresh variables.
+
+After the normalization, the resulting formula is of the following shape: 1) it is in NNF (negation normal form),  2) it contains no occurrences of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, 3)  it contains no occurrences of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, but $\iterm \neq \ivarx$, 4) all the atomic formulas are of the form $\iterm_1 \le \iterm_2$ or $c | \iterm$. Denote the negation of $c | \iterm$ by $c\nmid t$, then the formula contains no negation symbol. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 The normalization step first removes the occurrences of $\ell_{10}(\iterm)$ where $\ivarx$ occurs in $\iterm$, by encoding them with the exponential function. Moreover, for each occurrence of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, it introduces a fresh variable $\ivarz$, replaces $10^\iterm$ with $10^\ivarz$, and adds the equality $\ivarz = \iterm$.  It also applies some additional transformations. After the normalization, the resulting formula is of the following shape: 1) it is in NNF (negation normal form),  2) it contains no occurrences of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, 3)  it contains no occurrences of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, but $\iterm \neq \ivarx$, 4) all the atomic formulas are of the form $\iterm_1 \le \iterm_2$ or $c | \iterm$. Denote the negation of $c | \iterm$ by $c\nmid t$, then the formula contains no negation symbol. A formula is \textit{normalized} if it satisfies the above properties. More details can be found in Appendix~\ref{app-norm}.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \vspace{-2mm}
 \subsection{Enumeration of the variable orders} 
@@ -125,9 +153,13 @@ or
 $c \ \big  | \ \big(a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})\big)$
 (or $\nmid$).
 
-For convenience, let us call these formulas as inequality respectively (in)divisibility atomic formulas. In the sequel, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for these inequality atomic formulas. The elimination of the exponential occurrences of the (in)divisibility formulas are simpler and omitted, which can be found in Appendix~\ref{app-div}. 
-
-Let us consider 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+    For convenience, let us call these formulas as inequality respectively (in)divisibility atomic formulas. In the sequel, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for these inequality atomic formulas. The elimination of the exponential occurrences of the (in)divisibility formulas are simpler and omitted, which can be found in Appendix~\ref{app-div}. 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Inequality atoms}
+In the sequel, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for these inequality atomic formulas. Let us consider 
 $$
 \begin{array}{l}
 \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
@@ -216,44 +248,41 @@ where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
 %
 The elimination of the exponential occurrences of $\ivarx_{\sigma(i)}$ for the case $a_i < 0$ is similar. 
 
-
-\hide{
-\medskip
-
-\paragraph{Divisibility atomic formulas} Consider
+\subsubsection{Divisibility atoms}
+Consider a divisiblilty atomic formula 
 %
 $$
 \begin{array}{l}
 \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
-c\ \big |\ \big(a_i 10^{\ivarx_{\sigma(i)}} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
+d\ \big |\ \big(a_i 10^{\ivarx_{\sigma(i)}} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
 + \iterm(\vec{\ivary}) \big)
 \end{array}
 $$
-with $a_i \neq 0$.
+with $a_i \neq 0$. The indivisibility case can be treated analogously.
 %
 
-Let $c = 2^{r_1} 5^{r_2}  c_0$ such that $c_0$ is divisible by neither $2$ nor $5$. Moreover, let $r = \max(r_1, r_2)$. Then $c | (10^rc_0)$. 
+Let $d = 2^{r_1} 5^{r_2}  d_0$ such that $d_0$ is divisible by neither $2$ nor $5$. Moreover, let $r = \max(r_1, r_2)$. Then $d | (10^rd_0)$. 
 
-If $c_0 = 1$, then $10^r$ is divisible by $c = 2^{r_1}5^{r_2}$. Thus for every $n \ge r$, $c \ |\ 10^n$.  Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+If $d_0 = 1$, then $10^r$ is divisible by $d = 2^{r_1}5^{r_2}$. Thus for every $n \ge r$, $d \ |\ 10^n$.  Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
 \[
 \small
 \begin{array}{l}
-\bigvee \limits_{p = 0}^{r - 1} c\ \big | \big(a_i 10^{p} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + b_kp + \sum_{k=1}^{i-1} b_k \ivarx_{\sigma(k)} 
+\bigvee \limits_{p = 0}^{r - 1} d\ \big | \big(a_i 10^{p} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + b_kp + \sum_{k=1}^{i-1} b_k \ivarx_{\sigma(k)} 
 + \iterm(\vec{\ivary}) \big)\\
 %
-\vee \big(\ivarx_{\sigma(i)} \ge r \wedge c\ \big | \big(\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
+\vee \big(\ivarx_{\sigma(i)} \ge r \wedge d\ \big | \big(\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
 + \iterm(\vec{\ivary}) \big)\big),
 \end{array}
 \]
 where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
 
-Next, let us assume $c_0 > 1$. Since $10$ and $c_0$ are relatively prime, according to Euler's theorem (cf. \cite{HW80}), $10^{\phi(c_0)} \equiv 1 \bmod c_0$, where $\phi$ is the Euler function. Suppose $10^{\phi(c_0)} = kc_0 + 1$ for some $k \in \Nat$. 
+Next, let us assume $d_0 > 1$. Since $10$ and $d_0$ are relatively prime, according to Euler's theorem (cf. \cite{HW80}), $10^{\phi(d_0)} \equiv 1 \bmod d_0$, where $\phi$ is the Euler function. Suppose $10^{\phi(d_0)} = kd_0 + 1$ for some $k \in \Nat$. 
 Then for every $n \in \Nat$ with $n \ge r$, 
 $$
 \begin{array}{l}
-10^{n + \phi(c_0)} \bmod c =10^{n-r} 10^r (kc_0 + 1) \bmod c = \\
-10^{n-r} (k 10^rc_0 + 10^r) \bmod c = \\
-10^{n-r} (0+10^r) \bmod c = 10^n \bmod c.
+10^{n + \phi(d_0)} \bmod d =10^{n-r} 10^r (kd_0 + 1) \bmod d = \\
+10^{n-r} (k 10^rd_0 + 10^r) \bmod d = \\
+10^{n-r} (0+10^r) \bmod d = 10^n \bmod d.
 \end{array}
 $$
 
@@ -264,11 +293,11 @@ Then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equ
 \left(
 \begin{array}{l}
 \ivarx_{\sigma(i)} \ge r\ \wedge \\
-\bigvee \limits_{q = 0}^{\phi(c_0)-1} 
+\bigvee \limits_{q = 0}^{\phi(d_0)-1} 
 \left(
 \begin{array}{l}
-\phi(c_0)\ \big |\ (\ivarx_{\sigma(i)} - r - q)\ \wedge \\
-c\ \big | 
+\phi(d_0)\ \big |\ (\ivarx_{\sigma(i)} - r - q)\ \wedge \\
+d\ \big | 
 \left(
 \begin{array}{l}
 a_i 10^{r+q} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \\
@@ -282,469 +311,5 @@ a_i 10^{r+q} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \\
 \end{array}
 \]
 where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
-}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-Let $d = 2^rd_0$, $d_0$ is an odd natural number. 
-According to Euler's Theorem, 
-$gcd(2,d_0)=1$ implies
-$2^{\phi(d_0)} \text{mod}\ d_0 = 1$,
-where $\phi$ is the Euler function.
-Consider function $f(n)=(2^n\ \text{mod} \ d)$,
-when $n\ge r$, 
-$f(n)$ becomes a periodic function and its period is a divisor of $\phi(d_0)$ because
-\begin{align}
-    f(n+\phi(d_0)) 
-    &=2^{n+\phi(d_0)}\ \text{mod}\ d &\notag\\
-    &=2^n\cdot 2^{\phi(d_0)}\ \text{mod}\ d &\notag\\
-    &=2^n\cdot (k d_0 + 1) \ \text{mod}\ d &
-    (\mbox{assume } 2^{\phi(d_0)}=k d_0 +1) \notag \\
-    &= 2^n \ \text{mod}\ d &
-    (\mbox{when } n\ge r, 2^n d_0\ \text{mod}\ d = 0 )\notag\\
-    &= f(n) \notag
-\end{align}
-
-When $x_i\le r-1$, we just enumerate all possible value of $x_i$, i.e., 
-$$\rho_5 \Def \bigvee_{p=0}^{r-1} \tau(p,\bar{x},\bar{y})\,.$$
-When $x_i\ge r$, $\tau(x_i,\bar{x},\bar{y})$ is equivalent to
-$$
-\rho_6 \Def \bigvee_{q=0}^{\phi(d_0)-1} [d|(a_i 2^{r+q}+\sum_{j=0}^{i-1} a_j 2^{x_j}
-+  \sum_{k=0}^{i} b_k x_k+t(\bar{y})) \wedge \phi(d_0)|(x_i-r-q) \wedge x_i \ge r] \,.
-$$
-            Therefore,  $\tau(x_i,\bar{x},\bar{y})$ is equivalent to  $\rho_5 \vee \rho_6$.
-            
-\textbf{Elim-exp} is the most technical part of our QE algorithm. As mentioned, \textbf{Elim-exp} takes $\theta_{\sigma}(\bar{x},\bar{y})$ and  variable $x_{\sigma(i)}$ (the maximal variable among all quantified variables that are not eliminated yet according to $\sigma$) as inputs, and outputs an equivalent formula in which $x_{\sigma(i)}$ occurs linearly.
-The ideal case is that the formula $\theta(\bar{x},\bar{y})$ itself contains no $2^{x_{\sigma(i)}}$ terms, so we can omit this step and directly go to \textbf{Elim-linear}.
-For simplicity, we will abuse notations $x_i$ for $x_{\sigma(i)}$, and $\bar{x}$ for $(x_{\sigma(0)},...,x_{\sigma(i-1)})$ ( remind that $x_{\sigma(i+1)},...,x_n$ have been eliminated already).
-
-After normalization, the formula $\theta(\bar{x},\bar{y})$ contains atoms of three forms corresponding to 
-the predicates $\le$, $|$ and negation of $|$, respectively.
-The problem will be discussed in two cases depending on the form of the atom $\tau$ that contains $2^{x_i}$, 
-corresponding to \textbf{Elim-exp-ineq} or \textbf{Elim-exp-div}. 
-
-%We first give the whole procedure of \textbf{Elim-exp},and then provide the details of the two sub-routines.
-
-\begin{algorithm}[t]
-    \SetAlgoLined
-    \KwIn{$x_i$ and $\theta$, $x_i$ is larger than $x_0$ to $x_{i-1}$
-    and occurs exponentially in $\theta$} 
-    \KwOut{a formula equivalent to $\theta$ where $x_i$ occurs linearly}
-    
-    \While{there is an atom $\tau(x_i,\bar{x},\bar{y})$ contains $2^{x_i}$}
-    {
-        $\Psi:= \textit{False}$\;
-        \eIf{$\tau$ is of the form $a_i 2^{x_i}+\sum_{j=0}^{i-1} a_j2^{x_j} + \sum_{k=0}^{i}b_k x_k \le t(\bar{y})$}
-        { 
-            \tcp{ \textbf{Elim-exp-ineq} case}
-            $A :=  \sum_{j=0}^{i-1}|a_j|$, $B:= b_i + \sum_{j=0}^{i-1}|b_j|$\;
-            $B':= 2(l_2(B)+3)$, $\delta:=  l_2(A)+3$\;
-            If $a_i>0$ then $\alpha := l_2(t(y))-l_2(a_i)$
-            else $\alpha := l_2(-t(y))-l_2(-a_i)$\;
-            
-            $\rho_1 :=  (x_i \le \alpha -1 \wedge \bigvee_{0\le k\le B'}(x_i=k \wedge \tau[k/x_i] ))$
-    
-            $\quad \vee ( x_i \le \alpha -1 \wedge x_i\ge B' \wedge \bigvee_{0\le k \le \delta} (x_i = x_{i-1}+k \wedge \tau[x_{i-1}+k/x_i]))$\;
-                
-            $\rho_2 :=  (x_i = \alpha) \wedge \tau[\alpha/x_i]$\;
-            $\rho_3 :=  (x_i = \alpha+1) \wedge \tau[\alpha+1/x_i]$\;
-            $\rho_4 :=  (x_i \ge \alpha+2 \wedge \bigvee_{0\le k\le B'}(x_i=k \wedge \tau[k/x_i] ))$
-        
-            $\quad \vee (x_i \ge \alpha +2 \wedge x_i\ge B' \wedge \bigvee_{0\le k \le \delta}(x_i = x_{i-1}+k \wedge \tau[x_{i-1}+k/x_i]))
-            $\;
-            \eIf{$a_i>0$}
-            {
-                $\Psi := \rho_1 \vee \rho_2 \vee \rho_3 \vee \rho_4 
-                \vee [x_i \le \alpha -1 \wedge x_i \ge B' \wedge x_i \ge x_{i-1}+\delta]$
-            }
-            {
-                $\Psi := \rho_1 \vee \rho_2 \vee \rho_3 \vee \rho_4 
-                \vee [x_i \ge \alpha +2 \wedge x_i \ge B' \wedge x_i \ge x_{i-1}+\delta]$    
-            }
-            }
-        {
-            \tcp{the atom is of the form $d|t(x_i,\bar{x},\bar{y})$}
-            \tcp{ \textbf{Elim-exp-div} case}
-            \tcp{ let $d=2^r d_0$ where $d_0$ is odd}
-            $\rho_5 := \bigvee_{p=0}^{r-1} [\tau(p,\bar{x},\bar{y})\wedge x=p]$\;
-            $\rho_6 := \bigvee_{q=0}^{\phi(d_0)-1} [d|(a_i 2^{r+q}+\sum_{j=0}^{i-1} a_j 2^{x_j}
-            +  \sum_{k=0}^{i} b_k x_k+t(\bar{y})) \wedge \phi(d_0)|(x_i-r-q) \wedge x_i \ge r]
-            $\;
-            $\Psi :=  \rho_5 \vee \rho_6$
-        }
-        replace $\tau$ by $\Psi$ in $\theta$\;
-    }
-    \caption{Elim-exp}
-\end{algorithm}
-
-
-\subsubsection{Elim-exp-ineq}
-
-This part deals with the case when $\tau$ is an inequality of the form 
-$$\tau(x_i,\bar{x},\bar{y}) \Def  a_i 2^{x_i}+\sum_{j=0}^{i-1} a_j2^{d x_j} + \sum_{k=0}^{i}b_k x_k \le t(\bar{y})$$
-
-We now try to eliminate $2^{x_i}$ in $\tau$, the idea is to find a bound for $x_i$, 
-either by constants or by other variables.
-We will prove the following theorem.
-
-\begin{theorem} \label{thm:exp-ineq}
-Assume that $x_i$ is the maximal variable in $\{x_0,...,x_{i}\}$ according to the given order, $\bar{x}$ denotes $\{x_0,...,x_{i-1}\}$.
-Given an inequality $\tau(x_i,\bar{x},\bar{y})$ of the form  
-$$\tau(x_i,\bar{x},\bar{y}) \Def  a_i 2^{x_i}+\sum_{j=0}^{i-1} a_j2^{d x_j} + \sum_{k=0}^{i}b_k x_k \le t(\bar{y})$$
-with $a_i \neq 0$. Define $A\Def \sum_{j=0}^{i-1}|a_j|$, 
-$B\Def |b_i| + \sum_{j=0}^{i-1}|b_j|$, 
-$B'\Def 2(l_2(B)+3)$,
-$\delta\Def  l_2(A)+3$, then 
-\begin{itemize}
-    \item if $a_i > 0$, let $\alpha \Def l_2(t(y))-l_2(a_i)$
-    \begin{itemize}
-        \item if $x_i \le \alpha -1$, $x_i \ge B'$ and $x_{i} \ge x_{i-1} +\delta $, then $\tau(x_i,\bar{x},\bar{y})$ holds.
-        \item if $x_i \ge \alpha +2$, $x_i \ge B'$ and $x_{i} \ge x_{i-1} +\delta $, then $\tau(x_i,\bar{x},\bar{y})$ \textbf{does not} hold.
-    \end{itemize}
-    \item if $a_i < 0$, let $\alpha \Def l_2(-t(y))-l_2(-(a_i))$
-    \begin{itemize}
-        \item if $x_i \le \alpha -1$, $x_i \ge B'$ and $x_{i} \ge x_{i-1} +\delta $, then $\tau(x_i,\bar{x},\bar{y})$ \textbf{does not} hold.
-        \item if $x_i \ge \alpha +2$, $x_i \ge B'$ and $x_{i} \ge x_{i-1} +\delta $, then $\tau(x_i,\bar{x},\bar{y})$ holds.
-    \end{itemize}
-\end{itemize}
-\end{theorem}
-
-Before proving \textbf{Theorem 1}, we need  the following lemma to estimate linear terms.
-
-\begin{lemma} \label{lem:1}
-For any $n,m\in \mathbb{N}$, if $n\ge m\ge 1$ and $x\ge 2(l_2(n)-l_2(m)+1)$, then 
-$nx\le m2^x$ holds.
-\end{lemma}
-
-\begin{proof}
-First we can prove that for any $N\in \mathbb{N}$, $x\ge 2N \implies 2^N x\le 2^x$. Let $N\Def l_2(n)-l_2(m)+1$, then we have $x\ge  2N \implies n x\le 2\lambda_2(n) x\le 2^N \lambda_2(m) x \le m 2^x $. \qed 
-\end{proof}
-
-
-Then we give the proof for Theorem~\ref{thm:exp-ineq}.
-\begin{proof}
-We only prove for the $a_i > 0$ case, the other case is analogous. 
-The goal is to find a bound for $x_i$ such that 
-the values of the atoms containing $x_i$ keep constant when $x_i$ is greater than the bound.
-
-Note that $x_i$ is the largest among $\bar{x}$. 
-suppose $x_i > x_{i-1} + \delta$, and let 
- $\delta \Def  l_2(A)+3$, then 
- \begin{equation} 
-   2^{-\delta}A = \frac{A}{8\lambda_2(A)}\le \frac{1}{4}.   \label{eq:thm-ineq-1}
- \end{equation}
- When $x_i \ge B' = 2(l_2(4B)-l_2(1)+1)$, according to Lemma~\ref{lem:1}, 
-\begin{equation} 
-    4 B x_i \le 2^{x_i}. \label{eq:thm-ineq-2}
-\end{equation}
- 
-When $x_i \ge \alpha+2$,
-\begin{align}
-    a_i2^{x_i}+ \sum_{j=0}^{i-1} a_j 2^{x_j} + \sum_{k=0}^{i} b_k x_k 
-    & \ge a_i 2^{x_i} - 2^{x_i -\delta}A  - Bx_i & \notag \\
-     & \ge 2^{x_i}(a_i -\frac{1}{4} -\frac{1}{4}) &  (\mbox{by \eqref{eq:thm-ineq-1} and  \eqref{eq:thm-ineq-2}})\notag \\
-    %= &(a_i-\frac{1}{2})2^{x_i} \notag \\
-    %\ge &\frac{a_i}{2}2^{x_i} \notag \\
-    & \ge  \frac{a_i}{2}\frac{4\lambda_2(t(\bar{y}))}{\lambda_2(a_i)} & 
-      (\mbox{ Def. of } \alpha) & \notag \\
-     & \ge  t(\bar{y}) & \notag 
-\end{align}
-So we conclude that %when $x_i \ge \alpha+2,x_i\ge B',x_i \ge x_{i-1}+\delta$,
-$\tau(x_i,\bar{x},\bar{y})$ keeps \textit{false} in this case.
-
-When $x_i \le \alpha-1$, similarly we have
-\begin{align}
-    \tau(x_i,\bar{x},\bar{y})\notag 
-    & \le  a_i 2^{x_i} + 2^{x_i -\delta}A  + Bx_i &  \notag \\
-    & \le  2^{x_i}(a_i +\frac{1}{4} +\frac{1}{4}) &(\mbox{by \eqref{eq:thm-ineq-1} and  \eqref{eq:thm-ineq-2}}) \notag \\
-   & \le  2\lambda_2(a_i)\frac{\lambda_2(t(\bar{y}))}{2\lambda_2(a_i)} &  (\mbox{ Def. of } \alpha) \notag \\
-   &  \le  t(\bar{y}) & \notag 
-\end{align}
-which indicates that when  $x_i \le \alpha-1$, $\tau(x_i,\bar{x},\bar{y})$ keeps \textit{true}. \qed 
-\end{proof}
-
-\subsubsection{Elim-exp-div}
-
-If $x_i$ occurs exponentially in an atom $\tau(x_i,\bar{x},\bar{y})$ of the form
-$$\tau(x_i,\bar{x},\bar{y}) \Def  d| a_i 2^{x_i}+\sum_{j=0}^{i-1} a_j 2^{x_j} + \sum_{k=0}^{i} b_k x_k+t(\bar{y}) \quad (a_i \neq 0)\,,$$
-the algorithm \textbf{Elim-exp-div} outputs an equivalent formula without $2^{x_i}$ terms.
-The idea is that $a_i 2^x$ modulo $d$ is a periodic function when $x$ is large enough and the period can be computed.
-
-Let $d = 2^rd_0$, $d_0$ is an odd natural number. 
-According to Euler's Theorem, 
-$gcd(2,d_0)=1$ implies
-$2^{\phi(d_0)} \text{mod}\ d_0 = 1$,
-where $\phi$ is the Euler function.
-Consider function $f(n)=(2^n\ \text{mod} \ d)$,
-when $n\ge r$, 
-$f(n)$ becomes a periodic function and its period is a divisor of $\phi(d_0)$ because
-\begin{align}
-    f(n+\phi(d_0)) 
-    &=2^{n+\phi(d_0)}\ \text{mod}\ d &\notag\\
-    &=2^n\cdot 2^{\phi(d_0)}\ \text{mod}\ d &\notag\\
-    &=2^n\cdot (k d_0 + 1) \ \text{mod}\ d &
-    (\mbox{assume } 2^{\phi(d_0)}=k d_0 +1) \notag \\
-    &= 2^n \ \text{mod}\ d &
-    (\mbox{when } n\ge r, 2^n d_0\ \text{mod}\ d = 0 )\notag\\
-    &= f(n) \notag
-\end{align}
-
-When $x_i\le r-1$, we just enumerate all possible value of $x_i$, i.e., 
-$$\rho_5 \Def \bigvee_{p=0}^{r-1} \tau(p,\bar{x},\bar{y})\,.$$
-When $x_i\ge r$, $\tau(x_i,\bar{x},\bar{y})$ is equivalent to
-$$
-\rho_6 \Def \bigvee_{q=0}^{\phi(d_0)-1} [d|(a_i 2^{r+q}+\sum_{j=0}^{i-1} a_j 2^{x_j}
-+  \sum_{k=0}^{i} b_k x_k+t(\bar{y})) \wedge \phi(d_0)|(x_i-r-q) \wedge x_i \ge r] \,.
-$$
-            Therefore,  $\tau(x_i,\bar{x},\bar{y})$ is equivalent to  $\rho_5 \vee \rho_6$.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\znj{\textbf{Solved}.More explanation or a formal proof is needed. }
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-\subsection{Elim-linear}
-
-After \textbf{Elim-exp}, 
-we obtain a formula (still denoted by $\theta(x_i,\bar{x},\bar{y})$) without $2^{x_i}$ terms,
-i.e., $x_i$ occurs only linearly.
-Now we wish to construct a formula without $x_i$ equivalent to $\exists x_i.\theta(x_i,\bar{x},\bar{y})$.
-This can be done by 
-following Cooper's QE algorithm for PA,
-treating all $x_j (j<i)$ as free variables (like $\bar{y}$).
-The procedure contains 3 steps.
-
-Step 1: Put $\theta(x_i,\bar{x},\bar{y})$ in NNF form, replace atomic formulas containing symbols other than $\le,|$ by equivalent formulas only with $\le$, that is, $x=a$ by $x\le a \wedge a\le x$, $x< a$ by $x\le a+1$, $x\neq a$ by $x>a \vee x<a$,  $x\geq a$ by $-x \le -a$, and $x>a$ by $-x \le -a-1$.
-In inequality atoms, collect terms of $x_i$
-to one side and guarantee the coefficients of $x_i$ are positive.
-
-Step 2: Let $d$ be the least common multiple of all coefficients of $x_i$. 
-For atoms with $x_i$, multiply all terms by a factor so that the coefficient of $x_i$ is $d$.
-We introduce a fresh variable $x_i'$, replace all occurrence of $dx_i$ by $x_i'$,
-and denote the resulted formula by $\theta'(x_i')$.
-Note that $x_i'$ is a multiple of $d$, 
-so we set $\theta'=\theta'\wedge d|x'$.
-
-We classify all atoms in $\theta$ into the following three sets:  
-$L$ denotes all atoms of the form $t_l(\bar{x},\bar{y})\le x_i'$,
-$U$ denotes all atoms of the form $x_i'\le t_u(\bar{x},\bar{y})$,
-$M$ denotes all atoms of the form $k_m|x_i'+t_m(\bar{x},\bar{y})$ and their negations,
-where $t(\bar{x},\bar{y})$ with a subscript is any term of $\bar{x}$ and $\bar{y}$ and 
-$k_m \in \mathbb{N}$ for $m\in M$. % are integers in $$. 
-%Then all atoms with $x_i'$ are of one of the types $L,U,M$.
-
-Step 3: Let $\delta$ be the least common multiple of $\{k_m \mid m\in M\}$.
-Construct $\theta'_{+\infty}(x_i')$ from $\theta'(x_i')$ by  
- replacing $\textit{true}$ for all atoms in $L$,
-and $\textit{false}$ for all atoms in  $U$.
-%We use $\theta'[t]$ to denote replacing all $x_i'$ by a term $t$. 
-Then $\exists x_i'.\theta'(x_i')$
-is equivalent to
-
-$$\bigvee_{j=0}^{\delta-1} \theta'_{+\infty}[j/x_i'] \vee 
-\bigvee_{j=0}^{\delta-1} \bigvee_{u\in U} \theta'[t_u(\bar{x},\bar{y})-j/x_i']$$
-
-The first disjunction $\bigvee_{j=0}^{\delta-1} \theta'_{+\infty}[j/x_i']$ corresponds to the case where $x_i'$ is large enough 
-so that all atoms in $L$ are \textit{true} and all atoms in  $U$ are \textit{false}. Thus $\theta'_{+\infty}$  contains only divisibility literals.
-If there is a number $n (0\le n \le \delta-1)$ such that $ \theta'_{+\infty}[n/x_i']$ is evaluated to be \textit{true},
-then for every $\lambda\in \mathbb{N}$,
-$\theta'_{+\infty}[n+\lambda\delta/x_i']$ is also evaluated to be \textit{true}.
-Hence, there exists $x_i'$ large enough to satisfy $\theta'$.
-
-The second disjunction corresponds to the case that for 
-some $u\in U, x_i'\le t_u(\bar{x},\bar{y})$ holds.
-In this case, 
-select the minimal $t_u(\bar{x},\bar{y})$
-from atoms in $U$ that holds,
-then there exists a solution for $x_i'$ such that $x_i'$ is in the interval $[t_u(\bar{x},\bar{y})-\delta+1,t_u(\bar{x},\bar{y})]$.
-
-Here we describe Cooper's algorithm in pseudo code.
-We will use $\theta\{\tau'/\tau\}$ to denote substitute all atoms $\tau$ with $\tau'$,
-distinguished from term substitution $\theta[t'/t]$.
-
-\begin{algorithm}[t]
-    \SetAlgoLined
-    \KwIn{$x_i,\theta(x_i,\bar{x},\bar{y})$,
-    where $x_i$ occurs linearly} 
-    \KwOut{A equivalent formula without $x_i$}
-    
-    Collect terms of $x_i$ in each atom\;
-    Let $d$ to be the least common multiple of all coefficients of $x_i$\;
-    Multiply each atom by a factor so that coefficient of $x_i $ is $d$\;
-    Let $\theta'(x_i'):= \theta[x_i'/dx_i]$\;
-    $\theta'(x_i') := \theta'(x_i') \wedge d| x_i'$\;
-    \tcp{ Now the atoms have 3 different forms}
-    \tcp{ $t_l(\bar{x},\bar{y})\le x_i'$, $x_i' \le t_u(\bar{x},\bar{y})$, $k_m|x_i'+t_m(\bar{x},\bar{y})$(or its negation)}
-    \tcp{ where $l\in L,u\in U,m\in M$ are the index sets}
-    $\delta :=  lcm\{k_m|m\in M\}$\;
-    \For{all atom $\tau_l \in L$}
-    {
-        $\theta'_{+\infty}:=  \theta'\{\textit{true}/\tau_l\}$
-    }
-    \For{all atom $\tau_u \in U$}
-    {
-        $\theta'_{+\infty}:=  \theta'_{+\infty}\{\textit{false}/\tau_u\}$
-    }
-    output $\bigvee_{j=0}^{\delta-1} \theta'_{+\infty}[j/x_i'] \vee \bigvee_{j=0}^{\delta-1} \bigvee_{u\in U}\theta'[t_u(\bar{x},\bar{y})-j/x_i']$
-    \caption{Elim-linear (Cooper's QE algorithm for PA)}
-\end{algorithm}
-
-
-\subsection{Compared with Point's Origin Algorithm}
-
-Point's algorithm \cite{Point86} has four steps,
-corresponding to the four steps of our algorithm respectively.
-So we will use the names of our steps to refer to them. 
-The divisible predicate $n|x$ is not included in his theory,
-instead, the division operation $\frac{x}{n}$ where $n\in \mathbb{N}$ is allowed.
-The \textbf{Normalization} and \textbf{Enumerate-Orders} steps in two algorithms are similar,
-with some minor differences due to the setting of the theory.
-The main differences between the two algorithms lies in the following aspects.
-
-In \textbf{Elim-exp},
-we adopt the same idea to find sufficient conditions
-and necessary conditions for the formula to holds.
-But our strategy for choosing parameters are easier to understand and use.
-A flaw lies in the $a_i<0$ case in Point's algorithm 
-\footnote{
-In the $a_i<0$ case of \textbf{Elim-exp-ineq},
-Point's algorithm assumes falsely $t(y)\ge 0$.
-The reason for this mistake might be the confusion of 
-two subtraction operators.
-The example mentioned in \ref{sec:3.2} shows this case.
-},
-our \textbf{Elim-exp-ineq} corrects this flaw by 
-treating $a_i<0$ case similarly to the $a_i>0$ case.
-
-\textbf{Elim-linear} in Point's algorithm in some sense includes our
-\textbf{Elim-exp-div}, because divisible predicates is not introduced in his setting.
-In this step,
-Point uses the permutation groups (just like $S_{(n+1)}$ in \textbf{Enumerate-Orders}) and needs recursively renaming of variables $x_i$.
-We instead invoke the QE algorithm of PA without referring to permutation groups, 
-other improved QE algorithm can also be used to simplify this step.
-
-Point's algorithm has more restrictions on the form
-of the formula.
-Before \textbf{Elim-linear} and \textbf{Elim-exp} step,
-it needs to transform the formula into disjunction normal form (DNF)
-and deals with the basic case when input formula $\theta$ is 
-a conjunction of atoms. 
-It is well known that transforming an arbitrary formula into 
-DNF is costly and the length of the formula may increase exponentially.
-So our algorithm remove these limitations and assume no special forms of
-the formula other than NNF.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-
-\subsection{Complexity Analysis}
-\wuhao{To be checked}
-In this section, we give a complexity analysis of our decision procedure, and provide an example to demonstrate the procedure.
-%\subsection{Complexity Analysis}
-
-In this part, we estimate the complexity of our algorithm.
-It can be divided into two part, 
-the first part convert a string constraint $\phi$ to a PA formula with exponential functions,
-and the second part is the QE procedure on the obtained formula.
-
-Given a finite alphabet $\Sigma$ and $\alpha=\langle p,q \rangle$, the size of $\Sigma$ is denoted by
-$|\Sigma|$. 
-The generic $\alpha$-flat language contains $O(|\Sigma|^{pq})$ $\alpha$-flat languages
-
-
-\paragraph{Complexity for QE}
-In \textbf{Enumerate-Orders},
-it reduces the origin problem to $(n+1)!$ sub-cases,
-and for each case,
-we recursively invoke \textbf{Elim-exp} and \textbf{Elim-linear}.
-So the key is to analysis the inner \textit{for}
-loop in \textbf{Enumerate-Orders}.
-Note that if we omit the \textbf{Elim-exp} step,
-the sub-cases are equivalent to Cooper's algorithm,
-so we adopt the idea of Oppen's analysis to analyze the complexity
-\cite{Oppen}.
-
-
-Apply Cooper's algorithm on the quantified PA formula 
-$Q_m x_m Q_{m-1}$ 
-$x_{m-1} ... Q_1 x_1. $
-$F(x_1,...,x_m)$,
-the algorithm repeats $m$ times to eliminate
-$x_1,...,x_m$ one by one.
-Let $F_k \Def Q_m x_m Q_{m-1} 
-x_{m-1} ... Q_{k+1} x_{k+1}. F_k'(x_{k+1},...,x_m)$
-be the formula produced after $k$th iterations of the algorithm. 
-Let $a_k$ denote the number of atoms in $F_k$,
-$c_k$ denote the number of distinct $\delta_i$ in atom $\delta_i | t$ (and its negation) plus the number of distinct coefficients of variables.
-$s_k$ denote the largest value of integer constant.
-Use $a_0,c_0,s_0$ to denote the initial value of $a_k,c_k,s_k$ respectively.
-The following theorem holds.
-
-\begin{theorem}
-for all $k: 1\le k\le m$, the following relations holds
-\begin{itemize}
-    \item $c_k \le {c_{k-1}}^4$
-    \item $s_k \le {s_{k-1}}^{4c_{k-1}}$
-    \item $a_k \le {a_{k-1}}^4 \cdot {s_{k-1}}^{2c_{k-1}}$
-\end{itemize}
-and from the above relations we have 
-\begin{itemize}
-    \item $c_k \le {{c_0}^4}^k$
-    \item $s_k \le {{{s_0}^{4c_0}}^4}^k$
-    \item $a_k \le {{a_0}^4}^k \cdot {{{s_0}^{4c_0}}^4}^k$
-\end{itemize}
-\end{theorem}
-
-For each $k$,
-the space required to store $F_k$ 
-is $a_k \cdot (m+1) \cdot s_k \cdot q$,
-where $(m+1)$ is the maximum number of constants per atom and $q>1$ is some constant. Assume $m\le n, c\le n, a\le n, s\le n$, we obtain the deterministic space complexity is ${{2^2}^2}^{p n log_n}$, which is also the bound for deterministic time.
-
-In our algorithm,
-we use the same denotations and have the following theorem. 
-Note that each iteration corresponds to \textbf{Elim-exp} and \textbf{Elim-linear}.
-\begin{theorem}
-for all $k: 1\le k\le m$, the following relations holds
-\begin{itemize}
-    \item $c_k \le {c_{k-1}}^4$
-    \item $s_k \le {(n s_{k-1})}^{4c_{k-1}}$
-    \item $a_k \le {{(l_2(ns_{k-1})\cdot a_{k-1})}}^4 \cdot {(n s_{k-1})}^{2c_{k-1}}$
-\end{itemize}
-and from the above relations we have 
-\begin{itemize}
-    \item $c_k \le {{c_0}^4}^k$
-    \item $s_k \le {{{n}^{4c_0}}^4}^k \cdot {{{s_0}^{4c_0}}^4}^k$
-    \item $a_k \le {{a_0}^4}^k \cdot 
-     {{{n}^{4c_0}}^4}^k
-     \cdot {{{s_0}^{4c_0}}^4}^k$
-\end{itemize}
-\end{theorem}
-
-WAIT TO CHECK!
-
-Again assume $m,c,a,s\le n$, which gives 
-$$
-\textit{space}\le q \cdot {n^4}^n \cdot {{n^{(4n)}}^4}^n \cdot
-{{n^{(4n)}}^4}^n \cdot (n+1) \cdot 
-\cdot {{n^{(4n)}}^4}^n \cdot {{n^{(4n)}}^4}^n
-\le 2^{2^{2^{p n \textit{log}n}}}
-$$
-
-Then the upper bound for Cooper's algorithm still holds for the inner \textit{for} loop of \textbf{Enumerate-Orders}.
-When considering \textbf{Normalization} and permutations groups in \textbf{Enumerate-Orders},
-since the super exponential term dominates the number of permutations $n^{O(n)}$,
-this upper bound still holds.
-
-
-}
+\wuhao{describe the whole procedure using pseudo code}
