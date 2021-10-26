@@ -112,7 +112,7 @@ whether $\lVert  \varphi \rVert \neq \emptyset$.
 \vspace*{-5mm}
 \subsection{An Extension of Presburger Arithmetic with Exponential Functions (\paexp)}
 
-{\paexp} extends Presburger arithmetic with the exponential function $10^x$ as well as the (partial) functions $\ell_{10}(\ivarx)$ (cf. \cite{Point86}). The function $\ell_{10}(\ivarx)$ is inductively defined as follows. For $n \ge 1$, $\ell_{10}(n) = m$ iff $10^m \le n < 10^{m+1}$. (Note that $\ell_{10}(0)$ is undefined.)
+{\paexp} extends Presburger arithmetic with the exponential function $10^\ivarx$ as well as the (partial) functions $\ell_{10}(\ivarx)$ (cf. \cite{Point86}). The function $\ell_{10}(\ivarx)$ is inductively defined as follows. For $n \ge 1$, $\ell_{10}(n) = m$ iff $10^m \le n < 10^{m+1}$. (Note that $\ell_{10}(0)$ is undefined.)
 %and $\lambda_{10}(\ivarx)$ are inductively defined as follows.
 %\begin{itemize}
 %\item The (partial) function $\ell_{10}(\ivarx)$ is\hide{inductively} defined as follows: For $n \ge 1$, $\ell_{10}(n) = m$ iff $10^m \le n < 10^{m+1}$. (Note that $\ell_{10}(0)$ is undefined.) 
@@ -130,7 +130,7 @@ The syntax of {\paexp} is obtained from that of {\pa} by adding $10^\iterm$ and 
  \phi &\Def & \iterm \ \op\ \iterm \mid c | \iterm \mid \phi \wedge \phi \mid \phi \vee \phi \mid \neg \phi \mid \exists \ivarx.\ \phi \mid \forall \ivarx.\ \phi.
  \end{array}
  $$
- The semantics of {\paexp} are defined similarly to {\pa} with the difference that variables are interpreted over $\Nat$ (to avoid terms like $10^{-2}$), that is, an interpretation is a function $I: \free(\phi) \rightarrow \Nat$. 
+ Sometimes we will denote $\neg c | \iterm$ by $c\nmid \iterm$ to avoid the negation operator. The semantics of {\paexp} are defined similarly to {\pa} with the difference that variables are interpreted over $\Nat$ (to avoid terms like $10^{-2}$), that is, an interpretation is a function $I: \free(\phi) \rightarrow \Nat$. 
  The quantifier-free and existential {\paexp} formulas are defined similarly to {\pa} as well.
 
 \begin{example}
@@ -236,5 +236,5 @@ Suppose $\parseInt(\svarx) = 2\ivarx$ is an atomic constraint and $\flatfun_\var
 
 By the above reduction, and the decidability of $\paexp$'s satisfiability (see Theorem~\ref{thm-paexp}), we have 
 \begin{theorem} \label{thm:string-parInt}
-    \wuhao{The satisfiability of  $\strint$ under flat domain restrictions is equivalent to the satisfiability of existential $\paexp$ formulas, and thus is decidable. }
+    The satisfiability of  $\strint$ under flat domain restrictions is equivalent to the satisfiability of existential $\paexp$ formulas, and thus is decidable.
 \end{theorem}
