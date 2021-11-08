@@ -1,7 +1,7 @@
 FMCAD2021/*.log
 FMCAD2021/*.pdf
 FMCAD2021/*.aux
-FMCAD2021/*.fbd_latexmk
+FMCAD2021/*.fdb_latexmk
 FMCAD2021/*.synctex.gz
 FMCAD2021/*.md
 FMCAD2021/*.bbl
@@ -12,7 +12,6 @@ Acta Informatica2022/*.bbl
 Acta Informatica2022/*.blg
 Acta Informatica2022/*.log
 Acta Informatica2022/*.out
-Acta Informatica2022/*.pdf
 Acta Informatica2022/*.synctex.gz
-Acta Informatica2022/*.fbd_latexmk
+Acta Informatica2022/*.fdb_latexmk
 Acta Informatica2022/*.fls
