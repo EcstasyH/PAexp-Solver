@@ -14,3 +14,5 @@ Acta Informatica2022/*.log
 Acta Informatica2022/*.out
 Acta Informatica2022/*.pdf
 Acta Informatica2022/*.synctex.gz
+Acta Informatica2022/*.fbd_latexmk
+Acta Informatica2022/*.fls

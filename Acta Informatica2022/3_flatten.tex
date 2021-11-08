@@ -38,7 +38,7 @@ A $\strint$ formula $\varphi$ is defined by the following rules, where $\len(\st
 
 \[
 \begin{array}{l c l}
-\sterm & \Def & a \mid \svarx \mid \sterm \concat \sterm, \\
+\sterm & \Def & a \mid \svarx \mid \sterm \cdot \sterm, \\
 \iterm & \Def & n \mid \ivarx \mid \len(\sterm) \mid \parseInt(\sterm) \mid \iterm + \iterm \mid \iterm - \iterm,\\
 \varphi & \Def & \sterm = \sterm \mid x \in \Aut \mid \iterm\ \op\ \iterm \mid \varphi \wedge \varphi \mid \varphi \vee \varphi \mid \neg \varphi,
 \end{array}

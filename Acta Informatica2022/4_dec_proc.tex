@@ -26,7 +26,7 @@ As $\forall \ivarx. \ \varphi$ is equivalent to $\neg \exists \ivarx. \ \neg \va
 
 Before a formal description of the quantifier elimination procedure, let us use a simple example to illustrate the main idea and give an overview of the procedure.
 
-\vspace{-4mm}
+%\vspace{-4mm}
 
 %\begin{example}
 \subsection{An overview of the quantifier elimination procedure}
@@ -62,7 +62,7 @@ To summarize, $\varphi_1$ is transformed into
 \begin{array}{l}
 \varphi_2 \Def \exists \ivarx_3 \exists \ivarx_2. \\
 \begin{array}{l}
-\vspace{2mm}
+%\vspace{2mm}
 \left(
 \begin{array}{l}
 \ivarx_3 \le \ell_{10}(\ivary+1001)\ \vee \\
@@ -90,7 +90,7 @@ the elimination of the exponential occurrences of variables. The elimination of 
 
 Let us assume that $\varphi \Def \exists \ivarx.\ \varphi'(\ivarx, \vec{\ivary})$, where $\varphi'$ is a quantifier-free formula. 
 
-\vspace*{-3mm}
+%\vspace*{-3mm}
 \subsection{Normalization}
 
 The normalization step comprises the following sub-steps.
@@ -117,13 +117,8 @@ Intuitively, the normalization step first absorbs all negation operators by tran
 
 After the normalization, the resulting formula is of the following shape: 1) it is in NNF (negation normal form),  2) it contains no occurrences of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, 3)  it contains no occurrences of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, but $\iterm \neq \ivarx$, 4) all the atomic formulas are of the form $\iterm_1 \le \iterm_2$ or $c \vert  \iterm$. Denote the negation of $c \vert  \iterm$ by $c\nmid t$, then the formula contains no negation symbol. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-The normalization step first removes the occurrences of $\ell_{10}(\iterm)$ where $\ivarx$ occurs in $\iterm$, by encoding them with the exponential function. Moreover, for each occurrence of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, it introduces a fresh variable $\ivarz$, replaces $10^\iterm$ with $10^\ivarz$, and adds the equality $\ivarz = \iterm$.  It also applies some additional transformations. After the normalization, the resulting formula is of the following shape: 1) it is in NNF (negation normal form),  2) it contains no occurrences of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, 3)  it contains no occurrences of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, but $\iterm \neq \ivarx$, 4) all the atomic formulas are of the form $\iterm_1 \le \iterm_2$ or $c \vert  \iterm$. Denote the negation of $c \vert  \iterm$ by $c\nmid t$, then the formula contains no negation symbol. A formula is \textit{normalized} if it satisfies the above properties. More details can be found in Appendix~\ref{app-norm}.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\vspace{-2mm}
+%\vspace{-2mm}
 \subsection{Enumeration of the variable orders} 
 
 Suppose $n-1$ fresh variables are introduced in the normalization procedure, rename the original variable $\ivarx$ and the $n-1$ introduced variables $\ivarx_i,1\le i\le n$.
@@ -141,7 +136,7 @@ Note that the order $\ivarx_{\sigma(i)} \ge \ldots \ge \ivarx_{\sigma(1)}$ guara
 
 %\yfc{Explain why only the largest variable can  be eliminated. Which part of the procedure we need this condition? Or if we do not have the order, what can be wrong?}
 
-\vspace*{-3mm}
+%\vspace*{-3mm}
 \subsection{Elimination of  exponential occurrences of variables}\label{sec-elim-exp}
 
 Let $i \in [n]$ and $\exists \ivarx_{\sigma(1)} \ldots \exists \ivarx_{\sigma(i)}.\ \varphi''_{\sigma,i}(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ be the formula obtained from $\varphi'_\sigma$ by eliminating the quantifiers $\exists \ivarx_{\sigma(n)}$, $\ldots$, $\exists \ivarx_{\sigma(i+1)}$. We show how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\varphi''_{\sigma,i}$. The elimination is \emph{local} in the sense that it is applied to the atomic formulas independently. 
@@ -153,24 +148,19 @@ or
 $c \ \big  \vert  \ \big(a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})\big)$
 (or $\nmid$).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-    For convenience, let us call these formulas as inequality respectively (in)divisibility atomic formulas. In the sequel, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for these inequality atomic formulas. The elimination of the exponential occurrences of the (in)divisibility formulas are simpler and omitted, which can be found in Appendix~\ref{app-div}. 
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Inequality atoms}
 In the sequel, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for these inequality atomic formulas. Let us consider 
 $$
 \begin{array}{l}
 \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
-\hspace{4mm} 
+%\hspace{4mm} 
 a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary}).
 \end{array}
 $$
 %
 The elimination of the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ relies on the following lemma. Intuitively, the lemma states the fact that if $\ivarx_{\sigma(i)}$ is sufficiently greater than $\ivarx_{\sigma(i-1)}$, then the left-hand-side of $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is \emph{dominated} by $a_i10^{\ivarx_{\sigma(i)}}$, moreover, if $a_i > 0$ and the value of $\ivarx_{\sigma(i)}$ is sufficiently small (resp. big), then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds (resp. does not hold), similarly for $a_i < 0$.
 
-\vspace{-1mm}
+%\vspace{-1mm}
 \begin{lemma} \label{lem:exp-ineq}
 Let  
 %
@@ -178,8 +168,8 @@ $$
 \small
 \begin{array}{l}
 \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
-\hspace{4mm} 
-\vspace{-1mm}
+%\hspace{4mm} 
+%\vspace{-1mm}
 a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary}).
 \end{array}
 $$
@@ -202,9 +192,93 @@ and $\delta\Def  \ell_{10}(A)+3$.
 \end{itemize}
 \end{lemma}
 
+We need the following proposition for the proof of Lemma~\ref{lem:exp-ineq}.
+
+\begin{proposition} \label{prop:1}
+If $n\ge m\ge 1$ and $p \ge 2(\ell_{10}(n)- \ell_{10}(m)+1)$, then 
+$n p \le m10^p$ holds.
+\end{proposition}
+
+\begin{proof}
+
+First we show that for any $n' \in \Nat$, if $p \ge 2n'$, then $10^p \ge 10^{n'}10^{(p-n')}\ge 10^{n'}10(p-n')\ge 10^{n'}(5p+5(p-2n'))\ge  10^{n'}p$.
+
+If $ p \ge 2 (\ell_{10}(n) - \ell_{10}(m)+1)$, then  $n p \le 10\lambda_{10}(n) p = 10 * 10^{\ell_{10}(n)} p = 10^{\ell_{10}(n)-\ell_{10}(m) + 1}  10^{\ell_{10}(m)} p$.
+
+Because $p \ge 2(\ell_{10}(n)-\ell_{10}(m) + 1)$, we deduce that $10^{\ell_{10}(n)-\ell_{10}(m) + 1}  p \le 10^p$.  Therefore, $10^{\ell_{10}(n)-\ell_{10}(m) + 1}  10^{\ell_{10}(m)} p \le 10^{\ell_{10}(m)} 10^p \le m 10^p$.
+We conclude that $np \le m 10^p$.
+\end{proof}
+
+
+%Then we give the proof for Theorem~\ref{thm:exp-ineq}.
+\begin{proof}[Proof of Lemma~\ref{lem:exp-ineq}]
+We only prove for the case $a_i > 0$, the other case is symmetric. 
+
+
+Let $A\Def \sum_{j=1}^{i-1}\vert a_j\vert $, $B \Def 2(\ell_{10}(\sum_{j=1}^{i}\vert b_j\vert )+3)$, and $\delta\Def  \ell_{10}(A)+3$. 
+
+Suppose $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} + \delta$. Moreover, let $\alpha(\vec{\ivary}) \Def  \ell_{10}(\iterm(\ivary))- \ell_{10}(a_i)$.
+
+Note that
+ \begin{equation} 
+   A10^{-\delta} =A 10^{-\ell_{10}(A)-3} = \frac{A}{1000\lambda_{10}(A)} \le \frac{1}{100}.   \label{eq:thm-ineq-1}
+ \end{equation}
+ 
+ From $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} + \delta$ and $\ivarx_{\sigma(i-1)} \ge \ldots \ge \ivarx_{\sigma(1)}$, 
+we know   
+$$-A 10^{\ivarx_{\sigma(i)} - \delta} \le  \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} \le A 10^{\ivarx_{\sigma(i)} - \delta}$$
+and
+$$-(\sum_{j=1}^{i}\vert b_j\vert ) \ivarx_{\sigma(i)} \le \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} \le (\sum_{j=1}^{i}\vert b_j\vert ) \ivarx_{\sigma(i)}.$$ 
+
+Moreover, let $n = 100\sum_{j=1}^{i}\vert b_j\vert $, $m = 1$, and $p = \ivarx_{\sigma(i)}$, then 
+$n \ge m \ge 1$. From $2(\ell_{10}(n)- \ell_{10}(m)+1) = 2 (\ell_{10}(100 \sum_{j=1}^{i}\vert b_j\vert ) + 1) = 2 (\ell_{10}(\sum_{j=1}^{i}\vert b_j\vert ) + 3) = B$, we deduce that $p = \ivarx_{\sigma(i)} \ge B = 2(\ell_{10}(n)- \ell_{10}(m)+1)$.
+Then according to Proposition~\ref{prop:1}, 
+$$100(\sum_{j=1}^{i}\vert b_j\vert )\ivarx_{\sigma(i)} = np \le m 10^p = 10^{\ivarx_{\sigma(i)}}.$$
+Thus 
+$(\sum_{j=1}^{i}\vert b_j\vert )\ivarx_{\sigma(i)}  \le \frac{1}{100} 10^{\ivarx_{\sigma(i)}}.$
+
+If $\ivarx_{\sigma(i)} \ge   \alpha(\vec{\ivary}) + 2$, then 
+
+$
+\begin{array}{l}
+a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \ge \\
+a_i 10^{\ivarx_{\sigma(i)}} - A 10^{\ivarx_{\sigma(i)} - \delta} - (\sum_{j=1}^{i}\vert b_j\vert ) \ivarx_{\sigma(i)}  \ge \\
+a_i 10^{\ivarx_{\sigma(i)}} - \frac{1}{100}10^{\ivarx_{\sigma(i)}} - \frac{1}{100} 10^{\ivarx_{\sigma(i)}} = \\
+(a_i - \frac{1}{50}) 10^{\ivarx_{\sigma(i)}} \ge (a_i - \frac{1}{50}) 10^{ \alpha(\vec{\ivary}) + 2} = \\
+(a_i - \frac{1}{50}) 10^{  \ell_{10}(\iterm(\ivary))- \ell_{10}(a_i) + 2} = \\
+\frac{10(a_i - \frac{1}{50})}{10^{\ell_{10}(a_i)} } 10^{ \ell_{10}(\iterm(\ivary))+1} \ge \frac{10(a_i - \frac{1}{50})} {a_i} 10^{ \ell_{10}(\iterm(\ivary))+1} \ge \\
+(10 - \frac{1}{5a_i}) 10^{ \ell_{10}(\iterm(\ivary))+1} > 10^{ \ell_{10}(\iterm(\ivary))+1} \ge \iterm(\ivary).
+\end{array}
+$
+
+Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \emph{does not} hold.
+
+If $\ivarx_{\sigma(i)} \le   \alpha(\vec{\ivary}) - 1$, then 
+
+$
+\begin{array}{l}
+a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \\
+a_i 10^{\ivarx_{\sigma(i)}} + A 10^{\ivarx_{\sigma(i)} - \delta} + (\sum_{j=1}^{i}\vert b_j\vert ) \ivarx_{\sigma(i)} \le \\
+a_i 10^{\ivarx_{\sigma(i)}} + \frac{A} {10^\delta}10^{\ivarx_{\sigma(i)}} + \frac{1}{100} 10^{\ivarx_{\sigma(i)}} \le \\
+(a_i + \frac{1}{100} + \frac{1}{100})10^{\ivarx_{\sigma(i)}} = (a_i + \frac{1}{50}) 10^{\ivarx_{\sigma(i)}} \le \\
+(a_i + \frac{1}{50}) 10^{\alpha(\vec{\ivary}) - 1} = (a_i + \frac{1}{50}) 10^{\ell_{10}(\iterm(\ivary))- \ell_{10}(a_i) - 1} = \\
+\frac{a_i + \frac{1}{50}} {10^{\ell_{10}(a_i) + 1}} 10^{\ell_{10}(\iterm(\ivary))} = \frac{a_i + \frac{1}{50}} {10 \lambda_{10}(a_i)} 10^{\ell_{10}(\iterm(\ivary))} \le \\
+\frac{a_i + \frac{1}{50}} {a_i+1} 10^{\ell_{10}(\iterm(\ivary))} \le 10^{\ell_{10}(\iterm(\ivary))} \le \iterm(\ivary).
+\end{array}
+$
+
+Therefore,  in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds.
+
+
+\end{proof}
+
+We would like to remark that Lemma~\ref{lem:exp-ineq} still holds when the base of exponential function is changed to any natural number $n\ge 2$.
+
+
+
 If $a_i > 0$, then the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ can be eliminated by utilizing  Lemma~\ref{lem:exp-ineq} and enumerating the constraints on $\ivarx_{\sigma(i)}$ and $\ivarx_{\sigma(i-1)}$. Specifically, 
 $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
-\vspace{-2mm}
+%\vspace{-2mm}
 \[
 \small
 \begin{array}{l}
@@ -238,7 +312,7 @@ $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivale
 \begin{array}{l}
 \ivarx_{\sigma(i)} \ge B \wedge \ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})+2\ \wedge\\
  \ivarx_{\sigma(i)} = \ivarx_{\sigma(i-1)} +p\ \wedge \\
- \vspace{-1mm}
+ %\vspace{-1mm}
  \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[\ivarx_{\sigma(i-1)}+ p /\ivarx_{\sigma(i)}]
 \end{array}
 \right),

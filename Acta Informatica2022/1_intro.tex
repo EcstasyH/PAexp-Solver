@@ -13,13 +13,13 @@ A word equation is satisfiable if it has a solution, i.e., an assignment that ma
 The correctness proof of Makanin’s algorithm is arguably one of the most complex termination proofs in computer science. 
 Makanin’s result can be extended to include \emph{regular constraints} (a.k.a. regular expression matching, e.g., $x \in (ba)^*)$, and arbitrary Boolean connectives.
 This extension is called word equations with regular constraints. 
-However, the satisfiability problem of word equations together with length constraints (e.g., $|x|=|y|+1 \wedge wx=yx$) is still open.
+However, the satisfiability problem of word equations together with length constraints (e.g., $\vert x\vert =\vert y\vert +1 \wedge wx=yx$) is still open.
 The complexity of the satisfiability of word equations with regular constraints was proven to be PSPACE-complete by Plandowski~\cite{plandowski99}, after decades of improvement of the original algorithm by Makanin.
 
 Satisfiability of word equations is a special instance of Hilbert’s 10th problem. 
 In the past, the original motivation of studying word equations was for finding an undecidability proof of Hilbert’s 10th problem. 
 However, the motivation is no longer valid since Makanin finds a decision procedure. Recently, driven by the need for program analysis, people started to revisit the problem and its extensions to describe the complete string library APIs in conventional programming languages. Many highly efficient solvers for string constraints, to name a few, CVC4~\cite{cvc4Tool}, Z3~\cite{z3}, Z3-Str3~\cite{zheng2013z3}, S3~\cite{trinh2014s3}, Norn~\cite{abdulla2015norn}, Ostrich~\cite{chen2017decidable}, Sloth~\cite{sloth}, ABC~\cite{aydin2018parameterized}, Stranger~\cite{yu2010stranger}, and Trau~\cite{abdulla2018trau}, are developed in the last decade.
-The satisfiability of \emph{string-integer conversion constraints}, e.g., $wx=yx \wedge |x| > \parseInt(y)$, has been proven undecidable in~\cite{DayGHMN18}. 
+The satisfiability of \emph{string-integer conversion constraints}, e.g., $wx=yx \wedge \vert x\vert  > \parseInt(y)$, has been proven undecidable in~\cite{DayGHMN18}. 
 However, this kind of constraints is pervasive in scripting language programs. 
 For example, it is common that programs read string inputs from text files and converts a part of the string input to integers.
 Even more crucially, in many programming languages, the string-integer conversion is a part of the definition of their core semantics~\cite{ecmascript2019ecmascript}. 
@@ -30,7 +30,7 @@ Currently, there are two main specialized approaches for proving satisfiability.
 The first is to consider only strings of bounded length.
 This approach is taken in the first-generation solvers such as Hampi~\cite{KiezunGAGHE12} and Kuluza~\cite{SaxenaAHMMS10}.
 Although they are useful in handling many practical cases, they fail short when the all string solutions exceed the selected bound.
-For example, a constraint of the form $x.y \neq z  \wedge |x| > 2000$ would be quite challenging to handle using those solvers.
+For example, a constraint of the form $x.y \neq z  \wedge \vert x\vert  > 2000$ would be quite challenging to handle using those solvers.
 
 One more recent approach is flattening~\cite{Parosh:20:PLDI,AbdullaACDHRR18,AbdullaACDHRR17}.
 The idea is to restrict the solution space of string variables to 
@@ -38,7 +38,7 @@ The idea is to restrict the solution space of string variables to
 \emph{flat languages} (see Section~\ref{sec:string-solving}). 
 The major benefit of considering this class is two-fold.
 First, under the restriction, the potential solution space is still infinite, which gives us a higher potential of finding solutions.
-For instance, we can find a solution for $x.y \neq z  \wedge |x| > 2000$ under a very simple restriction: all variables are in $a^*$, which $a$ is an element of the alphabet.
+For instance, we can find a solution for $x.y \neq z  \wedge \vert x\vert  > 2000$ under a very simple restriction: all variables are in $a^*$, which $a$ is an element of the alphabet.
 Second, and more importantly, because we can convert the membership problem of a flat language to the satisfiability problem of a Presburger arithmetic formula, the class of word equation + flat languages + length constraints is decidable.
 
 The paper of Abdulla et al.~\cite{Parosh:20:PLDI} has considered adding string-integer conversion constraints to the above class.

@@ -108,6 +108,7 @@
 \newcommand\ivarx{\mathbbm{x}}
 \newcommand\ivary{\mathbbm{y}}
 \newcommand\ivarz{\mathbbm{z}}
+%\newcommand\concat{\cdot}
 \newcommand\sterm{t}
 \newcommand\iterm{\mathbbm{t}}
 \newcommand{\kell}{{(k,\ell)}}
@@ -116,6 +117,14 @@
 \newcommand{\ivar}{\textsf{IVar}}
 \newcommand{\pvar}{\textsf{PVar}}
 \newcommand{\flatfun}{\mathcal{F}}
+
+
+\newcommand{\znj}[1]{\color{red} {NJ: #1 :JN} \color{black}}
+\newcommand{\znjSide}[1]{\todo[color=orange!10]{\textbf{ZHAN:} #1}}
+\newcommand{\zhilin}[1]{\color{brown} {ZL: #1 :LZ} \color{black}}
+\newcommand{\wuhao}[1]{\color{cyan} {WH: #1 :HW} \color{black}}
+\newcommand{\yfc}[1]{\color{violet} {YF: #1 :FY} \color{black}}
+
 
 
 
@@ -212,10 +221,9 @@ The experimental results show that our implementation outperforms the state-of-t
 \section{Conclusion}
 \input{8_conclusion.tex}
 
-
+\hide{
 \begin{appendices}
-
-\section{Section title of first appendix}\label{secA1}
+\section{Appendix}\label{secA1}
 \input{9_appendix.tex}
 %%=============================================%%
 %% For submissions to Nature Portfolio Journals %%
@@ -232,7 +240,7 @@ The experimental results show that our implementation outperforms the state-of-t
 %% tables and equations etc.
 
 \end{appendices}
-
+}
 %%===========================================================================================%%
 %% If you are submitting to one of the Nature Portfolio journals, using the eJP submission   %%
 %% system, please include the references within the manuscript file itself. You may do this  %%
