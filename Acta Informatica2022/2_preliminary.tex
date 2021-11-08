@@ -1,0 +1,321 @@
+%!TEX root = paper.tex
+
+%In this section, we introduce some basic concepts and theories that will be used later. 
+%\subsection{Basic Concepts}
+
+In this section, we fix the notations and introduce some basic concepts, including Presburger arithmetic, finite-state automata, and flat languages.
+
+\paragraph{Integers, strings, and languges}
+Let $\Nat$ denote the set of natural numbers, $\Int$ denote the set of integers, and $\Int^+$ denote the set of positive integers. For $n \in \Int^+$, let $[n]$ denote $\{1,\dots,n\}$.
+
+An \emph{alphabet} $\Sigma$ is a finite set. Elements of $\Sigma$ are called \emph{letters}.
+%Let $\Sigma$ denote a finite alphabet,
+A \emph{string} $w$ over $\Sigma$ is a (possibly empty) finite sequence $a_1\ldots a_n$ with $a_i \in \Sigma$ for every $i \in [n]$. Let $\varepsilon$ denote the empty string, namely, the empty sequence. For a string $w = a_1 \ldots a_n \in \Sigma^*$, let $|w|$ denote the \emph{length} of $w$, i.e. $n$. In particular, $\vert \varepsilon\vert  = 0$.
+%
+For $w_1 = a_1 \ldots a_m, w_2 = b_1 \ldots b_n\in \Sigma^*$, 
+let $w_1\cdot w_2$ denote the \emph{concatenation} of $w_1$ and $w_2$, that is, $a_1 \ldots a_m b_1 \ldots b_n$.
+%
+Let $\Sigma^*$ denote the set of all strings over $\Sigma$ and $\Sigma^+$ denote the set of nonempty strings over $\Sigma$. 
+For convenience, we also use $\Sigma_{\epsilon}$ to denote $\Sigma \cup \{\epsilon\}$.
+%
+A language $L$ over $\Sigma$ is a subset of $\Sigma^*$.
+
+\paragraph{Presburger Arithmetic} \label{PA}
+A Presburger Arithmetic ({\pa}) formula 
+% is a first order theory over the signature 
+%$\Sigma_\mathbb{N}\Def  \{0,1,+, <, |\}$. 
+ is defined by the rules 
+ $$
+ \begin{array}{ l c l}
+ \iterm &\Def & c \mid \ivarx \mid \iterm+\iterm \mid \iterm - \iterm, \\
+ \phi & \Def & \iterm \ \op\ \iterm \mid c \vert \iterm \mid \phi \wedge \phi \mid \phi \vee \phi \mid \neg \phi \mid \exists \ivarx.\ \phi \mid \forall \ivarx.\ \phi,
+ \end{array}
+ $$
+where $\op \in \{=, < , >, \le, \ge\}$ and $\ivarx, c$ are integer variables and constants, respectively. A \emph{quantifier-free} {\pa} (\qfpa) formula is a {\pa} formula containing no quantifiers. A {\pa} formula is in \emph{negation normal form} (NNF) if all occurrences of the negation symbol $\neg$ are before the atomic formulas. A {\pa} formula is called \emph{existential} if it is in NNF and contains no occurrences of universal quantifiers.
+%An \emph{existential} LIA (ELIA) formula is an LIA formula where there are no universal quantifiers and all existential quantifiers are in the scope of an even number of the negation symbols $\neg$. 
+%
+The set of free variables of $\phi$, denoted by $\free(\phi)$, is defined in a standard manner. 
+We usually write $\phi(\ivarx_1,\cdots, \ivarx_k)$ to denote an PA formula $\phi$ such that $\free(\phi) \subseteq \{\ivarx_1,\cdots, \ivarx_k\}$. Given an PA formula $\phi$, and an integer interpretation of $\free(\phi)$, i.e. a function $I: \free(\phi) \rightarrow \Int$, we denote by $I \models \phi$ that $I$ satisfies $\phi$ (which is defined in the standard manner, with $+$, $-$, and $\vert$ interpreted as the integer addition, subtraction, and divisibility relation respectively), and call $I$ a \emph{model} of $\phi$. We use $\llbracket \phi \rrbracket$ to denote the set of models of $\phi$. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+Presburger Arithmetic (PA) is a first order theory over the signature 
+$\Sigma_\mathbb{N}\Def  \{0,1,+, <, |\}$, where $0,1$ are constants, 
+$+$ is a binary function symbol, $<, |$ are  and $=$ is a binary predicate.
+
+PA can be axiomatized by the following axioms \cite{PA} 
+
+\begin{itemize}
+    \item $\forall x, \neg (x+1=0)$
+    \item $\forall x \forall y. x+1=y+1 \to x=y$
+    \item $F(0) \wedge (\forall x. F(x)\to F(x+1)) \to \forall x. F(x)$ 
+    \item $\forall x. x+0=x$
+    \item $\forall x \forall y. x+(y+1)=(x+y)+1$
+\end{itemize}
+Given the domain $\mathbb{N}$,
+the standard interpretation of PA interprets 
+$0,1$ to $0_\mathbb{N},1_\mathbb{N}\in \mathbb{N}$
+and $+,=$ to addition and equality over $\mathbb{N}$.
+We call a PA formula without quantifiers a quantifier-free PA formula.
+
+PA is a decidable theory, 
+and the complexity of decidability is related to 
+the number and locations of quantifiers.
+Generally, 
+the upper bound (on deterministic time and space) 
+for deciding a formula of length $n$ is $2^{2^{2^{p n log(n)}}}$,
+where $p>1$ is a constant\cite{Oppen69}. 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Finite state automata}
+A finite state automaton (FA) is a tuple 
+$\Aut=\langle Q,\Sigma,\Delta, q_{\textit{init}}, F\rangle$, 
+where $Q$ is a finite set of states, 
+$\Sigma$ is a finite alphabet,
+$\Delta\subseteq Q\times \Sigma_\epsilon\times Q$ is the transition relation, 
+$q_{\textit{init}}$ is the initial state, $F \subseteq Q$ is the set of accepting states. 
+A \emph{run} of $\Aut$ on a string $w = a_1 \ldots a_n$ is a sequence $q_0 \xrightarrow{b_1} q_1  \xrightarrow{b_2}  \ldots   \xrightarrow{b_{m-1}}  q_{m-1} \xrightarrow{b_m} q_m$ such that $q_0 = q_{\textit{init}}$, $(q_{i-1}, b_i, q_i) \in \Delta$ for every $i \in [m]$, and $a_1 \ldots a_n = b_1 \ldots b_m$. A \emph{run} $q_0 \xrightarrow{b_1} q_1  \xrightarrow{b_2}  \ldots   \xrightarrow{b_{m-1}}  q_{m-1} \xrightarrow{b_m} q_m$ is \emph{accepting} if $q_m  \in F$. A string $w$ is \emph{accepted} by $\Aut$ if there is an accepting run of $\Aut$ on $w$. Let $\Lang(\Aut)$ denote the set of strings accepted by $\Aut$. A language $L \subseteq \Sigma^*$ is \emph{regular} if it can be defined by some FA $\Aut$, namely, $L = \Lang(\Aut)$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+\paragraph{Parikh Image}
+%Given an alphabet $\Sigma$ and a string $w\in \Sigma^*$, 
+%we define the set of Parikh variables 
+%$\Sigma^\# \Def \{a^\# \mid a\in \Sigma\}$.
+%The Parikh image of $w$ is a function 
+%$\mathbb{P}(w): \Sigma^\# \mapsto \mathbb{N}$,
+%which maps each symbol $a^\#\in \Sigma^\#$ to the number of occurrences
+%of $a$ in $w$.
+%
+The \emph{Parikh image} of a word $w \in \Sigma^*$, denoted by $\parikh(w)$, maps each Parikh (integer) variable $\#a$, where $a \in \Sigma$, to the number of occurrences of $a$ in $w$. 
+For instance, let $\Sigma = \{a,b\}$ and $w= aabba$,
+then $\parikh(w)(\#a)=3$ and $\parikh(w)(\#b)=2$.
+Given an alphabet $\Sigma$, let $\#\Sigma$ denote the set of Parikh variables $\{\#a | a \in \Sigma\}$. 
+%The Parikh image of $w$ is a function $\parikh(w): \#\Sigma \rightarrow \mathbb{N}$ such that $\parikh(w)(\#a) = |w|_a$, for each $a \in \Sigma$. 
+The Parikh image of a language $L$ is defined as $\parikh(L) = \{\parikh(w) \mid w \in L\}$. It is well known that the Parikh image of a regular language can be characterized by an existential PA formula~\cite{SSMH04}.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%For a language $L\subseteq \Sigma^*$, 
+%define the Parikh image of $L$ to be 
+%$\mathbb{P}(L)\Def \{\mathbb{P}(w) | w\in L\}$.
+%We say a language $L$ is \emph{Parikh-definable} 
+%if $\mathbb{P}(L)$ can be characterized by a quantifier-free PA formula over $\Sigma^\#$, 
+%where $a^\#$ in the formula encodes the number of occurrences of $a$.
+%It is well known that
+%any context-free language (therefore regular language) 
+%is Parikh definable \cite{Parikh66}.
+
+
+
+
+%\paragraph{Flat automata and languages}
+
+%Given a string constraint $\Psi$,
+%the general problem of deciding whether $\lVert \Psi \rVert$ is empty is undecidable.
+%However, 
+%the problem becomes decidable when certain restrictions are imposed.
+%One of the restriction is by flat automata and flat languages, 
+%defined below. 
+
+\paragraph{Flat languages}
+
+
+We will present flat languages. This is a high level, language-theoretical view at the flat automata from \cite{Parosh:20:PLDI}. 
+%
+%For integers $k$ and $\ell$ and a string variable $x$, 
+%we define the family of indexed \emph{character variables} $\charvars = \{x_j^i \mid 1 \le i \le k, 1 \le j \le \ell\}$. 
+A \emph{flat language} (FL)  over $\Sigma$
+%with the \emph{period} at most $\ell$ and the \emph{cycle count} $k$ 
+is the set of strings 
+that conform to a regular expression of the form
+$
+(a^1_1\ldots a^1_{\ell_1})^* \cdot \ldots \cdot (a^k_1\ldots a^k_{\ell_k})^*, 
+$
+where $a^i_j \in \Sigma$ for each $i \in [k]$ and $j \in [\ell_i]$.
+Intuitively, an FL is a  sequence of loops,  and the body of each loop is a string of the form  $a^i_1\ldots a^i_{\ell_i}$ with $\ell_i$ letters. 
+%A $\langle \ell, k \rangle$-FL is an FL such that its \emph{period} is at most $\ell$ and the \emph{cycle count} is at most $k$.
+For instance, the language defined by $(ab)^*(a)^*(bb)^*$ is an FL.
+
+%A central property of FL is that the strings accepted by an FL are fully characterized by their Parikh images. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+For a fixed alphabet $\Sigma$,
+we say a language $L$ over $\Sigma$ to be \emph{$\langle p,q \rangle$-flat} if 
+there exist strings $w_1,...,w_q \in \Sigma^*$ such that
+$|w_i|\le p$ for all $i:1\le i \le q$ 
+and $L = (w_1)^*(w_2)^*...(w_q)^*$. 
+We use $\alpha$ to denote $\langle p,q \rangle$, 
+and call it the \emph{abstraction parameter} of $L$.
+Intuitively,
+a flat language with abstraction parameter $\alpha = \langle p,q \rangle$
+consists of $q$ loops and the length of each loop body is equal or less than $p$.
+For example,
+$L = (ab)^*(a)^*(bb)^*$ is a $\langle 2,3 \rangle$-flat language.
+
+Flat automata are a special form of finite state automata that 
+recognize flat languages.
+Fix the abstraction parameter $\alpha=\langle p,q\rangle$,
+a flat automaton consists of $q$ loops,
+each loop is a circle of $p$ states.
+Formally, 
+an $\alpha$-flat automaton contains $p q$ states at most,
+and we name the states from $1$ to $p q$,
+$1$ is the initial state and $(p q - p + 1)$ is the accepting state.
+We use $\cdot$ as a placeholder for some symbol in $\Sigma_\epsilon$,
+the transition relations of state $i$ are defined as 
+\begin{itemize}
+    \item if $i\  \text{mod}\  p = 1$ and $i \neq pq-p+1$, then 
+    $(i,\epsilon,i+p)\in \Delta$,
+    $(i, \cdot ,i+1) \in \Delta$;
+    \item if $i\  \text{mod}\  p = 0$, then 
+    $(i,\cdot , i-p+1) \in \Delta$;
+    \item otherwise, $(i,\cdot, i+1) \in \Delta$.
+\end{itemize}
+
+\begin{figure}[ht]
+    \centering 
+    \begin{tikzpicture}
+        \node[state,           ] (4) {$4$};
+        \node[state, left  of=4] (2) {$2$};
+        \node[state, right of=4] (6) {$6$};
+        \node[state, initial, below of=2] (1) {$1$};
+        \node[state, below of=4] (3) {$3$};
+        \node[state, accepting, right of=3] (5) {$5$};
+        
+        \draw 
+        (1) edge[above] node{$\epsilon$} (3)
+        (3) edge[above] node{$\epsilon$} (5)
+        
+        (1) edge[bend left,left] node{$a$} (2)
+        (2) edge[bend left,right] node{$b$} (1)
+        
+        (3) edge[bend left,left] node{$a$} (4)
+        (4) edge[bend left,right] node{$\epsilon$} (3)
+        
+        (5) edge[bend left,left] node{$b$} (6)
+        (6) edge[bend left,right] node{$b$} (5);
+    \end{tikzpicture}
+    \caption{A $\langle 2,3 \rangle$-flat automaton 
+that recognizes $L\Def  (ab)^*(a)^*(bb)^*$}
+    \label{fig: FA}
+\end{figure}
+} 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+\paragraph{Generic Flat Languages and Automata}
+Fix $\alpha = \langle p,q \rangle$,
+we define the \emph{generic $\alpha$-flat language} is the union of all $\alpha$-flat languages, denoted by $\mathbb{F}(\alpha)$.
+Now, we try to define an automaton that recognizes all $\alpha$-flat languages,
+i.e., collects all behaviors of $\alpha$-flat automata.
+
+Intuitively, 
+the generic automaton is obtained by introducing a new alphabet (
+a multi-set with $p q$ copies of the original alphabet) and 
+adding more transitions (labels),
+the states and the overall framework remain unchanged. 
+In details, a generic $\alpha$-flat automaton is still a finite state automaton over
+$\Sigma(\alpha)\Def \{a(i)| (a\in \Sigma_\epsilon) \wedge i\in \mathbb{N}:1\le i \le pq\}\cup \{\epsilon\}$.
+The states are still named from $1$ to $pq$, 
+the initial state is $1$ and the accepting state is $(pq-p+1)$.
+The transition relations for state $i$ are defined as 
+\begin{itemize}
+    \item if $i\  \text{mod}\  p = 1$ and $i\neq pq-p+1$, then 
+    $(i,\epsilon,i+p)\in \Delta$
+    and $\forall s\in \Sigma_{\epsilon}. (i, s(i) ,i+1) \in \Delta$;
+    \item if $i\  \text{mod}\  p = 0$, 
+    $\forall s \in \Sigma_{\epsilon}. (i,s(i), i-p+1) \in \Delta$;
+    \item otherwise, $\forall s \in \Sigma_{\epsilon}. (i,s(i), i+1) \in \Delta$.
+\end{itemize}
+
+For $\Sigma = \{a,b\}$, an example of generic $\langle 2,3 \rangle$-flat automaton is shown in figure (\ref{fig: GFA}).
+
+\begin{figure}[ht]
+    \centering 
+    \begin{tikzpicture}
+        \node[state,           ] (4) {$4$};
+        \node[state, left  = 2cm of 4] (2) {$2$};
+        \node[state, right = 2cm of 4] (6) {$6$};
+        \node[state, initial, below of=2] (1) {$1$};
+        \node[state, below of=4] (3) {$3$};
+        \node[state, accepting, below of=6] (5) {$5$};
+        
+        \draw 
+        (1) edge[above] node{$\epsilon$} (3)
+        (3) edge[above] node{$\epsilon$} (5)
+        
+        (1) edge[bend left, pos =0.2 ,left] node{$a(1)$} (2)
+        (1) edge[bend left, pos =0.5 ,left] node{$b(1)$} (2)
+        (1) edge[bend left, pos =0.8 ,left] node{$\epsilon(1)$} (2)
+        
+        (2) edge[bend left, pos = 0.2 ,right] node{$\epsilon(2)$} (1)
+        (2) edge[bend left, pos = 0.5 ,right] 
+        node{$b(2)$} (1)
+        (2) edge[bend left, pos = 0.8 ,right] 
+        node{$a(2)$} (1)
+        
+        (3) edge[bend left, pos =0.2 ,left] node{$a(3)$} (4)
+        (3) edge[bend left, pos =0.5 ,left] node{$b(3)$} (4)
+        (3) edge[bend left, pos =0.8 ,left] node{$\epsilon(3)$} (4)
+        
+        (4) edge[bend left, pos = 0.2 ,right] node{$\epsilon(4)$} (3)
+        (4) edge[bend left, pos = 0.5 ,right] 
+        node{$b(4)$} (3)
+        (4) edge[bend left, pos = 0.8 ,right] 
+        node{$a(4)$} (3)
+        
+        (5) edge[bend left, pos =0.2 ,left] node{$a(5)$} (6)
+        (5) edge[bend left, pos =0.5 ,left] node{$b(5)$} (6)
+        (5) edge[bend left, pos =0.8 ,left] node{$\epsilon(5)$} (6)
+        
+        (6) edge[bend left, pos = 0.2 ,right] node{$\epsilon(6)$} (5)
+        (6) edge[bend left, pos = 0.5 ,right] 
+        node{$b(6)$} (5)
+        (6) edge[bend left, pos = 0.8 ,right] 
+        node{$a(6)$} (5);
+    \end{tikzpicture}
+    \caption{The generic $\langle 2,3 \rangle$-flat automaton}
+    \label{fig: GFA}
+\end{figure}
+ 
+
+However,
+the resulted automaton may accept languages that are not in $\mathbb{F}(\alpha)$,
+because in different passes inside a loop, 
+the automaton can choose different symbols between identical pairs. 
+To avoid this problem,
+we add a so-called purity condition on the accepting language of generic flat automata,
+which is equivalent to intersecting the language of a generic flat automaton 
+with a language that encodes the purity condition.
+
+We say a string $w\in (\Sigma(\alpha))^*$ is pure if for all $i: 1\le i \le p q$,
+and $a,b\in \Sigma$, 
+$a\neq b \wedge \#w(a(i))>0$ implies $\#w(b(i))=0$.
+Formally, the purity condition is defined by 
+\begin{equation} \label{eq:purity}
+ \bigwedge_{1\le i\le pq}\bigwedge_{a,b\in \Sigma, a\neq b} ({a(i)}^\#>0)\to ({b(i)}^\#=0)\, . 
+\end{equation}
+
+We denote the accepting language of the generic $\alpha$-flat automaton by $\mathbb{G}(\alpha)$.
+Note that $\mathbb{G}(\alpha)$ is a language over $\Sigma_\alpha$,
+but what we want is a language over $\Sigma$.
+So we define a renaming function $R:\Sigma(\alpha)\mapsto \Sigma$ such that for all $a(i) \in \Sigma_\alpha, R(a(i))=a$,
+and $R(\epsilon) = \epsilon$.
+Define $\mathbb{G}'(\alpha) \, \Def \, \{R(w) \mid w\in \mathbb{G}(\alpha)\}$, 
+for simplicity, we write
+$\mathbb{G}'(\alpha)=R(\mathbb{G}(\alpha))$.
+
+The important feature of generic flat autamata
+is that every word $w\in \mathbb{G}(\alpha)$ is uniquely determined by its Parikh image $\mathbb{P}(w)$.
+}
+

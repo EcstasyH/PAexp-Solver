@@ -1,0 +1,250 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% Please do not use \input{...} to include other tex files.       %%
+%% Submit your LaTeX manuscript as one .tex document.              %%
+%%                                                                 %%
+%% All additional figures and files should be attached             %%
+%% separately and not embedded in the \TeX\ document itself.       %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%\documentclass[referee,sn-basic]{sn-jnl}% referee option is meant for double line spacing
+
+%%=======================================================%%
+%% to print line numbers in the margin use lineno option %%
+%%=======================================================%%
+
+%%\documentclass[lineno,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%======================================================%%
+%% to compile with pdflatex/xelatex use pdflatex option %%
+%%======================================================%%
+
+%%\documentclass[pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%\documentclass[sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+\documentclass[sn-mathphys]{sn-jnl}% Math and Physical Sciences Reference Style
+%%\documentclass[sn-aps]{sn-jnl}% American Physical Society (APS) Reference Style
+%%\documentclass[sn-vancouver]{sn-jnl}% Vancouver Reference Style
+%%\documentclass[sn-apa]{sn-jnl}% APA Reference Style
+%%\documentclass[sn-chicago]{sn-jnl}% Chicago-based Humanities Reference Style
+%%\documentclass[sn-standardnature]{sn-jnl}% Standard Nature Portfolio Reference Style
+%%\documentclass[default]{sn-jnl}% Default
+%%\documentclass[default,iicol]{sn-jnl}% Default with double column layout
+
+%%%% Standard Packages
+%%<additional latex packages if required can be included here>
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{verbatim}
+\usepackage{times}
+\usepackage{multirow}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{stmaryrd}
+%%%%
+
+%%%%%=============================================================================%%%%
+%%%%  Remarks: This template is provided to aid authors with the preparation
+%%%%  of original research articles intended for submission to journals published 
+%%%%  by Springer Nature. The guidance has been prepared in partnership with 
+%%%%  production teams to conform to Springer Nature technical requirements. 
+%%%%  Editorial and presentation requirements differ among journal portfolios and 
+%%%%  research disciplines. You may find sections in this template are irrelevant 
+%%%%  to your work and are empowered to omit any such section if allowed by the 
+%%%%  journal you intend to submit to. The submission guidelines and policies 
+%%%%  of the journal take precedence. A detailed User Manual is available in the 
+%%%%  template package for technical guidance.
+%%%%%=============================================================================%%%%
+
+\jyear{2021}%
+
+%% as per the requirement new theorem styles can be included as shown below
+\theoremstyle{thmstyleone}%
+\newtheorem{theorem}{Theorem}%  meant for continuous numbers
+%%\newtheorem{theorem}{Theorem}[section]% meant for sectionwise numbers
+%% optional argument [theorem] produces theorem numbering sequence instead of independent numbers for Proposition
+\newtheorem{proposition}[theorem]{Proposition}% 
+%%\newtheorem{proposition}{Proposition}% to get separate numbers for theorem and proposition etc.
+
+\theoremstyle{thmstyletwo}%
+\newtheorem{example}{Example}%
+\newtheorem{lemma}{Lemma}%
+\newtheorem{remark}{Remark}%
+
+\theoremstyle{thmstylethree}%
+\newtheorem{definition}{Definition}%
+
+% Notations
+\newcommand{\parseInt}{\textsf{parseInt}}
+\newcommand{\pa}{{\sf PA}}
+\newcommand{\qfpa}{{\sf QFPA}}
+\newcommand{\paexp}{{\sf ExpPA}}
+\newcommand{\Def}{\hat{=}}
+\newcommand{\strint}{{\sf STR}_\parseInt}
+
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Int}{\mathbb{Z}}
+\newcommand\Aut{\mathcal{A}}
+\newcommand\Lang{\mathcal{L}}
+\newcommand\free{\mathrm{Free}}
+\newcommand\op{\odot}
+\newcommand\parikh{\mathbb{P}}
+\newcommand{\hide}[1]{}
+\newcommand\encode{\mathit{encode}}
+\newcommand\decode{\mathit{decode}}
+\newcommand\len{\textsf{len}}
+\newcommand\svars{\mathcal{X}}
+\newcommand\ivars{\mathbbm{X}}
+\newcommand\pos{\mathit{pos}}
+\newcommand\ltrue{\mathtt{true}}
+\newcommand\lfalse{\mathtt{false}}
+\newcommand\flatdom{\mathcal{R}}
+\newcommand\flatten{\mathit{flatten}}
+\newcommand\svarx{x}
+\newcommand\svary{y}
+\newcommand\ivarx{\mathbbm{x}}
+\newcommand\ivary{\mathbbm{y}}
+\newcommand\ivarz{\mathbbm{z}}
+\newcommand\sterm{t}
+\newcommand\iterm{\mathbbm{t}}
+\newcommand{\kell}{{(k,\ell)}}
+
+\newcommand{\svar}{\textsf{SVar}}
+\newcommand{\ivar}{\textsf{IVar}}
+\newcommand{\pvar}{\textsf{PVar}}
+\newcommand{\flatfun}{\mathcal{F}}
+
+
+
+\raggedbottom
+%%\unnumbered% uncomment this for unnumbered level heads
+
+\begin{document}
+
+\title[Article Title]{A Decision Procedure for String Constraints with String-Integer Conversion and Flat Regular Constraints}
+
+%%=============================================================%%
+%% Prefix	-> \pfx{Dr}
+%% GivenName	-> \fnm{Joergen W.}
+%% Particle	-> \spfx{van der} -> surname prefix
+%% FamilyName	-> \sur{Ploeg}
+%% Suffix	-> \sfx{IV}
+%% NatureName	-> \tanm{Poet Laureate} -> Title after name
+%% Degrees	-> \dgr{MSc, PhD}
+%% \author*[1,2]{\pfx{Dr} \fnm{Joergen W.} \spfx{van der} \sur{Ploeg} \sfx{IV} \tanm{Poet Laureate} 
+%%                 \dgr{MSc, PhD}}\email{iauthor@gmail.com}
+%%=============================================================%%
+
+\author[1,2]{Hao Wu}\email{wuhao@ios.ac.cn}
+
+\author[3]{Yu-Fang Chen}\email{yfc@iis.sinica.edu.tw}
+
+\author[1,2]{Zhilin Wu}\email{wuzl@ios.ac}
+
+\author*[1,2]{Naijun Zhan}\email{znj@ios.ac.cn}
+
+\affil*[1]{State Key Laboratory of Computer Science,
+Institute of Software, Chinese Academy of Sciences, Beijing, China}
+
+\affil[2]{University of Chinese Academy of Sciences,
+Beijing, China}
+
+\affil[3]{Institute of Information Science, Academia Sinica, Taiwan, Republic of China}
+
+
+%%==================================%%
+%% sample for unstructured abstract %%
+%%==================================%%
+
+\abstract{String constraint solving is the core of various testing and verification approaches for scripting languages. 
+Among algorithms for solving string constraints, flattening is a well-known approach that is particularly useful in handling satisfiable instances.
+As string-integer conversion is an important function appearing in almost all scripting languages, Abdulla et al. extended the flattening approach to this function recently.
+However, their approach supports only a special flattening pattern and leaves the support of the general flat regular constraints as an open problem.
+In this paper, we fill the gap and propose a complete flattening approach for the string-integer conversion. The approach is built upon a quantifier elimination procedure for the linear-exponential arithmetic (namely, the extension of Presburger arithmetic with exponential functions) proposed by Point in 1986. The complexity of the quantifier elimination procedure is analyzed for the first time and is shown to be 3-EXPSPACE if the formula contains only existential quantifiers. While the quantifier elimination procedure by Point is too expensive to be implemented efficiently, we propose various optimizations and provide a prototypical implementation.
+We evaluate the performance of our implementation on the benchmarks that are generated from the string hash functions as well as randomly.
+The experimental results show that our implementation outperforms the state-of-the-art solvers. 
+}
+
+%%================================%%
+%% Sample for structured abstract %%
+%%================================%%
+
+% \abstract{\textbf{Purpose:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+% 
+% \textbf{Methods:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+% 
+% \textbf{Results:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.
+% 
+% \textbf{Conclusion:} The abstract serves both as a general introduction to the topic and as a brief, non-technical summary of the main results and their implications. The abstract must not include subheadings (unless expressly permitted in the journal's Instructions to Authors), equations or citations. As a guide the abstract should not exceed 200 words. Most journals do not set a hard limit however authors are advised to check the author instructions for the journal they are submitting to.}
+
+\keywords{String-integer conversion, Flat regular constraints, Exponential function, Presburger arithmetic, Quantifier elimination}
+
+%%\pacs[JEL Classification]{D8, H51}
+
+%%\pacs[MSC Classification]{35A01, 65L10, 65L12, 65L20, 65L70}
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+\input{1_intro.tex}
+
+\section{Preliminary}\label{sec:pre}
+\input{2_preliminary.tex}
+
+\section{Flattening string constraints with string-integer conversion}\label{sec:string-solving}
+\input{3_flatten.tex}
+
+\section{Decision procedure for {\paexp}}\label{sec-dec}
+\input{4_dec_proc.tex}
+
+\section{Complexity Analysis}\label{sec-cpx}
+\input{5_complexity.tex}
+
+\section{Optimizations}\label{sec-opt}
+\input{6_optimization.tex}
+
+\section{Implementation and Experiments}\label{sec-exp}
+\input{7_impl_exp.tex}
+
+\section{Conclusion}
+\input{8_conclusion.tex}
+
+
+\begin{appendices}
+
+\section{Section title of first appendix}\label{secA1}
+\input{9_appendix.tex}
+%%=============================================%%
+%% For submissions to Nature Portfolio Journals %%
+%% please use the heading ``Extended Data''.   %%
+%%=============================================%%
+
+%%=============================================================%%
+%% Sample for another appendix section			       %%
+%%=============================================================%%
+
+%% \section{Example of another appendix section}\label{secA2}%
+%% Appendices may be used for helpful, supporting or essential material that would otherwise 
+%% clutter, break up or be distracting to the text. Appendices can consist of sections, figures, 
+%% tables and equations etc.
+
+\end{appendices}
+
+%%===========================================================================================%%
+%% If you are submitting to one of the Nature Portfolio journals, using the eJP submission   %%
+%% system, please include the references within the manuscript file itself. You may do this  %%
+%% by copying the reference list from your .bbl file, paste it into the main manuscript .tex %%
+%% file, and delete the associated \verb+\bibliography+ commands.                            %%
+%%===========================================================================================%%
+
+\bibliography{sn-bibliography}% common bib file
+%% if required, the content of .bbl file can be included here once bbl is generated
+%%\input sn-article.bbl
+
+%% Default %%
+%%\input sn-sample-bib.tex%
+
+\end{document}

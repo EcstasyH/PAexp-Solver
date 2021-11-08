@@ -19,7 +19,6 @@ The complexity of the satisfiability of word equations with regular constraints 
 Satisfiability of word equations is a special instance of Hilbert’s 10th problem. 
 In the past, the original motivation of studying word equations was for finding an undecidability proof of Hilbert’s 10th problem. 
 However, the motivation is no longer valid since Makanin finds a decision procedure. Recently, driven by the need for program analysis, people started to revisit the problem and its extensions to describe the complete string library APIs in conventional programming languages. Many highly efficient solvers for string constraints, to name a few, CVC4~\cite{cvc4Tool}, Z3~\cite{z3}, Z3-Str3~\cite{zheng2013z3}, S3~\cite{trinh2014s3}, Norn~\cite{abdulla2015norn}, Ostrich~\cite{chen2017decidable}, Sloth~\cite{sloth}, ABC~\cite{aydin2018parameterized}, Stranger~\cite{yu2010stranger}, and Trau~\cite{abdulla2018trau}, are developed in the last decade.
-
 The satisfiability of \emph{string-integer conversion constraints}, e.g., $wx=yx \wedge |x| > \parseInt(y)$, has been proven undecidable in~\cite{DayGHMN18}. 
 However, this kind of constraints is pervasive in scripting language programs. 
 For example, it is common that programs read string inputs from text files and converts a part of the string input to integers.
