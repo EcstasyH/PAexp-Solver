@@ -2,11 +2,13 @@
 
 Semënov first proved that  {\paexp} admits quantifier elimination in \cite{Semenov84}, thus its satisfiability problem is decidable. However, Semënov did not give a concrete quantifier elimination procedure. Remedying this, Point proposed a quantifier elimination procedure for {\paexp} in \cite{Point86}. In this section, we describe how Point's quantifier elimination procedure works. 
 
-%
+\vspace*{-3mm}
+
 \begin{theorem}[\cite{Point86}]
 \label{thm-paexp}
 {\paexp} admits quantifier elimination. 
 \end{theorem}
+\vspace*{-3mm}
 
 Compared to \cite{Point86}, the presentation here is more accessible to computer science researchers. Moreover, the procedure presented here slightly improves Point's procedure, in the following two aspects: 1) DNF (disjunctive normal form) was required in Point's procedure, which is not required here, 2) in Point's procedure, the divisibility constraints produced by the elimination of linear occurrences of a variable should be converted to equality constraints (by introducing fresh variables) before the elimination of exponential occurrences of some other variable, which is unnecessary here, since the divisibility constraints are directly dealt with in the elimination of exponential occurrences of variables. 
 
@@ -141,8 +143,6 @@ Intuitively, the normalization step first removes all occurrences of $\ell_{10}(
 
 After the normalization, the resulting formula is of the following shape: 1) it contains no occurrences of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, 2)  it contains no occurrences of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, but $\iterm \neq \ivarx$, 3) all the atomic formulas are of the form $\iterm_1 \le \iterm_2$, $c \vert  \iterm$ or $c\nmid \iterm$. 
 
-
-%\vspace{-2mm}
 \subsection{Enumeration of the variable orders}\label{qe-enum}
 
 Suppose $n-1$ fresh variables are introduced in the normalization procedure, rename the original variable $\ivarx$ and the $n-1$ introduced variables as $\ivarx_i,1\le i\le n$.
@@ -173,6 +173,9 @@ $c \ \big  \vert  \ \big(a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\i
 
 \subsubsection{Inequality atoms}
 In the following, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for inequality atomic formulas of the form 
+
+\vspace*{-2mm}
+
 \begin{equation}\label{tau}
     \begin{aligned}
         &\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
@@ -209,10 +212,14 @@ When $\ivarx_{\sigma(i)} \ge \gamma$ and  $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma
 We need the following two propositions for the proof of Lemma~\ref{lem:exp-ineq}. 
 Proposition~\ref{prop:linear} shows that when $\ivarx$ is large enough, the linear term $n \ivarx$ can always be bound by the exponential term $10^\ivarx$. Proposition~\ref{prop:case} can be seen as a special case of Lemma~\ref{lem:exp-ineq} where the left-hand-side of $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ has only one term $a_i 10^{\ivarx_{\sigma(i)}}$. 
 
+\vspace*{-3mm}
+
 \begin{proposition} \label{prop:linear}
 Given $n\ge 1$, if $\ivarx \ge 2\ell_{10}(n)+1$, then 
 $n \ivarx  \le 10^\ivarx$ holds.
 \end{proposition}
+
+\vspace*{-3mm}
 
 \begin{proof}
 When $1\le n\le 9$, we have $n\ivarx \le 10\ivarx \le 10^\ivarx$ for all $\ivarx \in\mathbb N$.
@@ -225,6 +232,7 @@ $$\begin{aligned}
     &\ge n\ivarx
 \end{aligned}$$
 \end{proof}
+
 
 \begin{proposition} \label{prop:case}
     Given $a>0$, 
