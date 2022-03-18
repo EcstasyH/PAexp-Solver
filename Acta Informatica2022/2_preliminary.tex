@@ -8,18 +8,19 @@ In this section, we fix the notations and introduce some basic concepts, includi
 \paragraph{Integers, strings, and languges}
 Let $\Nat$ denote the set of natural numbers, $\Int$ denote the set of integers, and $\Int^+$ denote the set of positive integers. For $n \in \Int^+$, let $[n]$ denote $\{1,\dots,n\}$.
 
-An \emph{alphabet} $\Sigma$ is a finite set. Elements of $\Sigma$ are called \emph{letters}.
-%Let $\Sigma$ denote a finite alphabet,
-A \emph{string} $w$ over $\Sigma$ is a (possibly empty) finite sequence $a_1\ldots a_n$ with $a_i \in \Sigma$ for every $i \in [n]$. Let $\varepsilon$ denote the empty string, namely, the empty sequence. For a string $w = a_1 \ldots a_n \in \Sigma^*$, let $|w|$ denote the \emph{length} of $w$, i.e. $n$. In particular, $\vert \varepsilon\vert  = 0$.
+An \emph{alphabet} $\Sigma$ is a finite set. Each element of $\Sigma$ is called a \emph{letter}.
+A \emph{string} $w$ over $\Sigma$ is a (possibly empty) finite sequence $a_1\ldots a_n$ with $a_i \in \Sigma$ for every $i \in [n]$. Let $\varepsilon$ denote the empty string, namely, the empty sequence. 
+Let $\Sigma^*$ denote the set of all strings over $\Sigma$.
+Let$\Sigma^+$ denote the set of nonempty strings over $\Sigma$. 
+For convenience, we also use $\Sigma_{\epsilon}$ to denote $\Sigma \cup \{\epsilon\}$.
+For a string $w = a_1 \ldots a_n \in \Sigma^*$, let $\len(w)$ denote the \emph{length} of $w$, i.e. $n$. In particular, $\len(\varepsilon)  = 0$.
 %
 For $w_1 = a_1 \ldots a_m, w_2 = b_1 \ldots b_n\in \Sigma^*$, 
 let $w_1\cdot w_2$ denote the \emph{concatenation} of $w_1$ and $w_2$, that is, $a_1 \ldots a_m b_1 \ldots b_n$.
 %
-Let $\Sigma^*$ denote the set of all strings over $\Sigma$ and $\Sigma^+$ denote the set of nonempty strings over $\Sigma$. 
-For convenience, we also use $\Sigma_{\epsilon}$ to denote $\Sigma \cup \{\epsilon\}$.
-%
 A language $L$ over $\Sigma$ is a subset of $\Sigma^*$.
 
+\hide{
 \paragraph{Presburger Arithmetic} \label{PA}
 A Presburger Arithmetic ({\pa}) formula 
 % is a first order theory over the signature 
@@ -36,49 +37,33 @@ where $\op \in \{=, < , >, \le, \ge\}$ and $\ivarx, c$ are integer variables and
 %
 The set of free variables of $\phi$, denoted by $\free(\phi)$, is defined in a standard manner. 
 We usually write $\phi(\ivarx_1,\cdots, \ivarx_k)$ to denote an PA formula $\phi$ such that $\free(\phi) \subseteq \{\ivarx_1,\cdots, \ivarx_k\}$. Given an PA formula $\phi$, and an integer interpretation of $\free(\phi)$, i.e. a function $I: \free(\phi) \rightarrow \Int$, we denote by $I \models \phi$ that $I$ satisfies $\phi$ (which is defined in the standard manner, with $+$, $-$, and $\vert$ interpreted as the integer addition, subtraction, and divisibility relation respectively), and call $I$ a \emph{model} of $\phi$. We use $\llbracket \phi \rrbracket$ to denote the set of models of $\phi$. 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-Presburger Arithmetic (PA) is a first order theory over the signature 
-$\Sigma_\mathbb{N}\Def  \{0,1,+, <, |\}$, where $0,1$ are constants, 
-$+$ is a binary function symbol, $<, |$ are  and $=$ is a binary predicate.
-
-PA can be axiomatized by the following axioms \cite{PA} 
-
-\begin{itemize}
-    \item $\forall x, \neg (x+1=0)$
-    \item $\forall x \forall y. x+1=y+1 \to x=y$
-    \item $F(0) \wedge (\forall x. F(x)\to F(x+1)) \to \forall x. F(x)$ 
-    \item $\forall x. x+0=x$
-    \item $\forall x \forall y. x+(y+1)=(x+y)+1$
-\end{itemize}
-Given the domain $\mathbb{N}$,
-the standard interpretation of PA interprets 
-$0,1$ to $0_\mathbb{N},1_\mathbb{N}\in \mathbb{N}$
-and $+,=$ to addition and equality over $\mathbb{N}$.
-We call a PA formula without quantifiers a quantifier-free PA formula.
-
-PA is a decidable theory, 
-and the complexity of decidability is related to 
-the number and locations of quantifiers.
-Generally, 
-the upper bound (on deterministic time and space) 
-for deciding a formula of length $n$ is $2^{2^{2^{p n log(n)}}}$,
-where $p>1$ is a constant\cite{Oppen69}. 
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Presburger Arithmetic} \label{PA}
+Presburger Arithmetic ({\pa}) is the first-order logic of integers with addition. 
+A term of {\pa}, denoted by $\iterm$, is of the form
+$$\iterm \ \Def \ c \mid \ivarx \mid \iterm+\iterm \mid \iterm - \iterm,$$
+where $\ivarx$ and $c$ represent integer variables and integer constants respectively. 
+A formula of {\pa}, denoted by $\phi$, is of the form
+$$\phi \ \Def \ \iterm \ \op\ \iterm \mid c \vert \iterm \mid c \nmid \iterm \mid \neg \phi \mid \phi \wedge \phi \mid \phi \vee \phi \mid \exists \ivarx.\ \phi \mid \forall \ivarx.\ \phi,$$
+where $\op \in \{=, < , >, \le, \ge\}$. 
+
+A \emph{quantifier-free} {\pa} (\qfpa) formula is a {\pa} formula containing no quantifiers. A {\pa} formula is called \emph{existential} if it contains no occurrences of universal quantifiers.
+The set of free variables of $\phi$ is denoted by $\free(\phi)$. 
+We usually write $\phi(\ivarx_1,\cdots, \ivarx_k)$ to denote an PA formula $\phi$ such that $\free(\phi) \subseteq \{\ivarx_1,\cdots, \ivarx_k\}$. Given an PA formula $\phi$, and an integer interpretation of $\free(\phi)$, i.e. a function $I: \free(\phi) \rightarrow \Int$, we denote by $I \models \phi$ that $I$ satisfies $\phi$ (which is defined in the standard manner, with $+$, $-$, $\vert$ and $\nmid$ interpreted as the integer addition, subtraction, divisibility and undivisibility relation respectively), and call $I$ a \emph{model} of $\phi$. We use $\llbracket \phi \rrbracket$ to denote the set of models of $\phi$. 
+
+We always assume, without loss of expressiveness, that quantifier-free formulas contain no negations, because we can transfrom a formula into negation normal form and negations before atomic formulas can be absorbed by changing the predicates (for example, $\neg (\ivarx \ge \ivary)\equiv \ivarx < \ivary$). The only time when we deal with negations is to transform an universal quantifier $\forall$ into an existential one $\neg \exists \neg$. 
+
+It is well-known that {\pa} admits quantifier elimination, for example, Cooper's algorihm\cite{Cooper72}. In Sec~\ref{sec-dec}, we will use this fact and apply Cooper's algorithm as a subprocedure.
 
 \paragraph{Finite state automata}
-A finite state automaton (FA) is a tuple 
+A \emph{finite state automaton} (FA) is a tuple 
 $\Aut=\langle Q,\Sigma,\Delta, q_{\textit{init}}, F\rangle$, 
 where $Q$ is a finite set of states, 
 $\Sigma$ is a finite alphabet,
 $\Delta\subseteq Q\times \Sigma_\epsilon\times Q$ is the transition relation, 
 $q_{\textit{init}}$ is the initial state, $F \subseteq Q$ is the set of accepting states. 
-A \emph{run} of $\Aut$ on a string $w = a_1 \ldots a_n$ is a sequence $q_0 \xrightarrow{b_1} q_1  \xrightarrow{b_2}  \ldots   \xrightarrow{b_{m-1}}  q_{m-1} \xrightarrow{b_m} q_m$ such that $q_0 = q_{\textit{init}}$, $(q_{i-1}, b_i, q_i) \in \Delta$ for every $i \in [m]$, and $a_1 \ldots a_n = b_1 \ldots b_m$. A \emph{run} $q_0 \xrightarrow{b_1} q_1  \xrightarrow{b_2}  \ldots   \xrightarrow{b_{m-1}}  q_{m-1} \xrightarrow{b_m} q_m$ is \emph{accepting} if $q_m  \in F$. A string $w$ is \emph{accepted} by $\Aut$ if there is an accepting run of $\Aut$ on $w$. Let $\Lang(\Aut)$ denote the set of strings accepted by $\Aut$. A language $L \subseteq \Sigma^*$ is \emph{regular} if it can be defined by some FA $\Aut$, namely, $L = \Lang(\Aut)$.
+A \emph{run} of $\Aut$ on a string $w = a_1 \ldots a_n$ is a sequence $q_0 \xrightarrow{b_1} q_1  \xrightarrow{b_2}  \ldots   \xrightarrow{b_{m-1}}  q_{m-1} \xrightarrow{b_m} q_m$ such that $q_0 = q_{\textit{init}}$, $(q_{i-1}, b_i, q_i) \in \Delta$ for every $i \in [m]$, and $a_1 \ldots a_n = b_1 \ldots b_m$. We say a run $q_0 \xrightarrow{b_1} q_1  \xrightarrow{b_2}  \ldots   \xrightarrow{b_{m-1}}  q_{m-1} \xrightarrow{b_m} q_m$ is \emph{accepting} if $q_m  \in F$. A string $w$ is \emph{accepted} by $\Aut$ if there is an accepting run of $\Aut$ on $w$. Let $\Lang(\Aut)$ denote the set of strings accepted by $\Aut$. A language $L \subseteq \Sigma^*$ is \emph{regular} if it can be defined by some FA $\Aut$, namely, $L = \Lang(\Aut)$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -125,14 +110,8 @@ The Parikh image of a language $L$ is defined as $\parikh(L) = \{\parikh(w) \mid
 
 \paragraph{Flat languages}
 
-
 We will present flat languages. This is a high level, language-theoretical view at the flat automata from \cite{Parosh:20:PLDI}. 
-%
-%For integers $k$ and $\ell$ and a string variable $x$, 
-%we define the family of indexed \emph{character variables} $\charvars = \{x_j^i \mid 1 \le i \le k, 1 \le j \le \ell\}$. 
-A \emph{flat language} (FL)  over $\Sigma$
-%with the \emph{period} at most $\ell$ and the \emph{cycle count} $k$ 
-is the set of strings 
+A \emph{flat language} (FL)  over $\Sigma$ is the set of strings 
 that conform to a regular expression of the form
 $
 (a^1_1\ldots a^1_{\ell_1})^* \cdot \ldots \cdot (a^k_1\ldots a^k_{\ell_k})^*, 

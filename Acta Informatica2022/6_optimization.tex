@@ -1,6 +1,11 @@
 %!TEX root = paper.tex
 
-In the last section, we illustrated the main idea of the decision procedure for  {\paexp}. The decision procedure has a high complexity in the sense that the elimination of the exponential occurrences   of each variable incurs an exponential blow-up, similarly for linear occurrences. Note that this high complexity holds even for quantifier-free formulas containing exponential terms: For a quantifier-free formula $\varphi$ containing exponential terms, we solve its satisfiability problem by adding the existential quantifiers for all the variables occurring in $\varphi$, then eliminate the quantifiers one by one, resulting into $\ltrue$ or $\lfalse$ in the end. The original formula $\varphi$ is satisfiable if $\ltrue$ is obtained in the end.
+In the last section we showed the complexity of Point's procedure over existential {\paexp} formulas to be 3-EXPSPACE, which  is quite expensive and a faithful implementation would not scale\footnote{We did implement Point's algorithm and discovered that the implementation could only solve formulas of very small size.}.
+Note that this high complexity holds even for quantifier-free $\paexp$ formulas: For a quantifier-free formula $\varphi$, we solve its satisfiability problem by adding the existential quantifiers for all the variables occurring in $\varphi$, then eliminate the quantifiers one by one, resulting into $\ltrue$ or $\lfalse$ in the end. The original formula $\varphi$ is satisfiable if $\ltrue$ is obtained in the end.
+
+\hide{
+In Section~\ref{sec-dec}, we illustrated the main idea of the decision procedure for  {\paexp}. In last section, we show that the decision procedure has a high complexity in the sense that the elimination of the exponential occurrences of each variable incurs an exponential blow-up, similarly for linear occurrences. Note that this high complexity holds even for quantifier-free formulas containing exponential terms: For a quantifier-free formula $\varphi$ containing exponential terms, we solve its satisfiability problem by adding the existential quantifiers for all the variables occurring in $\varphi$, then eliminate the quantifiers one by one, resulting into $\ltrue$ or $\lfalse$ in the end. The original formula $\varphi$ is satisfiable if $\ltrue$ is obtained in the end.
+}
 
 In this section, we focus on quantifier-free {\paexp} formulas (or existential {\paexp} formulas since they are satisfiability-equivalent), and present various optimizations of the quantifier elimination procedure for {\paexp}, aiming at an efficient implementation. The focus on quantifier-free {\paexp} formulas is motivated by the following two facts: 1) the flattening of {$\strint$} constraints results into such formulas, 2) these formulas are already challenging for state-of-the-art SMT solvers (with exponential functions defined as recursive functions). 
 
@@ -10,12 +15,11 @@ $\sum_{j=1}^{n} a_j 10^{\ivarx_{j}} + \sum_{k=1}^{n}b_k \ivarx_{k} \le c$,
 %
 where $c$ is an integer constant. (Implicitly, we assume that there are no free variables and all the variables are existentially quantified.)
 
-%In the sequel, we present two major optimizations and omit some additional ones, which can be found in Appendix~\ref{app-opt}. 
 In the sequel, we will explain two major optimizations in \ref{para: opt reduce} and \ref{para: opt under appro}. Additional optimizations are listed in \ref{para: opts}.
 
 \subsection{Reduce the number of enumerated variable orders by over approximation}\label{para: opt reduce}
 
-Recall that in the decision procedure for {\paexp}, after the normalization, the variable orders are enumerated and for each order, the exponential and linear occurrences of variables are eliminated. Since the quantifier elimination is expensive and applied to each possible order of variables, if we could reduce the candidate variable orders in the very beginning, it would facilitate considerable speed-up for the decision procedure. 
+Recall that in Point's procedure for {\paexp}, after the normalization, the variable orders are enumerated and for each order, the exponential and linear occurrences of variables are eliminated. Since the quantifier elimination is expensive and applied to each possible order of variables, if we could reduce the candidate variable orders in the very beginning, it would facilitate considerable speed-up for the decision procedure. 
 
 Our main idea is to consider an over approximation of $\varphi$, which is a {\pa} formula $\varphi'$, and use $\varphi'$ to remove the infeasible candidate variable orders.
 
@@ -34,19 +38,24 @@ Then during the enumeration of the linear orders for the variables $\ivarx_1, \l
 
 The decision procedure of {\paexp} in Section~\ref{sec-dec} requires the elimination of both exponential and linear occurrences of variables. Considering the fact that {\pa} formulas can be solved efficiently by the state-of-the-art solvers, e.g. CVC4 and Z3, one natural idea is to try to only eliminate the exponential occurrences, but not the linear occurrences, of variables, and obtain the {\pa} formulas in the end, which can then be solved by the state-of-the-art solvers.
 
-Recall that Lemma~\ref{lem:exp-ineq} enables us to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ from 
-%\vspace{-1mm}
-$$
+Recall that Lemma~\ref{lem:exp-ineq} enables us to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ from an atomic formula $\tau$ of the form
+\hide{$$
 \begin{array}{l}
 \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}) \Def  \\
-\hspace{4mm} 
-%\vspace{-1mm}
 a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le c.
 \end{array}
-$$
-Actually, Lemma~\ref{lem:exp-ineq} does more in the sense that all occurrences of $\ivarx_{\sigma(i)}$, including the linear ones, are eliminated from the atomic formulas resulted from $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, e.g. $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-1)} + p /\ivarx_{\sigma(i)}]$. Then we can continue eliminating the exponential occurrences of $\ivarx_{\sigma(i-1)}$ from $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-1)} + p /\ivarx_{\sigma(i)}]$, provided that the coefficient of $\ivarx_{\sigma(i-1)}$ therein is nonzero. Iterating this process would produce a {\pa} formula eventually.
+$$}
+\begin{equation}
+    \begin{aligned}
+        &\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}) \Def  \\
+        &a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le c.
+    \end{aligned}            
+\end{equation}
 
-Nevertheless, the side condition of Lemma~\ref{lem:exp-ineq}, namely $a_i \neq 0$, undermines the aforementioned natural idea. If $a_i = 0$, but $b_i \neq 0$, 
+
+Actually, Lemma~\ref{lem:exp-ineq} does more in the sense that all occurrences of $\ivarx_{\sigma(i)}$, including the linear ones, are eliminated from the atomic formulas resulted from $\tau$, e.g. $\tau[\ivarx_{\sigma(i-1)} + p /\ivarx_{\sigma(i)}]$. Then we can continue eliminating the exponential occurrences of $\ivarx_{\sigma(i-1)}$ from $\tau[\ivarx_{\sigma(i-1)} + p /\ivarx_{\sigma(i)}]$, provided that the coefficient of $\ivarx_{\sigma(i-1)}$ therein is nonzero. Iterating this process would produce a {\pa} formula eventually.
+
+Nevertheless, the condition of Lemma~\ref{lem:exp-ineq}, namely $a_i \neq 0$, undermines the aforementioned natural idea. If $a_i = 0$, but $b_i \neq 0$, 
 %namely, 
 %$$
 %\begin{array}{l}
@@ -55,9 +64,9 @@ Nevertheless, the side condition of Lemma~\ref{lem:exp-ineq}, namely $a_i \neq 0
 %\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le c,
 %\end{array}
 %$$
-then we are unable to utilize Lemma~\ref{lem:exp-ineq} to eliminate the linear occurrences of $\ivarx_{\sigma(i)}$ from $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$. In this case, the quantifier elimination algorithm of {\pa} has to be applied to eliminate $\ivarx_{\sigma(i)}$ from $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, so that later on, we can eliminate the exponential occurrences of $\ivarx_{\sigma(i-1)}$, which requires that $\ivarx_{\sigma(i-1)}$ is the maximum variable in the left-hand side of the inequality.
+then we are unable to utilize Lemma~\ref{lem:exp-ineq} to eliminate the linear occurrences of $\ivarx_{\sigma(i)}$ from $\tau$. In this case, the quantifier elimination algorithm of {\pa} has to be applied to eliminate $\ivarx_{\sigma(i)}$, so that later on, we can eliminate the exponential occurrences of $\ivarx_{\sigma(i-1)}$, which requires that $\ivarx_{\sigma(i-1)}$ is the maximum variable in the left-hand side of the inequality.
 
-To avoid applying the quantifier elimination algorithm of {\pa}, we consider the following under approximation of $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, namely, we additionally assume that $\ivarx_{\sigma(i)} \le 10^{u}$ for some constant bound $u \in \Nat$ with $u \ge 1$. Then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$ can be rewritten as 
+To avoid applying the quantifier elimination algorithm of {\pa}, we consider the following under approximation of $\tau$, namely, we additionally assume that $\ivarx_{\sigma(i)} \le 10^{u}$ for some constant bound $u \in \Nat$. Then $\tau$ can be rewritten as 
 %\begin{equation}\label{eqn-org}
 %\vspace{-2mm}
 \[\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}) \Def \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le c - b_i  \ivarx_{\sigma(i)}.\]
@@ -76,12 +85,27 @@ and
 \begin{equation}\label{eqn-ub}
 \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le c_2.
 \end{equation}
-Let $\alpha_1 = \ell_{10}(c_1) -  \ell_{10}(a_{i-1})$ and $\alpha_2 = \ell_{10}(c_2) -  \ell_{10}(a_{i-1})$. Then from Lemma~\ref{lem:exp-ineq}, 
+
+Let $\alpha_1 = \ell_{10}(c_1) -  \ell_{10}(a_{i-1})$ and $\alpha_2 = \ell_{10}(c_2) -  \ell_{10}(a_{i-1})$. Then from Lemma~\ref{lem:exp-ineq}, let $A\Def 1+\sum_{j=1}^{i-2}\vert a_j\vert$, 
+$B \Def 1+\sum_{j=1}^{i-1}\vert b_j\vert$, 
+$\delta\Def  \ell_{10}(A)+2$,
+and $\gamma \Def 2\ell_{10}(B)+3$. 
 \begin{itemize}
-\item if $\ivarx_{\sigma(i-1)} \ge B$, $\ivarx_{\sigma(i-1)} \le \alpha_1 - 1$, and $\ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)} + \delta$, then inequality (\ref{eqn-lb}), thus also $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, is evaluated to $\ltrue$,
-\item if $\ivarx_{\sigma(i-1)} \ge B$, $\ivarx_{\sigma(i-1)} \ge \alpha_2 + 2$, and $\ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)} + \delta$, then inequality (\ref{eqn-ub}), thus also $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, is evaluated to $\lfalse$.
+\item if $\ivarx_{\sigma(i-1)} \ge \gamma$, $\ivarx_{\sigma(i-1)} \le \alpha_1 - 1$, and $\ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)} + \delta$, then inequality (\ref{eqn-lb}), thus also $\tau'$, is evaluated to $\ltrue$,
+\item if $\ivarx_{\sigma(i-1)} \ge \gamma$, $\ivarx_{\sigma(i-1)} \ge \alpha_2 + 2$, and $\ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)} + \delta$, then inequality (\ref{eqn-ub}), thus also $\tau'$, is evaluated to $\lfalse$.
 \end{itemize}
-Therefore, $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, thus also $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, is equivalent to 
+
+Therefore, $\tau'$ and $\tau$ are equivalent to 
+\begin{equation}\label{lemma-example}\begin{aligned}
+    &\bigvee_{p=0}^{\gamma-1} (\ivarx_{\sigma(i-1)}=p \wedge \tau[p/\ivarx_{\sigma(i-1)}])\\
+    \vee &\bigvee_{p=0}^{\delta-1} \bigg(\ivarx_{\sigma(i-1)}=\ivarx_{\sigma(i-2)}+p\wedge \tau[\ivarx_{\sigma(i-2)}+p/\ivarx_{\sigma(i-1)}]\wedge \ivarx_{\sigma(i-1)}\le \alpha_1-1\bigg)\\
+    \vee &\bigvee_{p=0}^{\delta-1} \bigg(\ivarx_{\sigma(i-1)}=\ivarx_{\sigma(i-2)}+p\wedge \tau[\ivarx_{\sigma(i-2)}+p/\ivarx_{\sigma(i-1)}]\wedge \ivarx_{\sigma(i-1)}\ge \alpha_2+2\bigg)\\
+    \vee & \bigg( \ivarx_{\sigma(i-1)}\ge \gamma \wedge \ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)}+\delta \wedge \ivarx_{\sigma(i-1)}\le \alpha(\vec\ivary)-1\bigg)\\
+    \vee & \bigvee_{p=\alpha_1}^{\alpha_2+1} \bigg( \ivarx_{\sigma(i-1)}\ge \gamma \wedge \ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)}+\delta \wedge \ivarx_{\sigma(i-1)} = p \wedge \tau[p/\ivarx_{\sigma(i-1)}]\bigg),
+\end{aligned}\end{equation}
+where all exponential occurrences of $\ivarx_{\sigma(i-1)}$ are eliminated.
+
+\hide{
 \[
 \small
 \begin{array}{l}
@@ -113,161 +137,21 @@ Therefore, $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})$, thus also $\
 \right),
 \end{array}
 \]
-where all exponential occurrences of $\ivarx_{\sigma(i-1)}$ are eliminated.
+}
 
-Similarly, we can eliminate the exponential occurrences of $\ivarx_{\sigma(i-2)}$ from $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-2)} + p /\ivarx_{\sigma(i-1)}]$ as well as  $\tau'(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[p /\ivarx_{\sigma(i-1)}]$, and so on. Eventually, we obtain a {\pa} formula.
+Similarly, we can eliminate the exponential occurrences of $\ivarx_{\sigma(i-2)}$ from $\tau'[\ivarx_{\sigma(i-2)} + p /\ivarx_{\sigma(i-1)}]$ as well as  $\tau'[p /\ivarx_{\sigma(i-1)}]$, and so on. Eventually, we obtain a {\pa} formula.
 
 %We also propose some additional optimizations, which are omitted due to the page limit and can be found in Appendix~\ref{app-opt}.
 
-
-
-\hide{
-\paragraph{Synchronize the elimination of exponential occurrences of the same variable in different atomic formulas}
-
-Although Lemma~\ref{lem:exp-ineq} is stated for a single atomic formula, the elimination of the exponential occurrences of the same variable in different atomic formulas can actually be synchronized. That is,  let $\alpha^\tau_{1}, \alpha^\tau_{2}, B^\tau, \delta^\tau$ be the constants as stated in the aforementioned under-approximation of an inequality $\tau$, define $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ as the minimum of $\alpha^\tau_1$, the maximum of $\alpha^\tau_2$, the maximum of $B^\tau$, and the maximum of $\delta^\tau$ respectively with $\tau$ ranging over the inequalities of $\varphi$. Then we can use the same constants $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ for different inequalities when eliminating the exponential occurrences of the same variable. 
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-Note that when Lemma~\ref{lem:exp-ineq} is applied to an atomic formula $\tau$ to eliminate exponential occurrences of $\ivarx$, it computes 4 parameters, namely $(\alpha^\tau_1,\alpha^\tau_2,B^\tau,\delta^\tau)$, and obtains an equivalent {\pa} formula according to these parameters. Since the parameters are used as boundary conditions in enumeration, we can choose the strictest boundary conditions and apply to all atomic formulas.  
-
-More specifically, we first compute $(\alpha^\tau_1,\alpha^\tau_2,B^\tau,\delta^\tau)$ 
-for all atomic formulas that contain $10^\ivarx$. Let $\alpha^{\min}_1$ denote the minimal element in $\{\alpha^\tau_1\}_\tau$, let $\alpha^{\max}_2,B^{\max},\delta^{\max}$ denote the maximal element in $\{\alpha^\tau_2\}_\tau$, $\{B^\tau\}_\tau$ and $\{\delta^\tau\}_\tau$ respectively. Then, we apply $(\alpha^{\min}_1,\alpha^{\max}_2,B^{\max},\delta^{\max})$ to all atomic formulas $\tau$ in parallel and obtain $\varphi'$ equivalent to $\varphi$. 
-
-For instance, assume coefficients of $10^\ivarx$ in atomic formulas of $\varphi$ are all non-negative. Let $\varphi^+$ denote the formula obtained by replace atomic formulas where coefficients of $10^\ivarx$ are positive by $\ltrue$. The resulted formula $\varphi'$ is
-\[
-\small
-\begin{array}{l}
-\bigvee \limits_{p=0}^{B^{\max}-1} ( \ivarx_{\sigma(i-1)} = p \wedge \varphi(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}) [p/\ivarx_{\sigma(i-1)}])   \\
-\bigvee \left(
-    \begin{array}{l}
-        \ivarx_{\sigma(i-1)} \ge B^{\max} \wedge \ivarx_{\sigma(i-1)} \le \alpha^{\min}_1  - 1  \wedge \\
-        \ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)} +\delta^{\max} \wedge \varphi^+  
-    \end{array}
-    \right)\\
-%
-\bigvee \bigvee \limits_{p=0}^{\delta^{\max}-1} 
-\left(
-\begin{array}{l}
-\ivarx_{\sigma(i-1)} \ge B^{\max} \wedge \ivarx_{\sigma(i-1)} \le \alpha^{\min}_1  -1 \ \wedge \\
- \ivarx_{\sigma(i-1)} = \ivarx_{\sigma(i-2)} +p\ \wedge\\
- \varphi(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-2)} + p /\ivarx_{\sigma(i-1)}] 
-\end{array}
-\right)\\
-\bigvee \bigvee \limits_{p=0}^{\delta^{\max}-1} 
-\left(
-\begin{array}{l}
-\ivarx_{\sigma(i-1)} \ge B^{\max} \wedge \ivarx_{\sigma(i-1)} \ge \alpha^{\max}_2 + 2 \ \wedge \\
- \ivarx_{\sigma(i-1)} = \ivarx_{\sigma(i-2)} +p\ \wedge\\
- \varphi(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[\ivarx_{\sigma(i-2)} + p /\ivarx_{\sigma(i-1)}] 
-\end{array}
-\right)\\
-\bigvee \bigvee \limits_{p = \alpha^{\min}_1}^{\alpha^{\max}_2 + 1}
-\left(
-\begin{array}{l}
-\ivarx_{\sigma(i-1)} \ge B^{\max} \wedge \ivarx_{\sigma(i-1)} = p\ \wedge \\
- \varphi(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)})[p /\ivarx_{\sigma(i-1)}] 
-\end{array}
-\right),
-\end{array}
-\]
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\hide{
-\paragraph{Avoid the formula-size blow-up by depth-first search}
-
-The {\pa} formula resulting from the elimination of exponential occurrences is essentially a big disjunction of the formulas of small size. If we store this big disjunction naively, then the formula size quickly blows up and exhausts the memory. Instead, we choose to do a depth-first search (DFS) and consider the disjuncts, which are of small sizes, one by one, and solve the satisfiability problem for these disjuncts. If during the search, a satisfiable disjunct is found, then the search terminates and ``SAT'' is reported.
-
-\paragraph{Preprocess with small upper bound}
-
-We believe that if a quantifier-free {\paexp} formula is satisfiable, then most probably it is satisfiable with small values assigned to variables. Consequently, as a preprocessing step, we put a small upper bound, e.g. the biggest constant occurring in the formula, on the values of variables, and perform a depth-first search, so that a model can be quickly found, if there is any. If this preprocessing is unsuccessful, then we continue the search with the greater upper bound $10^u$ for some proper $u \ge 1$.
-}
-
-%\zhilin{stopped here}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hide{
-In the last section, 
-we introduced quantifier elimination as a decision procedure for {$\paexp$}. According to theorem \ref{thm:string-parInt}, the satisfiability of {$\strint$} fragment is decidable.
-However, it is not practical to directly apply quantifier elimination when solving constraints over {$\paexp$} due to two main reasons.
-
-First, quantifier elimination does not return a model that satisfies the constraints. In constrast, it only leaves a formula with constants and free variables. To obtain satisfiability, all free variables need to be treated as existential quantified variables and be eliminated one by one until the formula is equal to \textit{true} or \textit{false}.
-Second, the quantifier elimination procedure has a high complexity, both time and space. Note that we alternatively invoke QE-exp and Cooper's algorithm to eliminate exponential terms and linear terms of a quantified variable, the length of the formula grows super-exponentially in the procedure. 
-
-In this section, we introduced some optimizations on the QE procedure restricted to quantifier-free fragment in {$\paexp$}. Given a quantifier-free formula, we wish to decide its satisfiability and find an assignment for variables in the formula if it exists. Since the Cooper's algorithm is the main contribution to the complexity, we try to only eliminate exponential terms using an variation of \textbf{Elim-exp} and send the obtained linear formula to SMT-solver. The cost is that the algorithm is no longer complete in some situations, in which case some practical restrictions are needed.
-
-A quantifier-free formula is a boolean combination of constraints. Here we allow only equalities and inequalities, divisible predicates are replaced by equalities, for example, $2|x$ is replace to $x=2y$, where $y$ is a fresh variable. Since we only eliminate exponential terms, the newly introduced $y$ will not bother. For convenience, we call variables that occurs exponentially in the formula \emph{exponential variables}, variables that have only linear occurrences \emph{linear variables}. Similarly,
-constraints that have exponential terms are called \textit{exponential constraints}, others are called \textit{linear constraints.}
-
-\paragraph{over-approximation}
-
-Given any formula in $\paexp$, we first invoke \textbf{Normalization} to translate it into a simpler form. Then we  try to detect if there are obvious conflicts, for example, if the linear constraints combined are unsatisfiable, the whole formula is of course unsatisfiable.
-
-Suppose the normalized formula $\theta$ contains variables $\{x_i:i\in[n]\}$, so the exponential terms could be $e^{x_i}$. For each $e^{x_i}$, we subtitute $e^{x_i}$ by a fresh variable $y_i$ in $\theta$ and add the constraints $(e-1)x_i+1\le y_i$ to get $\theta'$. Since $(e-1)x_i+1\le e^{x_i}$ holds for all $e,x\in \Nat$, $\theta'$ is an over-approximation of $\theta$ and if $\theta'$ is unsatisfiable over positive reals, then $\theta$ is unsatisfiable over $\Nat$.
-
-This technique also helps us to rule out impossible orders of exponential variables. In this case, constraints $\bigwedge_{1\le i\le n-1} x_{\sigma(i)}<x_{\sigma(i+1)}$ is added in $\theta'$.
-
-\paragraph{modified \textbf{Elim-exp}}\label{para: modified Elim-exp}
-
-\textbf{Elim-exp} is performed recursively on atoms according to orders of all variables. The idea is that if the upper bound of variables is given, it is enough to consider orders of exponential variables and this step can be performed on all atoms in the formula simultaneously.
-
-Assume we have $m$ exponential variables with an order $x_1\le ...\le x_m$ and $n-m$ linear variables $x_{m+1},...,x_n$. We further assume that there is an upper bound for all variables, say $x_{m+1},...,x_n< e^\gamma$, the bound may be inferred from constraints or specified manually. When we try to eliminate exponential terms of $x_i(1\le i\le m)$, an atom with $e^{x_i}$ is of the form 
-
-\begin{equation}\label{eq:modify-Elim-exp}
-    \sum_{j=1}^i a_j e^{x_j}+\sum_{k=1}^n b_j x_j\le t 
-\end{equation}
-where $a_m\neq 0$ and $t$ is a constant. Note that the form of (\ref{eq:modify-Elim-exp}) is different from formula in theorem \ref{thm:exp-ineq}, exponential variables $x_{i+1},...,x_{m}$ may appear linearly in formula (\ref{eq:modify-Elim-exp}) because we do not invoke \textbf{Elim-linear} to eliminate linear terms. Following the method of theorem \ref{thm:exp-ineq}, we seperate terms in the left hand side into the following form.
-\begin{equation}
-    \sum_{j=1}^i (a_j e^{x_j} + b_j x_j) \le t -\sum_{k=i+1}^n b_k x_k \notag
-\end{equation}
-
-The left hand side $\sum_{j=1}^i (a_j e^{x_j} + b_j x_j)$ can be estimated using the same technique in theorem \ref{thm:exp-ineq}. For the right hand side, define  $ t_1 \Def t-\gamma (\sum_{k=i+1}^n b_k)$, $t_2\Def t+\gamma (\sum_{k=i+1}^n b_k)$, we have
-\begin{equation}
-    t_1  \le t - \sum_{k=i+1}^n b_k x_k \le  t_2 \notag
-\end{equation} 
-
-Similar to \textbf{Elim-exp}, we will discuss 3 subcases,
-assuming w.l.o.g $a_i>0$, define $\alpha_1 \Def l(t_1)-l(a_i)$, $\alpha_2 \Def l(t_2)-l(a_i)$. 
-
-\begin{itemize}
-    \item $x_i\le \alpha_1 -1$, corresponds to $\rho_1$ (in \textbf{Elim-exp}), the atom is evaluated \textit{true}
-    \item $\alpha_1 -1\le x_i \le \alpha_2 +2$, corresponds to $\rho_2$ and $\rho_3$
-    \item $\alpha_2 + 2\le x_i$, corresponds to $\rho_4$, the atom is evaluated \textit{false}
-\end{itemize}
-
-For each atom with $e^{x_i}$, we compute $\alpha_1$ and $\alpha_2$ according to coefficients in the atom. Select the minimal $\alpha_1$ and the maximal $\alpha_2$, in this way we can perform \textbf{Elim-exp} simultaneously on all atoms in the formula.
-
-Note that the manually specified bound is for variables that only appear linearly in exponential constraints, if there are no variables of this form, the modified algorithm is still complete.
-
-\paragraph{DFS pruning}
-
-Given an order for exponential variables $x_1\le x_2 \le ... \le x_m$, the process of \textbf{Elim-exp} from $x_m$ to $x_1$ can be seen as a search tree with depth $m+1$. A depth $i(1\le i\le m)$ non-leaf node is a disjunction, each of its child corresponds to a subcase in \textbf{Elim-exp} of $x_i$, a leaf is labeled by a linear formula in which all exponential terms have been eliminated.  
-
-In our implement, we adopt a DFS strategy to search the tree to avoid the explosion of length of the formula. When eliminating $x_{i-1}$, the upper bound for $x_i$ in some subcases are passed down for pruning. 
-
-\paragraph{pre-search}
-To answer \textit{unsat}, the algorithm must search for all possible orders of exponential variables. Intuitively, in most satisfiable cases exponential variables are small, so we first give a small bound (roughly the biggest constants in the formula) for exponential variables to perform a pre-search.
-}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \subsection{Additional optimization techniques}\label{para: opts}
-\paragraph{Synchronize the elimination of exponential occurrences of the same variable in different atomic formulas}
+\paragraph{Eliminate exponential occurrences in atomic formulas simutaneously}
 
-Although Lemma~\ref{lem:exp-ineq} is stated for a single atomic formula, the elimination of the exponential occurrences of the same variable in different atomic formulas can actually be synchronized. That is,  let $\alpha^\tau_{1}, \alpha^\tau_{2}, B^\tau, \delta^\tau$ be the constants as stated in the aforementioned under-approximation of an inequality $\tau$, define $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ as the minimum of $\alpha^\tau_1$, the maximum of $\alpha^\tau_2$, the maximum of $B^\tau$, and the maximum of $\delta^\tau$ respectively with $\tau$ ranging over the inequalities of $\varphi$. Then we can use the same constants $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ for different inequalities when eliminating the exponential occurrences of the same variable. 
+Although Lemma~\ref{lem:exp-ineq} is stated for a single atomic formula, the elimination of the exponential occurrences of the same variable in different atomic formulas can actually be conducted simutaneously. That is,  let $\alpha^\tau_{1}, \alpha^\tau_{2}, \gamma^\tau, \delta^\tau$ be the constants as stated in the aforementioned under-approximation of an inequality $\tau$, define $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ as the minimum of $\alpha^\tau_1$, the maximum of $\alpha^\tau_2$, the maximum of $B^\tau$, and the maximum of $\delta^\tau$ respectively with $\tau$ ranging over the inequalities of $\varphi$. Then we can use the same constants $\alpha^{\min}_1, \alpha^{\max}_2, B^{\max}, \delta^{\max}$ for different inequalities when eliminating the exponential occurrences of the same variable. 
 
 \paragraph{Avoid the formula-size blow-up by depth-first search}
 
-The {\pa} formula resulting from the elimination of exponential occurrences is essentially a big disjunction of the formulas of small size. If we store this big disjunction naively, then the formula size quickly blows up and exhausts the memory. Instead, we choose to do a depth-first search (DFS) and consider the disjuncts, which are of small sizes, one by one, and solve the satisfiability problem for these disjuncts. If during the search, a satisfiable disjunct is found, then the search terminates and ``SAT'' is reported.
+The {\pa} formula resulting from the elimination of exponential occurrences is essentially a disjunction of large number of disjuncts of small size. If we store this large formula naively, then its size quickly blows up and exhausts the memory. Alternatively, we choose to do a depth-first search (DFS) and consider the disjuncts, which are of small sizes, one by one, and solve the satisfiability problem for these disjuncts. When a satisfiable disjunct is found, then the search terminates and ``SAT'' is reported.
 
 \paragraph{Preprocess with small upper bound}
 
-We believe that if a quantifier-free {\paexp} formula is satisfiable, then most probably it is satisfiable with small values assigned to variables. Consequently, as a preprocessing step, we put a small upper bound, e.g. the biggest constant occurring in the formula, on the values of variables, and perform a depth-first search, so that a model can be quickly found, if there is any. If this preprocessing is unsuccessful, then we continue the search with the greater upper bound $10^u$ for some proper $u \ge 1$.
+We believe that if a quantifier-free {\paexp} formula is satisfiable, then more likely it may be satisfied with an assignment in which all variables are uniformly bounded. Consequently, as a preprocessing step, we put a small upper bound, e.g. the biggest constant occurring in the formula, on the values of variables, and perform a depth-first search, so that a model can be quickly found if there is any. If this preprocessing is unsuccessful, then we continue the search with the greater upper bound $10^u$ for some proper predefined $u \in \mathbb N$.

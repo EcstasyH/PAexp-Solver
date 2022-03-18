@@ -1,80 +1,92 @@
 %!TEX root = paper.tex
 
-\subsection{Complexity analysis}\label{app:cpx}
+In this section, we analyse the complexity of Point's procedure applied on an existential quantified {\paexp} formula. 
 
-In this part, we analyse the complexity of the quantifier elimination procedure applied on a formula with one existential quantifer, that is, a formula of the form $\exists \ivarx. \varphi(\ivarx, \vec{\ivary})$. We will prove that the complexity of eliminating one quantifer has a 3-EXPSPACE upper bound. Since the quantifier elimination procedure for $\pa$ works as a subprocedure (in eliminating linear occurrences of variables) and also has a 3-EXPSPACE complexity, the bound may not be easily improved.
+Consider a formula of the form $$\exists \ivarx^1\cdots\exists \ivarx^m.\varphi(\ivarx^1,\cdots,\ivarx^m,\vec{\ivary})$$ with free variables $\vec{\ivary}$. Let $N$ denote the length of the formula. We will prove that the space complexity to eliminate all (existential) quantifiers has a 3-EXPSPACE upper bound. Since Cooper's quantifier elimination algorithm for $\pa$ works as a subprocedure and also has a 3-EXPSPACE upper bound, this bound may not be easily improved.
 
-We first analyse the changes of formula length in the normalization step. For the rest of the decision procedure, we adopt the style in the complexity analysis of \pa \ (cf. \cite{Oppen73}). The idea is that the upper bound of the formula length can be expressed using the product of the number of atoms, the number of coefficients and the length of the maximum constant. So we track the changes of such quantities throughout the procedure.
+We first give a brief analysis of the normalization step, in which fresh variables are introduced and the length of the formula grows linearly at most. 
+For the rest of the algorithm, we adopt the strategy of Oppen's analysis of Cooper's algorithm (cf. \cite{Oppen73}). The idea is that the upper bound of the formula length can be expressed using the product of the number of atoms, the number of coefficients and the length of the maximum constant. 
+The critical point of our analysis is that only coefficients of linear occurrences of quantified variables need to be considered.
 
-Given a formula $\exists \ivarx. \varphi(\ivarx, \vec{\ivary})$ with length $n$. After the normalization step, suppose we obtain a formula with $m$ quantified variables $\exists \ivarx_1 \dots\exists \ivarx_m. \varphi'(\ivarx_1,\dots, \ivarx_m, \vec{\ivary})$. We show that the length of the new formula is at most $10n$ and the number of quantified variables $m\le n$. In each sub-step of normalization, we analyse the worst situation: 
-(1) \textit{NNF transformation} suppose all atoms are of the form $\iterm_1=\iterm_2$, then taking negation will double the number of atoms, the length increases to $2n$ at most. 
-(2) \textit{replace $\ell_{10}(\iterm)$ terms} the original formula has at most $n$ terms of the form $\ell_{10}(\iterm)$, for each of them, we introduce a fresh variable and two conjuncts. The formula length increases to $4n$.
-(3) \textit{flatten $10^\iterm$ terms} similar to (2), the formula has at most $n$ such terms and for each term, a fresh variable and a conjunct are added. The formula length increases to $5n$. 
-(4) \textit{$\le$ transformation} similar to (1), here we assume all atoms are of the form $\iterm_1  = \iterm_2$, so the length of the formula with increase to $10n$ at most. 
+\paragraph{Normalization} In the normalization step, we normalize the formula w.r.t quantified variables from $\ivarx^m$ to $\ivarx^1$. Suppose that fresh variables $\ivarx^i_1,\cdots,\ivarx^i_{n_i}$ are introduced for each $\ivarx^i(1\le i\le m)$, the formula then becomes $$\exists \ivarx^1\exists \ivarx^1_1\cdots\exists\ivarx^1_{n_1}\cdots\exists \ivarx^m\exists \ivarx^m_1\cdots\exists\ivarx^m_{n_m}.\varphi'(\ivarx^1,\cdots,\ivarx^m_{n_m},\vec{\ivary}).$$ 
 
-The analysis for the normalization step is coarse, for example, the worst case in (1)\&(4) or (2)\&(3) can not happen at the same time. However, what we need is that the increased length of the formula is bounded by a constant factor,i.e. 10. In addition, we can also conclude that the number of fresh variables, $m$, is less than $n$ since there are at most $n$ different forms of terms. 
+Since the number of newly introduced variables is less than the number of occurrences of exponential and logarithmic functions in the original formula, we have at most $m+\sum_{i=1}^m n_i\le N$ quantified variables after normalization.  
 
-After the normalization step, denote the obtained formula by $\exists \vec{\ivarx}. \varphi(\vec{\ivarx},\vec{\ivary})$ with quantified variables $\vec{\ivarx} = (\ivarx_1,\dots,\ivarx_m)$ and free variables $\vec{\ivary}$. $\varphi$ contains no quantifiers. 
-Let $n'$ denote the length of the formula.
+The increase in the length of the formula during normalization comes from two sources, the conjuncts for each introduced variables and the additional formulas for translating $\neq,=$ relations to $\le$. It is not hard to see that both these operations will at most increase the length of the formula by a constant factor. 
 
-According to our quantifier elimination procedure,we eliminate the quantified variables one by one: each time select the largest variable among $\ivarx_i,1\le i\le m$, first eliminate the exponential occurrences, then linear occurrences. The linear order of quantified variables are given by a permutation. For $m$ quantified variables, there are $m!$ possible linear orders.
+In the sequel, to avoid redundant symbols, we still use $m$ to denote the number of quantified variables and $N$ to denote the length of the formula after normalization. Just keep in mind that $m\le N$. 
 
-Suppose the specified linear order is $\ivarx_m\ge \dots \ge \ivarx_1$. Let $\exists \ivarx_1\dots \exists\ivarx_{m-k}.\varphi_k$ denote the formula obtained from $\exists \vec{\ivarx}. \varphi(\vec{\ivarx},\vec{\ivary})$ by eliminating quantifiers $\exists \ivarx_m,\dots,\exists\ivarx_{m-k+1}$. Let $\exists \ivarx_1 \dots \exists \ivarx_{m-k+1}.\varphi'_k$ denote the formula obtained from $\exists \ivarx_1\dots \exists\ivarx_{m-k+1}.\varphi_{k-1}$ by eliminating linear occurrences of $\ivarx_{m-k+1}$. Let $\varphi_0$ denote $\varphi$.
+\hide{
+    Given a formula $\exists \ivarx. \varphi(\ivarx, \vec{\ivary})$ with length $n$. After the normalization step, suppose we obtain a formula with $m$ quantified variables $\exists \ivarx_1 \dots\exists \ivarx_m. \varphi'(\ivarx_1,\dots, \ivarx_m, \vec{\ivary})$. We show that the length of the new formula is at most $10n$ and the number of quantified variables $m\le n$. In each sub-step of normalization, we analyse the worst situation: 
+    (1) \textit{NNF transformation} suppose all atoms are of the form $\iterm_1=\iterm_2$, then taking negation will double the number of atoms, the length increases to $2n$ at most. 
+    (2) \textit{replace $\ell_{10}(\iterm)$ terms} the original formula has at most $n$ terms of the form $\ell_{10}(\iterm)$, for each of them, we introduce a fresh variable and two conjuncts. The formula length increases to $4n$.
+    (3) \textit{flatten $10^\iterm$ terms} similar to (2), the formula has at most $n$ such terms and for each term, a fresh variable and a conjunct are added. The formula length increases to $5n$. 
+    (4) \textit{$\le$ transformation} similar to (1), here we assume all atoms are of the form $\iterm_1  = \iterm_2$, so the length of the formula with increase to $10n$ at most. 
+    
+    The analysis for the normalization step is coarse, for example, the worst case in (1)\&(4) or (2)\&(3) can not happen at the same time. However, what we need is that the increased length of the formula is bounded by a constant factor,i.e. 10. In addition, we can also conclude that the number of fresh variables, $m$, is less than $n$ since there are at most $n$ different forms of terms.     
+}
 
-Let $c_k$ be the number of distinct $d$ in atoms of the form $d \ \big \vert  \ \iterm$ plus the number of distinct coefficients of \emph{linear occurrences} of quantified variables in $\varphi_k$. Let $s_k$ be the largest constant (including coefficients) and $a_k$ be the number of atomic formulas in $\varphi_k$. Similarly we define $c'_k$, $s'_k$ and $a'_k$ for $\varphi'_k$. Let $c,s,a$ be $c_0,s_0,a_0$ respectively. 
 
-First we analyse the sub-procedure to eliminate exponential occurrences of $\ivarx_m$. We prove the following lemma.
+\paragraph{Enumeration of linear orders (the outer for-loop)}
+
+Denote the normalized formula by $\exists \vec{\ivarx}. \varphi(\vec{\ivarx},\vec{\ivary})$ with $\vec{\ivarx} = (\ivarx_1,\dots,\ivarx_m)$. According to Point's procedure, we then eliminate the quantified variables one by one: each time select the largest variable among $\ivarx_i,1\le i\le m$, first eliminate the exponential occurrences, then linear occurrences. Each linear order of quantified variables is given by a permutation. For $m$ quantified variables, there are $m!$ possible linear orders, which means the inner for-loop repeats $m!$ times.
+
+\paragraph{Elimination of quantifiers (the inner for-loop)}
+Suppose the specified linear order is $\ivarx_m\ge \dots \ge \ivarx_1$. Let $\exists \ivarx_1\dots \exists\ivarx_{m-k}.\varphi_k$ denote the formula obtained by eliminating quantifiers $\exists \ivarx_m,\dots,\exists\ivarx_{m-k+1}$ from $\exists \vec{\ivarx}. \varphi(\vec{\ivarx},\vec{\ivary})$. Let $\varphi'_k$ denote the formula obtained by further eliminating exponential occurrences of $\ivarx_{m-k+1}$ (from $\varphi_k$). Let $\varphi_0$ denote $\varphi$.
+
+Let $c_k$ be the number of distinct divisor $d$ in atoms of the form $d \mid \iterm$ and $d \nmid \iterm$ plus the number of distinct coefficients of \emph{linear occurrences} of quantified variables in $\varphi_k$. Let $s_k$ be the largest constant (including coefficients) and $a_k$ be the number of atomic formulas in $\varphi_k$. Similarly we define $c'_k$, $s'_k$ and $a'_k$ for $\varphi'_k$.
+
+First we analyse the sub-procedure to eliminate exponential occurrences of the inner most quantified variable $\ivarx_m$. We prove the following lemma.
 
 \begin{lemma}\label{lem:cpx exp}
     \begin{align}
-        c'_1&\le c^2 \notag \\
-        s'_1&\le ms^2 \notag\\
-        a'_1&\le sa\notag 
+        c'_0&\le c_0^2 \notag \\
+        s'_0&\le ms_0^2 \notag\\
+        a'_0&\le s_0a_0\notag 
     \end{align} 
 \end{lemma}
 
 \begin{proof}
-   
-The analysis is separated into 2 cases where all atoms are of the same form (inequalities atoms or divisiblilty atoms). 
+The analysis is divided into two cases by assuming all atomic formulas are of the same form (inequalities atoms or divisibility atoms). 
 
-If all atoms are inequalities atomic formulas of the form in Lemma~\ref{lem:exp-ineq}. We know that each atomic formula $\tau$ with exponential occurrence of $\ivarx_m$ is replaced by a new formula. Only the coefficients of linear occurrences of $\ivarx_m$ and $\ivarx_{m-1}$ will be changed: constant coefficient $1$ is introduced, and if we substitute $\ivarx_m$ by $\ivarx_{m-1}+p$ for some $p$, coefficient of linear occurrence of $\ivarx_{m-1}$ will become $b_m+b_{m-1}$ ($b_m,b_{m-1}$ are coefficients for $\ivarx_{m}$ and $\ivarx_{m-1}$ in $\tau$, see Lemma~\ref{lem:exp-ineq} ). Since the new coefficient is obtained by adding two linear coefficient together, we have $c'_1\le c^2$. Note that $\delta$ and $B$ are at most $\ell_{10}(ms)$, when we substitute $\ivarx_m$ by $\ivarx_{m-1}+\delta-1$ or by $B-1$, the largest constant in the formula is at most $s\cdot  10^{\ell_{10}(ms)}\le ms^2$. And an inequality is replaced by at most $4\ell_{10}(ms)$ atomic formulas, so $a'_1\le 4\ell_{10}(ms)a$.
+If all atoms are inequalities of the form in Lemma~\ref{lem:exp-ineq}. We know that each atomic formula $\tau$ with exponential occurrence of $\ivarx_m$ is replaced by a new formula. Note that coefficients of linear occurrences of $\ivarx_i$, for $i\le m-2$, remain changed throughout the substitutions, only the coefficients of linear occurrences of $\ivarx_m$ and $\ivarx_{m-1}$ will be changed: constant 1 is introduced as a coefficient for $\ivarx_m$, and if we substitute $\ivarx_m$ by $\ivarx_{m-1}+p$ for some constant $p$, coefficient of linear occurrence of $\ivarx_{m-1}$ will become $b_m+b_{m-1}$ ($b_m,b_{m-1}$ are coefficients for $\ivarx_{m}$ and $\ivarx_{m-1}$ in $\tau$, see Lemma~\ref{lem:exp-ineq} ). Since the new coefficient is obtained by adding two linear coefficient together, we have $c'_1\le c_0^2$. Note that $\delta$ and $B$ in Lemma~\ref{lem:exp-ineq} are at most $\ell_{10}(ms_0)$. When we substitute $\ivarx_m$ by $\ivarx_{m-1}+\delta-1$ or by $B-1$, the largest constant in the formula becomes at most $s_0\cdot  10^{\ell_{10}(ms_0)}\le ms_0^2$. And an inequality is replaced by at most $4\ell_{10}(ms_0)$ atomic formulas, so $a'_1\le 4\ell_{10}(ms_0)a_0$.
 
-If all atoms are divisiblilty atomic formulas of the form $d \ \big \vert  \ \iterm$ or $d \ \nmid \ \iterm$. We have $c'_1<2c$ since a divisibility atomic formula  will produce at most two forms of atomic formulas $d \ \big \vert  \ \iterm$ and $\phi(d) \ \big \vert  \ \iterm$. Note that any constant in $\iterm$ , say $l$, can be replaced by ($l \bmod d)$, so $s'_1\le s$. When $d$ is a large prime number, $\phi(d)=d-1$, a divisibility atomic formula is replaced by roughly $d$ atomic formulas, so $a'_1\le sa$. 
+If all atoms are divisibility atomic formulas of the form $d \ \big \vert  \ \iterm$ or $d \ \nmid \ \iterm$. We have $c'_1<2c_0$ because a divisibility atomic formula  will produce at most two forms of atomic formulas $d \ \big \vert  \ \iterm$ and $\phi(d) \ \big \vert  \ \iterm$. In a divisibility atom, any constant in the divident $\iterm$ , say $l$, can be replaced by ($l \bmod d)$. So we have $s'_1\le s_0$. When $d$ is a large prime number, $\phi(d)=d-1$, a divisibility atomic formula is replaced by roughly $d$ atomic formulas, so $a'_1\le s_0a_0$. 
 
-Choose larger upper bound for $c'_1$, $s'_1$ and $a'_1$ respectively, then the lemma is proved.
+Choose larger upper bounds for $c'_1$, $s'_1$ and $a'_1$ respectively, then the lemma is proved.
 
 \end{proof}
 
-Since linear occurrences of $\ivarx_m$ are eliminated using Cooper's algorithm, we combine Oppen's analysis for this sub-procedure:
+When $\varphi_0'$ is transformed into $\varphi_{1}$ by eliminating linear occurrences of $\ivarx_m$, Oppen's analysis gives the following lemma.
 
-\begin{lemma}\label{lem:cpx oppen}
+\begin{lemma}\cite{Oppen73}\label{lem:cpx oppen}
     \begin{align}
-        c_1&\le c'^4 \notag \\
-        s_1&\le s'^{4c'} \notag\\
-        a_1&\le {a'}^4 s'^{2c'}\notag 
+        c_1&\le c_0'^4 \notag \\
+        s_1&\le s_0'^{4c_0'} \notag\\
+        a_1&\le {a_0'}^4 s_0'^{2c_0'}\notag 
     \end{align} 
 \end{lemma}
 
-From Lemma~\ref{lem:cpx exp} and Lemma~\ref{lem:cpx oppen}, we have
+Combining Lemma~\ref{lem:cpx exp} and Lemma~\ref{lem:cpx oppen}, we have
 \begin{align}
-    c_1&\le c^8 \notag \\
-    s_1&\le (ms^2)^{4c^2} \notag\\
-    a_1&\le (sa)^4(ms^2)^{2c^2}\notag 
+    c_1&\le c_0^8 \notag \\
+    s_1&\le (ms_0^2)^{4c_0^2} \notag\\
+    a_1&\le (s_0a_0)^4(m_0s_0^2)^{2c_0^2}\notag 
 \end{align} 
 
-Assuming $m\le n$, by induction on $k$ we get
+By induction on $k$ and assuming $m\le N$, we get
 
 \begin{lemma}
     \begin{align}
-        c_k&\le c^{8^k} \notag \\
-        s_k&\le n^{(4c)^{ 8^k}} s^{(8c)^{ 8^k}} \notag\\
-        a_k&\le a^{4^k}n^{(4c)^{ 8^k}} s^{(8c)^{ 8^k}} \notag
+        c_k&\le c_0^{8^k} \notag \\
+        s_k&\le N^{(4c_0)^{ 8^k}} s_0^{(8c_0)^{ 8^k}} \notag\\
+        a_k&\le a_0^{4^k}n^{(4c_0)^{ 8^k}} s_0^{(8c_0)^{ 8^k}} \notag
     \end{align} 
 \end{lemma}
 
-If we assume $c\le n$, $a\le n$ and $s\le n$, the space required to store the quantifier free formula, $\varphi_k$, is bounded by the product of the number of linear orders $m!$, the number of atoms $a_k$, the maximum number of constants $2m+2$ per atom, the maximum amount of space $s_k$ to store each constant and some constant $q$:
+If we adopt the assumptions in \cite{Oppen73}, by assuming $c_0\le N$, $a_0\le N$ and $s_0\le N$, the space required to store the quantifier free formula $\varphi_k$, is bounded by the product of the number of linear orders $m!$, the number of atoms $a_k$, the maximum number of constants $2m+2$ per atom, the maximum amount of space $s_k$ to store each constant and some constant $q$. So the space complexity is $O(m! \cdot a_k \cdot (2m+2) \cdot s_k)=O(2^{2^{2^{pn \log n}}})$, which belongs to 3-EXPSPACE.
  
-$${\sf space}\le q \cdot m! \cdot a_k \cdot (2m+2) \cdot s_k \le 2^{2^{2^{pn \log n}}}$$
-for some large constant $p$. 
+\hide{$${\sf space}\le q \cdot m! \cdot a_k \cdot (2m+2) \cdot s_k \le 2^{2^{2^{pn \log n}}}$$
+for some large constant $p$. }
 
-REMARK: When the original formula has no alternating quantifiers, for example, the formula of the form $\exists \ivarx_m \exists \ivarx_{m-1} \dots\exists \ivarx_1.\varphi(\ivarx_1,\dots,\ivarx_{m-1},\ivarx_m,\vec{\ivary})$. Since we can carry out the normalization step for all quantified variable $\ivarx_i(1\le i\le m)$ at the same time and enumerate the linear order for all introduced variables, the complexity of eliminating all quantifers is still 3-EXPSPACE. However, if there are  alternating quantifers at the very beginning, say the formula is of the form $\forall \ivarx_2\exists \ivarx_1.\varphi(\ivarx_1,\ivarx_2,\vec{\ivary})$. We have to eliminate the occurrences of $\ivarx_1$ first, treating $\ivarx_2$ as a free variable like $\vec{\ivary}$. When eliminating exponential occurrences of variables in inequalities (see Lemma~\ref{lem:exp-ineq}), $\ivarx_2$ will be collected in term $\iterm(\ivary)$. Since $\iterm(\ivary)$ may change due to the  substitutions of $\ivarx_1$, when we carry out normalization step for $\ivarx_2$, the number of introduced fresh variables is not bounded by the length of original formula. Hence, we conjecture that the overall complexity for eliminating all quantifiers in a formula will be non-elementary. 
+The above analysis is focused on the existential {\paexp} formulas and is sufficient for our string constraints solving context. But what about general {\paexp} formulas that contain alternating quantifiers? Unfortunately, directly extending our analysis on alternating quantifers by transforming $\forall \ivarx.\varphi$ into $\neg \exists \ivarx.\neg \varphi$ will not give an elementary upper bound. We will explain the main idea without going into details on this issue. To eliminate quantifiers in a formula, say $\forall \ivarx_2\exists \ivarx_1.\varphi(\ivarx_1,\ivarx_2,\vec \ivary)$, we first eliminate $\exists \ivarx_1$, treating $\ivarx_2$ and $\vec \ivary$ both as free variables. The subprocedure to eliminate exponential occurrences of $\ivarx_1$ is at the cost of introducing logarithmic expressions of $\ivarx_2$ and $\vec \ivary$, which in the worst case increases \emph{exponentially} the number of fresh variables in the normalization step w.r.t $\ivarx_2$. We conjecture that the space complexity of quantifier elimination procedure over {\paexp} formulas still has an elementary upper bound, which may require a more detailed analysis or improvements of the algorithm.

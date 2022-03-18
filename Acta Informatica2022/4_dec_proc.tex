@@ -1,38 +1,58 @@
 %!TEX root = paper.tex
 
-Semënov first proved that  {\paexp} admits quantifier elimination in \cite{Semenov84}, thus its satisfiability problem is decidable. However, Semënov did not give a concrete quantifier elimination procedure. Remedying this, Point proposed a quantifier elimination procedure for {\paexp} in \cite{Point86}. 
+Semënov first proved that  {\paexp} admits quantifier elimination in \cite{Semenov84}, thus its satisfiability problem is decidable. However, Semënov did not give a concrete quantifier elimination procedure. Remedying this, Point proposed a quantifier elimination procedure for {\paexp} in \cite{Point86}. In this section, we describe how Point's quantifier elimination procedure works. 
 
-In this section, we describe how Point's quantifier elimination procedure works. 
 %
 \begin{theorem}[\cite{Point86}]
 \label{thm-paexp}
 {\paexp} admits quantifier elimination. 
 \end{theorem}
-%
+
 Compared to \cite{Point86}, the presentation here is more accessible to computer science researchers. Moreover, the procedure presented here slightly improves Point's procedure, in the following two aspects: 1) DNF (disjunctive normal form) was required in Point's procedure, which is not required here, 2) in Point's procedure, the divisibility constraints produced by the elimination of linear occurrences of a variable should be converted to equality constraints (by introducing fresh variables) before the elimination of exponential occurrences of some other variable, which is unnecessary here, since the divisibility constraints are directly dealt with in the elimination of exponential occurrences of variables. 
-%
 
-However, in the next section we analyse the complexity of Point's procedure to be 3-EXPSPACE, which  is quite expensive and a faithful implementation would not scale\footnote{We did implement Point's algorithm and discovered that the implementation could only solve formulas of very small size.}.
-So in Section~\ref{sec-opt}, we will propose various optimizations to Point's algorithm, aiming at an efficient implementation. 
+As $\forall \ivarx. \ \varphi$ is equivalent to $\neg \exists \ivarx. \ \neg \varphi$, to prove Theorem~\ref{thm-paexp}, we only need to show that every existentially quantified $\paexp$ formula $\exists \ivarx.\ \varphi \in \paexp$, where $\varphi$ is quantifier-free, can be transformed into an equivalent quantifier-free formula $\varphi' \in \paexp$. 
 
-\smallskip
+An informal sketch of Point's procedure is presented in Algorithm~\ref{qe-algo}.
 
-As $\forall \ivarx. \ \varphi$ is equivalent to $\neg \exists \ivarx. \ \neg \varphi$,  thus in the sequel, we only need to  show that every $\paexp$ formula $\exists \ivarx.\ \varphi \in \paexp$, where $\varphi$ is quantifier-free, can be transformed into an equivalent quantifier-free formula $\varphi' \in \paexp$.
+\hide{Before a formal description of the quantifier elimination procedure, let us use a simple example to illustrate the main idea.}
 
-% when the quantifier elimination problem of $\paexp$  can be easily reduced to the above special case. 
+\begin{algorithm2e}[ht]\label{qe-algo}
+    \SetAlgoLined
+    \KwIn{{\paexp} formula $\exists \ivarx_1.\varphi$, where $\varphi$ is quantifier-free}
+    \KwOut{an equivalent quantifier-free formula}
+    \SetKwFor{ForOrder}{For each}{do}{end}
+    \SetKwRepeat{Do}{do}{while}
+    
+    $\varphi \gets \textrm{normalize } \varphi \textrm{ w.r.t }\ivarx_1 $ (Subsection~\ref{qe-norm});
 
-% such that $\free(\varphi') = \free(\varphi) \setminus \{\ivarx\}$. 
-%From this, we can easily derive that every {\paexp} formula $\varphi$ can be transformed effectively into an equivalent quantifier-free Presburger arithmetic formula $\varphi'$.
+    \tcp{suppose fresh variables $\ivarx_2,\cdots,\ivarx_n$ are introduced}
+    $\mathcal S_n\gets$ enumerate linear orders among $\ivarx_1,\cdots,\ivarx_n$ (Subsection~\ref{qe-enum})\;
+    \ForOrder{$\sigma\in \mathcal S_n$}
+    {
+        $\varphi'_\sigma  \gets \exists \vec{\ivarx}.\ \varphi' \wedge \bigwedge \limits_{i \in [n-1]} \ivarx_{\sigma(i)} \le \ivarx_{\sigma(i+1)}$\; 
+        $i\gets n$\;
+        \For{$i> 0$}{
+            eliminate exponential occurrences of $\ivarx_{\sigma(i)}$ in $\varphi'_\sigma$ (Subsection~\ref{qe-elim-exp})\;
+            eliminate linear occurrences of $\ivarx_{\sigma(i)}$ in $\varphi'_\sigma$ (Cooper's QE algorithm)\;
+            \tcp{variable $\ivarx_{\sigma(i)}$ is removed}
+        $i\gets i-1$\;
+        }
+        \tcp{all quantified variables in $\varphi'$ are removed}
+        $\varphi''_\sigma\gets \varphi'_\sigma$\;
+    }
+    
+    \Return $\bigvee_{\sigma\in\mathcal S_n}\varphi''_\sigma$\;
+    
+    \caption{Quantifer elimination for \paexp}
+\end{algorithm2e}
 
-Before a formal description of the quantifier elimination procedure, let us use a simple example to illustrate the main idea and give an overview of the procedure.
 
-%\vspace{-4mm}
-
-%\begin{example}
+\hide{
 \subsection{An overview of the quantifier elimination procedure}
-Consider $\varphi \Def \exists \ivarx_2.\ 10^{\ivarx_1 + \ivarx_2} - 10^{\ivarx_2} \le \ivary + 1001$. 
 
-At first, we \emph{normalize} $\varphi$ by introducing a fresh variable $\ivarx_3$ for $\ivarx_1 + \ivarx_2$ and get the formula 
+Consider the formula $\varphi \Def \exists \ivarx_2.\ 10^{\ivarx_1 + \ivarx_2} - 10^{\ivarx_2} \le \ivary + 1001$. 
+
+At first, we \emph{normalize} $\varphi$ w.r.t. $\ivarx_2$ by introducing a fresh variable $\ivarx_3$ for $\ivarx_1 + \ivarx_2$ and get the formula 
 $$\varphi_1 \Def \exists \ivarx_3 \exists \ivarx_2.\ 10^{\ivarx_3} - 10^{\ivarx_2} \le \ivary + 1001 \wedge \ivarx_3 = \ivarx_1 + \ivarx_2.$$
 
 Then, we enumerate different \emph{orders} of the quantified variables, i.e. $\ivarx_2$ and $\ivarx_3$. Since $\ivarx_3 = \ivarx_1 + \ivarx_2$, there is only one possible order, that is, $\ivarx_3 \ge \ivarx_2$.
@@ -91,53 +111,56 @@ the elimination of the exponential occurrences of variables. The elimination of 
 Let us assume that $\varphi \Def \exists \ivarx.\ \varphi'(\ivarx, \vec{\ivary})$, where $\varphi'$ is a quantifier-free formula. 
 
 %\vspace*{-3mm}
-\subsection{Normalization}
+
+}
+\subsection{Normalization}\label{qe-norm}
 
 The normalization step comprises the following sub-steps.
 \begin{enumerate}
+
+\hide{ % do not allow \neg in PAexp
 \item \textit{NNF transformation} At first, we transform $\varphi'(\ivarx,\vec{\ivary})$ into the NNF (negation normal form). Moreover, we remove the occurrences of $\neg$ by replacing 
-\hide{(a) replacing $\neg c \vert  \iterm$ with $\bigvee \limits_{j \in [c-1]} c \vert  (\iterm+j)$, }
 (a) $\neg c \vert  \iterm$ with $ c \nmid \iterm$, 
 (b) $\neg (\iterm_1 = \iterm_2)$ with $\iterm_1 < \iterm_2 \vee \iterm_2 < \iterm_1$, 
 (c) $\neg (\iterm_1 < \iterm_2)$ with $\iterm_2 \le \iterm_1$, 
 (d) $\neg (\iterm_1 \le \iterm_2)$ with $\iterm_2 < \iterm_1$, and so on.
-%
-\item \textit{replace $\ell_{10}(\iterm)$ terms} Repeat the following procedure, until there are no $\ell_{10}(\iterm)$ with $\ivarx$ occurs in $\iterm$: for each occurrence of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add the constraint $10^\ivarz \le \iterm < 10^{\ivarz + 1}$ as a conjunct. Note that if $\iterm$ contains no variables, then $\ell_{10}(\iterm)$ is a constant. In this case, we can also assume that $\iterm$ contains $\ivarx$ and perform the same replacements, which helps in the analysis of complexity in \ref{app:cpx}. Let the resulting formula be $\varphi''$.
+}
+
+\item \textit{replace $\ell_{10}(\iterm)$ terms} Repeat the following procedure, until there are no $\ell_{10}(\iterm)$ with $\ivarx$ occurs in $\iterm$: for each occurrence of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $\ell_{10}(\iterm)$ by $\ivarz$, moreover, add the constraint $10^\ivarz \le \iterm < 10^{\ivarz + 1}$ as a conjunct. Note that if $\iterm$ contains no variables, then $\ell_{10}(\iterm)$ is a constant. In this case, we can also assume that $\iterm$ contains $\ivarx$ and perform the same replacements, which helps in the analysis of complexity in \ref{sec-cpx}. Let the resulting formula be $\varphi''$.
 %
 
-\item \textit{flatten $10^\iterm$ terms} Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ with $\ivarx$ occurs in $\iterm$, we have $\iterm = \ivarx$: For each occurrence of the $10^{\iterm}$ in $\varphi''$, such that $\iterm$ contains $\ivarx$ but is not $\ivarx$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $10^{\iterm}$ by $10^\ivarz$, moreover, add the constraint $\ivarz = \iterm$ as a conjunct. Let $\varphi'''$ denote the resulting formula.  
+\item \textit{flatten $10^\iterm$ terms} Then repeat the following procedure to $\varphi''$, until for each occurrence of $10^{\iterm}$ with $\ivarx$ occurs in $\iterm$, we have $\iterm = \ivarx$: For each occurrence of the $10^{\iterm}$ in $\varphi''$, such that $\iterm$ contains $\ivarx$ but is not equal to $\ivarx$, introduce a fresh variable, say $\ivarz$, and replace all occurrences of $10^{\iterm}$ by $10^\ivarz$, moreover, add the constraint $\ivarz = \iterm$ as a conjunct. Let $\varphi'''$ denote the resulting formula.  
 
-\item \textit{$\le$ transformation} Do the following replacements to $\varphi'''$, so that all the atomic formulas in $\varphi^\dag$ are of the form $\iterm_1 \le \iterm_2$ ,$c \vert  \iterm$ or $c \nmid \iterm$: Replace every occurrence of $\iterm_1 \ge \iterm_2$ with $\iterm_2 \le \iterm_1$. Replace every occurrence of $\iterm_1 < \iterm_2$ (resp. $\iterm_1 > \iterm_2$) with $\iterm_1 \le \iterm_2 - 1$ (resp. $\iterm_2 \le \iterm_1-1$). Replace ever occurrence of $\iterm_1 = \iterm_2$ wtih $\iterm_2 \le \iterm_1 \wedge \iterm_1 \le \iterm_2$. Let $\varphi^\dag$ the resulting formula. 
+\item \textit{$\le$ transformation} Do the following replacements to $\varphi'''$, so that all the atomic formulas in $\varphi^\dag$ are of the form $\iterm_1 \le \iterm_2$, $c \vert  \iterm$ or $c \nmid \iterm$: Replace every occurrence of $\iterm_1 \ge \iterm_2$ with $\iterm_2 \le \iterm_1$. Replace every occurrence of $\iterm_1 < \iterm_2$ (resp. $\iterm_1 > \iterm_2$) with $\iterm_1 \le \iterm_2 - 1$ (resp. $\iterm_2 \le \iterm_1-1$). Replace ever occurrence of $\iterm_1 = \iterm_2$ wtih $\iterm_2 \le \iterm_1 \wedge \iterm_1 \le \iterm_2$. Let $\varphi^\dag$ denote the resulting formula. 
 
 \item Let $\vec{\ivarz} = \ivarz_1,\ldots, \ivarz_n$ be an enumeration of the freshly introduced variables. Then the result of the normalization procedure is 
 $\exists \vec{\ivarz}\exists \ivarx.\ \varphi^\dag$.
 \end{enumerate}
 
-Intuitively, the normalization step first absorbs all negation operators by transforming the formula into NNF. Then it removes the occurrences of $\ell_{10}(\iterm)$ where $\ivarx$ occurs in $\iterm$, by encoding them with the exponential function. Moreover, for each occurrence of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, it introduces a fresh variable $\ivarz$, replaces $10^\iterm$ with $10^\ivarz$, and adds the equality $\ivarz = \iterm$. All equalities and inequalities will be rewritten into the form $\iterm_1\le\iterm_2$. Finally, add quantifiers for the introduced fresh variables.
+Intuitively, the normalization step first removes all occurrences of $\ell_{10}(\iterm)$ where $\ivarx$ occurs in $\iterm$, by encoding them with the exponential function. Moreover, for each occurrence of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, it introduces a fresh variable $\ivarz$, replaces $10^\iterm$ with $10^\ivarz$, and adds the equality $\ivarz = \iterm$. All equalities and inequalities will be rewritten into the form $\iterm_1\le\iterm_2$. Finally, add quantifiers for the introduced fresh variables.
 
-After the normalization, the resulting formula is of the following shape: 1) it is in NNF (negation normal form),  2) it contains no occurrences of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, 3)  it contains no occurrences of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, but $\iterm \neq \ivarx$, 4) all the atomic formulas are of the form $\iterm_1 \le \iterm_2$ or $c \vert  \iterm$. Denote the negation of $c \vert  \iterm$ by $c\nmid t$, then the formula contains no negation symbol. 
+After the normalization, the resulting formula is of the following shape: 1) it contains no occurrences of $\ell_{10}(\iterm)$ such that $\ivarx$ occurs in $\iterm$, 2)  it contains no occurrences of $10^\iterm$ such that $\ivarx$ occurs in $\iterm$, but $\iterm \neq \ivarx$, 3) all the atomic formulas are of the form $\iterm_1 \le \iterm_2$, $c \vert  \iterm$ or $c\nmid \iterm$. 
 
 
 %\vspace{-2mm}
-\subsection{Enumeration of the variable orders} 
+\subsection{Enumeration of the variable orders}\label{qe-enum}
 
-Suppose $n-1$ fresh variables are introduced in the normalization procedure, rename the original variable $\ivarx$ and the $n-1$ introduced variables $\ivarx_i,1\le i\le n$.
+Suppose $n-1$ fresh variables are introduced in the normalization procedure, rename the original variable $\ivarx$ and the $n-1$ introduced variables as $\ivarx_i,1\le i\le n$.
 Let the output of the normalization procedure be $\exists \vec{\ivarx}.\ \varphi'$ with $\vec{\ivarx} = (\ivarx_1,\ldots, \ivarx_n)$. 
 We then enumerate all the linear orders of $\{\ivarx_1,\ldots, \ivarx_n\}$. Each linear order can be represented by a permutation $\sigma \in \mathcal{S}_n$ (where $\mathcal{S}_n$ is the permutation group on $[n]$), with the intention that $\ivarx_{\sigma(n)} \ge \cdots \ge \ivarx_{\sigma(1)}$.
 
-Assuming a linear order $\sigma \in \mathcal{S}_n$ of $\{\ivarx_1,\ldots, \ivarx_n\}$, we then consider $\varphi'_\sigma  = \exists \vec{\ivarx}.\ \varphi' \wedge \bigwedge \limits_{i \in [n-1]} \ivarx_{\sigma(i)} \le \ivarx_{\sigma(i+1)}$ and eliminate the quantifiers $\exists \ivarx_{\sigma(n)}$, $\ldots$, $\exists \ivarx_{\sigma(1)}$,  one by one and from $\ivarx_n$ to $\ivarx_1$. Let $\varphi''_\sigma$ denote the resulting formula.
+Assuming a linear order $\sigma \in \mathcal{S}_n$ of $\{\ivarx_1,\ldots, \ivarx_n\}$, we then consider $\varphi'_\sigma  = \exists \vec{\ivarx}.\ \varphi' \wedge \bigwedge \limits_{i \in [n-1]} \ivarx_{\sigma(i)} \le \ivarx_{\sigma(i+1)}$ and eliminate the quantifiers $\exists \ivarx_{\sigma(n)}$, $\ldots$, $\exists \ivarx_{\sigma(1)}$,  one by one and from $\ivarx_{\sigma(n)}$ to $\ivarx_{\sigma(1)}$. To eliminate the $i$-th quantifer $\exists \ivarx_{\sigma(i)}$, we first eliminate all its exponential occurrences, i.e. $10^{\ivarx_{\sigma(i)}}$, using the fact that $\ivarx_{\sigma(i)}$ is the largest among the remaining quantified variables (see Lemma~\ref{lem:exp-ineq}). Then linear terms of $\ivarx_{\sigma(i)}$ are eliminated further by applying Cooper's algorithm so that the quantifier $\exists \ivarx_{\sigma(i)}$ can be removed. Let $\varphi''_\sigma$ denote the resulting formula.
+
 
 Finally, $\exists \vec{\ivarx}.\ \varphi'$ is transformed into the quantifier-free formula $\bigvee \limits_{\sigma \in \mathcal{S}_n} \varphi''_{\sigma}$. 
 
+
+\hide{
 In the sequel, assuming a linear order $\sigma \in \mathcal{S}_n$, for $i \in [n]$, let $\exists \ivarx_{\sigma(1)} \ldots \exists \ivarx_{\sigma(i)}.\ \varphi''_{\sigma,i}$ be the formula obtained from $\varphi'_\sigma$ by eliminating the quantifiers $\exists \ivarx_{\sigma(n)}$, $\ldots$, $\exists \ivarx_{\sigma(i+1)}$, we show how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\exists \ivarx_{\sigma(1)} \ldots \exists \ivarx_{\sigma(i)}.\ \varphi''_{\sigma,i}$. We would like to remark that the linear occurrences of $\ivarx_{\sigma(i)}$ should be eliminated further so that the quantifier $\exists \ivarx_{\sigma(i)}$ can be eliminated. The elimination of linear occurrences of $\ivarx_{\sigma(i)}$ is essentially the quantifier elimination algorithm of {\pa}.
-%$\varphi'_\sigma =  \exists \vec{\ivarx}.\ \varphi' \wedge \bigwedge \limits_{i \in [n-1]} \ivarx_{\sigma(i)} \le \ivarx_{\sigma(i+1)}$.
 
-Note that the order $\ivarx_{\sigma(i)} \ge \ldots \ge \ivarx_{\sigma(1)}$ guarantees the maximality of $\ivarx_{\sigma(i)}$ among $\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}$, which is essential for the elimination of $10^{\ivarx_{\sigma(i)}}$ from $\varphi''_{\sigma,i}$ (see Lemma~\ref{lem:exp-ineq}).
+Note that the order $\ivarx_{\sigma(i)} \ge \ldots \ge \ivarx_{\sigma(1)}$ guarantees the maximality of $\ivarx_{\sigma(i)}$ among $\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}$, which is essential for the elimination of $10^{\ivarx_{\sigma(i)}}$ from $\varphi''_{\sigma,i}$ (see Lemma~\ref{lem:exp-ineq}).}
 
-%\yfc{Explain why only the largest variable can  be eliminated. Which part of the procedure we need this condition? Or if we do not have the order, what can be wrong?}
-
-%\vspace*{-3mm}
-\subsection{Elimination of  exponential occurrences of variables}\label{sec-elim-exp}
+\subsection{Elimination of exponential occurrences of variables}\label{qe-elim-exp}
 
 Let $i \in [n]$ and $\exists \ivarx_{\sigma(1)} \ldots \exists \ivarx_{\sigma(i)}.\ \varphi''_{\sigma,i}(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ be the formula obtained from $\varphi'_\sigma$ by eliminating the quantifiers $\exists \ivarx_{\sigma(n)}$, $\ldots$, $\exists \ivarx_{\sigma(i+1)}$. We show how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\varphi''_{\sigma,i}$. The elimination is \emph{local} in the sense that it is applied to the atomic formulas independently. 
 
@@ -146,93 +169,169 @@ Recall that after normalization, the atomic formulas are of the form $\iterm_1 \
 $a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary})$
 or  
 $c \ \big  \vert  \ \big(a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})\big)$
-(or $\nmid$).
+(or $\nmid$), where $\iterm(\vec{\ivary})$ collects all terms in the formula without $\ivarx_i$.
 
 \subsubsection{Inequality atoms}
-In the sequel, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for these inequality atomic formulas. Let us consider 
-$$
-\begin{array}{l}
-\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
-%\hspace{4mm} 
-a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary}).
-\end{array}
-$$
-%
-The elimination of the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ relies on the following lemma. Intuitively, the lemma states the fact that if $\ivarx_{\sigma(i)}$ is sufficiently greater than $\ivarx_{\sigma(i-1)}$, then the left-hand-side of $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is \emph{dominated} by $a_i10^{\ivarx_{\sigma(i)}}$, moreover, if $a_i > 0$ and the value of $\ivarx_{\sigma(i)}$ is sufficiently small (resp. big), then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds (resp. does not hold), similarly for $a_i < 0$.
+In the following, we illustrate how to eliminate the exponential occurrences of $\ivarx_{\sigma(i)}$ for inequality atomic formulas of the form 
+\begin{equation}\label{tau}
+    \begin{aligned}
+        &\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
+        &a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary})
+    \end{aligned}            
+\end{equation}
+where $a_i\neq 0$, $\iterm(\vec \ivary)$ is the sum of all other terms without $\ivarx_{\sigma(i)}$.
 
-%\vspace{-1mm}
+The elimination of the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ relies on the following lemma. 
+Intuitively, 
+The lemma states that when the left-hand-side of the inequality is dominated by the $a_i 10^{\ivarx_{\sigma(i)}}$ term, if $\ivarx_{\sigma(i)}\le \alpha(\vec{\ivary})-1$ or $\ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})+2$, it can be determined directly whether the formula is true or false.
+
 \begin{lemma} \label{lem:exp-ineq}
-Let  
-%
-$$
-\small
-\begin{array}{l}
-\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
-%\hspace{4mm} 
-%\vspace{-1mm}
-a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary}).
-\end{array}
-$$
-%
-with $a_i \neq 0$, $A\Def \sum_{j=1}^{i-1}\vert a_j\vert $, 
-%$B\Def  \sum_{j=1}^{i}\vert b_j\vert $, 
-$B \Def 2(\ell_{10}(\sum_{j=1}^{i}\vert b_j\vert )+3)$,
-and $\delta\Def  \ell_{10}(A)+3$. 
+Let $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ be of form (\ref{tau}) 
+with $a_i \neq 0$. Let $A\Def 1+\sum_{j=1}^{i-1}\vert a_j\vert$, 
+$B \Def 1+\sum_{j=1}^{i}\vert b_j\vert$, 
+$\delta\Def  \ell_{10}(A)+2$,
+and $\gamma \Def 2\ell_{10}(B)+3$. 
+When $\ivarx_{\sigma(i)} \ge \gamma$ and  $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta$ are all satisfied,
 \begin{itemize}
-    \item If $a_i > 0$, let $\alpha(\vec{\ivary}) \Def \ell_{10}(\iterm(\ivary))- \ell_{10}(a_i)$, then 
+    \item for $a_i > 0$, let $\alpha(\vec{\ivary}) \Def \ell_{10}(\iterm(\ivary))- \ell_{10}(a_i)$, then 
     \begin{itemize}
-        \item if $\ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta $, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds,
-        \item if $\ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})  +2$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)}  \ge \ivarx_{\sigma(i-1)} +\delta$, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \textbf{does not} hold.
+        \item if $\ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1$, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds,
+        \item if $\ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})  +2$, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \textbf{does not} hold.
     \end{itemize}
-    \item If $a_i < 0$, let $\alpha(\vec{\ivary})  \Def \ell_{10}(-\iterm(\ivary))- \ell_{10}(-a_i)$, then 
+    \item for $a_i < 0$, let $\alpha(\vec{\ivary})  \Def \ell_{10}(-\iterm(\ivary))- \ell_{10}(-a_i)$, then 
     \begin{itemize}
-        \item if $\ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta $, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \textbf{does not} hold,
-        \item if $\ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})  +2$, $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta $, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds.
+        \item if $\ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1$, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \textbf{does not} hold,
+        \item if $\ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})  +2$, then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds.
     \end{itemize}
 \end{itemize}
 \end{lemma}
 
-We need the following proposition for the proof of Lemma~\ref{lem:exp-ineq}.
+We need the following two propositions for the proof of Lemma~\ref{lem:exp-ineq}. 
+Proposition~\ref{prop:linear} shows that when $\ivarx$ is large enough, the linear term $n \ivarx$ can always be bound by the exponential term $10^\ivarx$. Proposition~\ref{prop:case} can be seen as a special case of Lemma~\ref{lem:exp-ineq} where the left-hand-side of $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ has only one term $a_i 10^{\ivarx_{\sigma(i)}}$. 
 
-\begin{proposition} \label{prop:1}
-If $n\ge m\ge 1$ and $p \ge 2(\ell_{10}(n)- \ell_{10}(m)+1)$, then 
-$n p \le m10^p$ holds.
+\begin{proposition} \label{prop:linear}
+Given $n\ge 1$, if $\ivarx \ge 2\ell_{10}(n)+1$, then 
+$n \ivarx  \le 10^\ivarx$ holds.
+\end{proposition}
+
+\begin{proof}
+When $1\le n\le 9$, we have $n\ivarx \le 10\ivarx \le 10^\ivarx$ for all $\ivarx \in\mathbb N$.
+
+For $n\ge 10$, that is, $\ell_{10}(n)\ge 1$, then 
+$$\begin{aligned}
+10^\ivarx&\ge 10^{\ell_{10}(n)+1}10^{\ivarx-\ell_{10}(n)-1}\\
+    &\ge 10^{\ell_{10}(n)+1}10(\ivarx-\ell_{10}(n)-1)\\
+    &\ge 10^{\ell_{10}(n)+1}\ivarx\\
+    &\ge n\ivarx
+\end{aligned}$$
+\end{proof}
+
+\begin{proposition} \label{prop:case}
+    Given $a>0$, 
+    if $\ivarx\le \ell_{10}(\ivary)-\ell_{10}(a)-1$, then $(a+\frac{1}{2})\cdot 10^\ivarx\le\ivary$; 
+    if $\ivarx\ge \ell_{10}(\ivary)-\ell_{10}(a)+2$, then $(a-\frac{1}{2})\cdot 10^\ivarx\ge\ivary$.
 \end{proposition}
 
 \begin{proof}
 
-First we show that for any $n' \in \Nat$, if $p \ge 2n'$, then $10^p \ge 10^{n'}10^{(p-n')}\ge 10^{n'}10(p-n')\ge 10^{n'}(5p+5(p-2n'))\ge  10^{n'}p$.
+Suppose that $\ivarx\le \ell_{10}(\ivary)-\ell_{10}(a)-1$,
+we have 
+$$
+(a+\frac{1}{2})\cdot 10^\ivarx \le (a+\frac{1}{2})\cdot \frac{\lambda_{10}(\ivary)}{10\lambda_{10}(a)}=\frac{a+\frac{1}{2}}{10\lambda_{10} (a)}\lambda_{10}(\ivary)\le\lambda_{10}(\ivary) \le \ivary. 
+$$
 
-If $ p \ge 2 (\ell_{10}(n) - \ell_{10}(m)+1)$, then  $n p \le 10\lambda_{10}(n) p = 10 * 10^{\ell_{10}(n)} p = 10^{\ell_{10}(n)-\ell_{10}(m) + 1}  10^{\ell_{10}(m)} p$.
-
-Because $p \ge 2(\ell_{10}(n)-\ell_{10}(m) + 1)$, we deduce that $10^{\ell_{10}(n)-\ell_{10}(m) + 1}  p \le 10^p$.  Therefore, $10^{\ell_{10}(n)-\ell_{10}(m) + 1}  10^{\ell_{10}(m)} p \le 10^{\ell_{10}(m)} 10^p \le m 10^p$.
-We conclude that $np \le m 10^p$.
+Now, suppose that $\ivarx\ge \ell_{10}(\ivary)-\ell_{10}(a)+2$,
+$$
+(a-\frac{1}{2})\cdot 10^\ivarx \ge (a-\frac{1}{2})\frac{100\lambda_{10}(\ivary)}{\lambda_{10}(a)}=\frac{10(a-\frac{1}{2})}{\lambda_{10}(a)}10\lambda_{10}(\ivary)\ge 10\lambda_{10}(\ivary) \ge \ivary
+$$
 \end{proof}
 
 
-%Then we give the proof for Theorem~\ref{thm:exp-ineq}.
+
 \begin{proof}[Proof of Lemma~\ref{lem:exp-ineq}]
-We only prove for the case $a_i > 0$, the other case is symmetric. 
+We only prove for the case $a_i > 0$, the $a_i < 0$ case is symmetric. The proof is twofold.
+
+1) First, we prove that if $\ivarx_{\sigma(i)}\ge \gamma$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} + \delta$, then the left-hand-side of $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is dominated by $a_i 10^{\ivarx_{\sigma(i)}}$, i.e. ,
+\begin{equation} \label{eq:bound}
+(a_i-\frac{1}{2})10^{\ivarx_{\sigma(i)}}
+< a_i 10^{\ivarx_{\sigma(i)}}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i}b_k \ivarx_{\sigma(k)}
+< (a_i+\frac{1}{2})10^{\ivarx_{\sigma(i)}}
+\end{equation}
+
+To obtain the formula above, we need to bound the absolute values $\vert\sum_{j=1}^{i-1}a_j10^{\ivarx_{\sigma(j)}}\vert$ and  $\vert\sum_{k=1}^i b_k\ivarx_{\sigma(k)}\vert$ by some fraction of $10^{\ivarx_{\sigma(i)}}$ respectively. Here we choose the bound to be $\frac{1}{10}10^{\ivarx_{\sigma(i)}}$.
+
+Using $\ivarx_{\sigma(i)}\ge \ivarx_{\sigma(i-1)}+\delta$ and the linear order $\ivarx_{\sigma(i)}\ge \ivarx_{\sigma(i-1)} \ge \cdots \ge \ivarx_{\sigma(1)}$,
+we can prove that 
+\begin{equation}\label{eq:appr-exp}
+    \begin{aligned}
+        \vert \sum_{j=1}^{i-1}a_j10^{\ivarx_{\sigma(j)}} \vert &\le  \sum_{j=1}^{i-1} \vert a_j\vert 10^{\ivarx_{\sigma(j)}}\\
+        &< A\cdot 10^{\ivarx_{\sigma(i)}-\delta}\\
+        &\le \frac{A}{100\lambda_{10}(A)} 10^{\ivarx_{\sigma(i)}}\\
+        &< \frac{1}{10} 10^{\ivarx_{\sigma(i)}} && \text{(by $\ivarx < 10 \lambda_{10}(\ivarx)$)}.
+    \end{aligned}
+\end{equation}
+
+Similarly, using $\ivarx_{\sigma(i)}\ge \gamma$, we have
+\begin{equation}\label{eq:appr-linear}
+    \begin{aligned}
+        \vert \sum_{k=1}^i b_k\ivarx_{\sigma(k)} \vert &\le \sum_{k=1}^i \vert b_k \vert \ivarx_{\sigma(k)} \\
+        &< B \cdot \ivarx_{\sigma(i)}\\
+        &=\frac{1}{10}\cdot 10B \cdot \ivarx_{\sigma(i)}\\
+        &\le \frac{1}{10} 10^{\ivarx_{\sigma(i)}} &&\text{(by Proposition~\ref{prop:linear}, set $n=10B$)}.     
+    \end{aligned}
+\end{equation}
+
+Combining formula (\ref{eq:appr-exp}) and (\ref{eq:appr-linear}), we have 
+$\vert \sum_{j=1}^{i-1}a_j10^{\ivarx_{\sigma(j)}}
++ \sum_{k=1}^i b_k\ivarx_{\sigma(k)}\vert 
+< \frac{3}{10} 10^{\ivarx_{\sigma(i)}}< \frac{1}{2} 10^{\ivarx_{\sigma(i)}}$, then formula (\ref{eq:bound}) can be easily deduced.  
+
+2) Then, we give the sufficient conditions for $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ to hold or not by comparing $\iterm(\vec\ivary)$ with $(a_i \pm\frac{1}{2}) 10^{\ivarx_{\sigma(i)}}$. 
+Note that when $\iterm(\vec\ivary)\le 0$, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ does not hold since $0< (a_i-\frac{1}{2})10^{\ivarx_{\sigma(i)}}$, so we only need to consider the $\iterm(\vec\ivary)> 0$ case.
+
+Utilizing Proposition~\ref{prop:case}, we obtain that 
+
+\begin{equation}
+    \begin{aligned}
+        \ivarx_{\sigma(i)} \le \alpha(\vec\ivary)-1
+        &\implies (a_i+\frac{1}{2}) \cdot 10^{\ivarx_{\sigma(i)}}\le \iterm(\vec\ivary)\\
+       &\implies \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \textrm{ is satisfied }
+    \end{aligned}
+\end{equation}
+and
+\begin{equation}
+    \begin{aligned}
+        \ivarx_{\sigma(i)} \ge \alpha(\vec\ivary)+2
+        &\implies (a_i-\frac{1}{2})\cdot 10^{\ivarx_{\sigma(i)}}\ge\iterm(\vec\ivary)\\ 
+        &\implies \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \textrm{ is unsatisfied }
+    \end{aligned}
+\end{equation}
+
+Thus the lemma is proved.
+\end{proof}
 
 
-Let $A\Def \sum_{j=1}^{i-1}\vert a_j\vert $, $B \Def 2(\ell_{10}(\sum_{j=1}^{i}\vert b_j\vert )+3)$, and $\delta\Def  \ell_{10}(A)+3$. 
 
-Suppose $\ivarx_{\sigma(i)} \ge B$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} + \delta$. Moreover, let $\alpha(\vec{\ivary}) \Def  \ell_{10}(\iterm(\ivary))- \ell_{10}(a_i)$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
+Let $A\Def \sum_{j=1}^{i-1}\vert a_j\vert $, $\gamma \Def 2(\ell_{10}(\sum_{j=1}^{i}\vert b_j\vert )+3)$, and $\delta\Def  \ell_{10}(A)+3$. 
+
+Suppose $\ivarx_{\sigma(i)} \ge \gamma$ and $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} + \delta$. Moreover, let $\alpha(\vec{\ivary}) \Def  \ell_{10}(\iterm(\ivary))- \ell_{10}(a_i)$.
 
 Note that
  \begin{equation} 
-   A10^{-\delta} =A 10^{-\ell_{10}(A)-3} = \frac{A}{1000\lambda_{10}(A)} \le \frac{1}{100}.   \label{eq:thm-ineq-1}
+   A10^{-\delta} =A 10^{-\ell_{10}(A)-3} = \frac{A}{1000\lambda_{10}(A)} \le \frac{1}{100}.   
  \end{equation}
  
- From $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} + \delta$ and $\ivarx_{\sigma(i-1)} \ge \ldots \ge \ivarx_{\sigma(1)}$, 
+From $\ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} + \delta$ and $\ivarx_{\sigma(i-1)} \ge \ldots \ge \ivarx_{\sigma(1)}$, 
 we know   
 $$-A 10^{\ivarx_{\sigma(i)} - \delta} \le  \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} \le A 10^{\ivarx_{\sigma(i)} - \delta}$$
 and
 $$-(\sum_{j=1}^{i}\vert b_j\vert ) \ivarx_{\sigma(i)} \le \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} \le (\sum_{j=1}^{i}\vert b_j\vert ) \ivarx_{\sigma(i)}.$$ 
 
 Moreover, let $n = 100\sum_{j=1}^{i}\vert b_j\vert $, $m = 1$, and $p = \ivarx_{\sigma(i)}$, then 
-$n \ge m \ge 1$. From $2(\ell_{10}(n)- \ell_{10}(m)+1) = 2 (\ell_{10}(100 \sum_{j=1}^{i}\vert b_j\vert ) + 1) = 2 (\ell_{10}(\sum_{j=1}^{i}\vert b_j\vert ) + 3) = B$, we deduce that $p = \ivarx_{\sigma(i)} \ge B = 2(\ell_{10}(n)- \ell_{10}(m)+1)$.
-Then according to Proposition~\ref{prop:1}, 
+$n \ge m \ge 1$. From $2(\ell_{10}(n)- \ell_{10}(m)+1) = 2 (\ell_{10}(100 \sum_{j=1}^{i}\vert b_j\vert ) + 1) = 2 (\ell_{10}(\sum_{j=1}^{i}\vert b_j\vert ) + 3) = \gamma$, we deduce that $p = \ivarx_{\sigma(i)} \ge \gamma = 2(\ell_{10}(n)- \ell_{10}(m)+1)$.
+Then according to Proposition~\ref{prop:linear}, 
 $$100(\sum_{j=1}^{i}\vert b_j\vert )\ivarx_{\sigma(i)} = np \le m 10^p = 10^{\ivarx_{\sigma(i)}}.$$
 Thus 
 $(\sum_{j=1}^{i}\vert b_j\vert )\ivarx_{\sigma(i)}  \le \frac{1}{100} 10^{\ivarx_{\sigma(i)}}.$
@@ -251,6 +350,7 @@ a_i 10^{\ivarx_{\sigma(i)}} - \frac{1}{100}10^{\ivarx_{\sigma(i)}} - \frac{1}{10
 \end{array}
 $
 
+
 Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ \emph{does not} hold.
 
 If $\ivarx_{\sigma(i)} \le   \alpha(\vec{\ivary}) - 1$, then 
@@ -266,29 +366,39 @@ a_i 10^{\ivarx_{\sigma(i)}} + \frac{A} {10^\delta}10^{\ivarx_{\sigma(i)}} + \fra
 \frac{a_i + \frac{1}{50}} {a_i+1} 10^{\ell_{10}(\iterm(\ivary))} \le 10^{\ell_{10}(\iterm(\ivary))} \le \iterm(\ivary).
 \end{array}
 $
-
 Therefore,  in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ holds.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+For $a_i>0$, by lemma~\ref{lem:exp-ineq},
+$\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ (for readability, denoted by $\tau$ below) is equivalent to following formula without exponential occurrences of $\ivarx_{\sigma(i)}$:
+%&&(\ivarx_{\sigma(i)}<\gamma \text{ or } \ivarx_{\sigma(i)}\le \ivarx_{\sigma(i-1)}+\delta)
+\begin{equation}\label{lemma-example}\begin{aligned}
+    &\bigvee_{p=0}^{\gamma-1} (\ivarx_{\sigma(i)}=p \wedge \tau[p/\ivarx_{\sigma(i)}])\\
+    \vee &\bigvee_{p=0}^{\delta-1} (\ivarx_{\sigma(i)}=\ivarx_{\sigma(i-1)}+p\wedge \tau[\ivarx_{\sigma(i-1)}+p/\ivarx_{\sigma(i)}])\\
+    \vee & \bigg( \ivarx_{\sigma(i)}\ge \gamma \wedge \ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)}+\delta \wedge \ivarx_{\sigma(i)}\le \alpha(\vec\ivary)-1\bigg)\\
+    \vee & \bigvee_{p=0,1} \bigg( \ivarx_{\sigma(i)}\ge \gamma \wedge \ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)}+\delta \wedge \ivarx_{\sigma(i)} = \alpha(\vec\ivary)+p \wedge \tau[\alpha(\vec\ivary)+p/\ivarx_{\sigma(i)}]\bigg).
+\end{aligned}\end{equation}
+The elimination of the exponential occurrences of $\ivarx_{\sigma(i)}$ for the case $a_i < 0$ is similar. 
+
+We would like to make a few remarks about Lemma~\ref{lem:exp-ineq}:
+(1) When $i=1$, we can just ignore the condition $\ivarx_{\sigma(i)}\ge \ivarx_{\sigma(i-1)}+\delta$.
+(2) The constant $1$ in the definition of $A,B$ is to ensure that $\ell_{10}(A),\ell_{10}(B)$ are well-defined. 
+(3) The lemma still holds when the base of exponential function is changed to any natural number $n\ge 2$ (constants in $\delta,\gamma$ should be changed accordingly).
 
 
-\end{proof}
-
-We would like to remark that Lemma~\ref{lem:exp-ineq} still holds when the base of exponential function is changed to any natural number $n\ge 2$.
-
-
-
-If $a_i > 0$, then the exponential occurrences of $\ivarx_{\sigma(i)}$ in $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ can be eliminated by utilizing  Lemma~\ref{lem:exp-ineq} and enumerating the constraints on $\ivarx_{\sigma(i)}$ and $\ivarx_{\sigma(i-1)}$. Specifically, 
-$\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
-%\vspace{-2mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hide{
 \[
 \small
 \begin{array}{l}
-\bigvee \limits_{p=0}^{B-1} a_i 10^{p}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + b_i p + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary}) \\
-\bigvee \big(\ivarx_{\sigma(i)} \ge B \wedge \ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1  \wedge \ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta \big)\\
+\bigvee \limits_{p=0}^{\gamma-1} a_i 10^{p}+\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + b_i p + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le \iterm(\vec{\ivary}) \\
+\bigvee \big(\ivarx_{\sigma(i)} \ge \gamma \wedge \ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1  \wedge \ivarx_{\sigma(i)} \ge \ivarx_{\sigma(i-1)} +\delta \big)\\
 %
 \bigvee \bigvee \limits_{p=0}^{\delta-1} 
 \left(
 \begin{array}{l}
-\ivarx_{\sigma(i)} \ge B \wedge \ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1 \ \wedge \\
+\ivarx_{\sigma(i)} \ge \gamma \wedge \ivarx_{\sigma(i)} \le \alpha(\vec{\ivary})  -1 \ \wedge \\
  \ivarx_{\sigma(i)} = \ivarx_{\sigma(i-1)} +p\ \wedge\\
  \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[\ivarx_{\sigma(i-1)} + p /\ivarx_{\sigma(i)}] 
 \end{array}
@@ -296,21 +406,21 @@ $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivale
 \bigvee 
 \left(
 \begin{array}{l}
-\ivarx_{\sigma(i)} \ge B \wedge \ivarx_{\sigma(i)} = \alpha(\vec{\ivary})\ \wedge \\
+\ivarx_{\sigma(i)} \ge \gamma \wedge \ivarx_{\sigma(i)} = \alpha(\vec{\ivary})\ \wedge \\
 \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[\alpha(\vec{\ivary})/\ivarx_{\sigma(i)}]
 \end{array}
 \right)  \\
 \bigvee 
 \left(
 \begin{array}{l}
-\ivarx_{\sigma(i)} \ge B \wedge \ivarx_{\sigma(i)} = \alpha(\vec{\ivary})+1\ \wedge \\
+\ivarx_{\sigma(i)} \ge \gamma \wedge \ivarx_{\sigma(i)} = \alpha(\vec{\ivary})+1\ \wedge \\
 \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[\alpha(\vec{\ivary})+1/\ivarx_{\sigma(i)}]
 \end{array}
 \right)  \\
 \bigvee \bigvee \limits_{p=0}^{\delta-1} 
 \left(
 \begin{array}{l}
-\ivarx_{\sigma(i)} \ge B \wedge \ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})+2\ \wedge\\
+\ivarx_{\sigma(i)} \ge \gamma \wedge \ivarx_{\sigma(i)} \ge \alpha(\vec{\ivary})+2\ \wedge\\
  \ivarx_{\sigma(i)} = \ivarx_{\sigma(i-1)} +p\ \wedge \\
  %\vspace{-1mm}
  \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[\ivarx_{\sigma(i-1)}+ p /\ivarx_{\sigma(i)}]
@@ -318,26 +428,85 @@ $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivale
 \right),
 \end{array}
 \]
-where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.  
-%
-The elimination of the exponential occurrences of $\ivarx_{\sigma(i)}$ for the case $a_i < 0$ is similar. 
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Divisibility atoms}
+
+For divisibility atoms, we utilize its periodic property to enumerate $\ivarx_{\sigma(i)}$ within a finite range.
 Consider a divisiblilty atomic formula 
-%
-$$
-\begin{array}{l}
-\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
-d\ \big \vert \ \big(a_i 10^{\ivarx_{\sigma(i)}} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
-+ \iterm(\vec{\ivary}) \big)
-\end{array}
-$$
-with $a_i \neq 0$. The indivisibility case can be treated analogously.
-%
+\begin{equation}
+    \begin{aligned}
+        &\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary}) \Def  \\
+        &d\ \big \vert \ \big(a_i 10^{\ivarx_{\sigma(i)}} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
+        + \iterm(\vec{\ivary}) \big)               
+    \end{aligned}
+\end{equation}
+with $a_i \neq 0, d\ge 1$. The indivisibility case can be treated analogously.
 
 Let $d = 2^{r_1} 5^{r_2}  d_0$ such that $d_0$ is divisible by neither $2$ nor $5$. Moreover, let $r = \max(r_1, r_2)$. Then $d \vert  (10^rd_0)$. 
 
-If $d_0 = 1$, then $10^r$ is divisible by $d = 2^{r_1}5^{r_2}$. Thus for every $n \ge r$, $d \ \vert \ 10^n$.  Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+Since $10$ and $d_0$ are relatively prime, according to Euler's theorem (cf. \cite{HW80}), $10^{\phi(d_0)} \equiv 1 \bmod d_0$, where $\phi$ is the Euler function. Suppose $10^{\phi(d_0)} = kd_0 + 1$ for some $k \in \Nat$. 
+Then for every $n \in \Nat$ with $n \ge r$, 
+$$\begin{aligned}
+    10^{n + \phi(d_0)} 
+    &\equiv 10^{n-r} 10^r (kd_0 + 1) \bmod d\\
+    &\equiv 10^{n-r} (k 10^rd_0 + 10^r) \bmod d\\
+    &\equiv 10^{n-r} (0+10^r) \bmod d\\
+    &\equiv 10^n \bmod d.
+\end{aligned}$$
+
+\hide{
+$$
+\begin{array}{l}
+10^{n + \phi(d_0)} \bmod d =10^{n-r} 10^r (kd_0 + 1) \bmod d = \\
+10^{n-r} (k 10^rd_0 + 10^r) \bmod d = \\
+10^{n-r} (0+10^r) \bmod d = 10^n \bmod d.
+\end{array}
+$$
+}
+
+Then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to the following formula
+
+\begin{equation}\label{lem-div}
+\begin{array}{l}
+\bigvee \limits_{p=0}^{r-1} \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[p/\ivarx_{\sigma(i)}]\\
+\vee
+\left(
+\begin{array}{l}
+\ivarx_{\sigma(i)} \ge r\ \wedge \\
+\bigvee \limits_{p = 0}^{\phi(d_0)-1} 
+\left(
+\begin{array}{l}
+\phi(d_0)\ \big \vert \ (\ivarx_{\sigma(i)} - r - p)\ \wedge \\
+d\ \big \vert  
+\left(
+\begin{array}{l}
+a_i 10^{r+p} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \\
+\sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} + \iterm(\vec{\ivary})
+\end{array}
+\right) 
+\end{array}
+\right)
+\end{array}
+\right),
+\end{array}
+\end{equation}
+where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear. When $\ivarx_{\sigma(i)}>r$, we only need to enumerate $\ivarx_{\sigma(i)}$ in one period, i.e. from $r$ to $r+\phi(d_0)-1$.
+
+
+For a special case $d_0 = 1$, since $\phi(1)=1$, (\ref{lem-div}) can be simplified to 
+$$\begin{aligned}
+    \bigvee_{p=0}^{r-1} \tau [p/\ivarx_{\sigma(i)}] \vee  \bigg(\ivarx_{\sigma(i)}\ge r \wedge d\ \big \vert \big(\sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i} b_k \ivarx_{\sigma(k)} 
+    + \iterm(\vec{\ivary}) \big)\bigg)
+\end{aligned}.$$
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hide{
+
+then $10^r$ is divisible by $d = 2^{r_1}5^{r_2}$. Thus for every $n \ge r$, $d \ \vert \ 10^n$.  Therefore, in this case, $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
 \[
 \small
 \begin{array}{l}
@@ -350,17 +519,10 @@ If $d_0 = 1$, then $10^r$ is divisible by $d = 2^{r_1}5^{r_2}$. Thus for every $
 \]
 where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
 
-Next, let us assume $d_0 > 1$. Since $10$ and $d_0$ are relatively prime, according to Euler's theorem (cf. \cite{HW80}), $10^{\phi(d_0)} \equiv 1 \bmod d_0$, where $\phi$ is the Euler function. Suppose $10^{\phi(d_0)} = kd_0 + 1$ for some $k \in \Nat$. 
-Then for every $n \in \Nat$ with $n \ge r$, 
-$$
-\begin{array}{l}
-10^{n + \phi(d_0)} \bmod d =10^{n-r} 10^r (kd_0 + 1) \bmod d = \\
-10^{n-r} (k 10^rd_0 + 10^r) \bmod d = \\
-10^{n-r} (0+10^r) \bmod d = 10^n \bmod d.
-\end{array}
-$$
+Next, let us assume $d_0 > 1$. 
+}
 
-Then $\tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})$ is equivalent to 
+\hide{
 \[
 \begin{array}{l}
 \bigvee \limits_{p=0}^{r-1} \tau(\ivarx_{\sigma(i)}, \ldots, \ivarx_{\sigma(1)}, \vec{\ivary})[p/\ivarx_{\sigma(i)}]\ \vee \\
@@ -385,3 +547,16 @@ a_i 10^{r+q} + \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \\
 \end{array}
 \]
 where the exponential occurrences of $\ivarx_{\sigma(i)}$ disappear.
+}
+
+\hide{
+\begin{equation}\label{lem-div}
+    \begin{aligned}
+        &\bigvee_{p=0}^{r-1} \tau[p/\ivarx_{\sigma(i)}]\\ 
+        \vee &\left( x_{\sigma(i)}\ge r \wedge 
+            \bigvee_{p=0}^{\phi(d_0)-1} \left(\tau[r+p/\ivarx_{\sigma(i)}]\wedge \phi(d_0)\ \big \vert\ (\ivarx_{\sigma(i)}-r-p) \right)
+            \right).
+    \end{aligned}
+\end{equation}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
