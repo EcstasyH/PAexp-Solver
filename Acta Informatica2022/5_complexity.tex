@@ -39,54 +39,71 @@ Let $c_k$ be the number of distinct divisor $d$ in atoms of the form $d \mid \it
 First we analyse the sub-procedure to eliminate exponential occurrences of the inner most quantified variable $\ivarx_m$. We prove the following lemma.
 
 \begin{lemma}\label{lem:cpx exp}
-    \begin{align}
-        c'_0&\le c_0^2 \notag \\
-        s'_0&\le ms_0^2 \notag\\
-        a'_0&\le s_0a_0\notag 
-    \end{align} 
+$$c'_0\le {c_0}^2 \qquad s'_0\le m{s_0}^2 \qquad a'_0\le s_0a_0$$ 
 \end{lemma}
 
+\hide{\begin{align}
+    c'_0&\le c_0^2 \notag \\
+    s'_0&\le ms_0^2 \notag\\
+    a'_0&\le s_0a_0\notag 
+\end{align}}
 \begin{proof}
 The analysis is divided into two cases by assuming all atomic formulas are of the same form (inequalities atoms or divisibility atoms). 
 
-If all atoms are inequalities of the form in Lemma~\ref{lem:exp-ineq}. We know that each atomic formula $\tau$ with exponential occurrence of $\ivarx_m$ is replaced by a new formula. Note that coefficients of linear occurrences of $\ivarx_i$, for $i\le m-2$, remain changed throughout the substitutions, only the coefficients of linear occurrences of $\ivarx_m$ and $\ivarx_{m-1}$ will be changed: constant 1 is introduced as a coefficient for $\ivarx_m$, and if we substitute $\ivarx_m$ by $\ivarx_{m-1}+p$ for some constant $p$, coefficient of linear occurrence of $\ivarx_{m-1}$ will become $b_m+b_{m-1}$ ($b_m,b_{m-1}$ are coefficients for $\ivarx_{m}$ and $\ivarx_{m-1}$ in $\tau$, see Lemma~\ref{lem:exp-ineq} ). Since the new coefficient is obtained by adding two linear coefficient together, we have $c'_1\le c_0^2$. Note that $\delta$ and $B$ in Lemma~\ref{lem:exp-ineq} are at most $\ell_{10}(ms_0)$. When we substitute $\ivarx_m$ by $\ivarx_{m-1}+\delta-1$ or by $B-1$, the largest constant in the formula becomes at most $s_0\cdot  10^{\ell_{10}(ms_0)}\le ms_0^2$. And an inequality is replaced by at most $4\ell_{10}(ms_0)$ atomic formulas, so $a'_1\le 4\ell_{10}(ms_0)a_0$.
+If all atoms are inequalities of the form in Lemma~\ref{lem:exp-ineq}. We know that each atomic formula $\tau$ with exponential occurrence of $\ivarx_m$ is replaced by a new formula. Note that coefficients of linear occurrences of $\ivarx_i$, for $i\le m-2$, remain unchanged throughout the substitutions, only the coefficients of linear occurrences of $\ivarx_m$ and $\ivarx_{m-1}$ will be changed: constant 1 is introduced as a coefficient for $\ivarx_m$, and if we substitute $\ivarx_m$ by $\ivarx_{m-1}+p$ for some constant $p$, coefficient of linear occurrence of $\ivarx_{m-1}$ will become $b_m+b_{m-1}$ ($b_m,b_{m-1}$ are coefficients for $\ivarx_{m}$ and $\ivarx_{m-1}$ in $\tau$, see Lemma~\ref{lem:exp-ineq} ). Since the new coefficient is obtained by adding two linear coefficient together, we have $c'_1\le {c_0}^2$. Note that $\delta$ and $B$ in Lemma~\ref{lem:exp-ineq} are at most $\ell_{10}(ms_0)$. When we substitute $\ivarx_m$ by $\ivarx_{m-1}+\delta-1$ or by $B-1$, the largest constant in the formula becomes at most $s_0\cdot  10^{\ell_{10}(ms_0)}\le m{s_0}^2$. And an inequality is replaced by at most $4\ell_{10}(ms_0)$ atomic formulas, so $a'_1\le 4\ell_{10}(ms_0)a_0$.
 
 If all atoms are divisibility atomic formulas of the form $d \ \big \vert  \ \iterm$ or $d \ \nmid \ \iterm$. We have $c'_1<2c_0$ because a divisibility atomic formula  will produce at most two forms of atomic formulas $d \ \big \vert  \ \iterm$ and $\phi(d) \ \big \vert  \ \iterm$. In a divisibility atom, any constant in the divident $\iterm$ , say $l$, can be replaced by ($l \bmod d)$. So we have $s'_1\le s_0$. When $d$ is a large prime number, $\phi(d)=d-1$, a divisibility atomic formula is replaced by roughly $d$ atomic formulas, so $a'_1\le s_0a_0$. 
 
-Choose larger upper bounds for $c'_1$, $s'_1$ and $a'_1$ respectively, then the lemma is proved.
-
-\end{proof}
+Choose larger upper bounds for $c'_1$, $s'_1$ and $a'_1$ respectively, then the lemma is proved.\end{proof}
 
 When $\varphi_0'$ is transformed into $\varphi_{1}$ by eliminating linear occurrences of $\ivarx_m$, Oppen's analysis gives the following lemma.
 
 \begin{lemma}\cite{Oppen73}\label{lem:cpx oppen}
-    \begin{align}
-        c_1&\le c_0'^4 \notag \\
-        s_1&\le s_0'^{4c_0'} \notag\\
-        a_1&\le {a_0'}^4 s_0'^{2c_0'}\notag 
-    \end{align} 
+$$c_1\le {c_0'}^4\qquad
+s_1\le {s_0'}^{4c_0'}\qquad
+a_1\le {a_0'}^4 {s_0'}^{2c_0'}
+$$
 \end{lemma}
 
+\hide{    \begin{align}
+    c_1&\le {c_0'}^4 \notag \\
+    s_1&\le {s_0'}^{4c_0'} \notag\\
+    a_1&\le {a_0'}^4 {s_0'}^{2c_0'}\notag 
+\end{align} }
+
 Combining Lemma~\ref{lem:cpx exp} and Lemma~\ref{lem:cpx oppen}, we have
-\begin{align}
-    c_1&\le c_0^8 \notag \\
-    s_1&\le (ms_0^2)^{4c_0^2} \notag\\
-    a_1&\le (s_0a_0)^4(m_0s_0^2)^{2c_0^2}\notag 
-\end{align} 
+$$c_1\le {c_0}^8\qquad
+s_1\le (m{s_0}^2)^{4{c_0}^2} \qquad
+a_1\le (s_0a_0)^4(m_0{s_0}^2)^{2{c_0}^2} 
+$$
+
+\hide{\begin{align}
+    c_1&\le {c_0}^8 \notag \\
+    s_1&\le (m{s_0}^2)^{4{c_0}^2} \notag\\
+    a_1&\le (s_0a_0)^4(m_0{s_0}^2)^{2{c_0}^2}
+\end{align} }
 
 By induction on $k$ and assuming $m\le N$, we get
 
 \begin{lemma}
-    \begin{align}
-        c_k&\le c_0^{8^k} \notag \\
-        s_k&\le N^{(4c_0)^{ 8^k}} s_0^{(8c_0)^{ 8^k}} \notag\\
-        a_k&\le a_0^{4^k}n^{(4c_0)^{ 8^k}} s_0^{(8c_0)^{ 8^k}} \notag
-    \end{align} 
+$$c_k\le {c_0}^{8^k}\qquad
+s_k\le N^{(4c_0)^{ 8^k}} {s_0}^{(8c_0)^{ 8^k}} \qquad
+a_k\le {a_0}^{4^k}n^{(4c_0)^{ 8^k}} s_0^{(8c_0)^{ 8^k}} $$
 \end{lemma}
 
+\hide{    \begin{align}
+    c_k&\le {c_0}^{8^k} \notag \\
+    s_k&\le N^{(4c_0)^{ 8^k}} {s_0}^{(8c_0)^{ 8^k}} \notag\\
+    a_k&\le {a_0}^{4^k}n^{(4c_0)^{ 8^k}} s_0^{(8c_0)^{ 8^k}} \notag
+\end{align} 
+}
 If we adopt the assumptions in \cite{Oppen73}, by assuming $c_0\le N$, $a_0\le N$ and $s_0\le N$, the space required to store the quantifier free formula $\varphi_k$, is bounded by the product of the number of linear orders $m!$, the number of atoms $a_k$, the maximum number of constants $2m+2$ per atom, the maximum amount of space $s_k$ to store each constant and some constant $q$. So the space complexity is $O(m! \cdot a_k \cdot (2m+2) \cdot s_k)=O(2^{2^{2^{pn \log n}}})$, which belongs to 3-EXPSPACE.
  
 \hide{$${\sf space}\le q \cdot m! \cdot a_k \cdot (2m+2) \cdot s_k \le 2^{2^{2^{pn \log n}}}$$
 for some large constant $p$. }
 
-The above analysis is focused on the existential {\paexp} formulas and is sufficient for our string constraints solving context. But what about general {\paexp} formulas that contain alternating quantifiers? Unfortunately, directly extending our analysis on alternating quantifers by transforming $\forall \ivarx.\varphi$ into $\neg \exists \ivarx.\neg \varphi$ will not give an elementary upper bound. We will explain the main idea without going into details on this issue. To eliminate quantifiers in a formula, say $\forall \ivarx_2\exists \ivarx_1.\varphi(\ivarx_1,\ivarx_2,\vec \ivary)$, we first eliminate $\exists \ivarx_1$, treating $\ivarx_2$ and $\vec \ivary$ both as free variables. The subprocedure to eliminate exponential occurrences of $\ivarx_1$ is at the cost of introducing logarithmic expressions of $\ivarx_2$ and $\vec \ivary$, which in the worst case increases \emph{exponentially} the number of fresh variables in the normalization step w.r.t $\ivarx_2$. We conjecture that the space complexity of quantifier elimination procedure over {\paexp} formulas still has an elementary upper bound, which may require a more detailed analysis or improvements of the algorithm.
+The above analysis is focused on the existential {\paexp} formulas and is sufficient for our string constraints solving context. 
+Unfortunately, directly extending our analysis on general {\paexp} formulas with alternating quantifiers by transforming $\forall \ivarx.\varphi$ into $\neg \exists \ivarx.\neg \varphi$ will not give an elementary upper bound. 
+
+
+\hide{We will explain the main idea without going into details on this issue. To eliminate quantifiers in a formula, say $\forall \ivarx_2\exists \ivarx_1.\varphi(\ivarx_1,\ivarx_2,\vec \ivary)$, we first eliminate $\exists \ivarx_1$, treating $\ivarx_2$ and $\vec \ivary$ both as free variables. The subprocedure to eliminate exponential occurrences of $\ivarx_1$ is at the cost of introducing logarithmic expressions of $\ivarx_2$ and $\vec \ivary$, which in the worst case increases \emph{exponentially} the number of fresh variables in the normalization step w.r.t $\ivarx_2$. We conjecture that the space complexity of quantifier elimination procedure over {\paexp} formulas still has an elementary upper bound, which may require a more detailed analysis or improvements of the algorithm.}

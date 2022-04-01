@@ -1,6 +1,6 @@
 %!TEX root = paper.tex
 
-The emerging of scripting languages boosted the needs of efficient approaches and tools to ensure program quality.
+The emerging of scripting languages boosts the needs of efficient approaches and tools to ensure program quality.
 Comparing with traditional programming languages, string data type plays a more critical role in its analysis.
 String constraint solvers are the engine of modern scripting program analysis techniques. 
 Due to the high demand, in recent years, there is a boosting amount of publications on this subject.
@@ -29,8 +29,8 @@ Due to the difficulties in solving string constraints and, in practice, satisfia
 Currently, there are two main specialized approaches for proving satisfiability.
 The first is to consider only strings of bounded length.
 This approach is taken in the first-generation solvers such as Hampi~\cite{KiezunGAGHE12} and Kuluza~\cite{SaxenaAHMMS10}.
-Although they are useful in handling many practical cases, they fail to find an answer when the all string solutions exceed the selected bound.
-For example, a constraint of the form $x.y \neq z  \wedge \vert x\vert  > 2000$ would be quite challenging to handle using those solvers.
+Although they are useful in handling many practical cases, they fail to find an answer when all string solutions exceed the selected bound.
+For example, a constraint of the form $x.y \neq z  \wedge \vert x\vert  > 2000$ would be quite challenging using those solvers.
 
 One more recent approach is flattening~\cite{Parosh:20:PLDI,AbdullaACDHRR18,AbdullaACDHRR17}.
 The idea is to restrict the solution space of string variables to 
@@ -41,10 +41,10 @@ First, under the restriction, the potential solution space is still infinite, wh
 For instance, we can find a solution for $x.y \neq z  \wedge \vert x\vert  > 2000$ under a very simple restriction: all variables are in $a^*$, where $a$ is an element of the alphabet.
 Second, more importantly, because we can convert the membership problem of a flat language to the satisfiability problem of a Presburger arithmetic formula, the class of word equations + flat languages + length constraints is decidable.
 
-The paper of Abdulla et al.~\cite{Parosh:20:PLDI} has considered adding string-integer conversion constraints to the above class,
-which proposed an algorithm for a restricted form of flat languages and left the support of general flat languages as an open problem.
+The paper of Abdulla et al.~\cite{Parosh:20:PLDI} considered adding string-integer conversion constraints to the above class,
+and proposed an algorithm for a restricted form of flat languages and left the support of general flat languages as an open problem.
 For string-integer conversion constraints, their approach projects the solution to 
-a finite solution space (in a way similar to the PASS~\cite{goudong2013pass} approach).
+a finite solution space (in a way similar to the PASS approach~\cite{goudong2013pass}).
 
 In this paper, we give a complete solution to this problem.
 We propose a decision procedure for the class of word equations + flat languages + length constraints + string-integer conversion.
@@ -53,7 +53,7 @@ The basic idea of our approach can be sketched as follows: we first reduce the s
 The decidability of $\paexp$ was first shown by Semen\"{o}v in \cite{Semenov84}. Nevertheless, Semen\"{o}v did not provide an explicit decision procedure. To remedy this, in \cite{Point86}, Point presented the first quantifier elimination procedure for the satisfiability of $\paexp$. Partially attributed to the fact that Point's procedure in \cite{Point86} was presented  in a mathematical and dense way, this quantifier elimination procedure has mostly eluded the attentions of computer science community\footnote{There are only two citations in Google Scholar.}.  To the best of our knowledge, no implementation based on Point's procedure was available up to now. 
 
 Aiming at introducing Point's procedure to computer science community, we reformulate (and slightly improve) Point's procedure in a way, which, hopefully, is more accessible for computer science community (Section~\ref{sec-dec}). This can be seen as another contribution of this paper.
-We also analyze the deterministic upper bound of complexity for the first time: given a $\paexp$ formula with only existential quantifiers, eliminating all quantifiers has a 3-EXPSPACE complexity. Furthermore, we propose various optimizations (Section~\ref{sec-opt}) and achieve the first prototypical implementation of Point's procedure (Section~\ref{sec-exp}).
+We also analyze the deterministic upper bound of complexity for the first time: given an $\paexp$ formula with only existential quantifiers, eliminating all quantifiers has a 3-EXPSPACE complexity. Furthermore, we propose various optimizations (Section~\ref{sec-opt}) and achieve the first prototypical implementation of Point's procedure (Section~\ref{sec-exp}).
 
 In fact, other than the theoretical difficulties, in practice, the string-integer conversion is quite challenging for state-of-the-art solvers. 
 Here we illustrate a toy example that mimic the ``mining'' step of block-chain construction. 
@@ -68,6 +68,6 @@ With the optimizations introduced in Section~\ref{sec-opt},
 our implementation manages to solve several variants of the string-hash examples as well as some randomly generated arithmetic problem instances better than the state-of-the-art solvers (Section~\ref{sec-exp}). 
  
 \paragraph*{Structure}
-After the preliminaries in Section~\ref{sec:pre}, we show how to flatten a string constraint with string-integer conversion to an existential $\paexp$ formula in Section~\ref{sec:string-solving}. We describe the quantifier elimination procedure for $\paexp$ in Section~\ref{sec-dec} and analyse its complexity in Section~\ref{sec-cpx}. Several optimization techniques are presented in Section~\ref{sec-opt}. Finally, we describe the implementation and experiment results in Section~\ref{sec-exp}.
+After introducing preliminaries in Section~\ref{sec:pre}, we present how to flatten a string constraint with string-integer conversion to an existential $\paexp$ formula in Section~\ref{sec:string-solving}. We describe the quantifier elimination procedure for $\paexp$ in Section~\ref{sec-dec} and analyse its complexity in Section~\ref{sec-cpx}. Several optimization techniques are provided in Section~\ref{sec-opt}. Finally, we report the implementation and experiment results in Section~\ref{sec-exp}.
 
 

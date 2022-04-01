@@ -1,11 +1,11 @@
 %!TEX root = paper.tex
 
 \subsection{Implementation}
-We implement the decision procedure in Wolfram Mathematica, called the {\paexp}-solver, which is able to solve the satisfiability of {\paexp} formulas.
+We implement the decision procedure in Wolfram Mathematica, called EXP-solver, which is able to solve the satisfiability of {\paexp} formulas.
 
-The {\paexp}-solver takes a quantifier-free {\paexp} formula as input. Moreover, it allows specifying a upper bound $10^u$ to uniformly bound the values of variables. Given a upper bound $10^u$, the problem becomes to decide whether there is an assignment in which all variable values are bounded by $10^u$ satisfying the given formula.
+EXP-solver takes a quantifier-free {\paexp} formula as input. Moreover, it allows specifying a upper bound $10^u$ to uniformly bound the values of variables. Given a upper bound $10^u$, the problem becomes to decide whether there is an assignment in which all variable values are bounded by $10^u$ satisfying the given formula.
 %
-Outputs of the {\paexp}-solver are either ``SAT'', ``UNSAT'', ``B-UNSAT'', or ``TIMEOUT'', standing for the given formula satisfiable, unsatisfiable, unsatisfiable up to $10^u$, or timeout if the solver does not terminate within the time limit. If the output is ``SAT'', then a model (namely, an assignment) is returned.
+Outputs of EXP-solver are either ``SAT'', ``UNSAT'', ``B-UNSAT'', or ``TIMEOUT'', standing for the given formula satisfiable, unsatisfiable, unsatisfiable up to $10^u$, or timeout if the solver does not terminate within the time limit. If the output is ``SAT'', then a model (namely, an assignment) is returned.
 
 %a prototype of our algorithm in Wolfram Mathematica, called  $\paexp$-Solver. Any postive Integer is allowed to be the base of exponential functions in our algorithm, but $\parseInt$ in Z3 and CVC4 only takes a numeric string as input. For this reason, we fix the exponential function to be $10^x$ in our experiments.
 
@@ -22,14 +22,14 @@ The outputs of our solver can be SAT, UNSAT, B-UNSAT (short for bounded unsat) o
 %\vspace*{-4mm}
 \subsection{Benchmarks}
 
-To evaluate the performance of the {\paexp}-solver, we design two benchmark suites, ARITHMETIC and STRINGHASH\footnote{The benchmarks are available at https://github.com/EcstasyH/PAexp-Solver/tree/main/Benchmark}.
+To evaluate the performance of EXP-solver, we design two benchmark suites, ARITHMETIC and STRINGHASH\footnote{The benchmarks are available at https://github.com/EcstasyH/PAexp-Solver/tree/main/Benchmark}.
 %\begin{itemize}
 %\item 
 
 \paragraph{The ARITHMETIC benchmark suite} 
 This suite comprises three groups of randomly generated {\paexp} formulas. Each group is characterized by four parameters ($EV$, $LV$, $EI$, $LI$), where $EV, LV$ represent the number of variables with exponential occurrences and with only linear occurrences respectively, and $EI, LI$ represent the number of inequalities with exponential terms and with only linear terms respectively. 
 We consider three parameter classes, $(2, 3, 3, 4)$, $(3, 4, 4, 5)$, and $(4, 5, 5, 6)$. 
-Each group of the benchmark suite consists of 200 randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-10^2, 10^2]$ and the other coefficients/constants are randomly selected from $[-10^5, 10^5]$. The two intervals are chosen with the intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities. Moreover, aiming at a better coverage of the syntactical ingredients of {\paexp}, we randomly choose some problem instances and replace the $\le$ symbol of their first inequalities by $=$. The constant upper bound for the values of variables is set to be $10^{20}$, as the largest 64-bit integer is less than $10^{20}$. We also create an SMTLib2 file for each problem instance, to facilitate the comparison with the state-of-the-art of SMT solvers CVC4 and Z3. Because neither CVC4 nor Z3 supports the exponential functions directly, in the SMTLib2 files, we encode $10^x$ as a recursive function $f(x)$ defined by: $f(0) = 1$ and $f(n+1) = 10*f(n)$.
+Each group of the benchmark suite consists of 200 randomly generated problem instances. The coefficients of exponential terms are randomly selected from the interval $[-10^2, 10^2]$ and the other coefficients/constants are randomly selected from $[-10^5, 10^5]$. The two intervals are chosen with the intention that the coefficients of exponential terms are smaller so that they do not always dominate the left-hand side of the inequalities. Moreover, aiming at a better coverage of the syntactical ingredients of {\paexp}, we randomly choose some problem instances and replace the $\le$ symbol of their first inequalities by $=$. The constant upper bound for the values of variables is set to be $10^{20}$, as the largest 64-bit integer is less than $10^{20}$. We also create an SMTLib2 file for each problem instance, to facilitate the comparison with the state-of-the-art of SMT solvers CVC4 and Z3. Because neither CVC4 nor Z3 supports the exponential functions directly, in the SMTLib2 files, we encode $10^x$ as a recursive function $f(x)$ defined by: $f(0) = 1$ and $f(n+1) = 10\cdot f(n)$.
 
 %
 %\item 
@@ -46,9 +46,9 @@ $\svarx \in \Aut \wedge \left( \parseInt(\svarx) \bmod m \right) \bmod m^\prime 
 %
 where $\Aut$ is an FA, $m, m^\prime \ge 2.$ 
 The two groups of string constraints are characterized by flat and non-flat regular constraints respectively.
-The flat group comprises 300 problem instances, where the flat languages are of the form $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, or $w^+_1 w^+_2 6789$, with $w_1,w_2 \in \Sigma^+_{\sf num}$, where $12345$ and $6789$ are the text to be protected, and $w^+_1 w^+_2$ is the pattern for nonce string. The non-flat group comprises 300 problem instances, where the non-flat languages are of the form $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, or $\Sigma_{\sf num}^* 6789$. Moreover, the number $m$ is a randomly chosen prime number in the interval $[10^2, 10^5]$ and $1 \le m' < m$ ($m'$ is not necessarily a prime number). We generate the SMTLib2 files for these string constraints, as inputs to the string constraint solvers. On the other hand, for the {\paexp}-solver, we do the following:   
+The flat group comprises 300 problem instances, where the flat languages are of the form $12345w^+_1 w^+_2$,  $12345 w^+_1  w^+_2 6789$, or $w^+_1 w^+_2 6789$, with $w_1,w_2 \in \Sigma^+_{\sf num}$, where $12345$ and $6789$ are the text to be protected, and $w^+_1 w^+_2$ is the pattern for nonce string. The non-flat group comprises 300 problem instances, where the non-flat languages are of the form $12345\Sigma_{\sf num}^*$, $12345\Sigma_{\sf num}^* 6789$, or $\Sigma_{\sf num}^* 6789$. Moreover, the number $m$ is a randomly chosen prime number in the interval $[10^2, 10^5]$ and $1 \le m' < m$ ($m'$ is not necessarily a prime number). We generate the SMTLib2 files for these string constraints, as inputs to the string constraint solvers. On the other hand, for EXP-solver, we do the following:   
 \begin{itemize}
-\item For flat instances, we generate {\paexp} formulas corresponding to the string constraints, as inputs to the {\paexp}-solver.
+\item For flat instances, we generate {\paexp} formulas corresponding to the string constraints, as inputs to EXP-solver.
 \item For non-flat instances, we use flat languages $a^* (b_{1} \ldots b_{k})$ to under-approximate 
 $\Sigma_{\sf num}^*$,  where $a, b_1,\ldots, b_k \in \Sigma_{\sf num}$. 
 %
@@ -100,10 +100,10 @@ The Second pattern is arbitrary string, that is $y\in \Sigma_{num}^*$. We use la
 %%\vspace*{-4mm}
 \subsection{Experiments}
 
-We compare the {\paexp}-solver with the state-of-the-art SMT solvers on the generated benchmarks. Specifically, 
+We compare EXP-solver with the state-of-the-art SMT solvers on the generated benchmarks. Specifically, 
 \begin{itemize}
-\item for the ARITHMETIC benchmark suite, we compare the {\paexp}-solver against CVC4 (version 1.8) and Z3 (version 4.8.10),
-\item for the STRINGHASH benchmark suite, we compare the {\paexp}-solver against CVC4, Z3, and Trau\footnote{\url{https://github.com/guluchen/z3/tree/new_trau}}. 
+\item for the ARITHMETIC benchmark suite, we compare EXP-solver against CVC4 (version 1.8) and Z3 (version 4.8.10),
+\item for the STRINGHASH benchmark suite, we compare EXP-solver against CVC4, Z3, and Trau\footnote{\url{https://github.com/guluchen/z3/tree/new_trau}}. 
 \end{itemize}
 All the experiments are run on a lap-top with the Intel i5 1.4GHz CPU and 8GB memory. We set the time limit as 60 seconds per problem instance. 
 
@@ -121,7 +121,7 @@ where ``Fail'' means either timeout, unknown, or wrong answers.
     \resizebox{5.5cm}{!}{
         \begin{tabular}{ c c c c c c c c c c }
     \hline
-        \multirow{2}{*}{Group }  & \multirow{2}{*}{O} & \multicolumn{2}{c}{Z3} & \multicolumn{2}{c}{CVC4} &  \multicolumn{2}{c}{Trau} & \multicolumn{2}{c }{$\paexp$} \\ 
+        \multirow{2}{*}{Group }  & \multirow{2}{*}{O} & \multicolumn{2}{c}{Z3} & \multicolumn{2}{c}{CVC4} &  \multicolumn{2}{c}{Trau} & \multicolumn{2}{c }{EXP-solver} \\ 
         &  & \scriptsize{$\#$} & \scriptsize{$T$}  & \scriptsize{$\#$} & \scriptsize{$T$}  & \scriptsize{$\#$} & \scriptsize{$T$} & \scriptsize{$\#$} & \scriptsize{$T$}  \\ \hline
         \multirow{4}{*}{
         \newline \scriptsize{(2,3,3,4)}} & S & 56 & {\bf 0.4} & 42 & 2.3 & - & - &  {\bf 64} & {\bf 0.4} \\
@@ -169,7 +169,7 @@ where ``Fail'' means either timeout, unknown, or wrong answers.
     {
     \begin{tabular}{cccccccccc}
     \hline
-        \multirow{2}{*}{Group }  & \multirow{2}{*}{O} & \multicolumn{2}{c}{Z3} & \multicolumn{2}{c}{CVC4} &  \multicolumn{2}{c}{Trau} & \multicolumn{2}{c}{$\paexp$} \\
+        \multirow{2}{*}{Group }  & \multirow{2}{*}{O} & \multicolumn{2}{c}{Z3} & \multicolumn{2}{c}{CVC4} &  \multicolumn{2}{c}{Trau} & \multicolumn{2}{c}{EXP-solver} \\
        &  & $\#$ & $T$ &  $\#$ & $T$ & $\#$ & $T$ &  $\#$ & $T$ \\ 
        \hline
        \cline{1-10}
@@ -216,13 +216,13 @@ where ``Fail'' means either timeout, unknown, or wrong answers.
 \end{table*}
 
 
-For the ARITHMETIC benchmark suite, the $\paexp$-solver solves around $20\%$-$60\%$ more instances than Z3, and $30\%$-$100\%$ more instances than CVC4. Moreover, the gap becomes bigger as the the sizes of the formulas increase, which demonstrates that the $\paexp$-solver is more efficient in solving formulas of greater sizes. The average time of the $\paexp$-solver is comparable with Z3 and CVC4. The $\paexp$-solver reports ``B-UNSAT'' for 47 instances of the $(2, 3, 3, 4)$-group, while it does not report ``B-UNSAT'' (except one) for the other two groups. If more time is allowed, the $\paexp$-solver is able to report ``B-UNSAT'' for the ``TIMEOUT'' instances. 
+For the ARITHMETIC benchmark suite, EXP-solver solves around $20\%$-$60\%$ more instances than Z3, and $30\%$-$100\%$ more instances than CVC4. Moreover, the gap becomes bigger as the the sizes of the formulas increase, which demonstrates that EXP-solver is more efficient in solving formulas of greater sizes. The average time of EXP-solver is comparable with Z3 and CVC4. EXP-solver reports ``B-UNSAT'' for 47 instances of the $(2, 3, 3, 4)$-group, while it does not report ``B-UNSAT'' (except one) for the other two groups. If more time is allowed, EXP-solver is able to report ``B-UNSAT'' for the ``TIMEOUT'' instances. 
 
 %which means it can tackle some difficult instances. However, there are some instances are answered SAT or UNSAT by other solvers but timeout in $\paexp$-solver, e.g. 12 instances in 3-4-4-5 group. The reason is that $\paexp$-solver must seach for all possible assignments before answering B-UNSAT, and the number of variables with exponential occurrences has a dramatic impact on the time complexity due to the non-elementary complexity upper bound.
 
 
-For the STRINGHASH benchmark suite, in overall, the $\paexp$-solver solves significantly more instances, especially those satisfiable instances, than Z3, CVC4, and Trau. For instance, for flat regular constraints, the $\paexp$-solver solves almost all 300 problem instances, except 3 of them\footnote{These three instances can actually be solved in 70 seconds.}, while  Z3, CVC4, Trau solve only 34, 89, 187 instances respectively.  Trau gets wrong answers for some problem instances, e.g. it reports ``UNSAT'' for some satisfiable instances. 
-From the results, we can see that the $\paexp$-solver achieves a good tradeoff between precision and efficiency, although it is slower than the other solvers. 
+For the STRINGHASH benchmark suite, in overall, EXP-solver solves significantly more instances, especially those satisfiable instances, than Z3, CVC4, and Trau. For instance, for flat regular constraints, EXP-solver solves almost all 300 problem instances, except 3 of them\footnote{These three instances can actually be solved in 70 seconds.}, while  Z3, CVC4, Trau solve only 34, 89, 187 instances respectively.  Trau gets wrong answers for some problem instances, e.g. it reports ``UNSAT'' for some satisfiable instances. 
+From the results, we can see that EXP-solver achieves a good tradeoff between precision and efficiency, although it is slower than the other solvers. 
 %(More detailed experiment results of STRINGHASH can be found in Table~\ref{table:string}.)
 
 

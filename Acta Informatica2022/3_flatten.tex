@@ -43,14 +43,15 @@ The syntax of $\strint$ is defined as follows:
 a string term, denoted by $\sterm$, is of the form 
 $$\sterm\  \Def\  a \mid \svarx \mid \sterm \cdot \sterm,$$
 an integer term, denoted by $\iterm$, is of the form
-$$\iterm\  \Def\  n \mid \ivarx \mid \len(\sterm) \mid \parseInt(\sterm) \mid \iterm + \iterm \mid \iterm - \iterm,$$
+$$\iterm\  \Def\  c \mid \ivarx \mid \len(\sterm) \mid \parseInt(\sterm) \mid \iterm + \iterm \mid \iterm - \iterm,$$
 and a $\strint$ formula, denoted by $\varphi$ is of the form 
-$$\varphi\ \Def\ \sterm = \sterm \mid x \in \Aut \mid \iterm\ \op\ \iterm \mid \varphi \wedge \varphi \mid \varphi \vee \varphi \mid \neg \varphi$$
-where $a \in (\Sigma_{\textit{num}})_\varepsilon$, $n \in \Nat$, $\Aut$ is an FA, $\op \in \{=, < , >, \le, \ge\}$ and $\len(\sterm)$ denotes the length of a string $\sterm$. 
-Let us call $\sterm = \sterm$ as string equality constraints, $x \in \Aut$ as regular constraints, $\iterm \op \iterm$ as arithmetic constraints. 
+$$\varphi\ \Def\ \sterm = \sterm \mid \sterm \in \Aut \mid \iterm\ \op\ \iterm \mid \varphi \wedge \varphi \mid \varphi \vee \varphi \mid \neg \varphi$$
+where $a \in (\Sigma_{\textit{num}})_\varepsilon$, $c \in \mathbb Z$, $\Aut$ is an FA, $\op \in \{=, < , >, \le, \ge\}$ and $\len(\sterm)$ denotes the length of a string $\sterm$. 
+Let us call $\sterm = \sterm$ as string equality constraints, $\sterm \in \Aut$ as regular constraints, $\iterm \op \iterm$ as arithmetic constraints. 
 Let  $\svar(\varphi)$ and $\ivar(\varphi)$ denote the set of string variables and integer variables occurring in $\varphi$ respectively.
 
-The $\strint$ formulas are interpreted on $I=(I_s, I_i)$ where $I_s$ is a partial function from $\svars$ (the set of string variables) to $\Sigma^*$ and $I_i$ is a partial function from $\ivars$ (the set of integer variables) to $\Nat$. 
+The $\strint$ formulas are interpreted on $I=(I_s, I_i)$ where $I_s$ is a partial function from $\svars$ (the set of string variables) to $\Sigma^*$ and $I_i$ is a partial function from $\ivars$ (the set of integer variables) to $\mathbb Z$. 
+% nat -> Z
 Moreover, it is required that the domains of $I_s, I_i$ are finite. Given $I = (I_s, I_i)$, the interpretations of string terms, integer terms, as well as the formulas $\varphi$ under $I$ are easy to comprehend, thus omitted to avoid tediousness. 
 For $\varphi \in \strint$ and $I = (I_s, I_i)$, $I$ satisfies $\varphi$ if the interpretation of $\varphi$ under $I$ is $\ltrue$.
 Let us use $\lVert \varphi \rVert$ to denote the set of $I = (I_s, I_i)$ satisfying $\varphi$.
@@ -65,27 +66,29 @@ is a $\strint$ formula.
 The satisfiability problem of $\strint$ is to decide for a given constraint $\varphi \in \strint$,
 whether $\lVert  \varphi \rVert \neq \emptyset$.
 
-\subsection{An Extension of Presburger Arithmetic with Exponential Functions (\paexp)}
+\subsection{Presburger Arithmetic with Exponential Functions (\paexp)}
 
 {\paexp} extends Presburger arithmetic with two partial functions, the \emph{exponential} function $10^\ivarx$ and the \emph{integer logarithmic} function $\ell_{10}(\ivarx)$ (cf. \cite{Point86}). The function $\ell_{10}(\ivarx)$ is defined as follows: for $n \ge 1$, $\ell_{10}(n) = m$ if $10^m \le n < 10^{m+1}$. Note that $10^\ivarx$ is undefined for $\ivarx<0$ and $\ell_{10}(\ivarx)$ is undefined for $\ivarx\le 0$.
 
 The syntax of {\paexp} is obtained from that of {\pa} by adding $10^\iterm$ and $\ell_{10}(\iterm)$ to the definition of terms. An {\paexp} term, denoted by $\iterm$, is of the form
-$$\iterm\ \Def\ c \mid \ivarx \mid \iterm + \iterm \mid \iterm - \iterm \mid 10^\iterm \mid \ell_{10}(\iterm) $$
-where $\ivarx$ is an integer variable and $c\in \mathbb Z$ is an constant integer. 
+$$\iterm\ \Def\ c \mid \ivarx \mid \iterm + \iterm \mid \iterm - \iterm \mid 10^{\iterm} \mid \ell_{10}(\iterm) $$
+where $\ivarx$ is an integer variable and $c\in \mathbb Z$ is an constant integer. In addition, we require that $10^\iterm$ and $\ell_{10}(\iterm)$ terms are well-defined, which restricts the interpretations of $\iterm$ therein.
 
 A formula of {\paexp}, denoted by $\phi$, is of the form
 $$\phi \ \Def \ \iterm \ \op\ \iterm \mid c \vert \iterm \mid c \nmid \iterm \mid \neg \phi \mid \phi \wedge \phi \mid \phi \vee \phi \mid \exists \ivarx.\ \phi \mid \forall \ivarx.\ \phi,$$
 where $\op \in \{=, < , >, \le, \ge\}$. 
 
+The semantics of {\paexp} are defined similarly to that of {\pa} with the only difference that partial functions are required to be well-defined. The quantifier-free and existential {\paexp} formulas are defined similarly to {\pa} as well.
+We also assume that quantifier-free {\paexp} formulas are free of negations, for the same reason we have explained for {\pa}.
+
+\hide{
 The semantics of {\paexp} are defined similarly to {\pa} with the only difference that variables are interpreted over $\Nat$ rather than $\mathbb Z$, that is, an interpretation is a function $I:\free(\phi)\to \mathbb \Nat$. 
-This restriction ensures that terms $10^\iterm$ and $\ell_{10}(\iterm)$ are well-defined: In the \emph{normalization} step of the quantifier elimination procedure, for each $\ell_{10}(\iterm)$ term, we will replace all its occurrences by a fresh variable $\ivarz$, and add a conjunct $10^\ivarz \le \iterm < 10*10^\ivarz$. 
+This restriction ensures that terms $10^\iterm$ and $\ell_{10}(\iterm)$ are well-defined: In the \emph{normalization} step of the quantifier elimination procedure, for each $\ell_{10}(\iterm)$ term, we will replace all its occurrences by a fresh variable $\ivarz$, and add a conjunct $10^\ivarz \le \iterm < 10\cdot 10^\ivarz$. 
 Then $\ivarz\in\Nat$ guarantees that $\iterm \ge 1$ is always satisfied.
 Exponential functions are treated similarly
 (more details can be found in Section~\ref{qe-norm}).
 Note that we can extend the interpretation to $\mathbb Z$ since each integer can be written as the difference of two positive integers.
-
-The quantifier-free and existential {\paexp} formulas are defined similarly to {\pa} as well.
-We also assume that quantifier-free {\paexp} formulas are free of negations, for the same reason we have explained for {\pa}.
+}
 
 For convenience, when working with exponential and logarithmic functions, we use the notation $\lambda_{10}(\iterm)$ to denote $10^{\ell_{10}(\iterm)}$. It is easy to show that for all $n \ge 1$, $\lambda_{10}(n) \le n < 10\lambda_{10}(n)$ holds.
 
@@ -103,19 +106,19 @@ The flattened semantics of $\varphi \in \strint$ is defined as $\llbracket \varp
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \hide{
 The flattening of $\varphi \in \strint$ under a flat domain restriction $\flatfun_\varphi$ is a {\paexp} formula, denoted by $\flatten_{\flatfun_\varphi}(\varphi)$, that encodes its flattened semantics.
-More concretely, $\flatten_{\flatfun_\varphi}(\varphi)$ is a formula over the integer variables $\ivar(\varphi)$,  and flattening variables $\pvar_{\flatfun_\varphi}(\varphi) = \bigcup_{\svarx \in \svar(\varphi)} \pvar_{\flatfun_\varphi}(\svarx)$, where $\pvar_{\flatfun_\varphi}(\svarx) = \{\#_{\svarx,i} \mid i \in [k_\svarx]\}$, plus some other auxiliary variables, such that 
+More concretely, $\flatten_{\flatfun_\varphi}(\varphi)$ is a formula over the integer variables $\ivar(\varphi)$,  and flattening variables $\pvar_{\flatfun_\varphi}(\varphi) = \bigcup_{\svarx \in \svar(\varphi)} \pvar_{\flatfun_\varphi}(\svarx)$, where $\pvar_{\flatfun_\varphi}(\svarx) = \{l_{\svarx,i} \mid i \in [k_\svarx]\}$, plus some other auxiliary variables, such that 
 $$\llbracket \varphi \rrbracket_{\flatfun_\varphi} =\decode_{\flatfun_\varphi}(\llbracket \flatten_{\flatfun_\varphi}(\varphi) \rrbracket \vert_{\ivar(\phi) \cup \pvar_{\flatfun_\varphi}(\varphi)}).$$
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Under a flat domain restriction $\flatfun_\varphi$, the flattening of $\varphi \in \strint$ is an $\paexp$ formula, denoted by $\flatten_{\flatfun_\varphi}(\varphi)$, that encodes the flattened semantics $\llbracket \varphi \rrbracket_{\flatfun_\varphi}$. 
-The idea is that $x$ can be expressed as $(w_{\svarx,1})^{\#_{x,1}} \cdots (w_{\svarx, k_\svarx})^{\#_{x,k_x}}$ with $\#_{x,i}$ denoting the number of repeatitions of $w_{x,i}$,  
-so we can eliminate the occurrences of $x$ in $\varphi$ by introduce a set of integer variables $\pvar_{\flatfun_\varphi}(\svarx) = \{\#_{\svarx,i} \mid i \in [k_\svarx]\}$. 
+The idea is that $x$ can be expressed as $(w_{\svarx,1})^{l_{x,1}} \cdots (w_{\svarx, k_\svarx})^{l_{x,k_x}}$ with $l_{x,i}$ denoting the number of iterations of $w_{x,i}$,  
+so we can eliminate the occurrences of $x$ in $\varphi$ by introduce a set of integer variables $\pvar_{\flatfun_\varphi}(\svarx) = \{l_{\svarx,i} \mid i \in [k_\svarx]\}$. 
 More concretely, $\flatten_{\flatfun_\varphi}(\varphi)$ is a formula over the integer variables $\ivar(\varphi)$,  and flattening variables $\pvar_{\flatfun_\varphi}(\varphi) = \bigcup_{\svarx \in \svar(\varphi)} \pvar_{\flatfun_\varphi}(\svarx)$ plus some other auxiliary variables, such that the interpretations $I_e: \ivar(\varphi) \cup \pvar_{\flatfun_\varphi}(\varphi) \rightarrow \mathbb Z$ of $\llbracket \flatten_{\flatfun_\varphi}(\varphi) \rrbracket$and interpretations $(I_s, I_i)$ of $\llbracket \varphi \rrbracket_{\flatfun_\varphi}$ have the following correspondence 
 
 \begin{itemize}
     \item  
-    for every $ \svarx \in \svar(\varphi)$, $I_s(\svarx) = w_{\svarx,1}^{I_e(\#_{\svarx,1})} \ldots  w_{\svarx,k_\svarx}^{I_e(\#_{\svarx,k_\svarx})}$, 
+    for every $ \svarx \in \svar(\varphi)$, $I_s(\svarx) = w_{\svarx,1}^{I_e(l_{\svarx,1})} \ldots  w_{\svarx,k_\svarx}^{I_e(l_{\svarx,k_\svarx})}$, where $I_e(l_{x,i})\ge 0$ for $1\le i\le k_x$.
     %
     \item for every $ \ivarx \in \ivar(\varphi)$, $I_i(\ivarx) = I_e(\ivarx)$.
 \end{itemize}
@@ -141,15 +144,15 @@ Then $\flatten_{\flatfun_\varphi}(\iterm_1 \op \iterm_2)$ is obtained from $\ite
 $\flatten_{\flatfun_\varphi}(\parseInt(\svarx)) \Def \iterm_{\svarx,1}$  such that $(\iterm_{\svarx, i})_{i \in [k_\svarx]}$ are inductively defined as follows: 
 \begin{itemize}
 \item for $i = k_\svarx$, 
-$$\iterm_{\svarx, i} = \frac{\parseInt(w_{\svarx, k_\svarx}) (10^{\len(w_{\svarx,k_\svarx})\#_{\svarx, k_\svarx}} -1 )}{(10^{\len(w_{\svarx, k_\svarx}) } -1 )}$$ 
+$$\iterm_{\svarx, i} = \frac{\parseInt(w_{\svarx, k_\svarx}) (10^{\len(w_{\svarx,k_\svarx})l_{\svarx, k_\svarx}} -1 )}{(10^{\len(w_{\svarx, k_\svarx}) } -1 )}$$ 
 %
 \item for $i \in [k_\svarx-1]$, 
 %
-$$ \hspace{-1.2cm} \iterm_{\svarx, i} =  \frac{\parseInt(w_{\svarx, i}) (10^{\len(w_{\svarx, i})  \#_{\svarx, i} } -1 ) 10^{\big(\sum_{i+1\le j\le k_x} \len(w_{\svarx, j})  \#_{\svarx, j}\big)}} {(10^{\len(w_{\svarx, i}) } -1 )} + \iterm_{\svarx, i+1}$$
+$$ \hspace{-1.2cm} \iterm_{\svarx, i} =  \frac{\parseInt(w_{\svarx, i}) (10^{\len(w_{\svarx, i})  l_{\svarx, i} } -1 ) 10^{\big(\sum_{i+1\le j\le k_x} \len(w_{\svarx, j})  l_{\svarx, j}\big)}} {(10^{\len(w_{\svarx, i}) } -1 )} + \iterm_{\svarx, i+1}$$
 \end{itemize}
 %
-\item Notice that here $\len( w_{\svarx, \textunderscore } )$ are constants while $\#_{\svarx, \textunderscore}$ are (flattening) variables. So we have 
-$$\flatten_{\flatfun_\varphi}(\len(\svarx)) \Def \sum \limits_{i \in [k_{\svarx}]} \len(w_{\svarx, i})  \#_{\svarx, i}.$$ 
+\item Notice that here $\len( w_{\svarx, \textunderscore } )$ are constants while $l_{\svarx, \textunderscore}$ are (flattening) variables. So we have 
+$$\flatten_{\flatfun_\varphi}(\len(\svarx)) \Def \sum \limits_{i \in [k_{\svarx}]} \len(w_{\svarx, i})  l_{\svarx, i}.$$ 
 \end{itemize} 
 
 The following example helps to illustrate the main idea of the flattening technique.
@@ -160,9 +163,9 @@ Suppose $\parseInt(\svarx) = 2\ivarx$ is an atomic constraint and $\flatfun_\var
 \small
 \begin{array}{l l}
 & \flatten_{\flatfun_\varphi}(\parseInt(\svarx)  =  2\ivarx)  \\
-\Def & 1 \frac{10^{\#_{\svarx,1}}-1}{10-1}10^{\#_{\svarx,2}}  + 2 \frac{10^{\#_{\svarx,2}}-1}{10-1} = 2\ivarx   \\
-\equiv & 10^{\#_{\svarx,1}+\#_{\svarx,2}} - 10^{\#_{\svarx,2}}  + 2*10^{2\#_{\svarx,2}}- 2 = 18\ivarx \\
-\equiv & 10^{\#_{\svarx,1}+\#_{\svarx,2}} +  10^{\#_{\svarx,2}} = 18\ivarx + 2.
+\Def & 1 \frac{10^{l_{\svarx,1}}-1}{10-1}10^{l_{\svarx,2}}  + 2 \frac{10^{l_{\svarx,2}}-1}{10-1} = 2\ivarx   \\
+\equiv & 10^{l_{\svarx,1}+l_{\svarx,2}} - 10^{l_{\svarx,2}}  + 2*10^{2l_{\svarx,2}}- 2 = 18\ivarx \\
+\equiv & 10^{l_{\svarx,1}+l_{\svarx,2}} +  10^{l_{\svarx,2}} = 18\ivarx + 2.
 \end{array}
 \]
 \end{example}

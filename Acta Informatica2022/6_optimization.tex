@@ -86,24 +86,26 @@ and
 \sum_{j=1}^{i-1} a_j 10^{\ivarx_{\sigma(j)}} + \sum_{k=1}^{i-1}b_k \ivarx_{\sigma(k)} \le c_2.
 \end{equation}
 
-Let $\alpha_1 = \ell_{10}(c_1) -  \ell_{10}(a_{i-1})$ and $\alpha_2 = \ell_{10}(c_2) -  \ell_{10}(a_{i-1})$. Then from Lemma~\ref{lem:exp-ineq}, let $A\Def 1+\sum_{j=1}^{i-2}\vert a_j\vert$, 
+Let $\alpha_1 = \ell_{10}(c_1) -  \ell_{10}(a_{i-1})$ and $\alpha_2 = \ell_{10}(c_2) -  \ell_{10}(a_{i-1})$. 
+Then from Lemma~\ref{lem:exp-ineq}, let $A\Def 1+\sum_{j=1}^{i-2}\vert a_j\vert$, 
 $B \Def 1+\sum_{j=1}^{i-1}\vert b_j\vert$, 
 $\delta\Def  \ell_{10}(A)+2$,
 and $\gamma \Def 2\ell_{10}(B)+3$. 
+When $\ivarx_{\sigma(i-1)} \ge \gamma$ and $\ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)} + \delta$
+
 \begin{itemize}
-\item if $\ivarx_{\sigma(i-1)} \ge \gamma$, $\ivarx_{\sigma(i-1)} \le \alpha_1 - 1$, and $\ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)} + \delta$, then inequality (\ref{eqn-lb}), thus also $\tau'$, is evaluated to $\ltrue$,
-\item if $\ivarx_{\sigma(i-1)} \ge \gamma$, $\ivarx_{\sigma(i-1)} \ge \alpha_2 + 2$, and $\ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)} + \delta$, then inequality (\ref{eqn-ub}), thus also $\tau'$, is evaluated to $\lfalse$.
+\item if $\ivarx_{\sigma(i-1)} \le \alpha_1 - 1$, then inequality (\ref{eqn-lb}), thus also $\tau'$, holds.
+\item if $\ivarx_{\sigma(i-1)} \ge \alpha_2 + 2$, then inequality (\ref{eqn-ub}), thus also $\tau'$, \textbf{does not} holds.
 \end{itemize}
 
 Therefore, $\tau'$ and $\tau$ are equivalent to 
-\begin{equation}\label{lemma-example}\begin{aligned}
+\begin{equation}\label{opt-example}\begin{aligned}
     &\bigvee_{p=0}^{\gamma-1} (\ivarx_{\sigma(i-1)}=p \wedge \tau[p/\ivarx_{\sigma(i-1)}])\\
-    \vee &\bigvee_{p=0}^{\delta-1} \bigg(\ivarx_{\sigma(i-1)}=\ivarx_{\sigma(i-2)}+p\wedge \tau[\ivarx_{\sigma(i-2)}+p/\ivarx_{\sigma(i-1)}]\wedge \ivarx_{\sigma(i-1)}\le \alpha_1-1\bigg)\\
-    \vee &\bigvee_{p=0}^{\delta-1} \bigg(\ivarx_{\sigma(i-1)}=\ivarx_{\sigma(i-2)}+p\wedge \tau[\ivarx_{\sigma(i-2)}+p/\ivarx_{\sigma(i-1)}]\wedge \ivarx_{\sigma(i-1)}\ge \alpha_2+2\bigg)\\
+    \vee &\bigvee_{p=0}^{\delta-1} \bigg(\ivarx_{\sigma(i-1)}=\ivarx_{\sigma(i-2)}+p\wedge \tau[\ivarx_{\sigma(i-2)}+p/\ivarx_{\sigma(i-1)}]\bigg)\\
     \vee & \bigg( \ivarx_{\sigma(i-1)}\ge \gamma \wedge \ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)}+\delta \wedge \ivarx_{\sigma(i-1)}\le \alpha(\vec\ivary)-1\bigg)\\
     \vee & \bigvee_{p=\alpha_1}^{\alpha_2+1} \bigg( \ivarx_{\sigma(i-1)}\ge \gamma \wedge \ivarx_{\sigma(i-1)} \ge \ivarx_{\sigma(i-2)}+\delta \wedge \ivarx_{\sigma(i-1)} = p \wedge \tau[p/\ivarx_{\sigma(i-1)}]\bigg),
 \end{aligned}\end{equation}
-where all exponential occurrences of $\ivarx_{\sigma(i-1)}$ are eliminated.
+where all exponential occurrences of $\ivarx_{\sigma(i-1)}$ are eliminated. Note that in the last line of (\ref{opt-example}), $\ivarx_{\sigma(i-1)}$ is  enumerated from $\alpha_1$ to $\alpha_2+1$, while in (\ref{lemma-example}) only two term $\alpha(\vec \ivary)$ and $\alpha(\vec \ivary)+1$ are tested for $\ivarx_{\sigma(i)}$.   
 
 \hide{
 \[
